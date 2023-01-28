@@ -12,6 +12,33 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
     public static final double stickDeadband = 0.1;
+    public static final double liftPosTolerance = 0;
+
+    public static int driveSettingTimeout = 100;
+    public static int PIDindex = 0;
+
+    public static double liftMotor_P = .001;
+    public static double liftMotor_I = 0;
+    public static double liftMotor_D = 0;
+
+    //max and min lift output
+    public static double liftOutputMax = .5;
+    public static double liftOutputMin = -.5;
+
+    //upper & lower limits
+    public static double liftLowerLimit = 0;
+    public static double liftUpperLimit = 300;
+
+    //lift conversion
+    public static double liftConversion = 1;
+
+
+    //upper and lower limit switch position / homing/calibrating values
+    public static double liftLowerLimitSwitchPos = 0;
+    public static double liftUpperLimitSwitchPos = 600;
+
+//Set speed for HomingLift
+  public static double setSpeedForLiftHome = -.5;
 
     public static final class Swerve {
         public static final int pigeonID = 1;

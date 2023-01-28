@@ -33,8 +33,8 @@ public class RobotContainer {
     /* Subsystems */
     public final static Swerve s_Swerve = new Swerve();
     public final static limeLight_subsystem s_Limelight = new limeLight_subsystem();
-
-
+    public final static Lift s_Lift = new Lift();
+    
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         s_Swerve.setDefaultCommand(

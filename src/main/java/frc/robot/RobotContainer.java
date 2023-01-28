@@ -64,7 +64,7 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 1).onTrue(new Calibrate().withTimeout(2));
         new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0,2));
         new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(2,0));
-        new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(2, 2))
+        new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(2, 2));
     }
 
     /**

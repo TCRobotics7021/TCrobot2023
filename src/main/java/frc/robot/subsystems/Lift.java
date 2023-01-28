@@ -17,8 +17,6 @@ public class Lift extends SubsystemBase {
     // Creates a new Lift
   WPI_TalonFX m_Lift = new WPI_TalonFX(11);
 
-  DigitalInput UpperLimit = new DigitalInput(1);
-  DigitalInput LowerLimit = new DigitalInput(0);
 
   private WPI_TalonFX m_lift = new WPI_TalonFX(11);
   private DigitalInput upperLimit = new DigitalInput(1);
@@ -86,10 +84,10 @@ public void setPosition(double calibratePosition){
   m_lift.setSelectedSensorPosition(calibratePosition * Constants.liftConversion, Constants.PIDindex, Constants.driveSettingTimeout);
 }
 public boolean atTopLimit () {
-return (!LowerLimit.get());
+return (!lowerLimit.get());
 }
   public boolean atBottomLimit () {
-    return (!LowerLimit.get());
+    return (!lowerLimit.get());
   }
 public void calibrateEncoder (double calibratePosition) {
   m_lift.setSelectedSensorPosition(calibratePosition * Constants.liftConversion, Constants.PIDindex, Constants.driveSettingTimeout);

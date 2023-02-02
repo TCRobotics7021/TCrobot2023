@@ -7,15 +7,16 @@ package frc.robot.commands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class AutonomousMove extends CommandBase {
-  /** Creates a new AutonomousMove. */
-  double targetX;
-  double targetY;
+public class MoveToPosReletiveToTarget extends CommandBase {
+
+  /** Creates a new MoveToPosReletiveToTarget. */
+  double relativeX;
+  double relativeY;
 
   double calcStrafe;
   double calcTranslation;
@@ -31,38 +32,47 @@ public class AutonomousMove extends CommandBase {
 
   boolean finished;
 
-  public AutonomousMove(double targetX, double targetY) {
+  double degrees;
+
+
+
+
+
+  public MoveToPosReletiveToTarget(double relativeX, double relativeY) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.targetX = targetX;
-    this.targetY = targetY;
+    this.relativeX = relativeX;
+    this.relativeY = relativeY;
     finished = false;
     addRequirements(RobotContainer.s_Swerve);
-
-
+    addRequirements(RobotContainer.s_Limelight);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, new Rotation2d(0)));
+    degrees = RobotContainer.s_Limelight.tagRelativeRPos();
+    currentX = RobotContainer.s_Limelight.tagRelativeXPos();
+    currentY = RobotContainer.s_Limelight.tagRelativeYPos();
+    RobotContainer.s_Swerve.resettempOdometry(new Pose2d(currentX, currentY, new Rotation2d(degrees)));
+    RobotContainer.s_Swerve.setGyro(degrees);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    currentX = RobotContainer.s_Swerve.getPose().getX();
+    currentY = RobotContainer.s_Swerve.getPose().getY();
 
+    errorX = Math.abs(relativeX - currentX);
+    errorY = Math.abs(relativeY - currentY);
 
-    currentX = RobotContainer.s_Swerve.gettempPose().getX();
-    currentY = RobotContainer.s_Swerve.gettempPose().getY();
-
-    errorX = Math.abs(targetX - currentX);
-    errorY = Math.abs(targetY - currentY);
-
-    calcTranslation = Constants.Swerve.autonomousMove_P * (targetX - currentX);
-    calcStrafe = Constants.Swerve.autonomousMove_P * (targetY - currentY);
+    calcTranslation = Constants.Swerve.autonomousMove_P * (relativeX - currentX);
+    calcStrafe = Constants.Swerve.autonomousMove_P * (relativeY - currentY);
     calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
 
 
+  
 
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
       calcTranslation = Math.min(Constants.maxSpeedPos,calcTranslation);
@@ -95,19 +105,18 @@ public class AutonomousMove extends CommandBase {
       }
     }
 
-    
-
     RobotContainer.s_Swerve.drive(
       new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
       0 * Constants.Swerve.maxAngularVelocity, 
       false, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );
-    if (errorX <= .05 && errorY <= .05){
-      finished = true;
-    }
-    SmartDashboard.putNumber("Calc Translation",calcTranslation);
-    SmartDashboard.putNumber("Calc Strafe",calcStrafe);
+  if (errorX <= .05 && errorY <= .05){
+    finished = true;
+  }
+
+
+
   }
 
   // Called once the command ends or is interrupted.
@@ -116,9 +125,11 @@ public class AutonomousMove extends CommandBase {
     RobotContainer.s_Swerve.drive(
       new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
       0 * Constants.Swerve.maxAngularVelocity, 
-      true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+      false, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
     );
+
+
   }
 
   // Returns true when the command should end.

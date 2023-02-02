@@ -27,6 +27,8 @@ public class AutonomousMove extends CommandBase {
   double errorX;
   double errorY;
 
+  double calcMagnitude; 
+
   boolean finished;
 
   public AutonomousMove(double targetX, double targetY) {
@@ -58,31 +60,53 @@ public class AutonomousMove extends CommandBase {
 
     calcTranslation = Constants.Swerve.autonomousMove_P * (targetX - currentX);
     calcStrafe = Constants.Swerve.autonomousMove_P * (targetY - currentY);
+    calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
+
+
 
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
-      calcTranslation = Math.max(.1,calcTranslation);
-      calcTranslation = Math.min(.5, calcTranslation);
+      calcTranslation = Math.max(.2,calcTranslation);
+      //calcTranslation = Math.min(.5, calcTranslation);
     }
-
+  
     if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
-      calcTranslation = Math.min(-.1,calcTranslation);
+      //calcTranslation = Math.min(-.2,calcTranslation);
       calcTranslation = Math.max(-.5, calcTranslation);
     }
+    if (errorX < .05){
+      calcTranslation = 0;
+    }
+    
+    
 
     if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
-      calcStrafe = Math.max(.1,calcStrafe);
-      calcStrafe = Math.min(.5, calcStrafe);
+      calcStrafe = Math.max(.2,calcStrafe);
+      //calcStrafe = Math.min(.5, calcStrafe);
     }
 
     if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
-      calcStrafe = Math.min(-.1,calcStrafe);
+      //calcStrafe = Math.min(-.2,calcStrafe);
       calcStrafe = Math.max(-.5, calcStrafe);
     }
+    if (errorY < .05){
+      calcStrafe = 0;
+    }
+
+    if (calcMagnitude <= Constants.minSpeedPos) {
+      if (Math.abs(calcTranslation) < Math.abs(calcStrafe)) {
+        calcStrafe = Constants.minSpeedPos * Math.signum(calcStrafe);
+      }
+      if (Math.abs(calcTranslation) > Math.abs(calcStrafe)) {
+        calcTranslation = Constants.minSpeedPos;
+      }
+    }
+
+    
 
     RobotContainer.s_Swerve.drive(
       new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
       0 * Constants.Swerve.maxAngularVelocity, 
-      true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+      false, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );
     if (errorX <= .05 && errorY <= .05){
@@ -106,6 +130,7 @@ public class AutonomousMove extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+
 
     return finished;
   }

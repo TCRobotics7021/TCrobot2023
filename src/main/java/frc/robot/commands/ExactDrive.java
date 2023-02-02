@@ -32,7 +32,7 @@ public class ExactDrive extends CommandBase {
     RobotContainer.s_Swerve.drive(
       new Translation2d(translation, strafe).times(Constants.Swerve.maxSpeed), 
       0 * Constants.Swerve.maxAngularVelocity, 
-      true, //robotcentric
+      false, //robotcentric
       true
   );
   }

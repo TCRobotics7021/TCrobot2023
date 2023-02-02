@@ -38,10 +38,8 @@ public final class Constants {
     public static double liftUpperLimitSwitchPos = 600;
 
     //minimum and max speed for setting auto motor speed
-    public static double minSpeedPos = .2;
+    public static double minSpeedPos = .15;
     public static double maxSpeedPos = .5;
-    public static double minSpeedNeg = -.5;
-    public static double maxSpeedNeg = -.2;
 
 //Set speed for HomingLift
   public static double setSpeedForLiftHome = -.5;

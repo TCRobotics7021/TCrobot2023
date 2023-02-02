@@ -50,13 +50,14 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         /* Driver Buttons */
-        new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+        new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
         new JoystickButton(OpPanel, 1).onTrue(new Calibrate().withTimeout(2));
         new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0,2));
         new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(2,0));
         new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(2, 2));
         new JoystickButton(OpPanel, 6).whileTrue(new ExactDrive(0.1, 0)); //Forwards
         new JoystickButton(OpPanel, 5).whileTrue(new ExactDrive(-0.1, 0)); //Backwards
+        new JoystickButton(OpPanel, 7).onTrue(new BackToHome());
     }
 
     public Command getAutonomousCommand() {

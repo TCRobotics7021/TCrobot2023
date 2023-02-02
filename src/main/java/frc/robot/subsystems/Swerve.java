@@ -138,6 +138,8 @@ public class Swerve extends SubsystemBase {
     public void periodic(){
         
         swerveOdometry.update(getYaw(), getModulePositions());  
+        tempOdometry.update(getYaw(), getModulePositions());
+
         SmartDashboard.putNumber("Odometry X", swerveOdometry.getPoseMeters().getX());
         SmartDashboard.putNumber("Odometry Y", swerveOdometry.getPoseMeters().getY());
         SmartDashboard.putNumber("Odometry R", swerveOdometry.getPoseMeters().getRotation().getDegrees());

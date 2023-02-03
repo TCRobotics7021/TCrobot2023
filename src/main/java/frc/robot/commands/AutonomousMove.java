@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-
+// comment
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -54,7 +54,8 @@ public class AutonomousMove extends CommandBase {
 
     currentX = RobotContainer.s_Swerve.gettempPose().getX();
     currentY = RobotContainer.s_Swerve.gettempPose().getY();
-
+   
+    
     errorX = Math.abs(targetX - currentX);
     errorY = Math.abs(targetY - currentY);
 
@@ -65,39 +66,34 @@ public class AutonomousMove extends CommandBase {
 
 
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
-      calcTranslation = Math.max(.2,calcTranslation);
-      //calcTranslation = Math.min(.5, calcTranslation);
+      calcTranslation = Math.min(Constants.maxSpeedPos,calcTranslation);
+
     }
   
     if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
-      //calcTranslation = Math.min(-.2,calcTranslation);
-      calcTranslation = Math.max(-.5, calcTranslation);
+     calcTranslation = Math.max(-Constants.maxSpeedPos, calcTranslation);
     }
-    if (errorX < .05){
-      calcTranslation = 0;
-    }
+   
     
     
 
     if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
-      calcStrafe = Math.max(.2,calcStrafe);
-      //calcStrafe = Math.min(.5, calcStrafe);
+      calcStrafe = Math.min(Constants.maxSpeedPos,calcStrafe);
+ 
     }
 
     if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
-      //calcStrafe = Math.min(-.2,calcStrafe);
-      calcStrafe = Math.max(-.5, calcStrafe);
+  
+      calcStrafe = Math.max(-Constants.maxSpeedPos, calcStrafe);
     }
-    if (errorY < .05){
-      calcStrafe = 0;
-    }
+ 
 
     if (calcMagnitude <= Constants.minSpeedPos) {
-      if (Math.abs(calcTranslation) < Math.abs(calcStrafe)) {
+      if (Math.abs(calcTranslation) <= Math.abs(calcStrafe)) {
         calcStrafe = Constants.minSpeedPos * Math.signum(calcStrafe);
       }
       if (Math.abs(calcTranslation) > Math.abs(calcStrafe)) {
-        calcTranslation = Constants.minSpeedPos;
+        calcTranslation = Constants.minSpeedPos * Math.signum(calcTranslation);
       }
     }
 

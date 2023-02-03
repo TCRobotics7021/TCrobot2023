@@ -53,10 +53,12 @@ public class RobotContainer {
         new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
         new JoystickButton(OpPanel, 1).onTrue(new Calibrate().withTimeout(2));
         new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0,2));
-        new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(2,0));
-        new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(2, 2));
+        new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(-2,0));
+        new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(-2, 2));
         new JoystickButton(OpPanel, 6).whileTrue(new ExactDrive(0.1, 0)); //Forwards
         new JoystickButton(OpPanel, 5).whileTrue(new ExactDrive(-0.1, 0)); //Backwards
+        new JoystickButton(OpPanel, 7).whileTrue(new Homing_Rotation(0, 0, 90));
+        new JoystickButton(OpPanel, 8).whileTrue(new Homing_Rotation(0, 0, -90));
     }
 
     public Command getAutonomousCommand() {

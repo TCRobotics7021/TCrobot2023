@@ -157,4 +157,8 @@ public class Swerve extends SubsystemBase {
 
     public void drive(Rotation2d times, double rotation, boolean fieldRelative, boolean isOpenLoop) {
     }
+
+    public Object Resetfieldorientation() {
+        return null;
+    }
 }

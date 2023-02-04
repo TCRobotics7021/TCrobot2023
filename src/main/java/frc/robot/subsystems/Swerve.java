@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
-    public SwerveDriveOdometry tempOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
 
@@ -55,7 +54,6 @@ public class Swerve extends SubsystemBase {
         Timer.delay(1.0);
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getModulePositions());
-        tempOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getModulePositions());
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -91,18 +89,10 @@ public class Swerve extends SubsystemBase {
     public Pose2d getPose() {
         return swerveOdometry.getPoseMeters();
     }
-    public Pose2d gettempPose() {
-        return tempOdometry.getPoseMeters();
-    }
-
 
     public void resetOdometry(Pose2d pose) {
         swerveOdometry.resetPosition(getYaw(), getModulePositions(), pose);
     }
-    public void resettempOdometry(Pose2d pose) {
-        tempOdometry.resetPosition(getYaw(), getModulePositions(), pose);
-    }
-
 
     public SwerveModuleState[] getModuleStates(){
         SwerveModuleState[] states = new SwerveModuleState[4];
@@ -136,22 +126,15 @@ public class Swerve extends SubsystemBase {
 
     @Override
     public void periodic(){
-        
         swerveOdometry.update(getYaw(), getModulePositions());  
-        tempOdometry.update(getYaw(), getModulePositions());
-
         SmartDashboard.putNumber("Odometry X", swerveOdometry.getPoseMeters().getX());
         SmartDashboard.putNumber("Odometry Y", swerveOdometry.getPoseMeters().getY());
         SmartDashboard.putNumber("Odometry R", swerveOdometry.getPoseMeters().getRotation().getDegrees());
 
-        SmartDashboard.putNumber("Temp Odometry X", tempOdometry.getPoseMeters().getX());
-        SmartDashboard.putNumber("Temp Odometry Y", tempOdometry.getPoseMeters().getY());
-        SmartDashboard.putNumber("Temp Odometry R", tempOdometry.getPoseMeters().getRotation().getDegrees());
-
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);  
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
     }
 }

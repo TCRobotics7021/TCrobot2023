@@ -57,7 +57,7 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(-2, 2));
         new JoystickButton(OpPanel, 6).whileTrue(new ExactDrive(0.1, 0)); //Forwards
         new JoystickButton(OpPanel, 5).whileTrue(new ExactDrive(-0.1, 0)); //Backwards
-        new JoystickButton(OpPanel, 7).onTrue(new Command());
+        new JoystickButton(OpPanel, 7).onTrue(new BackToHome());
     }
 
     public Command getAutonomousCommand() {

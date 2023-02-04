@@ -31,6 +31,8 @@ public class AutonomousMove extends CommandBase {
 
   boolean finished;
 
+  double ratio;
+
   public AutonomousMove(double targetX, double targetY) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.targetX = targetX;
@@ -89,15 +91,32 @@ public class AutonomousMove extends CommandBase {
     }
 
     if (calcMagnitude <= Constants.minSpeedPos) {
-      if (Math.abs(calcTranslation) < Math.abs(calcStrafe)) {
-        calcStrafe = Constants.minSpeedPos * Math.signum(calcStrafe);
-      }
-      if (Math.abs(calcTranslation) > Math.abs(calcStrafe)) {
-        calcTranslation = Constants.minSpeedPos;
-      }
+      // if (Math.abs(calcTranslation) < Math.abs(calcStrafe)) {
+      //   calcStrafe = Constants.minSpeedPos * Math.signum(calcStrafe);
+      // }
+      // if (Math.abs(calcTranslation) > Math.abs(calcStrafe)) {
+      //   calcTranslation = Constants.minSpeedPos * Math.signum(calcTranslation);
+      // }
+      ratio = calcTranslation / calcStrafe;
+      calcStrafe = Math.sqrt(Math.pow(calcMagnitude, 2) / (Math.pow(ratio, 2) + 1)) * Math.signum(calcStrafe);
+      calcTranslation = Math.abs(calcStrafe * ratio) * Math.signum(calcTranslation);
+  
     }
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     RobotContainer.s_Swerve.drive(
       new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 

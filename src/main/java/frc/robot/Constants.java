@@ -54,7 +54,7 @@ public final class Constants {
         /* Drivetrain Constants */
         public static final double trackWidth = .56; //TODO: This must be tuned to specific robot
         public static final double wheelBase = .68; //TODO: This must be tuned to specific robot
-        public static final double wheelCircumference = chosenModule.wheelCircumference;
+        public static final double wheelCircumference = Units.inchesToMeters(4.0);//chosenModule.wheelCircumference;
 
         /* Swerve Kinematics 
          * No need to ever change this unless you are not doing a traditional rectangular/square 4 module swerve */
@@ -160,7 +160,7 @@ public final class Constants {
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
-    public static final double autonomousMove_P = .05;
+    public static final double autonomousMove_P = .02;
 
 
 

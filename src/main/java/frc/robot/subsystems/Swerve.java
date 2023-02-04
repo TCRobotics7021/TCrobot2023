@@ -123,6 +123,12 @@ public class Swerve extends SubsystemBase {
     public void zeroGyro(){
         gyro.setYaw(0);
     }
+    public void Resetfieldorientation(){
+        gyro.setYaw(0);
+        resetOdometry(new Pose2d(0, 0, new Rotation2d(0)));
+
+
+    }
 
     public Rotation2d getYaw() {
         return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());

@@ -5,15 +5,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
 
 public class CenterOnTarget extends CommandBase {
   /** Creates a new CenterOnTarget. */
   public CenterOnTarget() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Limelight, RobotContainer.s_Swerve);
-
-
   }
 
   // Called when the command is initially scheduled.

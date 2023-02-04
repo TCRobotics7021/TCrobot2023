@@ -65,11 +65,13 @@ public class AutonomousMove extends CommandBase {
 
 
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
-      calcTranslation = Math.min(Constants.maxSpeedPos,calcTranslation);
+      calcTranslation = Math.max(.2,calcTranslation);
+      //calcTranslation = Math.min(.5, calcTranslation);
     }
   
     if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
-      calcTranslation = Math.max(-Constants.maxSpeedPos, calcTranslation);
+      //calcTranslation = Math.min(-.2,calcTranslation);
+      calcTranslation = Math.max(-.5, calcTranslation);
     }
     if (errorX < .05){
       calcTranslation = 0;
@@ -78,11 +80,13 @@ public class AutonomousMove extends CommandBase {
     
 
     if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
-      calcStrafe = Math.min(Constants.maxSpeedPos,calcStrafe);
+      calcStrafe = Math.max(.2,calcStrafe);
+      //calcStrafe = Math.min(.5, calcStrafe);
     }
 
     if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
-      calcStrafe = Math.max(-Constants.maxSpeedPos, calcStrafe);
+      //calcStrafe = Math.min(-.2,calcStrafe);
+      calcStrafe = Math.max(-.5, calcStrafe);
     }
     if (errorY < .05){
       calcStrafe = 0;

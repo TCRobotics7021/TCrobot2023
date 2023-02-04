@@ -16,7 +16,7 @@ public class MoveToPosReletiveToTarget extends CommandBase {
 
   /** Creates a new MoveToPosReletiveToTarget. */
   double relativeX;
-  double relativeY;
+  double relativeY; 
 
   double calcStrafe;
   double calcTranslation;

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class Rotation extends CommandBase {
+public class Homing_Rotation extends CommandBase {
   double targetX;
   double targetY;
   double targetR;
@@ -32,7 +32,7 @@ public class Rotation extends CommandBase {
 
   boolean finished;
 
-  public Rotation(double targetX, double targetY,double targetR) {
+  public Homing_Rotation(double targetX, double targetY,double targetR) {
 
     this.targetR=targetR;
     finished = false;

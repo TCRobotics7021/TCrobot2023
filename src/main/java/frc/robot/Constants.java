@@ -14,6 +14,10 @@ public final class Constants {
     public static final double stickDeadband = 0.1;
     public static final double liftPosTolerance = 0;
 
+    //P values
+    public static final double autonomousMove_P = .5;
+    public static final double autoRotate_P = 1/90;
+
     public static int driveSettingTimeout = 100;
     public static int PIDindex = 0;
 
@@ -24,6 +28,7 @@ public final class Constants {
     //max and min lift output
     public static double liftOutputMax = .5;
     public static double liftOutputMin = -.5;
+    
 
     //upper & lower limits
     public static double liftLowerLimit = 0;
@@ -40,6 +45,11 @@ public final class Constants {
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .1;
     public static double maxSpeedPos = .25;
+
+    public static double minAutoRotate = .1;
+    public static double maxAutoRotate = .25;
+
+    public static double autoRotateTolerance = 2;
 
 //Set speed for HomingLift
   public static double setSpeedForLiftHome = -.5;
@@ -160,7 +170,7 @@ public final class Constants {
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
-    public static final double autonomousMove_P = .02;
+  
 
 
 

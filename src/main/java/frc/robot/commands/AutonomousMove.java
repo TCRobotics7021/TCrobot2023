@@ -60,8 +60,8 @@ public class AutonomousMove extends CommandBase {
     errorX = Math.abs(targetX - currentX);
     errorY = Math.abs(targetY - currentY);
 
-    calcTranslation = Constants.Swerve.autonomousMove_P * (targetX - currentX);
-    calcStrafe = Constants.Swerve.autonomousMove_P * (targetY - currentY);
+    calcTranslation = Constants.autonomousMove_P * (targetX - currentX);
+    calcStrafe = Constants.autonomousMove_P * (targetY - currentY);
     calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
 
 

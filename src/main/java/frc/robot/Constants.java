@@ -41,6 +41,16 @@ public final class Constants {
     public static double minSpeedPos = .1;
     public static double maxSpeedPos = .25;
 
+    public static double minAutoRot = .1;
+    public static double maxAutoRot = .25;
+
+
+    //P vaules
+    public static final double autonomousMove_P = .5;
+    public static final double autoRotate_P = 1/90;
+
+    public static final double autoRotateTolerance = 2;
+
 //Set speed for HomingLift
   public static double setSpeedForLiftHome = -.5;
 
@@ -160,8 +170,8 @@ public final class Constants {
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
-    public static final double autonomousMove_P = .02;
-
+   
+   
 
 
 

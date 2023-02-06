@@ -16,6 +16,7 @@ public class AutonomousMove extends CommandBase {
   /** Creates a new AutonomousMove. */
   double targetX;
   double targetY;
+  double targetR;
 
   double calcStrafe;
   double calcTranslation;
@@ -23,9 +24,11 @@ public class AutonomousMove extends CommandBase {
 
   double currentX;
   double currentY;
+  double currentR;
 
   double errorX;
   double errorY;
+  double errorR;
 
   double calcMagnitude; 
 
@@ -33,10 +36,11 @@ public class AutonomousMove extends CommandBase {
 
   double ratio;
 
-  public AutonomousMove(double targetX, double targetY) {
+  public AutonomousMove(double targetX, double targetY, double targetR) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.targetX = targetX;
     this.targetY = targetY;
+    this.targetR = targetR;
     finished = false;
     addRequirements(RobotContainer.s_Swerve);
 
@@ -56,15 +60,16 @@ public class AutonomousMove extends CommandBase {
 
     currentX = RobotContainer.s_Swerve.gettempPose().getX();
     currentY = RobotContainer.s_Swerve.gettempPose().getY();
+    currentR = RobotContainer.s_Swerve.gettempPose().getRotation().getDegrees();
 
     errorX = Math.abs(targetX - currentX);
     errorY = Math.abs(targetY - currentY);
+    errorR = (targetR - currentR);
 
-    calcTranslation = Constants.Swerve.autonomousMove_P * (targetX - currentX);
-    calcStrafe = Constants.Swerve.autonomousMove_P * (targetY - currentY);
+    calcTranslation = Constants.autonomousMove_P * (targetX - currentX);
+    calcStrafe = Constants.autonomousMove_P * (targetY - currentY);
     calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
-
-
+    calcRotation = Constants.autonomousMove_P * errorR;
 
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
       calcTranslation = Math.min(Constants.maxSpeedPos,calcTranslation);
@@ -89,6 +94,27 @@ public class AutonomousMove extends CommandBase {
     if (errorY < .05){
       calcStrafe = 0;
     }
+
+    if (calcRotation > 0){
+      calcRotation = Math.min(Constants.maxAutoRot, calcRotation);
+    }
+    
+    if (calcRotation < 0){
+      calcRotation = Math.max(-Constants.maxAutoRot, calcRotation);
+    }
+
+    if (Math.abs(errorR) > Constants.autoRotateTolerance){
+      if (calcRotation > 0){
+        calcRotation = Math.max(Constants.minAutoRot, calcRotation);
+      }
+      
+      if (calcRotation < 0){
+        calcRotation = Math.min(-Constants.minAutoRot, calcRotation);
+      }
+    }
+ 
+
+
 
     if (calcMagnitude <= Constants.minSpeedPos) {
       // if (Math.abs(calcTranslation) < Math.abs(calcStrafe)) {

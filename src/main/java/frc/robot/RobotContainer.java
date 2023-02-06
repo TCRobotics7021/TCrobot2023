@@ -20,22 +20,20 @@ import frc.robot.subsystems.*;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
     /* Controllers */
     private final Joystick  RightStick = new Joystick(1);
     private final Joystick leftStick = new Joystick(0);
-    private final Joystick OpPanel = new Joystick (2);
-
-    /* Drive Controls */
-    //private final int translationAxis = XboxController.Axis.kLeftY.value;
-    //private final int strafeAxis = XboxController.Axis.kLeftX.value;
-    //private final int rotationAxis = XboxController.Axis.kRightX.value;
+    private final Joystick OpPanel = new Joystick(2);
 
     /* Subsystems */
     public final static Swerve s_Swerve = new Swerve();
-
-
+    public final static limeLight_subsystem s_Limelight = new limeLight_subsystem();
+    public final static Lift s_Lift = new Lift();
+    
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
@@ -50,25 +48,18 @@ public class RobotContainer {
         configureButtonBindings();
     }
 
-    /**
-     * Use this method to define your button->command mappings. Buttons can be created by
-     * instantiating a {@link GenericHID} or one of its subclasses ({@link
-     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-     * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-     */
     private void configureButtonBindings() {
         /* Driver Buttons */
-        new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
+        new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
         new JoystickButton(OpPanel, 1).onTrue(new Calibrate().withTimeout(2));
-        new JoystickButton(OpPanel, 2).onTrue(new exampleAuto(s_Swerve));
-        
+        new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0,2));
+        new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(-2,0));
+        new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(-2, 2));
+        new JoystickButton(OpPanel, 6).whileTrue(new ExactDrive(0.1, 0)); //Forwards
+        new JoystickButton(OpPanel, 5).whileTrue(new ExactDrive(-0.1, 0)); //Backwards
+        new JoystickButton(OpPanel, 7).onTrue(new BackToHome());
     }
 
-    /**
-     * Use this to pass the autonomous command to the main {@link Robot} class.
-     *
-     * @return the command to run in autonomous
-     */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
         return new exampleAuto(s_Swerve);

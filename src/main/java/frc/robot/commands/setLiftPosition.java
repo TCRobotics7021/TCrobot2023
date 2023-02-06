@@ -5,25 +5,47 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class CenterOnTarget extends CommandBase {
-  /** Creates a new CenterOnTarget. */
-  public CenterOnTarget() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Limelight, RobotContainer.s_Swerve);
+public class setLiftPosition extends CommandBase {
+  /** Creates a new setLiftPosition. */
 
+  //temporary variable
+  double setPosition;
+
+  boolean finished;
+
+  public setLiftPosition(double setPosition) {
+    // Use addRequirements() here to declare subsystem dependencies.
+
+    finished = false;
+
+    this.setPosition = setPosition;
+
+    //pushes it into the system
+    addRequirements(RobotContainer.s_Lift);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.s_Lift.setSpeed(setPosition);
+    //finished = true;
+   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
-
+  public void execute() {
+    if (Math.abs(RobotContainer.s_Lift.currentPosition() - setPosition) <= Constants.liftPosTolerance) {
+      finished = true;
+    }
+  }
+   
+  
+  
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
@@ -31,6 +53,6 @@ public class CenterOnTarget extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

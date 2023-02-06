@@ -7,18 +7,24 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class CenterOnTarget extends CommandBase {
-  /** Creates a new CenterOnTarget. */
-  public CenterOnTarget() {
+public class setLiftSpeed extends CommandBase {
+  /** Creates a new setLiftSpeed. */
+  double goSpeed;
+  public setLiftSpeed(double goSpeed ) {
+    this.goSpeed = goSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Limelight, RobotContainer.s_Swerve);
-
+    addRequirements(RobotContainer.s_Lift);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.s_Lift.setSpeed(goSpeed);
+
+
+
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -26,7 +32,11 @@ public class CenterOnTarget extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.s_Lift.setSpeed(0);
+
+
+  }
 
   // Returns true when the command should end.
   @Override

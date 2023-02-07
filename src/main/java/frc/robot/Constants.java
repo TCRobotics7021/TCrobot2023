@@ -14,10 +14,6 @@ public final class Constants {
     public static final double stickDeadband = 0.1;
     public static final double liftPosTolerance = 0;
 
-    //P values
-    public static final double autonomousMove_P = .5;
-    public static final double autoRotate_P = 1/90;
-
     public static int driveSettingTimeout = 100;
     public static int PIDindex = 0;
 
@@ -28,7 +24,6 @@ public final class Constants {
     //max and min lift output
     public static double liftOutputMax = .5;
     public static double liftOutputMin = -.5;
-    
 
     //upper & lower limits
     public static double liftLowerLimit = 0;
@@ -43,13 +38,18 @@ public final class Constants {
     public static double liftUpperLimitSwitchPos = 600;
 
     //minimum and max speed for setting auto motor speed
-    public static double minSpeedPos = .1;
+    public static double minSpeedPos = .15;
     public static double maxSpeedPos = .25;
 
-    public static double minAutoRotate = .1;
-    public static double maxAutoRotate = .25;
+    public static double minAutoRot = .15;
+    public static double maxAutoRot = .25;
 
-    public static double autoRotateTolerance = 2;
+
+    //P vaules
+    public static final double autonomousMove_P = .5;
+    public static final double autoRotate_P = .02;
+
+    public static final double autoRotateTolerance = 2;
 
 //Set speed for HomingLift
   public static double setSpeedForLiftHome = -.5;
@@ -64,7 +64,7 @@ public final class Constants {
         /* Drivetrain Constants */
         public static final double trackWidth = .56; //TODO: This must be tuned to specific robot
         public static final double wheelBase = .68; //TODO: This must be tuned to specific robot
-        public static final double wheelCircumference = Units.inchesToMeters(4.0);//chosenModule.wheelCircumference;
+        public static final double wheelCircumference = Units.inchesToMeters(3.98) * Math.PI;//chosenModule.wheelCircumference;
 
         /* Swerve Kinematics 
          * No need to ever change this unless you are not doing a traditional rectangular/square 4 module swerve */
@@ -170,8 +170,8 @@ public final class Constants {
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
-  
-
+   
+   
 
 
 

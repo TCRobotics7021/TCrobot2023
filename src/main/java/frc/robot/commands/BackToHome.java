@@ -46,8 +46,8 @@ public class BackToHome extends CommandBase {
     currentX = RobotContainer.s_Swerve.getPose().getX();
     currentY = RobotContainer.s_Swerve.getPose().getY();
 
-    calcTranslation = Constants.Swerve.autonomousMove_P * Math.abs((0 - currentX));
-    calcStrafe = Constants.Swerve.autonomousMove_P * Math.abs((0 - currentY));
+    calcTranslation = Constants.autonomousMove_P * Math.abs((0 - currentX));
+    calcStrafe = Constants.autonomousMove_P * Math.abs((0 - currentY));
     calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
 
 

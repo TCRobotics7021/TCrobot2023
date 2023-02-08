@@ -52,15 +52,15 @@ public class RobotContainer {
         /* Driver Buttons */
         new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
         new JoystickButton(OpPanel, 1).onTrue(new Calibrate().withTimeout(2));
-        new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0,0,90));
-        new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(-2,0,0));
-        new JoystickButton(OpPanel, 5).onTrue(new AutonomousMove(-2,0,90));
-        new JoystickButton(OpPanel, 9).onTrue(new AutonomousMove(-2,2,0));
-        new JoystickButton(OpPanel, 8).onTrue(new AutonomousMove(-1, 1, 112));
-        new JoystickButton(OpPanel, 7).onTrue(new AutonomousMove(1.89,2.36, 150));
-        new JoystickButton(OpPanel, 12).onTrue(new AutonomousMove(3.14159265358979,3.144159365358979, 3.14159265358979)); 
-        new JoystickButton(OpPanel, 6).onTrue(new ExactDrive(-0.1, 0)); //Backwards
-
+        new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0, 2, 0));
+        new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(-2, 0, 0));
+        new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(-2, 2, 0));
+        new JoystickButton(OpPanel, 6).whileTrue(new ExactDrive(0.1, 0)); //Forwards
+        new JoystickButton(OpPanel, 5).whileTrue(new ExactDrive(-0.1, 0)); //Backwards
+        new JoystickButton(OpPanel, 13).whileTrue(new setLiftSpeed(.1));
+        new JoystickButton(OpPanel, 14).whileTrue(new setLiftSpeed(-.1));
+        new JoystickButton(OpPanel, 15).onTrue(new BackToHome());
+      
     }
 
     public Command getAutonomousCommand() {

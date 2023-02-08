@@ -17,6 +17,7 @@ public class MoveToPosReletiveToTarget extends CommandBase {
   /** Creates a new MoveToPosReletiveToTarget. */
   double relativeX;
   double relativeY; 
+  double targetR;
 
   double calcStrafe;
   double calcTranslation;
@@ -24,9 +25,11 @@ public class MoveToPosReletiveToTarget extends CommandBase {
 
   double currentX;
   double currentY;
+  double currentR;
 
   double errorX;
   double errorY;
+  double errorR;
 
   double calcMagnitude; 
 
@@ -34,15 +37,17 @@ public class MoveToPosReletiveToTarget extends CommandBase {
 
   double degrees;
 
+  double ratio;
 
 
 
 
-  public MoveToPosReletiveToTarget(double relativeX, double relativeY) {
+
+  public MoveToPosReletiveToTarget(double relativeX, double relativeY, double targetR) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.relativeX = relativeX;
     this.relativeY = relativeY;
-    finished = false;
+    this.targetR = targetR;
     addRequirements(RobotContainer.s_Swerve);
     addRequirements(RobotContainer.s_Limelight);
   }
@@ -50,27 +55,38 @@ public class MoveToPosReletiveToTarget extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    degrees = RobotContainer.s_Limelight.tagRelativeRPos();
+    currentR = RobotContainer.s_Limelight.tagRelativeRPos();
     currentX = RobotContainer.s_Limelight.tagRelativeXPos();
     currentY = RobotContainer.s_Limelight.tagRelativeYPos();
-    RobotContainer.s_Swerve.resettempOdometry(new Pose2d(currentX, currentY, new Rotation2d(degrees)));
-    RobotContainer.s_Swerve.setGyro(degrees);
+    RobotContainer.s_Swerve.resettempOdometry(new Pose2d(currentX, currentY, new Rotation2d(currentR)));
+    RobotContainer.s_Swerve.setGyro(currentR);
+    finished = false;
     
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    currentX = RobotContainer.s_Swerve.getPose().getX();
-    currentY = RobotContainer.s_Swerve.getPose().getY();
+    currentX = RobotContainer.s_Swerve.gettempPose().getX();
+    currentY = RobotContainer.s_Swerve.gettempPose().getY();
+    currentR = RobotContainer.s_Swerve.gettempPose().getRotation().getDegrees();
 
     errorX = Math.abs(relativeX - currentX);
     errorY = Math.abs(relativeY - currentY);
+    errorR = -(targetR - currentR);
 
-    calcTranslation = Constants.Swerve.autonomousMove_P * (relativeX - currentX);
-    calcStrafe = Constants.Swerve.autonomousMove_P * (relativeY - currentY);
+    if (errorR > 180){
+      errorR = errorR -360;
+    } 
+    if (errorR < -180){
+      errorR = errorR + 360;
+    }
+
+
+    calcTranslation = Constants.autonomousMove_P * (relativeX - currentX);
+    calcStrafe = Constants.autonomousMove_P * (relativeY - currentY);
     calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
-
+    calcRotation = Constants.autoRotate_P * errorR;
 
   
 
@@ -83,10 +99,15 @@ public class MoveToPosReletiveToTarget extends CommandBase {
       //calcTranslation = Math.min(-.2,calcTranslation);
       calcTranslation = Math.max(-Constants.maxSpeedPos, calcTranslation);
     }
-    
+
+    if (errorX < Constants.errorTolerance){
+      calcTranslation = 0;
+    }
+
+
 
     if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
-      calcStrafe = Math.max(Constants.maxSpeedPos,calcStrafe);
+      calcStrafe = Math.min(Constants.maxSpeedPos,calcStrafe);
       //calcStrafe = Math.min(.5, calcStrafe);
     }
 
@@ -95,14 +116,38 @@ public class MoveToPosReletiveToTarget extends CommandBase {
       calcStrafe = Math.max(-Constants.maxSpeedPos, calcStrafe);
     }
   
+    if (errorY < Constants.errorTolerance){
+      calcStrafe = 0;
+    }
 
-    if (calcMagnitude <= Constants.minSpeedPos) {
-      if (Math.abs(calcTranslation) < Math.abs(calcStrafe)) {
-        calcStrafe = Constants.minSpeedPos * Math.signum(calcStrafe);
+    if (calcRotation > 0){
+      calcRotation = Math.min(Constants.maxAutoRot, calcRotation);
+    }
+    
+    if (calcRotation < 0){
+      calcRotation = Math.max(-Constants.maxAutoRot, calcRotation);
+    }
+
+
+    if (Math.abs(errorR) > Constants.autoRotateTolerance){
+      if (calcRotation > 0){
+        calcRotation = Math.max(Constants.minAutoRot, calcRotation);
       }
-      if (Math.abs(calcTranslation) >= Math.abs(calcStrafe)) {
-        calcTranslation = Constants.minSpeedPos;
+      
+      if (calcRotation < 0){
+        calcRotation = Math.min(-Constants.minAutoRot, calcRotation);
       }
+    }
+
+
+    if (calcMagnitude <= Constants.minSpeedPos && calcStrafe != 0) {
+      ratio = calcTranslation / calcStrafe;
+      calcStrafe = Math.sqrt(Math.pow(Constants.minSpeedPos, 2) / (Math.pow(ratio, 2) + 1)) * Math.signum(calcStrafe);
+      calcTranslation = Math.abs(calcStrafe * ratio) * Math.signum(calcTranslation);
+  
+    }
+    if(calcStrafe == 0 && calcTranslation != 0){
+      calcTranslation = Math.max(Constants.minSpeedPos,Math.abs(calcTranslation)) * Math.signum(calcTranslation);
     }
 
     RobotContainer.s_Swerve.drive(
@@ -111,10 +156,9 @@ public class MoveToPosReletiveToTarget extends CommandBase {
       false, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );
-  if (errorX <= .05 && errorY <= .05){
-    finished = true;
-  }
-
+   if (errorX <= Constants.errorTolerance && errorY <= Constants.errorTolerance && Math.abs(errorR) <= Constants.autoRotateTolerance){
+      finished = true;
+    }
 
 
   }

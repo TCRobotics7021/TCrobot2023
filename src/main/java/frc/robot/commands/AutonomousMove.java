@@ -86,7 +86,7 @@ public class AutonomousMove extends CommandBase {
     if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
       calcTranslation = Math.max(-Constants.maxSpeedPos, calcTranslation);
     }
-    if (errorX < .02){
+    if (errorX < Constants.errorTolerance){
       calcTranslation = 0;
     }
     
@@ -99,7 +99,7 @@ public class AutonomousMove extends CommandBase {
     if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
       calcStrafe = Math.max(-Constants.maxSpeedPos, calcStrafe);
     }
-    if (errorY < .02){
+    if (errorY < Constants.errorTolerance){
       calcStrafe = 0;
     }
 
@@ -140,7 +140,7 @@ public class AutonomousMove extends CommandBase {
       true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );
-    if (errorX <= .02 && errorY <= .02 && Math.abs(errorR) <= Constants.autoRotateTolerance){
+    if (errorX <= Constants.errorTolerance && errorY <= Constants.errorTolerance && Math.abs(errorR) <= Constants.autoRotateTolerance){
       finished = true;
     }
     SmartDashboard.putNumber("Error R", errorR);

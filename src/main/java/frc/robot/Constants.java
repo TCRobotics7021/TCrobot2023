@@ -44,6 +44,8 @@ public final class Constants {
     public static double minAutoRot = .15;
     public static double maxAutoRot = .25;
 
+    public static double errorTolerance = .02;
+
 
     //P vaules
     public static final double autonomousMove_P = .5;

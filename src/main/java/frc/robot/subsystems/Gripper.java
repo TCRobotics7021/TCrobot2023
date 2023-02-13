@@ -73,12 +73,12 @@ private double tempPeakREV = 0;
     tempPeakFWD = Constants.gripperOutputMax;
     tempPeakREV = Constants.gripperOutputMin;
 
-    SmartDashboard.putNumber("P value", tempP);
-    SmartDashboard.putNumber("I value", tempI);
-    SmartDashboard.putNumber("D value", tempD);
-    SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
-    SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
-    SmartDashboard.putBoolean("PID Tuning", false);
+    // SmartDashboard.putNumber("P value", tempP);
+    // SmartDashboard.putNumber("I value", tempI);
+    // SmartDashboard.putNumber("D value", tempD);
+    // SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
+    // SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
+    // SmartDashboard.putBoolean("PID Tuning", false);
   } 
 
 
@@ -140,17 +140,11 @@ SmartDashboard.putNumber("Distance", m_Gripper.getSelectedSensorPosition()/Const
     }
 
     
-    updatePID();
+    //updatePID();
  
-    SmartDashboard.putBoolean("digital input 0", upperLimit.get());
-    SmartDashboard.putBoolean("digital input 1", lowerLimit.get());
-    // SmartDashboard.putBoolean("digital input 2", digitalLimit2.get());
-    // SmartDashboard.putBoolean("digital input 3", digitalLimit3.get());
-    // SmartDashboard.putBoolean("digital input 4", digitalLimit4.get());
-    // SmartDashboard.putBoolean("digital input 5", digitalLimit5.get());
-    // SmartDashboard.putBoolean("digital input 6", digitalLimit6.get());
-    // SmartDashboard.putBoolean("digital input 7", digitalLimit7.get());
-    SmartDashboard.putNumber("Gripper motor output voltage", m_Gripper.getMotorOutputVoltage());
-    SmartDashboard.putNumber("gripper output percent", m_Gripper.getMotorOutputPercent());
+    SmartDashboard.putBoolean("gripperUpperLimit", upperLimit.get());
+    SmartDashboard.putBoolean("gripperLowerLimit", lowerLimit.get());
+   
+    
   }
 }

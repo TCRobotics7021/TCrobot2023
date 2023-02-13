@@ -14,7 +14,7 @@ public class limeLight_subsystem extends SubsystemBase {
 //define variable and objects
 
   NetworkTable limeLight = NetworkTableInstance.getDefault().getTable("limelight-mitch"); //change, maybe blinky
-
+int delay = 0;
 
   /** Creates a new limeLight_subsystem. */
   public limeLight_subsystem() {
@@ -25,13 +25,16 @@ public class limeLight_subsystem extends SubsystemBase {
 
 //Functions:
 public double tagRelativeXPos(){
-  return limeLight.getEntry("camtran").getDoubleArray(new double[3])[0];
+  return limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[0];
+  
 }
 public double tagRelativeYPos(){
-  return limeLight.getEntry("camtran").getDoubleArray(new double[3])[1];
+  return limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[1];
+  
 }
 public double tagRelativeRPos(){
-  return limeLight.getEntry("camtran").getDoubleArray(new double[3])[2];
+ return limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[5];
+ 
 }
 
 //Reflective target position
@@ -57,14 +60,14 @@ public void setLEDMode(int LEDNumber){
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+if(delay > 50){
+//SmartDashboard.putNumber("TagRelativeX", tagRelativeXPos());
+//SmartDashboard.putNumber("TagRelativeY", tagRelativeYPos());
+//SmartDashboard.putNumber("TagRelativeR", tagRelativeRPos());
 
-SmartDashboard.putNumber("TagRelativeX", tagRelativeXPos());
-SmartDashboard.putNumber("TagRelativeY", tagRelativeYPos());
-SmartDashboard.putNumber("TagRelativeR", tagRelativeRPos());
-SmartDashboard.putNumber("TargetX", targetX());
-SmartDashboard.putNumber("TargetY", targetY());
-SmartDashboard.putNumber("TargetA", targetA());
-
+delay = 0;
+  }
+  delay++;
 
 
   }

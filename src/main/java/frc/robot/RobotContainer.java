@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
 import frc.robot.commands.*;
+import frc.robot.commands.Gripper.HomeGripper;
+import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Gripper.setGripperSpeed;
 import frc.robot.subsystems.*;
 
 /**
@@ -30,6 +33,7 @@ public class RobotContainer {
     public final static Swerve s_Swerve = new Swerve();
     public final static limeLight_subsystem s_Limelight = new limeLight_subsystem();
     public final static Lift s_Lift = new Lift();
+    public final static Gripper s_Gripper = new Gripper();
     
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -52,15 +56,22 @@ public class RobotContainer {
         /* Driver Buttons */
         new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
         new JoystickButton(OpPanel, 1).onTrue(new Calibrate().withTimeout(2));
-        new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0,0,90));
-        new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(-2,0,0));
-        new JoystickButton(OpPanel, 5).onTrue(new AutonomousMove(-2,0,90));
-        new JoystickButton(OpPanel, 9).onTrue(new AutonomousMove(-2,2,0));
-        new JoystickButton(OpPanel, 8).onTrue(new AutonomousMove(-1, 1, 112));
-        new JoystickButton(OpPanel, 7).onTrue(new AutonomousMove(1.89,2.36, 150));
-        new JoystickButton(OpPanel, 12).onTrue(new AutonomousMove(3.14159265358979,3.144159365358979, 3.14159265358979)); 
-        new JoystickButton(OpPanel, 6).onTrue(new ExactDrive(-0.1, 0)); //Backwards
-
+        // new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0, 2, 0));
+        // new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(-2, 0, 0));
+        // new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(-2, 2, 0));
+        // new JoystickButton(OpPanel, 6).whileTrue(new ExactDrive(0.1, 0)); //Forwards
+        // new JoystickButton(OpPanel, 5).whileTrue(new ExactDrive(-0.1, 0)); //Backwards
+        // new JoystickButton(OpPanel, 13).whileTrue(new setLiftSpeed(.1));
+        // new JoystickButton(OpPanel, 14).whileTrue(new setLiftSpeed(-.1));
+        // new JoystickButton(OpPanel, 15).onTrue(new BackToHome());
+        // new JoystickButton(OpPanel, 16).onTrue(new MoveToPosReletiveToTarget(1, 0, 0));
+        new JoystickButton(OpPanel, 7).whileTrue(new setGripperSpeed(0.2));
+        new JoystickButton(OpPanel, 8).whileTrue(new setGripperSpeed(-0.2));
+        new JoystickButton(OpPanel, 2).onTrue(new setGripperPosition(250));
+        new JoystickButton(OpPanel, 3).onTrue(new setGripperPosition(150));
+        new JoystickButton(OpPanel, 5).onTrue(new setGripperPosition(40));
+        new JoystickButton(OpPanel, 15).onTrue(new HomeGripper());
+      
     }
 
     public Command getAutonomousCommand() {

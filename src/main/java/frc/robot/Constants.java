@@ -12,7 +12,6 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
     public static final double stickDeadband = 0.1;
-    public static final double liftPosTolerance = 0;
 
     public static int driveSettingTimeout = 100;
     public static int PIDindex = 0;
@@ -32,17 +31,50 @@ public final class Constants {
     //lift conversion
     public static double liftConversion = 1;
 
+      //upper and lower limit switch position / homing/calibrating values
+      public static double liftLowerLimitSwitchPos = 0;
+      public static double liftUpperLimitSwitchPos = 100;
+
+      public static final double liftPosTolerance = 0;
+
+
+
+
+
+    //Gripper subsystem
+    public static double gripperMotor_P = .01;
+    public static double gripperMotor_I = 0;
+    public static double gripperMotor_D = 0;
+
+    //max and min lift output
+    public static double gripperOutputMax = .3;
+    public static double gripperOutputMin = -.5;
+
+    //upper & lower limits
+    public static double gripperLowerLimit = 34;
+    public static double gripperUpperLimit = 304;
+
+    //lift conversion
+    public static double gripperConversion = 112.7455;
 
     //upper and lower limit switch position / homing/calibrating values
-    public static double liftLowerLimitSwitchPos = 0;
-    public static double liftUpperLimitSwitchPos = 600;
+    public static double gripperLowerLimitSwitchPos = 33;
+    public static double gripperUpperLimitSwitchPos = 305;
+
+    public static final double gripperPosTolerance = 2;
+
+
+
+
 
     //minimum and max speed for setting auto motor speed
-    public static double minSpeedPos = .15;
-    public static double maxSpeedPos = .25;
+    public static double minSpeedPos = .1;
+    public static double maxSpeedPos = .15;
 
     public static double minAutoRot = .15;
     public static double maxAutoRot = .25;
+
+    public static double errorTolerance = .02;
 
 
     //P vaules
@@ -52,10 +84,12 @@ public final class Constants {
     public static final double autoRotateTolerance = 2;
 
 //Set speed for HomingLift
-  public static double setSpeedForLiftHome = -.5;
+  public static double setSpeedForLiftHome = -.25;
+
+  public static double setSpeedForGripperHome = .25;
 
     public static final class Swerve {
-        public static final int pigeonID = 1;
+        public static final int pigeonID = 9;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
         public static final COTSFalconSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot

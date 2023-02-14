@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -18,8 +19,8 @@ public class Lift extends SubsystemBase {
   WPI_TalonFX m_Lift = new WPI_TalonFX(11, "canivore1");
 
 
-  private DigitalInput upperLimit = new DigitalInput(8);
-  private DigitalInput lowerLimit = new DigitalInput(9);
+  private DigitalInput upperLimit = new DigitalInput(4);
+  private DigitalInput lowerLimit = new DigitalInput(3);
   public double currentPosition () {
     return (m_Lift.getSelectedSensorPosition(Constants.PIDindex)/Constants.liftConversion);
   }
@@ -57,7 +58,8 @@ private double tempPeakREV = 0;
     //enables those limits
     m_Lift.configForwardSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Lift.configReverseSoftLimitEnable(true, Constants.driveSettingTimeout);
-   
+    m_Lift.setNeutralMode(NeutralMode.Brake);
+
     tempP = Constants.liftMotor_P;
     tempI = Constants.liftMotor_I;
     tempD = Constants.liftMotor_D;
@@ -65,12 +67,12 @@ private double tempPeakREV = 0;
     tempPeakFWD = Constants.liftOutputMax;
     tempPeakREV = Constants.liftOutputMin;
 
-  //   SmartDashboard.putNumber("P value", tempP);
-  //   SmartDashboard.putNumber("I value", tempI);
-  //   SmartDashboard.putNumber("D value", tempD);
-  //   SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
-  //   SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
-  //   SmartDashboard.putBoolean("PID Tuning", false);
+    SmartDashboard.putNumber("P value", tempP);
+    SmartDashboard.putNumber("I value", tempI);
+    SmartDashboard.putNumber("D value", tempD);
+    SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
+    SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
+    SmartDashboard.putBoolean("PID Tuning", false);
    } 
 
 
@@ -80,7 +82,7 @@ private double tempPeakREV = 0;
 }
 
 public void setPosition(double position){
-  m_Lift.set(ControlMode.Position, position*Constants.gripperConversion);
+  m_Lift.set(ControlMode.Position, position*Constants.liftConversion);
 }
 public boolean atTopLimit () {
 return (!lowerLimit.get());
@@ -91,6 +93,15 @@ return (!lowerLimit.get());
 public void calibrateEncoder (double calibratePosition) {
   m_Lift.setSelectedSensorPosition(calibratePosition * Constants.liftConversion, Constants.PIDindex, Constants.driveSettingTimeout);
 }
+
+public void setCoastMode() {
+  m_Lift.setNeutralMode(NeutralMode.Coast);
+}
+
+public void setBrakeMode() {
+  m_Lift.setNeutralMode(NeutralMode.Brake);
+}
+
 // != not equal
 public void updatePID () {
 if (SmartDashboard.getNumber("P value", tempP) != tempP) {
@@ -130,7 +141,7 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
     }
 
  
-    //updatePID();
+    updatePID();
     
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());

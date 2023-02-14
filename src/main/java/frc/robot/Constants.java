@@ -21,23 +21,25 @@ public final class Constants {
     public static double liftMotor_D = 0;
 
     //max and min lift output
-    public static double liftOutputMax = .5;
-    public static double liftOutputMin = -.5;
+    public static double liftOutputMax = .25;
+    public static double liftOutputMin = -.25;
 
     //upper & lower limits
-    public static double liftLowerLimit = 0;
-    public static double liftUpperLimit = 300;
+    public static double liftLowerLimit = 1;
+    public static double liftUpperLimit = 1107;
 
     //lift conversion
-    public static double liftConversion = 1;
+    public static double liftConversion = 272.222;
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 100;
+      public static double liftUpperLimitSwitchPos = 1108;
 
       public static final double liftPosTolerance = 0;
 
-
+    // Back To home Variables
+    public static double maxAutoRotate = 0;
+    public static double minAutoRotate = 0;
 
 
 
@@ -63,7 +65,27 @@ public final class Constants {
 
     public static final double gripperPosTolerance = 2;
 
-
+      //max and min arm output
+      public static double ArmOutputMax = .25;
+      public static double ArmOutputMin = -.25;
+  
+      //upper & lower limits
+      public static double ArmLowerLimit = 0;
+      public static double ArmUpperLimit = 300;
+  
+      //arm conversion
+      public static double ArmConversion = 1;
+  
+        //upper and lower limit switch position / homing/calibrating values
+        public static double ArmLowerLimitSwitchPos = 0;
+        public static double ArmUpperLimitSwitchPos = 100;
+  
+        public static final double ArmPosTolerance = 0;
+        public static double ArmMotor_P = .001;
+        public static double ArmMotor_I = 0;
+        public static double ArmMotor_D = 0;
+        
+        public static double setSpeedForArmHome = .25;
 
 
 

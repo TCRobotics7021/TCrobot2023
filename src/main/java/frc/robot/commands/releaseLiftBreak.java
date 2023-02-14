@@ -12,7 +12,7 @@ import frc.robot.RobotContainer;
 public class releaseLiftBreak extends CommandBase {
   /** Creates a new releaseLiftBreak. */
   public releaseLiftBreak() {
-    addRequirements(RobotContainer.s_Lift);
+    addRequirements(RobotContainer.s_Lift, RobotContainer.s_Arm);
 
   }
 
@@ -20,6 +20,7 @@ public class releaseLiftBreak extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Lift.setCoastMode();
+    RobotContainer.s_Arm.setCoastMode();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,6 +33,7 @@ public class releaseLiftBreak extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     RobotContainer.s_Lift.setBrakeMode();
+    RobotContainer.s_Arm.setBrakeMode();
   }
 
   // Returns true when the command should end.

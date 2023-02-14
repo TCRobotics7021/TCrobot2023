@@ -24,17 +24,14 @@ public class HomeArm extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Arm.setSpeed(Constants.setSpeedForArmHome);
-    RobotContainer.s_Arm.calibrateEncoder(Constants.ArmLowerLimit);  
+    RobotContainer.s_Arm.calibrateEncoder(Constants.ArmUpperLimit);  
+    finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.s_Arm.atTopLimit()) {
-      Trigger1 = true;
-      RobotContainer.s_Arm.setSpeed(.05);
-     }
-     if (Trigger1 == true && !RobotContainer.s_Arm.atTopLimit()) {
+     if (RobotContainer.s_Arm.atBottomLimit()) {
       finished = true; 
      }
   }
@@ -48,6 +45,6 @@ public class HomeArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

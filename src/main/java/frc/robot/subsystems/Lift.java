@@ -67,12 +67,12 @@ private double tempPeakREV = 0;
     tempPeakFWD = Constants.liftOutputMax;
     tempPeakREV = Constants.liftOutputMin;
 
-    SmartDashboard.putNumber("P value", tempP);
-    SmartDashboard.putNumber("I value", tempI);
-    SmartDashboard.putNumber("D value", tempD);
-    SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
-    SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
-    SmartDashboard.putBoolean("PID Tuning", false);
+    // SmartDashboard.putNumber("P value", tempP);
+    // SmartDashboard.putNumber("I value", tempI);
+    // SmartDashboard.putNumber("D value", tempD);
+    // SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
+    // SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
+    // SmartDashboard.putBoolean("PID Tuning", false);
    } 
 
 
@@ -141,11 +141,11 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
     }
 
  
-    updatePID();
+    //updatePID();
     
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());
-    SmartDashboard.putNumber("Output", m_Lift.getMotorOutputPercent());
+   // SmartDashboard.putNumber("Output", m_Lift.getMotorOutputPercent());
  
  
  

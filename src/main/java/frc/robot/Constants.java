@@ -66,26 +66,26 @@ public final class Constants {
     public static final double gripperPosTolerance = 2;
 
       //max and min arm output
-      public static double ArmOutputMax = .25;
-      public static double ArmOutputMin = -.25;
+      public static double ArmOutputMax = 1;
+      public static double ArmOutputMin = -1;
   
       //upper & lower limits
-      public static double ArmLowerLimit = 0;
-      public static double ArmUpperLimit = 300;
+      public static double ArmLowerLimit = 1;
+      public static double ArmUpperLimit = 522;
   
       //arm conversion
-      public static double ArmConversion = 1;
+      public static double ArmConversion = 307.122;
   
         //upper and lower limit switch position / homing/calibrating values
         public static double ArmLowerLimitSwitchPos = 0;
-        public static double ArmUpperLimitSwitchPos = 100;
+        public static double ArmUpperLimitSwitchPos = 523;
   
-        public static final double ArmPosTolerance = 0;
-        public static double ArmMotor_P = .001;
+        public static final double ArmPosTolerance = 3;
+        public static double ArmMotor_P = .1;
         public static double ArmMotor_I = 0;
         public static double ArmMotor_D = 0;
         
-        public static double setSpeedForArmHome = .25;
+        public static double setSpeedForArmHome = -.25;
 
 
 
@@ -109,7 +109,6 @@ public final class Constants {
   public static double setSpeedForLiftHome = .2;
 
   public static double setSpeedForGripperHome = .25;
-
     public static final class Swerve {
         public static final int pigeonID = 9;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-

@@ -51,7 +51,7 @@ private double tempPeakREV = 0;
     m_Arm.configPeakOutputReverse(Constants.ArmOutputMin, Constants.driveSettingTimeout);
     m_Arm.configAllowableClosedloopError(Constants.PIDindex, Constants.ArmPosTolerance, Constants.driveSettingTimeout);
     //in case the robot is doing the opposite of what we need (up or down)
-    m_Arm.setInverted(false); //set to true to flip positive direction
+    m_Arm.setInverted(true); //set to true to flip positive direction
     //encoder reads positive
     m_Arm.setSensorPhase(true);
     //adds physical limits
@@ -69,12 +69,12 @@ private double tempPeakREV = 0;
     tempPeakFWD = Constants.ArmOutputMax;
     tempPeakREV = Constants.ArmOutputMin;
 
-    // SmartDashboard.putNumber("P value", tempP);
-    // SmartDashboard.putNumber("I value", tempI);
-    // SmartDashboard.putNumber("D value", tempD);
-    // SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
-    // SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
-    // SmartDashboard.putBoolean("PID Tuning", false);
+    SmartDashboard.putNumber("P value", tempP);
+    SmartDashboard.putNumber("I value", tempI);
+    SmartDashboard.putNumber("D value", tempD);
+    SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
+    SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
+    SmartDashboard.putBoolean("PID Tuning", false);
    } 
 
 
@@ -84,17 +84,26 @@ private double tempPeakREV = 0;
 }
 
 public void setPosition(double position){
-  m_Arm.set(ControlMode.Position, position*Constants.gripperConversion);
+  m_Arm.set(ControlMode.Position, position*Constants.ArmConversion);
 }
 public boolean atTopLimit () {
-return (!lowerLimit.get());
+return (lowerLimit.get());
 }
   public boolean atBottomLimit () {
-    return (!lowerLimit.get());
+    return (lowerLimit.get());
   }
 public void calibrateEncoder (double calibratePosition) {
   m_Arm.setSelectedSensorPosition(calibratePosition * Constants.ArmConversion, Constants.PIDindex, Constants.driveSettingTimeout);
 }
+
+public void setCoastMode() {
+  m_Arm.setNeutralMode(NeutralMode.Coast);
+}
+
+public void setBrakeMode() {
+  m_Arm.setNeutralMode(NeutralMode.Brake);
+}
+
 // != not equal
 public void updatePID () {
 if (SmartDashboard.getNumber("P value", tempP) != tempP) {
@@ -114,7 +123,7 @@ if (SmartDashboard.getNumber("FWD Peak OutPut", tempPeakFWD) != tempPeakFWD); {
   m_Arm.configPeakOutputForward(tempPeakFWD, Constants.driveSettingTimeout);
   }
   if (SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV) != tempPeakREV); {
-    tempPeakFWD = SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV);
+    tempPeakREV = SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV);
     m_Arm.configPeakOutputReverse(tempPeakREV, Constants.driveSettingTimeout);  
 }
 SmartDashboard.putNumber("Ticks", m_Arm.getSelectedSensorPosition());
@@ -125,16 +134,16 @@ SmartDashboard.putNumber("Distance", m_Arm.getSelectedSensorPosition()/Constants
   public void periodic() {
     // This method will be called once per scheduler run
 
-    if(!lowerLimit.get()){
+    if(lowerLimit.get()){
       m_Arm.setSelectedSensorPosition(Constants.ArmLowerLimitSwitchPos * Constants.ArmConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
-    if(!upperLimit.get()){
+    if(upperLimit.get()){
       m_Arm.setSelectedSensorPosition(Constants.ArmUpperLimitSwitchPos * Constants.ArmConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
  
-   // updatePID();
+    updatePID();
     
     SmartDashboard.putBoolean("ArmUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("ArmLowerLimit", lowerLimit.get());

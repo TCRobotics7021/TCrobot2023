@@ -24,18 +24,15 @@ public class HomeLift extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Lift.setSpeed(Constants.setSpeedForLiftHome);
-    RobotContainer.s_Lift.calibrateEncoder(Constants.liftUpperLimit);  
+    RobotContainer.s_Lift.calibrateEncoder(Constants.liftLowerLimit);  
+    finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.s_Lift.atBottomLimit()) {
-      Trigger1 = true;
-      RobotContainer.s_Lift.setSpeed(.05);
-     }
-     if (Trigger1 == true && !RobotContainer.s_Lift.atBottomLimit()) {
-      finished = true; 
+    if (RobotContainer.s_Lift.atTopLimit()) {
+      finished = true;
      }
   }
 
@@ -48,6 +45,6 @@ public class HomeLift extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

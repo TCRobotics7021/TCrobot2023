@@ -16,13 +16,13 @@ public final class Constants {
     public static int driveSettingTimeout = 100;
     public static int PIDindex = 0;
 
-    public static double liftMotor_P = .001;
+    public static double liftMotor_P = .1;
     public static double liftMotor_I = 0;
     public static double liftMotor_D = 0;
 
     //max and min lift output
-    public static double liftOutputMax = .25;
-    public static double liftOutputMin = -.25;
+    public static double liftOutputMax =1;
+    public static double liftOutputMin = -.75;
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
@@ -35,7 +35,7 @@ public final class Constants {
       public static double liftLowerLimitSwitchPos = 0;
       public static double liftUpperLimitSwitchPos = 1108;
 
-      public static final double liftPosTolerance = 0;
+      public static final double liftPosTolerance = 5;
 
     // Back To home Variables
     public static double maxAutoRotate = 0;
@@ -106,7 +106,7 @@ public final class Constants {
     public static final double autoRotateTolerance = 2;
 
 //Set speed for HomingLift
-  public static double setSpeedForLiftHome = -.25;
+  public static double setSpeedForLiftHome = .2;
 
   public static double setSpeedForGripperHome = .25;
 

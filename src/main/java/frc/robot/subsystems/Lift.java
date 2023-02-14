@@ -121,7 +121,7 @@ if (SmartDashboard.getNumber("FWD Peak OutPut", tempPeakFWD) != tempPeakFWD); {
   m_Lift.configPeakOutputForward(tempPeakFWD, Constants.driveSettingTimeout);
   }
   if (SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV) != tempPeakREV); {
-    tempPeakFWD = SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV);
+    tempPeakREV = SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV);
     m_Lift.configPeakOutputReverse(tempPeakREV, Constants.driveSettingTimeout);  
 }
 SmartDashboard.putNumber("Ticks", m_Lift.getSelectedSensorPosition());
@@ -145,6 +145,7 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
     
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());
+    SmartDashboard.putNumber("Output", m_Lift.getMotorOutputPercent());
  
  
  

@@ -65,8 +65,12 @@ public class RobotContainer {
         // new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(-2, 2, 0));
         // new JoystickButton(OpPanel, 6).whileTrue(new ExactDrive(0.1, 0)); //Forwards
         // new JoystickButton(OpPanel, 5).whileTrue(new ExactDrive(-0.1, 0)); //Backwards
-        new JoystickButton(OpPanel, 13).whileTrue(new setLiftSpeed(.1));
-        new JoystickButton(OpPanel, 14).whileTrue(new setLiftSpeed(-.1));
+        new JoystickButton(OpPanel, 13).whileTrue(new setLiftSpeed(.15));
+        new JoystickButton(OpPanel, 14).whileTrue(new setLiftSpeed(-.15));
+        new JoystickButton(OpPanel, 15).onTrue(new HomeLift());
+        new JoystickButton(OpPanel, 5).onTrue(new setLiftPosition(250));
+        new JoystickButton(OpPanel, 6).onTrue(new setLiftPosition(500));
+        new JoystickButton(OpPanel, 7).onTrue(new setLiftPosition(750));
         // new JoystickButton(OpPanel, 15).onTrue(new BackToHome());
         // new JoystickButton(OpPanel, 16).onTrue(new MoveToPosReletiveToTarget(1, 0, 0));
 

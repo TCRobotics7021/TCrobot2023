@@ -16,28 +16,30 @@ public final class Constants {
     public static int driveSettingTimeout = 100;
     public static int PIDindex = 0;
 
-    public static double liftMotor_P = .001;
+    public static double liftMotor_P = .1;
     public static double liftMotor_I = 0;
     public static double liftMotor_D = 0;
 
     //max and min lift output
-    public static double liftOutputMax = .5;
-    public static double liftOutputMin = -.5;
+    public static double liftOutputMax =1;
+    public static double liftOutputMin = -.75;
 
     //upper & lower limits
-    public static double liftLowerLimit = 0;
-    public static double liftUpperLimit = 300;
+    public static double liftLowerLimit = 1;
+    public static double liftUpperLimit = 1107;
 
     //lift conversion
-    public static double liftConversion = 1;
+    public static double liftConversion = 272.222;
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 100;
+      public static double liftUpperLimitSwitchPos = 1108;
 
-      public static final double liftPosTolerance = 0;
+      public static final double liftPosTolerance = 5;
 
-
+    // Back To home Variables
+    public static double maxAutoRotate = 0;
+    public static double minAutoRotate = 0;
 
 
 
@@ -63,27 +65,27 @@ public final class Constants {
 
     public static final double gripperPosTolerance = 2;
 
-  //Gantry subsystem
-  public static double GantryMotor_P = .01;
-  public static double GantryMotor_I = 0;
-  public static double GantryMotor_D = 0;
-
-  //max and min lift output
-  public static double GantryOutputMax = .3;
-  public static double GantryOutputMin = -.5;
-
-  //upper & lower limits
-  public static double GantryLowerLimit = 34;
-  public static double GantryUpperLimit = 304;
-
-  //lift conversion
-  public static double GantryConversion = 0;
-
-  //upper and lower limit switch position / homing/calibrating values
-  public static double GantryLowerLimitSwitchPos = 33;
-  public static double GantryUpperLimitSwitchPos = 305;
-
-  public static final double GantryPosTolerance = 5;
+      //max and min arm output
+      public static double ArmOutputMax = 1;
+      public static double ArmOutputMin = -1;
+  
+      //upper & lower limits
+      public static double ArmLowerLimit = 1;
+      public static double ArmUpperLimit = 522;
+  
+      //arm conversion
+      public static double ArmConversion = 307.122;
+  
+        //upper and lower limit switch position / homing/calibrating values
+        public static double ArmLowerLimitSwitchPos = 0;
+        public static double ArmUpperLimitSwitchPos = 523;
+  
+        public static final double ArmPosTolerance = 3;
+        public static double ArmMotor_P = .1;
+        public static double ArmMotor_I = 0;
+        public static double ArmMotor_D = 0;
+        
+        public static double setSpeedForArmHome = -.25;
 
 
 
@@ -104,7 +106,7 @@ public final class Constants {
     public static final double autoRotateTolerance = 2;
 
 //Set speed for HomingLift
-  public static double setSpeedForLiftHome = -.25;
+  public static double setSpeedForLiftHome = .2;
 
   public static double setSpeedForGripperHome = .25;
 

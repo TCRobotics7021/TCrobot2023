@@ -2,44 +2,44 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class HomeLift extends CommandBase {
-  /** Creates a new HomeLift. */
+public class HomeArm extends CommandBase {
+  /** Creates a new HomeArm. */
   boolean finished; 
   boolean Trigger1;
-  public HomeLift() {
+  public HomeArm() {
     finished = false;
     Trigger1 = false;
-    addRequirements(RobotContainer.s_Lift);
+    addRequirements(RobotContainer.s_Arm);
     // Use addRequirements() here to declare subsystem dependencies.
   } 
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Lift.setSpeed(Constants.setSpeedForLiftHome);
-    RobotContainer.s_Lift.calibrateEncoder(Constants.liftLowerLimit);  
+    RobotContainer.s_Arm.setSpeed(Constants.setSpeedForArmHome);
+    RobotContainer.s_Arm.calibrateEncoder(Constants.ArmUpperLimit);  
     finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.s_Lift.atTopLimit()) {
-      finished = true;
+     if (RobotContainer.s_Arm.atBottomLimit()) {
+      finished = true; 
      }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-     RobotContainer.s_Lift.setSpeed(0);
+     RobotContainer.s_Arm.setSpeed(0);
   }
 
   // Returns true when the command should end.

@@ -2,25 +2,25 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Gripper;
+package frc.robot.commands.Gantry;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class setGripperSpeed extends CommandBase {
+public class setGantrySpeed extends CommandBase {
   /** Creates a new setLiftSpeed. */
   double goSpeed;
-  public setGripperSpeed(double goSpeed ) {
+  public setGantrySpeed(double goSpeed ) {
     this.goSpeed = goSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Gripper);
+    addRequirements(RobotContainer.s_Gantry);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Gripper.setSpeed(goSpeed);
+    RobotContainer.s_Gantry.setSpeed(goSpeed);
 
 
 
@@ -33,7 +33,7 @@ public class setGripperSpeed extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.s_Gripper.setSpeed(0);
+    RobotContainer.s_Gantry.setSpeed(0);
 
 
   }

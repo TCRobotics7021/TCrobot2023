@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.autos.*;
@@ -37,6 +38,7 @@ public class RobotContainer {
     public final static limeLight_subsystem s_Limelight = new limeLight_subsystem();
     public final static Lift s_Lift = new Lift();
     public final static Gripper s_Gripper = new Gripper();
+    public final static Gantry s_Gantry = new Gantry();
     public final static Arm s_Arm = new Arm();
     
     /** The container for the robot. Contains subsystems, OI devices, and commands. */

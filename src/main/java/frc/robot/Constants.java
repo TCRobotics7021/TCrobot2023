@@ -85,7 +85,26 @@ public final class Constants {
         public static double ArmMotor_I = 0;
         public static double ArmMotor_D = 0;
         
-        public static double setSpeedForArmHome = -.25;
+            //max and min arm output
+      public static double GantryOutputMax = 1;
+      public static double GantryOutputMin = -1;
+  
+      //upper & lower limits
+      public static double GantryLowerLimit = 1;
+      public static double GantryUpperLimit = 522;
+  
+      //arm conversion
+      public static double GantryConversion = 307.122;
+  
+        //upper and lower limit switch position / homing/calibrating values
+        public static double GantryLowerLimitSwitchPos = 0;
+        public static double GantryUpperLimitSwitchPos = 523;
+  
+        public static final double GantryPosTolerance = 3;
+        public static double GantryMotor_P = .1;
+        public static double GantryMotor_I = 0;
+        public static double GantryMotor_D = 0;
+        
 
 
 
@@ -109,6 +128,11 @@ public final class Constants {
   public static double setSpeedForLiftHome = .2;
 
   public static double setSpeedForGripperHome = .25;
+
+  public static double setSpeedforGantryHome = .25;
+
+  public static double setSpeedForArmHome = -.25;
+
     public static final class Swerve {
         public static final int pigeonID = 9;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-

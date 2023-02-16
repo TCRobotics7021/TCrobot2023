@@ -120,7 +120,7 @@ if (SmartDashboard.getNumber("FWD Peak OutPut", tempPeakFWD) != tempPeakFWD); {
   m_Gantry.configPeakOutputForward(tempPeakFWD, Constants.driveSettingTimeout);
   }
   if (SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV) != tempPeakREV); {
-    tempPeakFWD = SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV);
+    tempPeakREV = SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV);
     m_Gantry.configPeakOutputReverse(tempPeakREV, Constants.driveSettingTimeout);  
 }
 SmartDashboard.putNumber("Ticks", m_Gantry.getSelectedSensorPosition());

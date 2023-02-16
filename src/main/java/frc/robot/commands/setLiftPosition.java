@@ -31,7 +31,7 @@ public class setLiftPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Lift.setSpeed(setPosition);
+    RobotContainer.s_Lift.setPosition(setPosition);
     //finished = true;
    }
 

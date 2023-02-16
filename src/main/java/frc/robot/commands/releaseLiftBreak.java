@@ -21,6 +21,7 @@ public class releaseLiftBreak extends CommandBase {
   public void initialize() {
     RobotContainer.s_Lift.setCoastMode();
     RobotContainer.s_Arm.setCoastMode();
+    RobotContainer.s_Gantry.setCoastMode();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,6 +35,7 @@ public class releaseLiftBreak extends CommandBase {
   public void end(boolean interrupted) {
     RobotContainer.s_Lift.setBrakeMode();
     RobotContainer.s_Arm.setBrakeMode();
+    RobotContainer.s_Gantry.setBrakeMode();
   }
 
   // Returns true when the command should end.

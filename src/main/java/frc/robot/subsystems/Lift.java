@@ -85,7 +85,7 @@ public void setPosition(double position){
   m_Lift.set(ControlMode.Position, position*Constants.liftConversion);
 }
 public boolean atTopLimit () {
-return (!lowerLimit.get());
+return (!upperLimit.get());
 }
   public boolean atBottomLimit () {
     return (!lowerLimit.get());

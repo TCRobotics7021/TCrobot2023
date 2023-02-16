@@ -21,8 +21,7 @@ public class Arm extends SubsystemBase {
 
   private DigitalInput upperLimit = new DigitalInput(0);
   private DigitalInput lowerLimit = new DigitalInput(1);
-  private DigitalInput digitalInput2 = new DigitalInput(2);
-  private DigitalInput digitalInput5 = new DigitalInput(5);
+  
   public double currentPosition () {
     return (m_Arm.getSelectedSensorPosition(Constants.PIDindex)/Constants.ArmConversion);
   }
@@ -69,12 +68,12 @@ private double tempPeakREV = 0;
     tempPeakFWD = Constants.ArmOutputMax;
     tempPeakREV = Constants.ArmOutputMin;
 
-    SmartDashboard.putNumber("P value", tempP);
-    SmartDashboard.putNumber("I value", tempI);
-    SmartDashboard.putNumber("D value", tempD);
-    SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
-    SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
-    SmartDashboard.putBoolean("PID Tuning", false);
+    // SmartDashboard.putNumber("P value", tempP);
+    // SmartDashboard.putNumber("I value", tempI);
+    // SmartDashboard.putNumber("D value", tempD);
+    // SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
+    // SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
+    // SmartDashboard.putBoolean("PID Tuning", false);
    } 
 
 
@@ -87,7 +86,7 @@ public void setPosition(double position){
   m_Arm.set(ControlMode.Position, position*Constants.ArmConversion);
 }
 public boolean atTopLimit () {
-return (lowerLimit.get());
+return (upperLimit.get());
 }
   public boolean atBottomLimit () {
     return (lowerLimit.get());
@@ -143,12 +142,11 @@ SmartDashboard.putNumber("Distance", m_Arm.getSelectedSensorPosition()/Constants
     }
 
  
-    updatePID();
+    //updatePID();
     
     SmartDashboard.putBoolean("ArmUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("ArmLowerLimit", lowerLimit.get());
-    SmartDashboard.putBoolean("Digital Imput 2", digitalInput2.get());
-    SmartDashboard.putBoolean("Digital Imput 5", digitalInput5.get());
+ 
  
  
   }

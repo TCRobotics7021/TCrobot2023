@@ -25,6 +25,7 @@ public class HomeGripper extends CommandBase {
   public void initialize() {
     RobotContainer.s_Gripper.setSpeed(Constants.setSpeedForGripperHome);
     RobotContainer.s_Gripper.calibrateEncoder(Constants.gripperLowerLimit);  
+    finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -48,6 +49,6 @@ public class HomeGripper extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

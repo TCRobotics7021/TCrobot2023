@@ -44,7 +44,7 @@ public final class Constants {
 
 
     //Gripper subsystem
-    public static double gripperMotor_P = .01;
+    public static double gripperMotor_P = .1;
     public static double gripperMotor_I = 0;
     public static double gripperMotor_D = 0;
 
@@ -91,14 +91,14 @@ public final class Constants {
   
       //upper & lower limits
       public static double GantryLowerLimit = 1;
-      public static double GantryUpperLimit = 522;
+      public static double GantryUpperLimit = 658;
   
-      //arm conversion
-      public static double GantryConversion = 307.122;
+      //gantry conversion
+      public static double GantryConversion = 400.342;
   
         //upper and lower limit switch position / homing/calibrating values
         public static double GantryLowerLimitSwitchPos = 0;
-        public static double GantryUpperLimitSwitchPos = 523;
+        public static double GantryUpperLimitSwitchPos = 659;
   
         public static final double GantryPosTolerance = 3;
         public static double GantryMotor_P = .1;
@@ -129,9 +129,13 @@ public final class Constants {
 
   public static double setSpeedForGripperHome = .25;
 
-  public static double setSpeedforGantryHome = .25;
+  public static double setSpeedforGantryHome = -.25;
 
   public static double setSpeedForArmHome = -.25;
+
+
+  public static double gantryLimitLift = 300;
+  public static double liftLimitGantry = 200;
 
     public static final class Swerve {
         public static final int pigeonID = 9;

@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -13,14 +14,16 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Gantry extends SubsystemBase {
   /** Creates a new Gantry. */
-  TalonFX m_Gantry = new TalonFX(12, "canivore1");
+  TalonFX m_Gantry = new TalonFX(13, "canivore1");
 
 
-  private DigitalInput upperLimit = new DigitalInput(6);
-  private DigitalInput lowerLimit = new DigitalInput(7);
+
+  private DigitalInput upperLimit = new DigitalInput(5);
+  private DigitalInput lowerLimit = new DigitalInput(2);
   // private DigitalInput digitalLimit2 = new DigitalInput(2);
   // private DigitalInput digitalLimit3 = new DigitalInput(3);
   // private DigitalInput digitalLimit4 = new DigitalInput(4);
@@ -40,6 +43,7 @@ private double tempD = 0;
 
 private double tempPeakFWD = 0;
 private double tempPeakREV = 0;
+private double tempLowerLimit = 0;
 
 
 
@@ -56,7 +60,7 @@ private double tempPeakREV = 0;
     m_Gantry.configPeakOutputReverse(Constants.GantryOutputMin, Constants.driveSettingTimeout);
     m_Gantry.configAllowableClosedloopError(Constants.PIDindex, Constants.GantryPosTolerance, Constants.driveSettingTimeout);
     //in case the robot is doing the opposite of what we need (up or down)
-    m_Gantry.setInverted(true); //set to true to flip positive direction
+    m_Gantry.setInverted(false); //set to true to flip positive direction
     //encoder reads positive
     m_Gantry.setSensorPhase(true);
     //adds physical limits
@@ -72,13 +76,15 @@ private double tempPeakREV = 0;
 
     tempPeakFWD = Constants.GantryOutputMax;
     tempPeakREV = Constants.GantryOutputMin;
+    m_Gantry.setNeutralMode(NeutralMode.Brake);
 
-    // SmartDashboard.putNumber("P value", tempP);
-    // SmartDashboard.putNumber("I value", tempI);
-    // SmartDashboard.putNumber("D value", tempD);
-    // SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
-    // SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
-    // SmartDashboard.putBoolean("PID Tuning", false);
+    tempLowerLimit = Constants.GantryLowerLimit;
+    SmartDashboard.putNumber("P value", tempP);
+    SmartDashboard.putNumber("I value", tempI);
+    SmartDashboard.putNumber("D value", tempD);
+    SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
+    SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
+    SmartDashboard.putBoolean("PID Tuning", false);
   } 
 
 
@@ -87,12 +93,14 @@ private double tempPeakREV = 0;
   m_Gantry.set(ControlMode.PercentOutput, goSpeed);
 }
 
+ 
+
 public void setPosition(double position){
   m_Gantry.set(ControlMode.Position, position*Constants.GantryConversion);
 
 }
 public boolean atTopLimit () {
-return (!lowerLimit.get());
+return (!upperLimit.get());
 }
   public boolean atBottomLimit () {
     return (!lowerLimit.get());
@@ -100,6 +108,15 @@ return (!lowerLimit.get());
 public void calibrateEncoder (double calibratePosition) {
   m_Gantry.setSelectedSensorPosition(calibratePosition * Constants.GantryConversion, Constants.PIDindex, Constants.driveSettingTimeout);
 }
+
+public void setCoastMode() {
+  m_Gantry.setNeutralMode(NeutralMode.Coast);
+}
+
+public void setBrakeMode() {
+  m_Gantry.setNeutralMode(NeutralMode.Brake);
+}
+
 
 // != not equal
 public void updatePID () {
@@ -139,8 +156,16 @@ SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Consta
      m_Gantry.setSelectedSensorPosition(Constants.GantryUpperLimitSwitchPos * Constants.GantryConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
+    // if (RobotContainer.s_Gantry.currentPosition() > Constants.gantryLimitLift && tempLowerLimit != Constants.GantryLowerLimit){
+    //   m_Gantry.configReverseSoftLimitThreshold(Constants.GantryLowerLimit * Constants.GantryConversion, Constants.driveSettingTimeout );
+    //   tempLowerLimit = Constants.GantryLowerLimit;
+    // }
+    // else if(RobotContainer.s_Gantry.currentPosition() > Constants.gantryLimitLift && tempLowerLimit != Constants.liftLimitGantry){
+    //   m_Gantry.configReverseSoftLimitThreshold(Constants.liftLimitGantry * Constants.GantryConversion, Constants.driveSettingTimeout );
+    //   tempLowerLimit = Constants.liftLimitGantry;
+    // }
     
-    //updatePID();
+    updatePID();
  
     SmartDashboard.putBoolean("GantryUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("GantryLowerLimit", lowerLimit.get());

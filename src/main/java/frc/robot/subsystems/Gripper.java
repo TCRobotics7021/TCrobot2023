@@ -92,7 +92,7 @@ public void setPosition(double position){
 
 }
 public boolean atTopLimit () {
-return (!lowerLimit.get());
+return (!upperLimit.get());
 }
   public boolean atBottomLimit () {
     return (!lowerLimit.get());

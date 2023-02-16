@@ -24,17 +24,14 @@ public class HomeGantry extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Gantry.setSpeed(Constants.setSpeedforGantryHome);
-    RobotContainer.s_Gantry.calibrateEncoder(Constants.GantryLowerLimit);  
+    RobotContainer.s_Gantry.calibrateEncoder(Constants.GantryUpperLimit);  
+    finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     if (RobotContainer.s_Gantry.atTopLimit()) {
-      Trigger1 = true;
-      RobotContainer.s_Gantry.setSpeed(.05);
-     }
-     if (Trigger1 == true && !RobotContainer.s_Gantry.atTopLimit()) {
       finished = true; 
      }
   }
@@ -48,6 +45,6 @@ public class HomeGantry extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return finished;
   }
 }

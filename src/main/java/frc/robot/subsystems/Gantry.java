@@ -156,15 +156,17 @@ SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Consta
      m_Gantry.setSelectedSensorPosition(Constants.GantryUpperLimitSwitchPos * Constants.GantryConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
-    // if (RobotContainer.s_Gantry.currentPosition() > Constants.gantryLimitLift && tempLowerLimit != Constants.GantryLowerLimit){
-    //   m_Gantry.configReverseSoftLimitThreshold(Constants.GantryLowerLimit * Constants.GantryConversion, Constants.driveSettingTimeout );
-    //   tempLowerLimit = Constants.GantryLowerLimit;
-    // }
-    // else if(RobotContainer.s_Gantry.currentPosition() > Constants.gantryLimitLift && tempLowerLimit != Constants.liftLimitGantry){
-    //   m_Gantry.configReverseSoftLimitThreshold(Constants.liftLimitGantry * Constants.GantryConversion, Constants.driveSettingTimeout );
-    //   tempLowerLimit = Constants.liftLimitGantry;
-    // }
+    if (RobotContainer.s_Lift.currentPosition() > Constants.liftLimitGantry && tempLowerLimit!= Constants.GantryLowerLimitSwitchPos){
+      m_Gantry.configReverseSoftLimitThreshold(Constants.GantryLowerLimitSwitchPos * Constants.GantryConversion, Constants.driveSettingTimeout );
+      tempLowerLimit = Constants.GantryLowerLimitSwitchPos;
+
+    }
+    else if(RobotContainer.s_Lift.currentPosition() <= Constants.liftLimitGantry && tempLowerLimit!= Constants.gantryLimitLift){
+      m_Gantry.configReverseSoftLimitThreshold(Constants.gantryLimitLift * Constants.GantryConversion, Constants.driveSettingTimeout );
+      tempLowerLimit = Constants.gantryLimitLift;
+    }
     
+
     updatePID();
  
     SmartDashboard.putBoolean("GantryUpperLimit", upperLimit.get());

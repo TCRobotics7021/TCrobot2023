@@ -21,6 +21,16 @@ import frc.robot.commands.Gantry.setGantrySpeed;
 import frc.robot.commands.Gripper.HomeGripper;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Gripper.setGripperSpeed;
+import frc.robot.commands.Lift.HomeLift;
+import frc.robot.commands.Lift.setLiftPosition;
+import frc.robot.commands.PickPlace.CancelAll;
+import frc.robot.commands.PickPlace.DropAndRetract;
+import frc.robot.commands.PickPlace.HomeAll;
+import frc.robot.commands.PickPlace.PlaceCubePOS5;
+import frc.robot.commands.PickPlace.PrepareConeFlip;
+import frc.robot.commands.PickPlace.PrepareForPickUp;
+import frc.robot.commands.PickPlace.RetrieveCone;
+import frc.robot.commands.PickPlace.RetrieveCube;
 import frc.robot.subsystems.*;
 
 /**
@@ -64,48 +74,36 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
-        //new JoystickButton(OpPanel, 1).onTrue(new Calibrate().withTimeout(2));
-        // new JoystickButton(OpPanel, 2).onTrue(new AutonomousMove(0, 2, 0));
-        // new JoystickButton(OpPanel, 3).onTrue(new AutonomousMove(-2, 0, 0));
-        // new JoystickButton(OpPanel, 4).onTrue(new AutonomousMove(-2, 2, 0));
-        // new JoystickButton(OpPanel, 6).whileTrue(new ExactDrive(0.1, 0)); //Forwards
-        // new JoystickButton(OpPanel, 5).whileTrue(new ExactDrive(-0.1, 0)); //Backwards
-        // new JoystickButton(OpPanel, 13).whileTrue(new setLiftSpeed(.15));
-        // new JoystickButton(OpPanel, 14).whileTrue(new setLiftSpeed(-.15));
-        new JoystickButton(OpPanel, 13).onTrue(new HomeLift());
-        new JoystickButton(OpPanel, 7).onTrue(new setLiftPosition(250));
-        new JoystickButton(OpPanel, 8).onTrue(new setLiftPosition(1));
-        new JoystickButton(OpPanel, 6).onTrue(new setLiftPosition(1100));
-        // new JoystickButton(OpPanel, 6).onTrue(new setLiftPosition(500));
-        // new JoystickButton(OpPanel, 7).onTrue(new setLiftPosition(750));
-        // new JoystickButton(OpPanel, 15).onTrue(new BackToHome());
-        // new JoystickButton(OpPanel, 16).onTrue(new MoveToPosReletiveToTarget(1, 0, 0));
-
+        new JoystickButton(leftStick, 1).onTrue(new PrepareForPickUp());
+        new JoystickButton(RightStick, 3).onTrue(new RetrieveCone());
+        new JoystickButton(RightStick, 4).onTrue(new RetrieveCube());
+        new JoystickButton(leftStick, 5).onTrue(new PrepareConeFlip());
+        new JoystickButton(RightStick, 6).onTrue(new DropAndRetract());
+        //PlaceObjects
+    new JoystickButton(OpPanel, 11).onTrue(new PlaceCubePOS5());
        
-        // new JoystickButton(OpPanel, 7).whileTrue(new setGripperSpeed(0.2));
-        // new JoystickButton(OpPanel, 8).whileTrue(new setGripperSpeed(-0.2));
-        // new JoystickButton(OpPanel, 2).onTrue(new setGripperPosition(250));
-        new JoystickButton(OpPanel, 2).onTrue(new setGripperPosition(305));
-        new JoystickButton(OpPanel, 1).onTrue(new setGripperPosition(50));
-        new JoystickButton(OpPanel, 14).onTrue(new HomeGripper());
-
-        // new JoystickButton(OpPanel, 7).whileTrue(new setArmSpeed(0.2));
-        // new JoystickButton(OpPanel, 8).whileTrue(new setArmSpeed(-0.2));
-        new JoystickButton(OpPanel, 5).onTrue(new setArmPosition(5));
-        new JoystickButton(OpPanel, 3).onTrue(new setArmPosition(515));
-        // new JoystickButton(OpPanel, 5).onTrue(new setArmPosition(450));
-        new JoystickButton(OpPanel, 16).onTrue(new HomeArm());
-
-           
-        // new JoystickButton(OpPanel, 7).whileTrue(new setGantrySpeed(0.2));
-        // new JoystickButton(OpPanel, 8).whileTrue(new setGantrySpeed(-0.2));
-        new JoystickButton(OpPanel, 9).onTrue(new setGantryPosition(300));
-        // new JoystickButton(OpPanel, 3).onTrue(new setGantryPosition(300));
-        // new JoystickButton(OpPanel, 5).onTrue(new setGantryPosition(500));
-        new JoystickButton(OpPanel, 12).onTrue(new setGantryPosition(650));
-        new JoystickButton(OpPanel, 15).onTrue(new HomeGantry());
-    new JoystickButton(OpPanel, 4).whileTrue(new releaseLiftBreak());
-     }
+    
+    new JoystickButton(OpPanel, 2).onTrue(new HomeAll());
+        new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
+       
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    }
+        
 
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous

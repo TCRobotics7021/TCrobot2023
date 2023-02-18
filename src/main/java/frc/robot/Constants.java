@@ -105,7 +105,31 @@ public final class Constants {
         public static double GantryMotor_I = 0;
         public static double GantryMotor_D = 0;
         
+    //GripperPOS
+        public static double gripperCubeGrabPOS = 150;
+        public static double gripperConeGrabPOS = 50;
+        public static double openGripperPOS = 305;
+    
+    //ArmPOS
+        public static double armRetractedPOS = 5;
+        public static double armExtendedPOS = 515;
 
+    //GantryPOS
+        public static double gantryRetractedPOS = 0;
+        public static double gantryPickPOS = 300;
+        public static double gantryMidLevelPOS = 400;
+        public static double gantryUpperLevelPOS = 655;
+
+    //LiftPOS
+        public static double liftBottomPOS = 0;
+        public static double liftConeFlippy = 250;
+        public static double liftRetrievePOS = 300;
+        public static double liftLowerLevelPOS = 350;
+        public static double liftMidLevelCubePOS = 600;
+        public static double liftMidLevelConePOS = 600; 
+        public static double liftMaxLevelCubePOS = 1100;
+        public static double liftMaxLevelConePOS = 1100;
+        public static double liftSubstationPOS = 700;
 
 
     //minimum and max speed for setting auto motor speed

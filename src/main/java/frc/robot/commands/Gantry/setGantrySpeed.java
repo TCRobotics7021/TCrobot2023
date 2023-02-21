@@ -23,7 +23,6 @@ public class setGantrySpeed extends CommandBase {
     RobotContainer.s_Gantry.setSpeed(goSpeed);
 
 
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.

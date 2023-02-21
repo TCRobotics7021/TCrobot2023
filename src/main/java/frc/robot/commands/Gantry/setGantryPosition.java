@@ -15,12 +15,10 @@ public class setGantryPosition extends CommandBase {
   //temporary variable
   double setPosition;
 
-  boolean finished;
+  boolean finished = false;
 
   public setGantryPosition(double setPosition) {
     // Use addRequirements() here to declare subsystem dependencies.
-
-    finished = false;
 
     this.setPosition = setPosition;
 
@@ -33,7 +31,7 @@ public class setGantryPosition extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Gantry.setPosition(setPosition);
-    //finished = true;
+    finished = false;
    }
 
   // Called every time the scheduler runs while the command is scheduled.

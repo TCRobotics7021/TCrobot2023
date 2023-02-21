@@ -24,15 +24,12 @@ import frc.robot.subsystems.Gripper;
 public class PrepareForPickUp extends SequentialCommandGroup {
   /** Creates a new GrabCone. */
   public PrepareForPickUp() {
-    // Add your commands in the addCommands() call, e.g.
+    // Add your coddSeqmmands in the addCommands() call, e.g.
+  
   
    addCommands( 
-    Commands.parallel(new setGantryPosition(Constants.gantryPickPOS), new setArmPosition(Constants.armRetractedPOS), new setGripperPosition(Constants.openGripperPOS)),
-    new setLiftPosition(Constants.liftBottomPOS)
-   
-   
-   
-   
+    Commands.parallel(new setGantryPosition(Constants.gantryPickPOS), new setArmPosition(Constants.armPickPOS), new setGripperPosition(Constants.openGripperPOS)),
+    Commands.sequence(new setLiftPosition(Constants.liftBottomPOS))
    );
 
   }

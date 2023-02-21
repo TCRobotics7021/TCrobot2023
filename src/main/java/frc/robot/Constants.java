@@ -21,19 +21,19 @@ public final class Constants {
     public static double liftMotor_D = 0;
 
     //max and min lift output
-    public static double liftOutputMax =1;
-    public static double liftOutputMin = -.75;
+    public static double liftOutputMax = 0.25;
+    public static double liftOutputMin = -0.25;
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
-    public static double liftUpperLimit = 1107;
+    public static double liftUpperLimit = 1189;
 
     //lift conversion
-    public static double liftConversion = 272.222;
+    public static double liftConversion = 274.536;
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 1108;
+      public static double liftUpperLimitSwitchPos = 1190;
 
       public static final double liftPosTolerance = 5;
 
@@ -66,13 +66,13 @@ public final class Constants {
     public static final double gripperPosTolerance = 2;
 
       //max and min arm output
-      public static double ArmOutputMax = 1;
-      public static double ArmOutputMin = -1;
+      public static double ArmOutputMax = 0.25;
+      public static double ArmOutputMin = -0.25;
   
       //upper & lower limits
       public static double ArmLowerLimit = 1;
       public static double ArmUpperLimit = 522;
-  
+
       //arm conversion
       public static double ArmConversion = 307.122;
   
@@ -80,14 +80,14 @@ public final class Constants {
         public static double ArmLowerLimitSwitchPos = 0;
         public static double ArmUpperLimitSwitchPos = 523;
   
-        public static final double ArmPosTolerance = 3;
+        public static final double ArmPosTolerance = 5;
         public static double ArmMotor_P = .1;
         public static double ArmMotor_I = 0;
         public static double ArmMotor_D = 0;
         
             //max and min arm output
-      public static double GantryOutputMax = 1;
-      public static double GantryOutputMin = -1;
+      public static double GantryOutputMax = 0.25;
+      public static double GantryOutputMin = -0.25;
   
       //upper & lower limits
       public static double GantryLowerLimit = 1;
@@ -100,35 +100,37 @@ public final class Constants {
         public static double GantryLowerLimitSwitchPos = 0;
         public static double GantryUpperLimitSwitchPos = 659;
   
-        public static final double GantryPosTolerance = 3;
+        public static final double GantryPosTolerance = 5;
         public static double GantryMotor_P = .1;
         public static double GantryMotor_I = 0;
         public static double GantryMotor_D = 0;
         
     //GripperPOS
         public static double gripperCubeGrabPOS = 150;
-        public static double gripperConeGrabPOS = 50;
+        public static double gripperConeGrabPOS = 75;
         public static double openGripperPOS = 305;
     
     //ArmPOS
         public static double armRetractedPOS = 5;
+        public static double armMidLevelPOS = 105;
         public static double armExtendedPOS = 515;
+        public static double armPickPOS = 300;
 
     //GantryPOS
-        public static double gantryRetractedPOS = 0;
-        public static double gantryPickPOS = 300;
-        public static double gantryMidLevelPOS = 400;
-        public static double gantryUpperLevelPOS = 655;
+        public static double gantryRetractedPOS = 50;
+        public static double gantryPickPOS = 50;
+        public static double gantryMidLevelPOS = 500;
+        public static double gantryUpperLevelPOS = 650;
 
     //LiftPOS
         public static double liftBottomPOS = 0;
         public static double liftConeFlippy = 250;
-        public static double liftRetrievePOS = 300;
+        public static double liftRetrievePOS = 200;
         public static double liftLowerLevelPOS = 350;
-        public static double liftMidLevelCubePOS = 600;
-        public static double liftMidLevelConePOS = 600; 
-        public static double liftMaxLevelCubePOS = 1100;
-        public static double liftMaxLevelConePOS = 1100;
+        public static double liftMidLevelCubePOS = 700;
+        public static double liftMidLevelConePOS = 900; 
+        public static double liftMaxLevelCubePOS = 1189;
+        public static double liftMaxLevelConePOS = 1189;
         public static double liftSubstationPOS = 700;
 
 
@@ -158,9 +160,8 @@ public final class Constants {
   public static double setSpeedForArmHome = -.25;
 
 
-  public static double gantryLimitLift = 300;
-  public static double liftLimitGantry = 200;
-
+  public static double gantryLimitLift = 250;
+  public static double liftLimitGantry = 150;
     public static final class Swerve {
         public static final int pigeonID = 9;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-

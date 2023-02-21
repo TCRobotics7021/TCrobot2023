@@ -32,7 +32,7 @@ public class setArmPosition extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Arm.setPosition(setPosition);
-    //finished = true;
+    finished = false;
    }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -24,7 +24,7 @@ public class HomeLift extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Lift.setSpeed(Constants.setSpeedForLiftHome);
-    RobotContainer.s_Lift.calibrateEncoder(Constants.liftLowerLimit);  
+    RobotContainer.s_Lift.calibrateEncoder(Constants.liftLowerLimit-200);  
     finished = false;
   }
 

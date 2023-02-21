@@ -32,7 +32,7 @@ public class setGripperPosition extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Gripper.setPosition(setPosition);
-    //finished = true;
+    finished = false;
    }
 
   // Called every time the scheduler runs while the command is scheduled.

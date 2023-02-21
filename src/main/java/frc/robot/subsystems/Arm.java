@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Arm extends SubsystemBase {
     // Creates a new Arm
@@ -79,11 +80,15 @@ private double tempPeakREV = 0;
 
 //Functions 
   public void setSpeed(double goSpeed ){
-  m_Arm.set(ControlMode.PercentOutput, goSpeed);
+    if(RobotContainer.s_Lift.currentPosition() > Constants.liftLimitGantry){
+         m_Arm.set(ControlMode.PercentOutput, goSpeed);
+    }
 }
 
 public void setPosition(double position){
-  m_Arm.set(ControlMode.Position, position*Constants.ArmConversion);
+  if(RobotContainer.s_Lift.currentPosition() > Constants.liftLimitGantry){
+        m_Arm.set(ControlMode.Position, position*Constants.ArmConversion);
+  }
 }
 public boolean atTopLimit () {
 return (upperLimit.get());
@@ -140,13 +145,17 @@ SmartDashboard.putNumber("Distance", m_Arm.getSelectedSensorPosition()/Constants
     if(upperLimit.get()){
       m_Arm.setSelectedSensorPosition(Constants.ArmUpperLimitSwitchPos * Constants.ArmConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
-
+    
+    //Stops the arm from moving when the lift is below limit
+    if(RobotContainer.s_Lift.currentPosition() <= Constants.liftLimitGantry){
+      m_Arm.set(ControlMode.PercentOutput, 0);
+    }
  
     //updatePID();
     
     SmartDashboard.putBoolean("ArmUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("ArmLowerLimit", lowerLimit.get());
- 
+    SmartDashboard.putNumber("Arm Position", m_Arm.getSelectedSensorPosition()/Constants.ArmConversion);
  
  
   }

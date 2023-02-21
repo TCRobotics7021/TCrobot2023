@@ -140,23 +140,18 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
     if(!upperLimit.get()){
       m_Lift.setSelectedSensorPosition(Constants.liftUpperLimitSwitchPos * Constants.liftConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
-    if (RobotContainer.s_Gantry.currentPosition() > Constants.gantryLimitLift && tempLowerLimit!= Constants.liftLowerLimitSwitchPos){
-      m_Lift.configReverseSoftLimitThreshold(Constants.liftLowerLimitSwitchPos * Constants.liftConversion, Constants.driveSettingTimeout );
-      tempLowerLimit = Constants.liftLowerLimitSwitchPos;
 
-    }
-    else if(RobotContainer.s_Gantry.currentPosition() <= Constants.gantryLimitLift && tempLowerLimit!= Constants.liftLimitGantry){
-      m_Lift.configReverseSoftLimitThreshold(Constants.liftLimitGantry * Constants.liftConversion, Constants.driveSettingTimeout );
-     tempLowerLimit = Constants.liftLimitGantry;
+    if(RobotContainer.s_Gantry.currentPosition() + RobotContainer.s_Arm.currentPosition() <= Constants.gantryLimitLift && currentPosition() < Constants.liftLimitGantry && m_Lift.getMotorOutputPercent() < 0){
+      setPosition(Constants.liftLimitGantry + 5);
     }
  
-    //updatePID();
+    updatePID();
     
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());
    // SmartDashboard.putNumber("Output", m_Lift.getMotorOutputPercent());
  
- 
+   SmartDashboard.putNumber("Lift Position", m_Lift.getSelectedSensorPosition()/Constants.liftConversion);
  
   }
 }

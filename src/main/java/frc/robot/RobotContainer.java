@@ -26,7 +26,9 @@ import frc.robot.commands.Lift.setLiftPosition;
 import frc.robot.commands.PickPlace.CancelAll;
 import frc.robot.commands.PickPlace.DropAndRetract;
 import frc.robot.commands.PickPlace.HomeAll;
-import frc.robot.commands.PickPlace.PlaceCubePOS5;
+import frc.robot.commands.PickPlace.PlaceConePOS1;
+import frc.robot.commands.PickPlace.PlaceConePOS4;
+import frc.robot.commands.PickPlace.PlaceConePOS1;
 import frc.robot.commands.PickPlace.PrepareConeFlip;
 import frc.robot.commands.PickPlace.PrepareForPickUp;
 import frc.robot.commands.PickPlace.RetrieveCone;
@@ -73,19 +75,21 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         /* Driver Buttons */
-        new JoystickButton(RightStick, 1).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
+        new JoystickButton(RightStick, 2).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
         new JoystickButton(leftStick, 1).onTrue(new PrepareForPickUp());
         new JoystickButton(RightStick, 3).onTrue(new RetrieveCone());
         new JoystickButton(RightStick, 4).onTrue(new RetrieveCube());
-        new JoystickButton(leftStick, 5).onTrue(new PrepareConeFlip());
-        new JoystickButton(RightStick, 6).onTrue(new DropAndRetract());
+        new JoystickButton(leftStick, 2).onTrue(new PrepareConeFlip());
+        new JoystickButton(RightStick, 1).onTrue(new DropAndRetract());
         //PlaceObjects
-    new JoystickButton(OpPanel, 11).onTrue(new PlaceCubePOS5());
+    new JoystickButton(OpPanel, 16).onTrue(new PlaceConePOS1());
        
     
-    new JoystickButton(OpPanel, 2).onTrue(new HomeAll());
+    new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
-       
+        new JoystickButton(OpPanel, 2).whileTrue(new releaseLiftBreak());
+        new JoystickButton(OpPanel, 15).onTrue(new PlaceConePOS4());
+    
         
     
     

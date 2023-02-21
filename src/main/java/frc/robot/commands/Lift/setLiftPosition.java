@@ -32,7 +32,7 @@ public class setLiftPosition extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Lift.setPosition(setPosition);
-    //finished = true;
+    finished = false;
    }
 
   // Called every time the scheduler runs while the command is scheduled.

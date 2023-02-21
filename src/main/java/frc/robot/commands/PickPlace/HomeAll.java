@@ -6,9 +6,15 @@ package frc.robot.commands.PickPlace;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
+import frc.robot.commands.Arm.HomeArm;
 import frc.robot.commands.Arm.setArmPosition;
+import frc.robot.commands.Gantry.HomeGantry;
+import frc.robot.commands.Gantry.setGantryPosition;
+import frc.robot.commands.Gripper.HomeGripper;
 import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Lift.HomeLift;
 import frc.robot.commands.Lift.setLiftPosition;
 import frc.robot.subsystems.Gripper;
 
@@ -19,8 +25,9 @@ public class HomeAll extends SequentialCommandGroup {
   /** Creates a new HomeAll. */
   public HomeAll() {
     addCommands(
-      Commands.parallel(new setLiftPosition(Constants.liftBottomPOS), new setArmPosition(Constants.armRetractedPOS), new setGripperPosition(Constants.openGripperPOS)),
-      new setLiftPosition(Constants.liftBottomPOS)
+      Commands.parallel(new HomeGripper(), new HomeLift()),
+      new WaitCommand(1),
+      Commands.parallel(new HomeGantry(), new HomeArm(), new setLiftPosition(Constants.liftLowerLevelPOS))
     );
   }
 }

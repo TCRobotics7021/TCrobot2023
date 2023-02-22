@@ -34,6 +34,8 @@ public class AutonomousMove extends CommandBase {
 
   boolean finished;
 
+  double degrees;
+
   double ratio;
 
   public AutonomousMove(double targetX, double targetY, double targetR) {
@@ -67,6 +69,7 @@ public class AutonomousMove extends CommandBase {
     errorY = Math.abs(targetY - currentY);
     errorR = -(targetR - currentR);
 
+    //finds shortest path for rotation
     if (errorR > 180){
       errorR = errorR -360;
     } 
@@ -143,10 +146,10 @@ public class AutonomousMove extends CommandBase {
     if (errorX <= Constants.errorTolerance && errorY <= Constants.errorTolerance && Math.abs(errorR) <= Constants.autoRotateTolerance){
       finished = true;
     }
-    SmartDashboard.putNumber("Error R", errorR);
-    SmartDashboard.putNumber("Calc Translation",calcTranslation);
-    SmartDashboard.putNumber("Calc Strafe",calcStrafe);
-    SmartDashboard.putNumber("Calc Rotate", calcRotation);
+    // SmartDashboard.putNumber("Error R", errorR);
+    // SmartDashboard.putNumber("Calc Translation",calcTranslation);
+    // SmartDashboard.putNumber("Calc Strafe",calcStrafe);
+    // SmartDashboard.putNumber("Calc Rotate", calcRotation);
   }
 
   // Called once the command ends or is interrupted.

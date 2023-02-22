@@ -85,10 +85,11 @@ public class RobotContainer {
     new JoystickButton(OpPanel, 16).onTrue(new PlaceConePOS1());
        
     
-    new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
+        new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
         new JoystickButton(OpPanel, 2).whileTrue(new releaseLiftBreak());
         new JoystickButton(OpPanel, 15).onTrue(new PlaceConePOS4());
+        new JoystickButton(OpPanel, 5).onTrue(new MoveToPosReletiveToTarget(0.8, -.56, 0));
     
         
     

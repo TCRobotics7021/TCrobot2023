@@ -2,13 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Arm;
+package frc.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class setArmPosition extends CommandBase {
+public class setLiftPosition extends CommandBase {
   /** Creates a new setLiftPosition. */
 
   //temporary variable
@@ -16,7 +16,7 @@ public class setArmPosition extends CommandBase {
 
   boolean finished;
 
-  public setArmPosition(double setPosition) {
+  public setLiftPosition(double setPosition) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     finished = false;
@@ -24,7 +24,7 @@ public class setArmPosition extends CommandBase {
     this.setPosition = setPosition;
 
     //pushes it into the system
-    addRequirements(RobotContainer.s_Arm);
+    addRequirements(RobotContainer.s_Lift);
 
   }
 
@@ -34,7 +34,7 @@ public class setArmPosition extends CommandBase {
     if (RobotContainer.EndPlaceCommand == true) {
       finished = true;
     } else {
-    RobotContainer.s_Arm.setPosition(setPosition);
+    RobotContainer.s_Lift.setPosition(setPosition);
     finished = false;
     }
     
@@ -43,14 +43,12 @@ public class setArmPosition extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Math.abs(RobotContainer.s_Arm.currentPosition() - setPosition) <= Constants.ArmPosTolerance) {
+    if (Math.abs(RobotContainer.s_Lift.currentPosition() - setPosition) <= Constants.liftPosTolerance) {
       finished = true;
     }
     
   
   }
-
-
    
   
   

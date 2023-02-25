@@ -25,15 +25,15 @@ int delay = 0;
 
 //Functions:
 public double tagRelativeXPos(){
-  return limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[0];
+  return -limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[2];
   
 }
 public double tagRelativeYPos(){
-  return limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[1];
+  return limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[0];
   
 }
 public double tagRelativeRPos(){
- return limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[5];
+ return limeLight.getEntry("botpose_targetspace").getDoubleArray(new double[3])[4];
  
 }
 
@@ -60,14 +60,14 @@ public void setLEDMode(int LEDNumber){
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-if(delay > 50){
+//if(delay > 50){
 //SmartDashboard.putNumber("TagRelativeX", tagRelativeXPos());
 //SmartDashboard.putNumber("TagRelativeY", tagRelativeYPos());
 //SmartDashboard.putNumber("TagRelativeR", tagRelativeRPos());
 
-delay = 0;
-  }
-  delay++;
+//delay = 0;
+  //}
+ // delay++;
 
 
   }

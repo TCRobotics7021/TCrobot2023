@@ -31,7 +31,7 @@ public class HomeGantry extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.s_Gantry.atTopLimit()) {
+    if (RobotContainer.s_Gantry.atBottomLimit()) {
       finished = true; 
      }
   }

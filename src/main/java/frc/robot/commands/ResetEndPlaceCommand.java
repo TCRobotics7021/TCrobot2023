@@ -7,23 +7,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class setLiftSpeed extends CommandBase {
-  /** Creates a new setLiftSpeed. */
-  double goSpeed;
-  public setLiftSpeed(double goSpeed ) {
-    this.goSpeed = goSpeed;
+public class ResetEndPlaceCommand extends CommandBase {
+  /** Creates a new ResetEndPlaceCommand. */
+  public ResetEndPlaceCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Lift);
-
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Lift.setSpeed(goSpeed);
-
-
-
+    RobotContainer.EndPlaceCommand = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -32,15 +25,11 @@ public class setLiftSpeed extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    RobotContainer.s_Lift.setSpeed(0);
-
-
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

@@ -23,6 +23,7 @@ public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry tempOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
+    
 
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
@@ -125,7 +126,7 @@ public class Swerve extends SubsystemBase {
     }
     public void Resetfieldorientation(){
         gyro.setYaw(0);
-        resetOdometry(new Pose2d(0, 0, new Rotation2d(0)));
+        resetOdometry(new Pose2d(0, 0, new Rotation2d(Math.toRadians(0))));
 
 
     }

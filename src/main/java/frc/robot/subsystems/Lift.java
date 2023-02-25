@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Lift extends SubsystemBase {
     // Creates a new Lift
@@ -34,7 +35,7 @@ private double tempD = 0;
 private double tempPeakFWD = 0;
 private double tempPeakREV = 0;
 
-
+private double tempLowerLimit = 0;
 
 
 
@@ -140,14 +141,17 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
       m_Lift.setSelectedSensorPosition(Constants.liftUpperLimitSwitchPos * Constants.liftConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
+    if(RobotContainer.s_Gantry.currentPosition() + RobotContainer.s_Arm.currentPosition() <= Constants.gantryLimitLift && currentPosition() < Constants.liftLimitGantry && m_Lift.getMotorOutputPercent() < 0){
+      setPosition(Constants.liftLimitGantry + 5);
+    }
  
-    //updatePID();
+    updatePID();
     
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());
    // SmartDashboard.putNumber("Output", m_Lift.getMotorOutputPercent());
  
- 
+   SmartDashboard.putNumber("Lift Position", m_Lift.getSelectedSensorPosition()/Constants.liftConversion);
  
   }
 }

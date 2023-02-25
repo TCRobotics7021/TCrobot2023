@@ -90,14 +90,17 @@ private double tempLowerLimit = 0;
 
 //Functions 
   public void setSpeed(double goSpeed ){
-  m_Gantry.set(ControlMode.PercentOutput, goSpeed);
+  if(RobotContainer.s_Lift.currentPosition() > Constants.liftLimitGantry){
+    m_Gantry.set(ControlMode.PercentOutput, goSpeed);
+  }
 }
 
  
 
 public void setPosition(double position){
-  m_Gantry.set(ControlMode.Position, position*Constants.GantryConversion);
-
+  if(RobotContainer.s_Lift.currentPosition() > Constants.liftLimitGantry){
+      m_Gantry.set(ControlMode.Position, position*Constants.GantryConversion);
+  }
 }
 public boolean atTopLimit () {
 return (!upperLimit.get());
@@ -156,20 +159,16 @@ SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Consta
      m_Gantry.setSelectedSensorPosition(Constants.GantryUpperLimitSwitchPos * Constants.GantryConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
-    // if (RobotContainer.s_Gantry.currentPosition() > Constants.gantryLimitLift && tempLowerLimit != Constants.GantryLowerLimit){
-    //   m_Gantry.configReverseSoftLimitThreshold(Constants.GantryLowerLimit * Constants.GantryConversion, Constants.driveSettingTimeout );
-    //   tempLowerLimit = Constants.GantryLowerLimit;
-    // }
-    // else if(RobotContainer.s_Gantry.currentPosition() > Constants.gantryLimitLift && tempLowerLimit != Constants.liftLimitGantry){
-    //   m_Gantry.configReverseSoftLimitThreshold(Constants.liftLimitGantry * Constants.GantryConversion, Constants.driveSettingTimeout );
-    //   tempLowerLimit = Constants.liftLimitGantry;
-    // }
+    if(RobotContainer.s_Lift.currentPosition() <= Constants.liftLimitGantry){
+      m_Gantry.set(ControlMode.PercentOutput, 0);
+    }
     
-    updatePID();
+
+    //updatePID();
  
     SmartDashboard.putBoolean("GantryUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("GantryLowerLimit", lowerLimit.get());
-   
+    SmartDashboard.putNumber("Gantry Position", m_Gantry.getSelectedSensorPosition()/Constants.GantryConversion);
     
   }
 }

@@ -31,11 +31,8 @@ public class HomeGripper extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (RobotContainer.s_Gripper.atTopLimit()) {
-      Trigger1 = true;
-      RobotContainer.s_Gripper.setSpeed(.05);
-     }
-     if (Trigger1 == true && !RobotContainer.s_Gripper.atTopLimit()) {
+    
+     if (RobotContainer.s_Gripper.atTopLimit()) {
       finished = true; 
      }
   }

@@ -15,6 +15,7 @@ import frc.robot.commands.*;
 import frc.robot.commands.Arm.HomeArm;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Arm.setArmSpeed;
+import frc.robot.commands.Autonomous.ClimbOnly;
 import frc.robot.commands.Gantry.HomeGantry;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gantry.setGantrySpeed;
@@ -88,6 +89,10 @@ public class RobotContainer {
         //PickupObjects
         new JoystickButton(leftStick, 4).onTrue(new RetrieveCone().unless(() -> PlaceCommandStarted));
        // new JoystickButton(RightStick, 4).onTrue(new RetrieveCube());
+
+       //GetOnChargeStation
+        new JoystickButton(OpPanel, 5).onTrue(new ClimbOnly());
+
 
         new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());

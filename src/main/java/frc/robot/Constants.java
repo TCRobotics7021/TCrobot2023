@@ -124,6 +124,7 @@ public final class Constants {
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
+        public static double gantryClimbPOS = 400;
 
     //LiftPOS
         public static double liftBottomPOS = 0;
@@ -135,6 +136,8 @@ public final class Constants {
         public static double liftMaxLevelCubePOS = 1189;
         public static double liftMaxLevelConePOS = 1189;
         public static double liftSubstationPOS = 700;
+        public static double liftAutoStartPOS = 200;
+        public static double liftClimbPOS = 110;
     
    
 
@@ -166,6 +169,23 @@ public final class Constants {
 
   public static double gantryLimitLift = 250;
   public static double liftLimitGantry = 150;
+
+
+//charge station
+  public static double climbStartedAngle = 10;
+  public static double startedTiltDownAngle = 35;
+  public static double balanceAngle = 3;
+
+  public static double balanceTime = 3;
+
+  public static double climbState0_StartingSpeed = .5;
+  public static double climbState1_ClimbingSpeed = .3;
+  public static double climbState2_Stopped = 0;
+  public static double climbState3_REVspeed = -.15;
+  public static double climbState4_FWDspeed = .15;
+
+
+
     public static final class Swerve {
         public static final int pigeonID = 9;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-

@@ -124,6 +124,7 @@ public final class Constants {
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
+        public static double gantryClimbPOS = 375;
 
     //LiftPOS
         public static double liftBottomPOS = 0;
@@ -135,15 +136,17 @@ public final class Constants {
         public static double liftMaxLevelCubePOS = 1189;
         public static double liftMaxLevelConePOS = 1189;
         public static double liftSubstationPOS = 700;
+        public static double liftAutoStartPOS = 200;
+        public static double liftClimbPOS = 110;
     
    
 
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .15;
-    public static double maxSpeedPos = .35;
+    public static double maxSpeedPos = .4;
 
     public static double minAutoRot = .15;
-    public static double maxAutoRot = .25;
+    public static double maxAutoRot = .4;
 
     public static double errorTolerance = .02;
 
@@ -155,7 +158,7 @@ public final class Constants {
     public static final double autoRotateTolerance = 2;
 
 //Set speed for HomingLift
-  public static double setSpeedForLiftHome = .3;
+  public static double setSpeedForLiftHome = .5;
 
   public static double setSpeedForGripperHome = .25;
 
@@ -166,6 +169,23 @@ public final class Constants {
 
   public static double gantryLimitLift = 250;
   public static double liftLimitGantry = 150;
+
+
+//charge station
+  public static double climbStartedAngle = 7.5;
+  public static double startedTiltDownAngle = 6.5;
+  public static double balanceAngle = 3;
+
+  public static double balanceTime = 3;
+
+  public static double climbState0_StartingSpeed = .25;
+  public static double climbState1_ClimbingSpeed = .15;
+  public static double climbState2_Stopped = 0;
+  public static double climbState3_REVspeed = -.1;
+  public static double climbState4_FWDspeed = .1;
+
+
+
     public static final class Swerve {
         public static final int pigeonID = 9;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-

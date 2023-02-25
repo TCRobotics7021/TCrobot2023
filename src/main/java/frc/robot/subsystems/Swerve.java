@@ -23,12 +23,17 @@ public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry tempOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
+    public double pitchCalibrate = 0;
     
 
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
         gyro.configFactoryDefault();
         zeroGyro();
+
+        pitchCalibrate = gyro.getPitch();
+
+
 
         SmartDashboard.putNumber("path X1", 0);
         SmartDashboard.putNumber("path Y1", 0);
@@ -124,6 +129,9 @@ public class Swerve extends SubsystemBase {
     public void zeroGyro(){
         gyro.setYaw(0);
     }
+    public void zeroPitch() {
+        pitchCalibrate = gyro.getPitch();
+    }
     public void Resetfieldorientation(){
         gyro.setYaw(0);
         resetOdometry(new Pose2d(0, 0, new Rotation2d(Math.toRadians(0))));
@@ -138,6 +146,14 @@ public class Swerve extends SubsystemBase {
     public Rotation2d getYaw() {
         return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
     }
+    public double GetRoll() {
+        return (gyro.getRoll());
+    }
+    public double GetPitch() {
+        return (gyro.getPitch() - pitchCalibrate);
+    }
+   
+
 
     public void resetModulesToAbsolute(){
         for(SwerveModule mod : mSwerveMods){
@@ -158,6 +174,9 @@ public class Swerve extends SubsystemBase {
         SmartDashboard.putNumber("Temp Odometry X", tempOdometry.getPoseMeters().getX());
         SmartDashboard.putNumber("Temp Odometry Y", tempOdometry.getPoseMeters().getY());
         SmartDashboard.putNumber("Temp Odometry R", tempOdometry.getPoseMeters().getRotation().getDegrees());
+
+        SmartDashboard.putNumber("Pitch", GetPitch());
+        SmartDashboard.putNumber("Roll", GetRoll());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());

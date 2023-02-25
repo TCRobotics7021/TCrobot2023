@@ -26,7 +26,7 @@ public class HomeAll extends SequentialCommandGroup {
   public HomeAll() {
     addCommands(
       Commands.parallel(new HomeGripper(), new HomeLift()),
-      new WaitCommand(1),
+      new WaitCommand(.25),
       Commands.parallel(new HomeGantry(), new HomeArm(), new setLiftPosition(Constants.liftLowerLevelPOS))
     );
   }

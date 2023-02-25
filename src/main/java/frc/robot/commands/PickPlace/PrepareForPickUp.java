@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.commands.AutonomousMove;
+import frc.robot.commands.ResetEndPlaceCommand;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
@@ -28,8 +29,10 @@ public class PrepareForPickUp extends SequentialCommandGroup {
   
   
    addCommands( 
+    new ResetEndPlaceCommand(),
     Commands.parallel(new setGantryPosition(Constants.gantryPickPOS), new setArmPosition(Constants.armPickPOS), new setGripperPosition(Constants.openGripperPOS)),
-    Commands.sequence(new setLiftPosition(Constants.liftBottomPOS))
+    Commands.sequence(new setLiftPosition(Constants.liftBottomPOS)),
+    new ResetEndPlaceCommand()
    );
 
   }

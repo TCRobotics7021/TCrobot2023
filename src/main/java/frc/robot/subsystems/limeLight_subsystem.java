@@ -61,9 +61,9 @@ public void setLEDMode(int LEDNumber){
   public void periodic() {
     // This method will be called once per scheduler run
 //if(delay > 50){
-SmartDashboard.putNumber("TagRelativeX", tagRelativeXPos());
-SmartDashboard.putNumber("TagRelativeY", tagRelativeYPos());
-SmartDashboard.putNumber("TagRelativeR", tagRelativeRPos());
+//SmartDashboard.putNumber("TagRelativeX", tagRelativeXPos());
+//SmartDashboard.putNumber("TagRelativeY", tagRelativeYPos());
+//SmartDashboard.putNumber("TagRelativeR", tagRelativeRPos());
 
 //delay = 0;
   //}

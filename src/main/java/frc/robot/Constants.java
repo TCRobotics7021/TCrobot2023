@@ -21,8 +21,11 @@ public final class Constants {
     public static double liftMotor_D = 0;
 
     //max and min lift output
-    public static double liftOutputMax = 0.25;
-    public static double liftOutputMin = -0.25;
+    public static double liftOutputMax = 1;
+    public static double liftOutputMin = -1;
+
+    //max and min motor output
+    
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
@@ -66,8 +69,8 @@ public final class Constants {
     public static final double gripperPosTolerance = 2;
 
       //max and min arm output
-      public static double ArmOutputMax = 0.25;
-      public static double ArmOutputMin = -0.25;
+      public static double ArmOutputMax = 1;
+      public static double ArmOutputMin = -1;
   
       //upper & lower limits
       public static double ArmLowerLimit = 1;
@@ -86,8 +89,8 @@ public final class Constants {
         public static double ArmMotor_D = 0;
         
             //max and min arm output
-      public static double GantryOutputMax = 0.25;
-      public static double GantryOutputMin = -0.25;
+      public static double GantryOutputMax = 1;
+      public static double GantryOutputMin = -1;
   
       //upper & lower limits
       public static double GantryLowerLimit = 1;
@@ -114,7 +117,7 @@ public final class Constants {
         public static double armRetractedPOS = 5;
         public static double armMidLevelPOS = 105;
         public static double armExtendedPOS = 515;
-        public static double armPickPOS = 300;
+        public static double armPickPOS = 350;
 
     //GantryPOS
         public static double gantryRetractedPOS = 50;
@@ -124,19 +127,20 @@ public final class Constants {
 
     //LiftPOS
         public static double liftBottomPOS = 0;
-        public static double liftConeFlippy = 250;
-        public static double liftRetrievePOS = 200;
+        public static double liftConeFlippy = 110;
+        public static double liftRetrievePOS = 275;
         public static double liftLowerLevelPOS = 350;
         public static double liftMidLevelCubePOS = 700;
-        public static double liftMidLevelConePOS = 900; 
+        public static double liftMidLevelConePOS = 950; 
         public static double liftMaxLevelCubePOS = 1189;
         public static double liftMaxLevelConePOS = 1189;
         public static double liftSubstationPOS = 700;
-
+    
+   
 
     //minimum and max speed for setting auto motor speed
-    public static double minSpeedPos = .1;
-    public static double maxSpeedPos = .25;
+    public static double minSpeedPos = .15;
+    public static double maxSpeedPos = .35;
 
     public static double minAutoRot = .15;
     public static double maxAutoRot = .25;
@@ -151,7 +155,7 @@ public final class Constants {
     public static final double autoRotateTolerance = 2;
 
 //Set speed for HomingLift
-  public static double setSpeedForLiftHome = .2;
+  public static double setSpeedForLiftHome = .3;
 
   public static double setSpeedForGripperHome = .25;
 
@@ -230,10 +234,10 @@ public final class Constants {
         /* Swerve Profiling Values */
         /** Meters per Second */
         public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
-        public static final double fineSpeed = 2; 
+        public static final double fineSpeed = 2.25; 
         /** Radians per Second */
         public static final double maxAngularVelocity = 5.0; //TODO: This must be tuned to specific robot
-
+        public static final double fineAngularVelocity = 2.5;
         /* Neutral Modes */
         public static final NeutralMode angleNeutralMode = NeutralMode.Coast;
         public static final NeutralMode driveNeutralMode = NeutralMode.Brake;

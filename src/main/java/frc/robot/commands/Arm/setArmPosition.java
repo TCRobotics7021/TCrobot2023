@@ -31,8 +31,13 @@ public class setArmPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    if (RobotContainer.EndPlaceCommand == true) {
+      finished = true;
+    } else {
     RobotContainer.s_Arm.setPosition(setPosition);
     finished = false;
+    }
+    
    }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,7 +46,11 @@ public class setArmPosition extends CommandBase {
     if (Math.abs(RobotContainer.s_Arm.currentPosition() - setPosition) <= Constants.ArmPosTolerance) {
       finished = true;
     }
+    
+  
   }
+
+
    
   
   

@@ -55,7 +55,8 @@ public class RobotContainer {
     public final static Gripper s_Gripper = new Gripper();
     public final static Gantry s_Gantry = new Gantry();
     public final static Arm s_Arm = new Arm();
-    
+    public static boolean EndPlaceCommand = false;
+    public static boolean PlaceCommandStarted = false;
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
 
@@ -76,20 +77,23 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         new JoystickButton(RightStick, 2).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
-        new JoystickButton(leftStick, 1).onTrue(new PrepareForPickUp());
-        new JoystickButton(RightStick, 3).onTrue(new RetrieveCone());
-        new JoystickButton(RightStick, 4).onTrue(new RetrieveCube());
-        new JoystickButton(leftStick, 2).onTrue(new PrepareConeFlip());
+        new JoystickButton(leftStick, 1).onTrue(new PrepareForPickUp().unless(() -> PlaceCommandStarted));
+        
+        new JoystickButton(leftStick, 3).onTrue(new PrepareConeFlip().unless(() -> PlaceCommandStarted));
         new JoystickButton(RightStick, 1).onTrue(new DropAndRetract());
         //PlaceObjects
-    new JoystickButton(OpPanel, 16).onTrue(new PlaceConePOS1());
+        new JoystickButton(OpPanel, 16).onTrue(new PlaceConePOS1().unless(() -> PlaceCommandStarted));
+        new JoystickButton(OpPanel, 15).onTrue(new PlaceConePOS4().unless(() -> PlaceCommandStarted));
        
-    
+        //PickupObjects
+        new JoystickButton(leftStick, 4).onTrue(new RetrieveCone().unless(() -> PlaceCommandStarted));
+       // new JoystickButton(RightStick, 4).onTrue(new RetrieveCube());
+
         new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
         new JoystickButton(OpPanel, 2).whileTrue(new releaseLiftBreak());
-        new JoystickButton(OpPanel, 15).onTrue(new PlaceConePOS4());
-        new JoystickButton(OpPanel, 5).onTrue(new MoveToPosReletiveToTarget(0.8, -.56, 0));
+        
+        //new JoystickButton(OpPanel, 5).onTrue(new MoveToPosReletiveToTarget(0.8, -.56, 0));
     
         
     

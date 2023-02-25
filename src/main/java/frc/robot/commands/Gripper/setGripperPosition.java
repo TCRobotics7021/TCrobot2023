@@ -31,8 +31,13 @@ public class setGripperPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    if (RobotContainer.EndPlaceCommand == true) {
+      finished = true;
+    } else {
     RobotContainer.s_Gripper.setPosition(setPosition);
     finished = false;
+    }
+    
    }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,6 +46,8 @@ public class setGripperPosition extends CommandBase {
     if (Math.abs(RobotContainer.s_Gripper.currentPosition() - setPosition) <= Constants.gripperPosTolerance) {
       finished = true;
     }
+    
+  
   }
    
   

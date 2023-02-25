@@ -30,8 +30,13 @@ public class setGantryPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    if (RobotContainer.EndPlaceCommand == true) {
+      finished = true;
+    } else {
     RobotContainer.s_Gantry.setPosition(setPosition);
     finished = false;
+    }
+    
    }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -40,6 +45,9 @@ public class setGantryPosition extends CommandBase {
     if (Math.abs(RobotContainer.s_Gantry.currentPosition() - setPosition) <= Constants.GantryPosTolerance) {
       finished = true;
     }
+   
+    
+ 
   }
    
   

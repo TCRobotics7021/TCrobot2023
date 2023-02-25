@@ -4,8 +4,15 @@
 
 package frc.robot.commands.PickPlace;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
+import frc.robot.commands.AutonomousMove;
+import frc.robot.commands.MoveToPosReletiveToTarget;
+import frc.robot.commands.PlaceCommandStart;
+import frc.robot.commands.ResetEndPlaceCommand;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Lift.setLiftPosition;
@@ -19,9 +26,14 @@ public class PlaceConePOS4 extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+    new ResetEndPlaceCommand(),
+    // new MoveToPosReletiveToTarget(1.25, 0, 0),
+    // new WaitCommand(0.5),
+    // new MoveToPosReletiveToTarget(0.56,-0.75 , 0),
+    new PlaceCommandStart(),
     new setLiftPosition(Constants.liftMidLevelConePOS),
-    new setArmPosition(Constants.armMidLevelPOS),
-    new setGantryPosition(Constants.gantryUpperLevelPOS)
+    Commands.parallel(new setArmPosition(Constants.armMidLevelPOS), new setGantryPosition(Constants.gantryUpperLevelPOS)),
+     new ResetEndPlaceCommand()
 
 
 

@@ -19,7 +19,7 @@ public class Arm extends SubsystemBase {
     // Creates a new Arm
   WPI_TalonFX m_Arm = new WPI_TalonFX(14, "canivore1");
 
-
+  
   private DigitalInput upperLimit = new DigitalInput(0);
   private DigitalInput lowerLimit = new DigitalInput(1);
   

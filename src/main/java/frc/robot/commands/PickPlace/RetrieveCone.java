@@ -7,6 +7,7 @@ package frc.robot.commands.PickPlace;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.ResetEndPlaceCommand;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
@@ -19,10 +20,11 @@ public class RetrieveCone extends SequentialCommandGroup {
   /** Creates a new RetrieveCone. */
   public RetrieveCone() {
     addCommands(
+      new ResetEndPlaceCommand(),
       new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(1),
       new setLiftPosition(Constants.liftRetrievePOS),
-      Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS),new setArmPosition(Constants.armRetractedPOS))
-
+      Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS),new setArmPosition(Constants.armRetractedPOS)),
+      new ResetEndPlaceCommand()
     );
   }
 }

@@ -7,6 +7,8 @@ package frc.robot.commands.PickPlace;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
+import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.setLiftPosition;
@@ -19,7 +21,7 @@ public class PrepareConeFlip extends SequentialCommandGroup {
   public PrepareConeFlip() {
   
     addCommands(
-    Commands.parallel( new setGantryPosition(Constants.gantryPickPOS), new setGripperPosition(Constants.openGripperPOS)),
+    Commands.parallel( new setGantryPosition(Constants.gantryPickPOS), new setGripperPosition(Constants.openGripperPOS), new setArmPosition(Constants.armPickPOS)), 
     new setLiftPosition(Constants.liftConeFlippy)
     
   

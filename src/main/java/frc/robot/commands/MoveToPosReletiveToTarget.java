@@ -56,16 +56,21 @@ public class MoveToPosReletiveToTarget extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    currentR = -RobotContainer.s_Limelight.tagRelativeRPos();
+    //currentR = -RobotContainer.s_Limelight.tagRelativeRPos();
+    currentR = RobotContainer.s_Swerve.getYaw().getDegrees();
     currentX = RobotContainer.s_Limelight.tagRelativeXPos();
     currentY = RobotContainer.s_Limelight.tagRelativeYPos();
     RobotContainer.s_Swerve.resetOdometry(new Pose2d(currentX, currentY, new Rotation2d(Math.toRadians(currentR))));
-    RobotContainer.s_Swerve.setGyro(currentR);
     finished = false;
     
     SmartDashboard.putNumber("Starting X", currentX); 
     SmartDashboard.putNumber("Starting Y", currentY); 
     SmartDashboard.putNumber("Starting R", currentR); 
+    
+    if (currentR > 30 || currentR <-30) {
+      RobotContainer.EndPlaceCommand = true;
+      finished = true;
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -73,8 +78,8 @@ public class MoveToPosReletiveToTarget extends CommandBase {
   public void execute() {
     currentX = RobotContainer.s_Swerve.getPose().getX();
     currentY = RobotContainer.s_Swerve.getPose().getY();
-   // currentR = RobotContainer.s_Swerve.getPose().getRotation().getDegrees();
-    currentR = RobotContainer.s_Swerve.getYaw().getDegrees();
+    // currentR = RobotContainer.s_Swerve.getPose().getRotation().getDegrees();
+    currentR = RobotContainer.s_Swerve.getPose().getRotation().getDegrees();
 
 
     SmartDashboard.putNumber("Current X", currentX); 

@@ -6,6 +6,8 @@ package frc.robot.commands.PickPlace;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.PlaceCommandStart;
+import frc.robot.commands.ResetEndPlaceCommand;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Lift.setLiftPosition;
 
@@ -16,9 +18,12 @@ public class PlaceCubePOS5 extends SequentialCommandGroup {
   /** Creates a new PlaceCubePOS1. */
   public PlaceCubePOS5() {
    addCommands(
+  new ResetEndPlaceCommand(),
   //add limelight
+  new PlaceCommandStart(),
   new setLiftPosition(Constants.liftMidLevelCubePOS),
-  new setGantryPosition(Constants.gantryMidLevelPOS)
+  new setGantryPosition(Constants.gantryMidLevelPOS),
+  new ResetEndPlaceCommand()
 
     );
   }

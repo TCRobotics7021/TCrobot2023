@@ -23,12 +23,17 @@ public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry tempOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
+    public double pitchCalibrate = 0;
     
 
     public Swerve() {
         gyro = new Pigeon2(Constants.Swerve.pigeonID);
         gyro.configFactoryDefault();
         zeroGyro();
+
+        pitchCalibrate = gyro.getPitch();
+
+
 
         SmartDashboard.putNumber("path X1", 0);
         SmartDashboard.putNumber("path Y1", 0);
@@ -124,6 +129,9 @@ public class Swerve extends SubsystemBase {
     public void zeroGyro(){
         gyro.setYaw(0);
     }
+    public void zeroPitch() {
+        pitchCalibrate = gyro.getPitch();
+    }
     public void Resetfieldorientation(){
         gyro.setYaw(0);
         resetOdometry(new Pose2d(0, 0, new Rotation2d(Math.toRadians(0))));
@@ -142,8 +150,9 @@ public class Swerve extends SubsystemBase {
         return (gyro.getRoll());
     }
     public double GetPitch() {
-        return (gyro.getPitch());
+        return (gyro.getPitch() - pitchCalibrate);
     }
+   
 
 
     public void resetModulesToAbsolute(){

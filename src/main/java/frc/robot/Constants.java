@@ -124,7 +124,7 @@ public final class Constants {
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
-        public static double gantryClimbPOS = 400;
+        public static double gantryClimbPOS = 375;
 
     //LiftPOS
         public static double liftBottomPOS = 0;
@@ -143,10 +143,10 @@ public final class Constants {
 
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .15;
-    public static double maxSpeedPos = .35;
+    public static double maxSpeedPos = .4;
 
     public static double minAutoRot = .15;
-    public static double maxAutoRot = .25;
+    public static double maxAutoRot = .4;
 
     public static double errorTolerance = .02;
 
@@ -158,7 +158,7 @@ public final class Constants {
     public static final double autoRotateTolerance = 2;
 
 //Set speed for HomingLift
-  public static double setSpeedForLiftHome = .3;
+  public static double setSpeedForLiftHome = .5;
 
   public static double setSpeedForGripperHome = .25;
 
@@ -172,17 +172,17 @@ public final class Constants {
 
 
 //charge station
-  public static double climbStartedAngle = 10;
-  public static double startedTiltDownAngle = 35;
+  public static double climbStartedAngle = 7.5;
+  public static double startedTiltDownAngle = 6.5;
   public static double balanceAngle = 3;
 
   public static double balanceTime = 3;
 
-  public static double climbState0_StartingSpeed = .5;
-  public static double climbState1_ClimbingSpeed = .3;
+  public static double climbState0_StartingSpeed = .25;
+  public static double climbState1_ClimbingSpeed = .15;
   public static double climbState2_Stopped = 0;
-  public static double climbState3_REVspeed = -.15;
-  public static double climbState4_FWDspeed = .15;
+  public static double climbState3_REVspeed = -.1;
+  public static double climbState4_FWDspeed = .1;
 
 
 

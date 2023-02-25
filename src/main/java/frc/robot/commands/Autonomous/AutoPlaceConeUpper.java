@@ -6,23 +6,24 @@ package frc.robot.commands.Autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Autonomous.PrepareForClimb;
-import frc.robot.commands.Arm.setArmPosition;
-import frc.robot.commands.Drive.GetOnChargeStation;
-import frc.robot.commands.Gantry.setGantryPosition;
-import frc.robot.commands.Lift.setLiftPosition;
+import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Lift.HomeLift;
+import frc.robot.commands.PickPlace.DropAndRetract;
+import frc.robot.commands.PickPlace.PlaceConePOS1;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ClimbOnly extends SequentialCommandGroup {
-  /** Creates a new ClimbOnly. */
-  public ClimbOnly() {
+public class AutoPlaceConeUpper extends SequentialCommandGroup {
+  /** Creates a new AutoPlaceConeUpper. */
+  public AutoPlaceConeUpper() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new PrepareForClimb(),
-    new GetOnChargeStation()
+    new setGripperPosition(Constants.gripperConeGrabPOS),
+    new HomeLift(), 
+    new PlaceConePOS1(),
+    new DropAndRetract()
     );
   }
 }

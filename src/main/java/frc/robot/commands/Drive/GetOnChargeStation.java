@@ -6,8 +6,10 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class GetOnChargeStation extends CommandBase {
@@ -77,20 +79,20 @@ public class GetOnChargeStation extends CommandBase {
         state = 3;
       }
     }
-    switch(state) {
-      case 0:
-        calcTranslation = Constants.climbState0_StartingSpeed;
-      case 1:
-        calcTranslation = Constants.climbState1_ClimbingSpeed;
-      case 2:
-        calcTranslation = Constants.climbState2_Stopped;
-      case 3:
-        if (Math.abs(currentAngle) < Constants.balanceAngle) {
-          calcTranslation = 0;
-        } else {
-          calcTranslation = Constants.climbState3_REVspeed;
-        }
-      case 4:
+    if(state == 0){
+      calcTranslation = Constants.climbState0_StartingSpeed;
+    }
+    if (state == 1) {
+      calcTranslation = Constants.climbState1_ClimbingSpeed;
+    }
+    if (state ==3) {
+      if (Math.abs(currentAngle) < Constants.balanceAngle) {
+        calcTranslation = 0;
+      } else {
+        calcTranslation = Constants.climbState3_REVspeed;
+      }
+    }
+    if (state ==4) {
       if (Math.abs(currentAngle) < Constants.balanceAngle) {
         calcTranslation = 0;
       } else {
@@ -104,7 +106,10 @@ public class GetOnChargeStation extends CommandBase {
       true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );
-
+  // SmartDashboard.putNumber("state", state);
+  //   SmartDashboard.putNumber("output", calcTranslation);
+  //   SmartDashboard.putNumber("Balanced Time", balanceTimer.get());
+  //   SmartDashboard.putBoolean("Finished", Finished);
   }
 
   // Called once the command ends or is interrupted.
@@ -116,6 +121,7 @@ public class GetOnChargeStation extends CommandBase {
       true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );
+    state = 0;
   }
 
   // Returns true when the command should end.

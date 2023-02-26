@@ -7,9 +7,7 @@ package frc.robot.commands.PickPlace;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.PlaceCommandEnd;
 import frc.robot.commands.ResetEndPlaceCommand;
-import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.setLiftPosition;
@@ -17,16 +15,19 @@ import frc.robot.commands.Lift.setLiftPosition;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class RetrieveCone extends SequentialCommandGroup {
-  /** Creates a new RetrieveCone. */
-  public RetrieveCone() {
+public class PrepareForSubPickup extends SequentialCommandGroup {
+  /** Creates a new PrepareForSubPickup. */
+  public PrepareForSubPickup() {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetEndPlaceCommand(),
-      new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(1),
-      new setLiftPosition(Constants.liftRetrievePOS),
-      Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS),new setArmPosition(Constants.armRetractedPOS)),
-      new PlaceCommandEnd(),
+      //add limelight
+      Commands.parallel(new setLiftPosition(Constants.liftSubstationPOS), new setGripperPosition(Constants.openGripperPOS)),
+      new setGantryPosition(Constants.gantrySubPOS),
       new ResetEndPlaceCommand()
+
+
     );
   }
 }

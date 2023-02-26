@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -36,11 +37,14 @@ import frc.robot.commands.PickPlace.DropAndRetract;
 import frc.robot.commands.PickPlace.HomeAll;
 import frc.robot.commands.PickPlace.PlaceConePOS1;
 import frc.robot.commands.PickPlace.PlaceConePOS4;
+import frc.robot.commands.PickPlace.PlaceObjectPOS7;
 import frc.robot.commands.PickPlace.PlaceConePOS1;
 import frc.robot.commands.PickPlace.PrepareConeFlip;
 import frc.robot.commands.PickPlace.PrepareForPickUp;
+import frc.robot.commands.PickPlace.PrepareForSubPickup;
 import frc.robot.commands.PickPlace.RetrieveCone;
 import frc.robot.commands.PickPlace.RetrieveCube;
+import frc.robot.commands.PickPlace.RetrieveFromSub;
 import frc.robot.subsystems.*;
 
 /**
@@ -79,7 +83,8 @@ public class RobotContainer {
                 () -> false  //robot centric boolean
             )
         );
-        m_Chooser.setDefaultOption("Place Cone Upper", new AutoPlaceConeUpper());
+        m_Chooser.setDefaultOption("Reset End Place Command", new ResetEndPlaceCommand());
+        m_Chooser.addOption("Place Cone Upper", new AutoPlaceConeUpper());
         m_Chooser.addOption("Place Cone and Climb", new PlaceConePOS1AndClimb());
 
         SmartDashboard.putData("Auto CHooser", m_Chooser);
@@ -97,33 +102,22 @@ public class RobotContainer {
         //PlaceObjects
         new JoystickButton(OpPanel, 16).onTrue(new PlaceConePOS1().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 15).onTrue(new PlaceConePOS4().unless(() -> PlaceCommandStarted));
-       
+        new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectPOS7().unless(() -> PlaceCommandStarted));
         //PickupObjects
-        new JoystickButton(leftStick, 4).onTrue(new RetrieveCone().unless(() -> PlaceCommandStarted));
+        new JoystickButton(leftStick, 4).onTrue(new ConditionalCommand(new RetrieveFromSub(), new RetrieveCone(), s_Lift::liftGreaterThan200));
        // new JoystickButton(RightStick, 4).onTrue(new RetrieveCube());
 
        //GetOnChargeStation
-        new JoystickButton(OpPanel, 5).onTrue(new ClimbOnly());
-        new JoystickButton(OpPanel, 6).onTrue(new PlaceConePOS1AndClimb());
+       // new JoystickButton(OpPanel, 5).onTrue(new ClimbOnly());
+       // new JoystickButton(OpPanel, 6).onTrue(new PlaceConePOS1AndClimb());
 
 
         new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
         new JoystickButton(OpPanel, 2).onTrue(new PrepareForClimb());
-        
+        new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
+      
         //new JoystickButton(OpPanel, 5).onTrue(new MoveToPosReletiveToTarget(0.8, -.56, 0));
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

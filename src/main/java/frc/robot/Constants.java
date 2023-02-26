@@ -22,7 +22,7 @@ public final class Constants {
 
     //max and min lift output
     public static double liftOutputMax = 1;
-    public static double liftOutputMin = -1;
+    public static double liftOutputMin = -.75;
 
     //max and min motor output
     
@@ -57,14 +57,14 @@ public final class Constants {
 
     //upper & lower limits
     public static double gripperLowerLimit = 34;
-    public static double gripperUpperLimit = 304;
+    public static double gripperUpperLimit = 329;
 
     //lift conversion
     public static double gripperConversion = 112.7455;
 
     //upper and lower limit switch position / homing/calibrating values
     public static double gripperLowerLimitSwitchPos = 33;
-    public static double gripperUpperLimitSwitchPos = 305;
+    public static double gripperUpperLimitSwitchPos = 330;
 
     public static final double gripperPosTolerance = 2;
 
@@ -111,7 +111,7 @@ public final class Constants {
     //GripperPOS
         public static double gripperCubeGrabPOS = 150;
         public static double gripperConeGrabPOS = 75;
-        public static double openGripperPOS = 305;
+        public static double openGripperPOS = 329;
     
     //ArmPOS
         public static double armRetractedPOS = 5;
@@ -120,22 +120,23 @@ public final class Constants {
         public static double armPickPOS = 350;
 
     //GantryPOS
-        public static double gantryRetractedPOS = 50;
+        public static double gantryLowerlevelPOS = 350;
+        public static double gantryRetractedPOS = 1;
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
         public static double gantryClimbPOS = 375;
-
+        public static double gantrySubPOS = 350;
     //LiftPOS
         public static double liftBottomPOS = 0;
-        public static double liftConeFlippy = 110;
+        public static double liftConeFlippy = 140;
         public static double liftRetrievePOS = 275;
-        public static double liftLowerLevelPOS = 350;
+        public static double liftLowerLevelPOS = 300;
         public static double liftMidLevelCubePOS = 700;
         public static double liftMidLevelConePOS = 950; 
         public static double liftMaxLevelCubePOS = 1189;
         public static double liftMaxLevelConePOS = 1189;
-        public static double liftSubstationPOS = 700;
+        public static double liftSubstationPOS = 1000;
         public static double liftAutoStartPOS = 200;
         public static double liftClimbPOS = 110;
     

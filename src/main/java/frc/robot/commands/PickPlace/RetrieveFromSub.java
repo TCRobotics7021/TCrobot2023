@@ -7,7 +7,9 @@ package frc.robot.commands.PickPlace;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.PlaceCommandEnd;
 import frc.robot.commands.ResetEndPlaceCommand;
+import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.setLiftPosition;
@@ -20,9 +22,10 @@ public class RetrieveFromSub extends SequentialCommandGroup {
   public RetrieveFromSub() {
   addCommands(
 new ResetEndPlaceCommand(),
-//add limelight
-Commands.parallel(new setLiftPosition(Constants.liftSubstationPOS), new setGripperPosition(Constants.openGripperPOS)),
-new setGantryPosition(Constants.gantryPickPOS),
+new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(1),
+Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS),new setArmPosition(Constants.armRetractedPOS)),
+new setLiftPosition(Constants.liftRetrievePOS),
+new PlaceCommandEnd(),
 new ResetEndPlaceCommand()
 
 

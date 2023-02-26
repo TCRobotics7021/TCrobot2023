@@ -6,26 +6,22 @@ package frc.robot.commands.PickPlace;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.PlaceCommandEnd;
-import frc.robot.commands.ResetEndPlaceCommand;
 import frc.robot.commands.Gantry.setGantryPosition;
-import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.setLiftPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class RetrieveCube extends SequentialCommandGroup {
-  /** Creates a new RetrieveCube. */
-  public RetrieveCube() {
-  
+public class PlaceObjectPOS7 extends SequentialCommandGroup {
+  /** Creates a new PlaceObjectPOS7. */
+  public PlaceObjectPOS7() {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-    new ResetEndPlaceCommand(),
-    new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(2),
-    new setLiftPosition(Constants.liftRetrievePOS),
-    new setGantryPosition(Constants.gantryRetractedPOS),
-    new PlaceCommandEnd(),
-    new ResetEndPlaceCommand()
+  new setLiftPosition(Constants.liftLowerLevelPOS), 
+  new setGantryPosition(Constants.gantryLowerlevelPOS)
+  
+
 
 
 

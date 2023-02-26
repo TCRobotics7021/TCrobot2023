@@ -167,16 +167,16 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.update(getYaw(), getModulePositions());  
         tempOdometry.update(getYaw(), getModulePositions());
 
-        SmartDashboard.putNumber("Odometry X", swerveOdometry.getPoseMeters().getX());
-        SmartDashboard.putNumber("Odometry Y", swerveOdometry.getPoseMeters().getY());
-        SmartDashboard.putNumber("Odometry R", swerveOdometry.getPoseMeters().getRotation().getDegrees());
+        // SmartDashboard.putNumber("Odometry X", swerveOdometry.getPoseMeters().getX());
+        // SmartDashboard.putNumber("Odometry Y", swerveOdometry.getPoseMeters().getY());
+        // SmartDashboard.putNumber("Odometry R", swerveOdometry.getPoseMeters().getRotation().getDegrees());
 
-        SmartDashboard.putNumber("Temp Odometry X", tempOdometry.getPoseMeters().getX());
-        SmartDashboard.putNumber("Temp Odometry Y", tempOdometry.getPoseMeters().getY());
-        SmartDashboard.putNumber("Temp Odometry R", tempOdometry.getPoseMeters().getRotation().getDegrees());
+        // SmartDashboard.putNumber("Temp Odometry X", tempOdometry.getPoseMeters().getX());
+        // SmartDashboard.putNumber("Temp Odometry Y", tempOdometry.getPoseMeters().getY());
+        // SmartDashboard.putNumber("Temp Odometry R", tempOdometry.getPoseMeters().getRotation().getDegrees());
 
-        SmartDashboard.putNumber("Pitch", GetPitch());
-        SmartDashboard.putNumber("Roll", GetRoll());
+        // SmartDashboard.putNumber("Pitch", GetPitch());
+        // SmartDashboard.putNumber("Roll", GetRoll());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());

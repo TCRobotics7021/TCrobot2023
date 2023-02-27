@@ -20,6 +20,7 @@ public class AutoPlaceConeUpper extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+    new CalibrateLiftAtStartOfMatch(),
     new setGripperPosition(Constants.gripperConeGrabPOS),
     new HomeLift(), 
     new PlaceConePOS1(),

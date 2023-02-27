@@ -2,13 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Autonomous;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Autonomous.PrepareForClimb;
 import frc.robot.commands.Arm.setArmPosition;
-import frc.robot.commands.Drive.GetOnChargeStation;
+import frc.robot.commands.Autonomous.CalibrateLiftAtStartOfMatch;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Lift.setLiftPosition;
 

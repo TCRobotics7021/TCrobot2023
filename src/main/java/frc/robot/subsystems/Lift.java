@@ -61,6 +61,7 @@ private double tempLowerLimit = 0;
     m_Lift.configForwardSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Lift.configReverseSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Lift.setNeutralMode(NeutralMode.Brake);
+    calibrateEncoder(Constants.liftStartingPOS);
 
     tempP = Constants.liftMotor_P;
     tempI = Constants.liftMotor_I;

@@ -6,7 +6,6 @@ package frc.robot.commands.PickPlace;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.ResetEndPlaceCommand;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.setLiftPosition;
@@ -20,9 +19,10 @@ public class RetrieveCube extends SequentialCommandGroup {
   
     addCommands(
     new ResetEndPlaceCommand(),
-    new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(2),
+    new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
     new setLiftPosition(Constants.liftRetrievePOS),
     new setGantryPosition(Constants.gantryRetractedPOS),
+    new PlaceCommandEnd(),
     new ResetEndPlaceCommand()
 
 

@@ -9,26 +9,21 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
-import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.setLiftPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class RetrieveFromSub extends SequentialCommandGroup {
-  /** Creates a new RetrieveFromSub. */
-  public RetrieveFromSub() {
-  addCommands(
-new ResetEndPlaceCommand(),
-new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(Constants.gripperTimeout),
-new setLiftPosition(Constants.liftSubstationBumpingUpwardsPosition),
-Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS),new setArmPosition(Constants.armRetractedPOS)),
-new setLiftPosition(Constants.liftRetrievePOS),
-new PlaceCommandEnd(),
-new ResetEndPlaceCommand()
-
-
-
-  );
+public class PlaceConeUpperLevel extends SequentialCommandGroup {
+  /** Creates a new PlaceCubePOS1. */
+  public PlaceConeUpperLevel() {
+   addCommands(
+    new ResetEndPlaceCommand(),
+    new PlaceCommandStart(),
+  //add limelight
+  new setLiftPosition(Constants.liftMaxLevelConePOS),
+  Commands.parallel(new setGantryPosition(Constants.gantryUpperLevelPOS),new setArmPosition(Constants.armExtendedPOS)),
+  new ResetEndPlaceCommand()
+    );
   }
 }

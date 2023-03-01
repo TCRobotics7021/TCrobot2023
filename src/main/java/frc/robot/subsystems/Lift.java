@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.commands.Lift.setLiftPosition;
 
 public class Lift extends SubsystemBase {
     // Creates a new Lift
@@ -60,6 +61,7 @@ private double tempLowerLimit = 0;
     m_Lift.configForwardSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Lift.configReverseSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Lift.setNeutralMode(NeutralMode.Brake);
+    calibrateEncoder(Constants.liftStartingPOS);
 
     tempP = Constants.liftMotor_P;
     tempI = Constants.liftMotor_I;
@@ -81,7 +83,9 @@ private double tempLowerLimit = 0;
   public void setSpeed(double goSpeed ){
   m_Lift.set(ControlMode.PercentOutput, goSpeed);
 }
-
+  public boolean liftGreaterThan200() {
+    return currentPosition() > 200;
+  }
 public void setPosition(double position){
   m_Lift.set(ControlMode.Position, position*Constants.liftConversion);
 }
@@ -144,8 +148,9 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
     if(RobotContainer.s_Gantry.currentPosition() + RobotContainer.s_Arm.currentPosition() <= Constants.gantryLimitLift && currentPosition() < Constants.liftLimitGantry && m_Lift.getMotorOutputPercent() < 0){
       setPosition(Constants.liftLimitGantry + 5);
     }
- 
-    updatePID();
+    
+    
+    //updatePID();
     
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());

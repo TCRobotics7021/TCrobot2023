@@ -22,8 +22,9 @@ public final class Constants {
 
     //max and min lift output
     public static double liftOutputMax = 1;
-    public static double liftOutputMin = -1;
-
+    public static double liftOutputMin = -.75;
+    public static double liftJogUp = .25;
+    public static double liftJogDown = -.2;
     //max and min motor output
     
 
@@ -57,14 +58,14 @@ public final class Constants {
 
     //upper & lower limits
     public static double gripperLowerLimit = 34;
-    public static double gripperUpperLimit = 304;
+    public static double gripperUpperLimit = 329;
 
     //lift conversion
     public static double gripperConversion = 112.7455;
 
     //upper and lower limit switch position / homing/calibrating values
     public static double gripperLowerLimitSwitchPos = 33;
-    public static double gripperUpperLimitSwitchPos = 305;
+    public static double gripperUpperLimitSwitchPos = 330;
 
     public static final double gripperPosTolerance = 2;
 
@@ -111,8 +112,8 @@ public final class Constants {
     //GripperPOS
         public static double gripperCubeGrabPOS = 150;
         public static double gripperConeGrabPOS = 75;
-        public static double openGripperPOS = 305;
-    
+        public static double openGripperPOS = 329;
+        public static double gripperTimeout = .5;
     //ArmPOS
         public static double armRetractedPOS = 5;
         public static double armMidLevelPOS = 105;
@@ -120,30 +121,47 @@ public final class Constants {
         public static double armPickPOS = 350;
 
     //GantryPOS
-        public static double gantryRetractedPOS = 50;
+        public static double GripperStartingPOS = 205;
+        public static double gantryLowerlevelPOS = 350;
+        public static double gantryRetractedPOS = 1;
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
-        public static double gantryClimbPOS = 375;
-
+        public static double gantryClimbPOS = 425;
+        public static double gantrySubPOS = 350;
     //LiftPOS
+        public static double liftStartingPOS = 131;
         public static double liftBottomPOS = 0;
-        public static double liftConeFlippy = 110;
+        public static double liftConeFlippy = 140;
         public static double liftRetrievePOS = 275;
-        public static double liftLowerLevelPOS = 350;
+        public static double liftLowerLevelPOS = 300;
         public static double liftMidLevelCubePOS = 700;
-        public static double liftMidLevelConePOS = 950; 
+        public static double liftMidLevelConePOS = 900; 
         public static double liftMaxLevelCubePOS = 1189;
         public static double liftMaxLevelConePOS = 1189;
-        public static double liftSubstationPOS = 700;
-        public static double liftAutoStartPOS = 200;
-        public static double liftClimbPOS = 110;
+        public static double liftSubstationPOS = 950;
+        public static double liftSubstationBumpingUpwardsPosition = 1000;
+        public static double liftClimbPOS = 75;
     
+    //Set speed for HomingLift
+        public static double setSpeedForLiftHome = .5;
+
+        public static double setSpeedForGripperHome = .25;
+
+        public static double setSpeedforGantryHome = -.25;
+
+        public static double setSpeedForArmHome = -.25;
+
+
+        public static double gantryLimitLift = 250;
+        public static double liftLimitGantry = 150;
    
+    //DRIVE SECTION
+
 
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .15;
-    public static double maxSpeedPos = .4;
+    public static double maxSpeedPos = .7;
 
     public static double minAutoRot = .15;
     public static double maxAutoRot = .4;
@@ -157,18 +175,7 @@ public final class Constants {
 
     public static final double autoRotateTolerance = 2;
 
-//Set speed for HomingLift
-  public static double setSpeedForLiftHome = .5;
 
-  public static double setSpeedForGripperHome = .25;
-
-  public static double setSpeedforGantryHome = -.25;
-
-  public static double setSpeedForArmHome = -.25;
-
-
-  public static double gantryLimitLift = 250;
-  public static double liftLimitGantry = 150;
 
 
 //charge station
@@ -178,8 +185,8 @@ public final class Constants {
 
   public static double balanceTime = 3;
 
-  public static double climbState0_StartingSpeed = .25;
-  public static double climbState1_ClimbingSpeed = .15;
+  public static double climbState0_StartingSpeed = .35;
+  public static double climbState1_ClimbingSpeed = .2;
   public static double climbState2_Stopped = 0;
   public static double climbState3_REVspeed = -.1;
   public static double climbState4_FWDspeed = .1;

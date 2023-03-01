@@ -2,21 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Autonomous;
+
+import java.io.Console;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class ResetEndPlaceCommand extends CommandBase {
-  /** Creates a new ResetEndPlaceCommand. */
-  public ResetEndPlaceCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class CalibrateLiftAtStartOfMatch extends CommandBase {
+  /** Creates a new CalibrateLiftAtStartOfMatch. */
+  public CalibrateLiftAtStartOfMatch() {
+    addRequirements(RobotContainer.s_Lift);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.EndPlaceCommand = false;
+    RobotContainer.s_Lift.calibrateEncoder(Constants.liftStartingPOS);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

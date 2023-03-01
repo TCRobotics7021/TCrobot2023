@@ -2,21 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.Swerve;
 
-public class PlaceCommandStart extends CommandBase {
-  /** Creates a new PlaceCommandStart. */
-  public PlaceCommandStart() {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class Calibrate extends CommandBase {
+ 
+  /** Creates a new Calibrate. */
+  public Calibrate() {
+    addRequirements(RobotContainer.s_Swerve);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.PlaceCommandStarted = true;
+    RobotContainer.s_Swerve.resetModulesToAbsolute();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -30,6 +33,6 @@ public class PlaceCommandStart extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

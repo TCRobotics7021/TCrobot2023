@@ -144,7 +144,7 @@ SmartDashboard.putNumber("Distance", m_Gripper.getSelectedSensorPosition()/Const
  
     SmartDashboard.putBoolean("gripperUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("gripperLowerLimit", lowerLimit.get());
-   
+    SmartDashboard.putNumber("GripperPos", currentPosition());
     
   }
 }

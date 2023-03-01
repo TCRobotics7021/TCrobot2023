@@ -121,15 +121,16 @@ public final class Constants {
         public static double armPickPOS = 350;
 
     //GantryPOS
+        public static double GripperStartingPOS = 205;
         public static double gantryLowerlevelPOS = 350;
         public static double gantryRetractedPOS = 1;
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
-        public static double gantryClimbPOS = 375;
+        public static double gantryClimbPOS = 425;
         public static double gantrySubPOS = 350;
     //LiftPOS
-        public static double liftStartingPOS = 50;
+        public static double liftStartingPOS = 131;
         public static double liftBottomPOS = 0;
         public static double liftConeFlippy = 140;
         public static double liftRetrievePOS = 275;
@@ -140,7 +141,7 @@ public final class Constants {
         public static double liftMaxLevelConePOS = 1189;
         public static double liftSubstationPOS = 950;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
-        public static double liftClimbPOS = 110;
+        public static double liftClimbPOS = 75;
     
     //Set speed for HomingLift
         public static double setSpeedForLiftHome = .5;
@@ -160,7 +161,7 @@ public final class Constants {
 
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .15;
-    public static double maxSpeedPos = .4;
+    public static double maxSpeedPos = .7;
 
     public static double minAutoRot = .15;
     public static double maxAutoRot = .4;

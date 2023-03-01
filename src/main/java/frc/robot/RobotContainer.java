@@ -15,13 +15,23 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.commands.*;
 import frc.robot.commands.Arm.HomeArm;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Arm.setArmSpeed;
+import frc.robot.commands.Autonomous.AutoPlaceConeB4_Climb;
+import frc.robot.commands.Autonomous.AutoPlaceConeB6_Climb;
+import frc.robot.commands.Autonomous.AutoPlaceConeB7_Climb;
+import frc.robot.commands.Autonomous.AutoPlaceConeB9_Climb;
+import frc.robot.commands.Autonomous.AutoPlaceConeMiddle;
 import frc.robot.commands.Autonomous.AutoPlaceConeUpper;
+import frc.robot.commands.Autonomous.AutoPlaceCubeB8_Climb;
+import frc.robot.commands.Autonomous.AutoPlaceCubeUpper;
+import frc.robot.commands.Autonomous.BlueAutoPlaceA8;
+import frc.robot.commands.Autonomous.BlueAutoPlaceCubeC8_Climb;
 import frc.robot.commands.Autonomous.PlaceConePOS1AndClimb;
 import frc.robot.commands.Autonomous.PlaceConePosition1AndDriveOverLine;
+import frc.robot.commands.Autonomous.RedAutoPlaceCubeA8;
+import frc.robot.commands.Autonomous.RedAutoPlaceCubeC8_Climb;
 import frc.robot.commands.Drive.ClimbOnly;
 import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.TeleopSwerve;
@@ -38,10 +48,10 @@ import frc.robot.commands.Lift.setLiftPosition;
 import frc.robot.commands.PickPlace.CancelAll;
 import frc.robot.commands.PickPlace.DropAndRetract;
 import frc.robot.commands.PickPlace.HomeAll;
-import frc.robot.commands.PickPlace.PlaceConePOS1;
-import frc.robot.commands.PickPlace.PlaceConePOS4;
-import frc.robot.commands.PickPlace.PlaceObjectPOS7;
-import frc.robot.commands.PickPlace.PlaceConePOS1;
+import frc.robot.commands.PickPlace.PlaceConeUpperLevel;
+import frc.robot.commands.PickPlace.PlaceConeMidLevel;
+import frc.robot.commands.PickPlace.PlaceObjectLowerLevel;
+import frc.robot.commands.PickPlace.PlaceConeUpperLevel;
 import frc.robot.commands.PickPlace.PrepareConeFlip;
 import frc.robot.commands.PickPlace.PrepareForPickUp;
 import frc.robot.commands.PickPlace.PrepareForSubPickup;
@@ -87,13 +97,19 @@ public class RobotContainer {
                 () -> false  //robot centric boolean
             )
         );
-        m_Chooser.setDefaultOption("Reset End Place Command", new ResetEndPlaceCommand());
-        m_Chooser.addOption("Home All", new HomeAll());
-        m_Chooser.addOption("Place Cone Upper", new AutoPlaceConeUpper());
-        m_Chooser.addOption("Place Cone and Climb", new PlaceConePOS1AndClimb());
-        m_Chooser.addOption("Place Cone POS 1 and Drive", new PlaceConePosition1AndDriveOverLine());
+        m_Chooser.setDefaultOption("AutoPlaceCubeUpper", new AutoPlaceCubeUpper());
+        m_Chooser.addOption("AutoPlaceConeUpper", new AutoPlaceConeUpper());
+        m_Chooser.addOption("AutoPlaceConeB4_Climb", new AutoPlaceConeB4_Climb());
+        m_Chooser.addOption("AutoPlaceConeB6_Climb", new AutoPlaceConeB6_Climb());
+        m_Chooser.addOption("AutoPlaceConeB7_Climb", new AutoPlaceConeB7_Climb());
+        m_Chooser.addOption("AutoPlaceCubeB8_Climb", new AutoPlaceCubeB8_Climb());
+        m_Chooser.addOption("AutoPlaceConeB9_Climb", new AutoPlaceConeB9_Climb());
+        m_Chooser.addOption("RedAutoPlaceCubeC8_Climb", new RedAutoPlaceCubeC8_Climb());
+        m_Chooser.addOption("BlueAutoPlaceCubeC8_Climb", new BlueAutoPlaceCubeC8_Climb());
+        m_Chooser.addOption("RedAutoPlaceCubeA8_Drive", new RedAutoPlaceCubeA8());
+        m_Chooser.addOption("BlueAutoPlaceCubeA8_Drive", new BlueAutoPlaceA8());
 
-        SmartDashboard.putData("Auto CHooser", m_Chooser);
+        SmartDashboard.putData("Auto Chooser", m_Chooser);
         // Configure the button bindings
         configureButtonBindings();
     }
@@ -108,9 +124,9 @@ public class RobotContainer {
         new POVButton(RightStick, 0).whileTrue(new JogAndSetPOS(Constants.liftJogUp));
         new POVButton(RightStick, 180).whileTrue(new JogAndSetPOS(Constants.liftJogDown));
         //PlaceObjects
-        new JoystickButton(OpPanel, 16).onTrue(new PlaceConePOS1().unless(() -> PlaceCommandStarted));
-        new JoystickButton(OpPanel, 15).onTrue(new PlaceConePOS4().unless(() -> PlaceCommandStarted));
-        new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectPOS7().unless(() -> PlaceCommandStarted));
+        new JoystickButton(OpPanel, 16).onTrue(new PlaceConeUpperLevel().unless(() -> PlaceCommandStarted));
+        new JoystickButton(OpPanel, 15).onTrue(new PlaceConeMidLevel().unless(() -> PlaceCommandStarted));
+        new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectLowerLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 9).onTrue(new ClimbOnly());
         //PickupObjects
         new JoystickButton(leftStick, 4).onTrue(new ConditionalCommand(new RetrieveFromSub(), new RetrieveCone(), s_Lift::liftGreaterThan200));

@@ -14,9 +14,9 @@ import frc.robot.commands.Lift.setLiftPosition;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PlaceConePOS1 extends SequentialCommandGroup {
+public class PlaceConeUpperLevel extends SequentialCommandGroup {
   /** Creates a new PlaceCubePOS1. */
-  public PlaceConePOS1() {
+  public PlaceConeUpperLevel() {
    addCommands(
     new ResetEndPlaceCommand(),
     new PlaceCommandStart(),

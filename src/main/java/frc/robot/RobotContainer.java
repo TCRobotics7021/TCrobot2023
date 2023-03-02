@@ -25,6 +25,7 @@ import frc.robot.commands.Autonomous.AutoPlaceConeB9_Climb;
 import frc.robot.commands.Autonomous.AutoPlaceConeMiddle;
 import frc.robot.commands.Autonomous.AutoPlaceConeUpper;
 import frc.robot.commands.Autonomous.AutoPlaceCubeB8_Climb;
+
 import frc.robot.commands.Autonomous.AutoPlaceCubeUpper;
 import frc.robot.commands.Autonomous.BlueAutoPlaceA8;
 import frc.robot.commands.Autonomous.BlueAutoPlaceCubeC8_Climb;
@@ -98,16 +99,17 @@ public class RobotContainer {
             )
         );
         m_Chooser.setDefaultOption("AutoPlaceCubeUpper", new AutoPlaceCubeUpper());
-        m_Chooser.addOption("AutoPlaceConeUpper", new AutoPlaceConeUpper());
-        m_Chooser.addOption("AutoPlaceConeB4_Climb", new AutoPlaceConeB4_Climb());
-        m_Chooser.addOption("AutoPlaceConeB6_Climb", new AutoPlaceConeB6_Climb());
-        m_Chooser.addOption("AutoPlaceConeB7_Climb", new AutoPlaceConeB7_Climb());
+       // m_Chooser.addOption("AutoPlaceConeUpper", new AutoPlaceConeUpper());
+       // m_Chooser.addOption("AutoPlaceConeB4_Climb", new AutoPlaceConeB4_Climb());
+        // m_Chooser.addOption("AutoPlaceConeB6_Climb", new AutoPlaceConeB6_Climb());
+        // m_Chooser.addOption("AutoPlaceConeB7_Climb", new AutoPlaceConeB7_Climb());
         m_Chooser.addOption("AutoPlaceCubeB8_Climb", new AutoPlaceCubeB8_Climb());
-        m_Chooser.addOption("AutoPlaceConeB9_Climb", new AutoPlaceConeB9_Climb());
+       // m_Chooser.addOption("AutoPlaceConeB9_Climb", new AutoPlaceConeB9_Climb());
         m_Chooser.addOption("RedAutoPlaceCubeC8_Climb", new RedAutoPlaceCubeC8_Climb());
         m_Chooser.addOption("BlueAutoPlaceCubeC8_Climb", new BlueAutoPlaceCubeC8_Climb());
         m_Chooser.addOption("RedAutoPlaceCubeA8_Drive", new RedAutoPlaceCubeA8());
         m_Chooser.addOption("BlueAutoPlaceCubeA8_Drive", new BlueAutoPlaceA8());
+    
 
         SmartDashboard.putData("Auto Chooser", m_Chooser);
         // Configure the button bindings

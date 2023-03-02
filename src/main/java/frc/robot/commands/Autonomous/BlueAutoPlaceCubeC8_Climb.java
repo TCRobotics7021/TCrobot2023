@@ -32,7 +32,7 @@ public class BlueAutoPlaceCubeC8_Climb extends SequentialCommandGroup {
       new PlaceConeUpperLevel(),
       new releaseLiftBreak().withTimeout(.5),
       new setGripperPosition(Constants.openGripperPOS),
-      Commands.parallel(new AutonomousMove(4.3, .5, 0), new RetractArmGantryThenPrepareForClimb()),
+      Commands.parallel(new AutonomousMove(4.6, .5, 0), new RetractArmGantryThenPrepareForClimb()),
       new AutonomousMove(0, -1.9, 0),
       new GetOnChargeStationFromBack()
 

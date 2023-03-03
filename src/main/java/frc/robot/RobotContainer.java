@@ -29,10 +29,12 @@ import frc.robot.commands.Autonomous.AutoPlaceCubeB8_Climb;
 import frc.robot.commands.Autonomous.AutoPlaceCubeUpper;
 import frc.robot.commands.Autonomous.BlueAutoPlaceA8;
 import frc.robot.commands.Autonomous.BlueAutoPlaceCubeC8_Climb;
+import frc.robot.commands.Autonomous.BluePlaceC8_Drive;
 import frc.robot.commands.Autonomous.PlaceConePOS1AndClimb;
 import frc.robot.commands.Autonomous.PlaceConePosition1AndDriveOverLine;
 import frc.robot.commands.Autonomous.RedAutoPlaceCubeA8;
 import frc.robot.commands.Autonomous.RedAutoPlaceCubeC8_Climb;
+import frc.robot.commands.Autonomous.RedPlaceC8_Drive;
 import frc.robot.commands.Drive.ClimbOnly;
 import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.TeleopSwerve;
@@ -109,8 +111,8 @@ public class RobotContainer {
         m_Chooser.addOption("BlueAutoPlaceCubeC8_Climb", new BlueAutoPlaceCubeC8_Climb());
         m_Chooser.addOption("RedAutoPlaceCubeA8_Drive", new RedAutoPlaceCubeA8());
         m_Chooser.addOption("BlueAutoPlaceCubeA8_Drive", new BlueAutoPlaceA8());
-    
-
+        m_Chooser.addOption("BluePlaceC8_Drive", new BluePlaceC8_Drive());
+        m_Chooser.addOption("RedPlaceC8_Drive", new RedPlaceC8_Drive());
         SmartDashboard.putData("Auto Chooser", m_Chooser);
         // Configure the button bindings
         configureButtonBindings();
@@ -142,7 +144,7 @@ public class RobotContainer {
 
         new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
-        new JoystickButton(OpPanel, 2).onTrue(new PrepareForClimb());
+       // new JoystickButton(OpPanel, 2).onTrue(new PrepareForClimb());
         new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
       
         //new JoystickButton(OpPanel, 5).onTrue(new MoveToPosReletiveToTarget(0.8, -.56, 0));

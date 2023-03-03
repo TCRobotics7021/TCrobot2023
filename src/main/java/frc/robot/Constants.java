@@ -22,7 +22,7 @@ public final class Constants {
 
     //max and min lift output
     public static double liftOutputMax = 1;
-    public static double liftOutputMin = -.75;
+    public static double liftOutputMin = -.8;
     public static double liftJogUp = .25;
     public static double liftJogDown = -.2;
     //max and min motor output
@@ -128,7 +128,7 @@ public final class Constants {
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
         public static double gantryClimbPOS = 425;
-        public static double gantrySubPOS = 350;
+        public static double gantrySubPOS = 250;
     //LiftPOS
         public static double liftStartingPOS = 131;
         public static double liftBottomPOS = 0;
@@ -141,7 +141,7 @@ public final class Constants {
         public static double liftMaxLevelConePOS = 1189;
         public static double liftSubstationPOS = 950;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
-        public static double liftClimbPOS = 75;
+        public static double liftClimbPOS = 50;
     
     //Set speed for HomingLift
         public static double setSpeedForLiftHome = .5;
@@ -160,8 +160,8 @@ public final class Constants {
 
 
     //minimum and max speed for setting auto motor speed
-    public static double minSpeedPos = .15;
-    public static double maxSpeedPos = .7;
+    public static double minSpeedPos = .2;
+    public static double maxSpeedPos = .8;
 
     public static double minAutoRot = .15;
     public static double maxAutoRot = .7;
@@ -185,11 +185,11 @@ public final class Constants {
 
   public static double balanceTime = 3;
 
-  public static double climbState0_StartingSpeed = .35;
+  public static double climbState0_StartingSpeed = .5;
   public static double climbState1_ClimbingSpeed = .2;
   public static double climbState2_Stopped = 0;
-  public static double climbState3_REVspeed = -.1;
-  public static double climbState4_FWDspeed = .1;
+  public static double climbState3_REVspeed = -.15;
+  public static double climbState4_FWDspeed = .15;
 
 
 

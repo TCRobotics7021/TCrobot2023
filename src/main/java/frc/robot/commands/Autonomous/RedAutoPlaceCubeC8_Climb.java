@@ -15,6 +15,7 @@ import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.releaseLiftBreak;
+import frc.robot.commands.PickPlace.PlaceCommandEnd;
 import frc.robot.commands.PickPlace.PlaceConeUpperLevel;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -30,9 +31,10 @@ public class RedAutoPlaceCubeC8_Climb extends SequentialCommandGroup {
       new CalibrateGripperAtStartOfMatch(),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
       new PlaceConeUpperLevel(),
-      new releaseLiftBreak().withTimeout(.5),
+     // new releaseLiftBreak().withTimeout(.5),
       new setGripperPosition(Constants.openGripperPOS),
-      Commands.parallel(new AutonomousMove(4.6, -.5, 0), new RetractArmGantryThenPrepareForClimb()),
+      Commands.parallel(new AutonomousMove(4.6, -.5, 0), new RetractArmGantryThenPrepareForClimb().withTimeout(4)),
+      new PlaceCommandEnd(),
       new AutonomousMove(0, 1.9, 0),
       new GetOnChargeStationFromBack()
 

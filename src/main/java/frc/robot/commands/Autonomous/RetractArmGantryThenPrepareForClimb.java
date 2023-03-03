@@ -10,6 +10,7 @@ import frc.robot.Constants;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Lift.setLiftPosition;
+import frc.robot.commands.PickPlace.PlaceCommandEnd;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,8 +21,9 @@ public class RetractArmGantryThenPrepareForClimb extends SequentialCommandGroup 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      Commands.parallel(new setArmPosition(Constants.armRetractedPOS), new setGantryPosition(Constants.gantryClimbPOS)),
-      new setLiftPosition(Constants.liftClimbPOS)
+      Commands.parallel(new setArmPosition(Constants.armRetractedPOS), new setGantryPosition(Constants.gantryRetractedPOS)),
+      new PlaceCommandEnd(),
+      new setLiftPosition(Constants.liftRetrievePOS)
     );
   }
 }

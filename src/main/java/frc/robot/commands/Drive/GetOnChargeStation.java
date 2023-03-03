@@ -18,6 +18,7 @@ public class GetOnChargeStation extends CommandBase {
   int state = 0;
   boolean Finished = false;
   Timer balanceTimer = new Timer();
+  Timer initialTimer = new Timer();
   double currentAngle = 0;
   double calcTranslation = 0;
 
@@ -35,6 +36,8 @@ public class GetOnChargeStation extends CommandBase {
     balanceTimer.reset();
     balanceTimer.start();
     calcTranslation = 0;
+    initialTimer.reset();
+    initialTimer.stop();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,7 +50,11 @@ public class GetOnChargeStation extends CommandBase {
 
 
     if (state == 0 && Constants.climbStartedAngle < currentAngle) {
-      state = 1;
+      initialTimer.start();
+      if (initialTimer.get() > Constants.startClimbDelay){
+        state = 1;
+      }
+     
     }
 
     if (state == 1 && currentAngle < Constants.startedTiltDownAngle) {
@@ -84,6 +91,9 @@ public class GetOnChargeStation extends CommandBase {
     }
     if (state == 1) {
       calcTranslation = Constants.climbState1_ClimbingSpeed;
+    }
+    if (state == 2) {
+      calcTranslation = 0;
     }
     if (state ==3) {
       if (Math.abs(currentAngle) < Constants.balanceAngle) {

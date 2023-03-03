@@ -184,12 +184,13 @@ public final class Constants {
   public static double balanceAngle = 3;
 
   public static double balanceTime = 3;
+  public static double startClimbDelay = .5;
 
   public static double climbState0_StartingSpeed = .5;
   public static double climbState1_ClimbingSpeed = .2;
   public static double climbState2_Stopped = 0;
-  public static double climbState3_REVspeed = -.15;
-  public static double climbState4_FWDspeed = .15;
+  public static double climbState3_REVspeed = -.13;
+  public static double climbState4_FWDspeed = .13;
 
 
 

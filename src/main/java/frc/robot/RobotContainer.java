@@ -37,6 +37,7 @@ import frc.robot.commands.Autonomous.RedAutoPlaceCubeC8_Climb;
 import frc.robot.commands.Autonomous.RedPlaceC8_Drive;
 import frc.robot.commands.Drive.ClimbOnly;
 import frc.robot.commands.Drive.GetOnChargeStation;
+import frc.robot.commands.Drive.GetOnChargeStationFromBack;
 import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.TeleopSwerve;
 import frc.robot.commands.Gantry.HomeGantry;
@@ -148,7 +149,7 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
        // new JoystickButton(OpPanel, 2).onTrue(new PrepareForClimb());
         new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
-      new JoystickButton(OpPanel, 2).onTrue(new GetOnChargeStation());
+      new JoystickButton(OpPanel, 2).onTrue(new GetOnChargeStationFromBack());
         //new JoystickButton(OpPanel, 5).onTrue(new MoveToPosReletiveToTarget(0.8, -.56, 0));
     
     

@@ -21,9 +21,9 @@ public class RetractArmGantryThenPrepareForClimb extends SequentialCommandGroup 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      Commands.parallel(new setArmPosition(Constants.armRetractedPOS), new setGantryPosition(Constants.gantryRetractedPOS)),
+      Commands.parallel(new setArmPosition(Constants.armRetractedPOS), new setGantryPosition(Constants.gantryClimbPOS)),
       new PlaceCommandEnd(),
-      new setLiftPosition(Constants.liftRetrievePOS)
+      new setLiftPosition(Constants.liftClimbPOS)
     );
   }
 }

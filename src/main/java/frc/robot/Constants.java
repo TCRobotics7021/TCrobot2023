@@ -127,7 +127,7 @@ public final class Constants {
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
-        public static double gantryClimbPOS = 425;
+        public static double gantryClimbPOS = 350;
         public static double gantrySubPOS = 250;
     //LiftPOS
         public static double liftStartingPOS = 131;
@@ -141,7 +141,7 @@ public final class Constants {
         public static double liftMaxLevelConePOS = 1189;
         public static double liftSubstationPOS = 950;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
-        public static double liftClimbPOS = 50;
+        public static double liftClimbPOS = 300;
     
     //Set speed for HomingLift
         public static double setSpeedForLiftHome = .5;
@@ -187,10 +187,10 @@ public final class Constants {
   public static double startClimbDelay = .5;
 
   public static double climbState0_StartingSpeed = .5;
-  public static double climbState1_ClimbingSpeed = .2;
+  public static double climbState1_ClimbingSpeed = .15;
   public static double climbState2_Stopped = 0;
-  public static double climbState3_REVspeed = -.13;
-  public static double climbState4_FWDspeed = .13;
+  public static double climbState3_REVspeed = -.1;
+  public static double climbState4_FWDspeed = .1;
 
 
 

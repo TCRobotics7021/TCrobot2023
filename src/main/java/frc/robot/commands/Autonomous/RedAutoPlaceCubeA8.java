@@ -33,7 +33,8 @@ public class RedAutoPlaceCubeA8 extends SequentialCommandGroup {
       new releaseLiftBreak().withTimeout(.5),
       new DropAndRetract(),
       new AutonomousMove(1, .25, 0),
-      new AutonomousMove(3.8, 0, 0) 
+      new AutonomousMove(3.6, 0, 0),
+      new AutonomousMove(0, 0, 180)
     );
   }
 }

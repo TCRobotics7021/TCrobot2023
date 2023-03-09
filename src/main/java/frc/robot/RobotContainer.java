@@ -25,14 +25,19 @@ import frc.robot.commands.Autonomous.AutoPlaceConeB9_Climb;
 import frc.robot.commands.Autonomous.AutoPlaceConeMiddle;
 import frc.robot.commands.Autonomous.AutoPlaceConeUpper;
 import frc.robot.commands.Autonomous.AutoPlaceCubeB8_Climb;
+
 import frc.robot.commands.Autonomous.AutoPlaceCubeUpper;
 import frc.robot.commands.Autonomous.BlueAutoPlaceA8;
 import frc.robot.commands.Autonomous.BlueAutoPlaceCubeC8_Climb;
+import frc.robot.commands.Autonomous.BluePlaceC8_Drive;
 import frc.robot.commands.Autonomous.PlaceConePOS1AndClimb;
 import frc.robot.commands.Autonomous.PlaceConePosition1AndDriveOverLine;
 import frc.robot.commands.Autonomous.RedAutoPlaceCubeA8;
 import frc.robot.commands.Autonomous.RedAutoPlaceCubeC8_Climb;
+import frc.robot.commands.Autonomous.RedPlaceC8_Drive;
 import frc.robot.commands.Drive.ClimbOnly;
+import frc.robot.commands.Drive.GetOnChargeStation;
+import frc.robot.commands.Drive.GetOnChargeStationFromBack;
 import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.TeleopSwerve;
 import frc.robot.commands.Gantry.HomeGantry;
@@ -98,17 +103,18 @@ public class RobotContainer {
             )
         );
         m_Chooser.setDefaultOption("AutoPlaceCubeUpper", new AutoPlaceCubeUpper());
-        m_Chooser.addOption("AutoPlaceConeUpper", new AutoPlaceConeUpper());
-        m_Chooser.addOption("AutoPlaceConeB4_Climb", new AutoPlaceConeB4_Climb());
-        m_Chooser.addOption("AutoPlaceConeB6_Climb", new AutoPlaceConeB6_Climb());
-        m_Chooser.addOption("AutoPlaceConeB7_Climb", new AutoPlaceConeB7_Climb());
+       // m_Chooser.addOption("AutoPlaceConeUpper", new AutoPlaceConeUpper());
+       // m_Chooser.addOption("AutoPlaceConeB4_Climb", new AutoPlaceConeB4_Climb());
+        // m_Chooser.addOption("AutoPlaceConeB6_Climb", new AutoPlaceConeB6_Climb());
+        // m_Chooser.addOption("AutoPlaceConeB7_Climb", new AutoPlaceConeB7_Climb());
         m_Chooser.addOption("AutoPlaceCubeB8_Climb", new AutoPlaceCubeB8_Climb());
-        m_Chooser.addOption("AutoPlaceConeB9_Climb", new AutoPlaceConeB9_Climb());
+       // m_Chooser.addOption("AutoPlaceConeB9_Climb", new AutoPlaceConeB9_Climb());
         m_Chooser.addOption("RedAutoPlaceCubeC8_Climb", new RedAutoPlaceCubeC8_Climb());
         m_Chooser.addOption("BlueAutoPlaceCubeC8_Climb", new BlueAutoPlaceCubeC8_Climb());
         m_Chooser.addOption("RedAutoPlaceCubeA8_Drive", new RedAutoPlaceCubeA8());
         m_Chooser.addOption("BlueAutoPlaceCubeA8_Drive", new BlueAutoPlaceA8());
-
+        m_Chooser.addOption("BluePlaceC8_Drive", new BluePlaceC8_Drive());
+        m_Chooser.addOption("RedPlaceC8_Drive", new RedPlaceC8_Drive());
         SmartDashboard.putData("Auto Chooser", m_Chooser);
         // Configure the button bindings
         configureButtonBindings();
@@ -128,6 +134,7 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 15).onTrue(new PlaceConeMidLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectLowerLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 9).onTrue(new ClimbOnly());
+        
         //PickupObjects
         new JoystickButton(leftStick, 4).onTrue(new ConditionalCommand(new RetrieveFromSub(), new RetrieveCone(), s_Lift::liftGreaterThan200));
         // new JoystickButton(leftStick, 4).onTrue(new ConditionalCommand(new RetrieveFromSub(), new RetrieveWithTipUp(), s_Lift::liftGreaterThan200));
@@ -140,9 +147,9 @@ public class RobotContainer {
 
         new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
-        new JoystickButton(OpPanel, 2).onTrue(new PrepareForClimb());
+       // new JoystickButton(OpPanel, 2).onTrue(new PrepareForClimb());
         new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
-      
+      new JoystickButton(OpPanel, 2).onTrue(new GetOnChargeStationFromBack());
         //new JoystickButton(OpPanel, 5).onTrue(new MoveToPosReletiveToTarget(0.8, -.56, 0));
     
     

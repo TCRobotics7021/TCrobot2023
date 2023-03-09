@@ -14,6 +14,7 @@ import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.releaseLiftBreak;
+import frc.robot.commands.PickPlace.PlaceCommandEnd;
 import frc.robot.commands.PickPlace.PlaceConeMidLevel;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -31,6 +32,7 @@ public class AutoPlaceConeB6_Climb extends SequentialCommandGroup {
     new releaseLiftBreak().withTimeout(.5),
     new setGripperPosition(Constants.openGripperPOS),
     Commands.parallel(new AutonomousMove(.25, .25, 0), new setGantryPosition(Constants.gantryRetractedPOS), new setArmPosition(Constants.armRetractedPOS)),
+    new PlaceCommandEnd(),
     Commands.parallel(new AutonomousMove(0, 0, 180), new PrepareForClimb()),
     new GetOnChargeStation()
     );

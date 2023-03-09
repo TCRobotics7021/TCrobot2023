@@ -20,7 +20,7 @@ public class GetOnChargeStationFromBack extends CommandBase {
   Timer balanceTimer = new Timer();
   double currentAngle = 0;
   double calcTranslation = 0;
-
+  Timer initialTimer = new Timer();
   public GetOnChargeStationFromBack() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.s_Swerve);
@@ -35,6 +35,8 @@ public class GetOnChargeStationFromBack extends CommandBase {
     balanceTimer.reset();
     balanceTimer.start();
     calcTranslation = 0;
+    initialTimer.reset();
+    initialTimer.stop();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,7 +49,10 @@ public class GetOnChargeStationFromBack extends CommandBase {
 
 
     if (state == 0 && Constants.climbStartedAngle < currentAngle) {
-      state = 1;
+      initialTimer.start();
+      if (initialTimer.get() > Constants.startClimbDelay){
+        state = 1;
+      }
     }
 
     if (state == 1 && currentAngle < Constants.startedTiltDownAngle) {
@@ -84,6 +89,9 @@ public class GetOnChargeStationFromBack extends CommandBase {
     }
     if (state == 1) {
       calcTranslation = Constants.climbState1_ClimbingSpeed;
+    }
+    if (state == 2) {
+      calcTranslation = 0;
     }
     if (state ==3) {
       if (Math.abs(currentAngle) < Constants.balanceAngle) {

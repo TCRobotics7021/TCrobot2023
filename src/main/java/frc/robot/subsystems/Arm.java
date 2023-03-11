@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
@@ -61,7 +62,8 @@ private double tempPeakREV = 0;
     m_Arm.configForwardSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Arm.configReverseSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Arm.setNeutralMode(NeutralMode.Brake);
-
+   // m_Arm.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, Constants.ArmMaxCurrentAmps, Constants.ArmPeakCurrentAmps, Constants.ArmMaxCurrentTime));
+    
      tempP = Constants.ArmMotor_P;
     tempI = Constants.ArmMotor_I;
     tempD = Constants.ArmMotor_D;
@@ -152,7 +154,7 @@ SmartDashboard.putNumber("Distance", m_Arm.getSelectedSensorPosition()/Constants
     }
  
     //updatePID();
-    
+    SmartDashboard.putNumber("Arm Stator Current", m_Arm.getStatorCurrent());
     SmartDashboard.putBoolean("ArmUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("ArmLowerLimit", lowerLimit.get());
     SmartDashboard.putNumber("Arm Position", m_Arm.getSelectedSensorPosition()/Constants.ArmConversion);

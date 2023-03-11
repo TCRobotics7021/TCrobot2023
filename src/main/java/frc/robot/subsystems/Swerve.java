@@ -135,6 +135,7 @@ public class Swerve extends SubsystemBase {
     public void Resetfieldorientation(){
         gyro.setYaw(0);
         resetOdometry(new Pose2d(0, 0, new Rotation2d(Math.toRadians(0))));
+        //resetempOdometry(new Pose2d(0, 0, new Rotation2d(Math.toRadians(0))));
 
 
     }

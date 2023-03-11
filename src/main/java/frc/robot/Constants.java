@@ -114,14 +114,19 @@ public final class Constants {
         public static double gripperConeGrabPOS = 75;
         public static double openGripperPOS = 329;
         public static double gripperTimeout = .5;
+        public static double GripperStartingConeGripPos = 180;
+        //gripper cali positions
+        public static double GripperstartingConePos = 205;
+        public static double GripperStartingcubePOS = 205;
+        
     //ArmPOS
         public static double armRetractedPOS = 5;
         public static double armMidLevelPOS = 105;
         public static double armExtendedPOS = 515;
         public static double armPickPOS = 350;
+        public static double armSideStation = 5;
 
     //GantryPOS
-        public static double GripperStartingPOS = 205;
         public static double gantryLowerlevelPOS = 350;
         public static double gantryRetractedPOS = 1;
         public static double gantryPickPOS = 50;
@@ -129,6 +134,7 @@ public final class Constants {
         public static double gantryUpperLevelPOS = 650;
         public static double gantryClimbPOS = 350;
         public static double gantrySubPOS = 250;
+        public static double gantrySideStation = 100;
     //LiftPOS
         public static double liftStartingPOS = 131;
         public static double liftBottomPOS = 0;
@@ -142,7 +148,35 @@ public final class Constants {
         public static double liftSubstationPOS = 950;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
+        public static double liftSideStation = 700;
+        
+        // Test Postions
+    public static double gripperTestPOS = 100;
+    public static double liftTestPOS = 200;
+    public static double gantryTestPOS = 5;
+    public static double armTestPOS = 5;
     
+    //current limiting
+
+    public static double LiftMaxCurrentAmps = 20;
+    public static double LiftPeakCurrentAmps = 25;
+    public static double LiftMaxCurrentTime = .5;
+
+    public static double GantryMaxCurrentAmps = 20;
+    public static double GantryPeakCurrentAmps = 25;
+    public static double GantryMaxCurrentTime = .5;
+
+    public static double GripperMaxCurrentAmps = 20;
+    public static double GripperPeakCurrentAmps = 25;
+    public static double GripperMaxCurrentTime = .5;
+
+    public static double ArmMaxCurrentAmps = 20;
+    public static double ArmPeakCurrentAmps = 25;
+    public static double ArmMaxCurrentTime = .5;
+
+
+
+
     //Set speed for HomingLift
         public static double setSpeedForLiftHome = .5;
 
@@ -161,7 +195,7 @@ public final class Constants {
 
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .2;
-    public static double maxSpeedPos = .8;
+    public static double maxSpeedPos = 1;
 
     public static double minAutoRot = .15;
     public static double maxAutoRot = .7;
@@ -170,12 +204,19 @@ public final class Constants {
 
 
     //P vaules
-    public static final double autonomousMove_P = .5;
+    public static final double autonomousMove_P = 1;
     public static final double autoRotate_P = .02;
 
     public static final double autoRotateTolerance = 2;
 
-
+    //LimeLight
+    public static double limeLightCubeAlignX = 0;
+    public static double limeLightCubeALignY=0;
+    public static double limeLightCubeAlignP=0.06;
+    public static double limeLightMinSpeed = .1;
+    public static double limeLightMaxSpeed = .2;
+    public static double limeLightXTolerance = 2;   
+    public static double limeLightYTolerance = 2;   
 
 
 //charge station
@@ -185,6 +226,7 @@ public final class Constants {
 
   public static double balanceTime = 3;
   public static double startClimbDelay = .5;
+  public static double driveOverDelay = 1;
 
   public static double climbState0_StartingSpeed = .5;
   public static double climbState1_ClimbingSpeed = .15;
@@ -192,6 +234,9 @@ public final class Constants {
   public static double climbState3_REVspeed = -.1;
   public static double climbState4_FWDspeed = .1;
 
+  public static double driveOverState0_StartingSpeed = .5;
+  public static double driveOverState1_ClimbingSpeed = .7;
+  public static double driveOverState2_DescendingSpeed = .3;
 
 
     public static final class Swerve {

@@ -1,7 +1,6 @@
 package frc.robot;
 
 import javax.swing.plaf.TreeUI;
-
 import edu.wpi.first.math.Drake;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,23 +17,16 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Arm.HomeArm;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Arm.setArmSpeed;
-import frc.robot.commands.Autonomous.AutoPlaceConeB4_Climb;
-import frc.robot.commands.Autonomous.AutoPlaceConeB6_Climb;
-import frc.robot.commands.Autonomous.AutoPlaceConeB7_Climb;
-import frc.robot.commands.Autonomous.AutoPlaceConeB9_Climb;
 import frc.robot.commands.Autonomous.AutoPlaceConeMiddle;
-import frc.robot.commands.Autonomous.AutoPlaceConeUpper;
 import frc.robot.commands.Autonomous.AutoPlaceCubeB8_Climb;
-
 import frc.robot.commands.Autonomous.AutoPlaceCubeUpper;
 import frc.robot.commands.Autonomous.BlueAutoPlaceA8;
 import frc.robot.commands.Autonomous.BlueAutoPlaceCubeC8_Climb;
 import frc.robot.commands.Autonomous.BluePlaceC8_Drive;
-import frc.robot.commands.Autonomous.PlaceConePOS1AndClimb;
-import frc.robot.commands.Autonomous.PlaceConePosition1AndDriveOverLine;
 import frc.robot.commands.Autonomous.RedAutoPlaceCubeA8;
 import frc.robot.commands.Autonomous.RedAutoPlaceCubeC8_Climb;
 import frc.robot.commands.Autonomous.RedPlaceC8_Drive;
+import frc.robot.commands.Drive.CameraAlignForCubePlace;
 import frc.robot.commands.Drive.ClimbOnly;
 import frc.robot.commands.Drive.GetOnChargeStation;
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
@@ -59,11 +51,13 @@ import frc.robot.commands.PickPlace.PlaceObjectLowerLevel;
 import frc.robot.commands.PickPlace.PlaceConeUpperLevel;
 import frc.robot.commands.PickPlace.PrepareConeFlip;
 import frc.robot.commands.PickPlace.PrepareForPickUp;
+import frc.robot.commands.PickPlace.PrepareForSideStation;
 import frc.robot.commands.PickPlace.PrepareForSubPickup;
 import frc.robot.commands.PickPlace.ResetEndPlaceCommand;
 import frc.robot.commands.PickPlace.RetrieveCone;
 import frc.robot.commands.PickPlace.RetrieveCube;
 import frc.robot.commands.PickPlace.RetrieveFromSub;
+import frc.robot.commands.UselessCommands.PositionTest;
 import frc.robot.subsystems.*;
 
 /**
@@ -116,6 +110,7 @@ public class RobotContainer {
         m_Chooser.addOption("BluePlaceC8_Drive", new BluePlaceC8_Drive());
         m_Chooser.addOption("RedPlaceC8_Drive", new RedPlaceC8_Drive());
         SmartDashboard.putData("Auto Chooser", m_Chooser);
+        
         // Configure the button bindings
         configureButtonBindings();
     }
@@ -134,6 +129,8 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 15).onTrue(new PlaceConeMidLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectLowerLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 9).onTrue(new ClimbOnly());
+        new JoystickButton(OpPanel, 6).onTrue(new PrepareForSideStation());
+        new JoystickButton(OpPanel,7).whileTrue(new CameraAlignForCubePlace());
         
         //PickupObjects
         new JoystickButton(leftStick, 4).onTrue(new ConditionalCommand(new RetrieveFromSub(), new RetrieveCone(), s_Lift::liftGreaterThan200));
@@ -151,7 +148,7 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
       new JoystickButton(OpPanel, 2).onTrue(new GetOnChargeStationFromBack());
         //new JoystickButton(OpPanel, 5).onTrue(new MoveToPosReletiveToTarget(0.8, -.56, 0));
-    
+        new JoystickButton(OpPanel, 7).onTrue(new PositionTest());
     
     
     

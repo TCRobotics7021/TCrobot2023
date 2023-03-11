@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands.Drive;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -12,11 +11,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class AutonomousMove extends CommandBase {
-  /** Creates a new AutonomousMove. */
+public class AdvAutoMove extends CommandBase {
+  /** Creates a new AdvAutoMove. */
   double targetX;
   double targetY;
   double targetR;
+  double XYtolerance;
+  double Rtolerance;
+  double minspeed;
+  double maxspeed;
   boolean resetodometry;
 
   double calcStrafe;
@@ -39,11 +42,15 @@ public class AutonomousMove extends CommandBase {
 
   double ratio;
 
-  public AutonomousMove(double targetX, double targetY, double targetR, boolean resetodometry) {
+  public AdvAutoMove(double targetX, double targetY, double targetR, double minspeed, double maxspeed, double XYtolerance, double Rtolerance, boolean resetodometry) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.targetX = targetX;
     this.targetY = targetY;
     this.targetR = targetR;
+    this.minspeed = minspeed;
+    this.maxspeed = maxspeed;
+    this.XYtolerance = XYtolerance;
+    this.Rtolerance = Rtolerance;
     this.resetodometry = resetodometry;
     finished = false;
     addRequirements(RobotContainer.s_Swerve);
@@ -54,17 +61,16 @@ public class AutonomousMove extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   if(resetodometry == true){
-     RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
-   }
-    finished = false;
+    if(resetodometry == true){   
+      RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
+     }
+        finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-
+    
     currentX = RobotContainer.s_Swerve.gettempPose().getX();
     currentY = RobotContainer.s_Swerve.gettempPose().getY();
     currentR = RobotContainer.s_Swerve.gettempPose().getRotation().getDegrees();
@@ -87,26 +93,26 @@ public class AutonomousMove extends CommandBase {
     calcRotation = Constants.autoRotate_P * errorR;
 
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
-      calcTranslation = Math.min(Constants.maxSpeedPos,calcTranslation);
+      calcTranslation = Math.min(maxspeed,calcTranslation);
     }
   
     if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
-      calcTranslation = Math.max(-Constants.maxSpeedPos, calcTranslation);
+      calcTranslation = Math.max(-maxspeed, calcTranslation);
     }
-    if (errorX < Constants.errorTolerance){
+    if (errorX < XYtolerance){
       calcTranslation = 0;
     }
     
     
 
     if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
-      calcStrafe = Math.min(Constants.maxSpeedPos,calcStrafe);
+      calcStrafe = Math.min(maxspeed,calcStrafe);
     }
 
     if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
-      calcStrafe = Math.max(-Constants.maxSpeedPos, calcStrafe);
+      calcStrafe = Math.max(-maxspeed, calcStrafe);
     }
-    if (errorY < Constants.errorTolerance){
+    if (errorY < XYtolerance){
       calcStrafe = 0;
     }
 
@@ -118,7 +124,7 @@ public class AutonomousMove extends CommandBase {
       calcRotation = Math.max(-Constants.maxAutoRot, calcRotation);
     }
 
-    if (Math.abs(errorR) > Constants.autoRotateTolerance){
+    if (Math.abs(errorR) > Rtolerance){
       if (calcRotation > 0){
         calcRotation = Math.max(Constants.minAutoRot, calcRotation);
       }
@@ -131,14 +137,14 @@ public class AutonomousMove extends CommandBase {
 
 
 
-    if (calcMagnitude <= Constants.minSpeedPos && calcStrafe != 0) {
+    if (calcMagnitude <= minspeed && calcStrafe != 0) {
       ratio = calcTranslation / calcStrafe;
-      calcStrafe = Math.sqrt(Math.pow(Constants.minSpeedPos, 2) / (Math.pow(ratio, 2) + 1)) * Math.signum(calcStrafe);
+      calcStrafe = Math.sqrt(Math.pow(minspeed, 2) / (Math.pow(ratio, 2) + 1)) * Math.signum(calcStrafe);
       calcTranslation = Math.abs(calcStrafe * ratio) * Math.signum(calcTranslation);
   
     }
     if(calcStrafe == 0 && calcTranslation != 0){
-      calcTranslation = Math.max(Constants.minSpeedPos,Math.abs(calcTranslation)) * Math.signum(calcTranslation);
+      calcTranslation = Math.max(minspeed,Math.abs(calcTranslation)) * Math.signum(calcTranslation);
     }
 
     RobotContainer.s_Swerve.drive(
@@ -147,13 +153,14 @@ public class AutonomousMove extends CommandBase {
       true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );
-    if (errorX <= Constants.errorTolerance && errorY <= Constants.errorTolerance && Math.abs(errorR) <= Constants.autoRotateTolerance){
+    if (errorX <= XYtolerance && errorY <= XYtolerance && Math.abs(errorR) <= Rtolerance){
       finished = true;
     }
     // SmartDashboard.putNumber("Error R", errorR);
     // SmartDashboard.putNumber("Calc Translation",calcTranslation);
     // SmartDashboard.putNumber("Calc Strafe",calcStrafe);
     // SmartDashboard.putNumber("Calc Rotate", calcRotation);
+
   }
 
   // Called once the command ends or is interrupted.
@@ -170,8 +177,6 @@ public class AutonomousMove extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-
     return finished;
   }
 }

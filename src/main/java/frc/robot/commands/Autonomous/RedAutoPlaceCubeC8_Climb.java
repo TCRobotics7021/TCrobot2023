@@ -33,9 +33,9 @@ public class RedAutoPlaceCubeC8_Climb extends SequentialCommandGroup {
       new PlaceConeUpperLevel(),
      // new releaseLiftBreak().withTimeout(.5),
       new setGripperPosition(Constants.openGripperPOS),
-      Commands.parallel(new AutonomousMove(4.6, -.5, 0), new RetractArmGantryThenPrepareForClimb().withTimeout(4)),
+      Commands.parallel(new AutonomousMove(4.6, -.5, 0,true), new RetractArmGantryThenPrepareForClimb().withTimeout(4)),
       new PlaceCommandEnd(),
-      new AutonomousMove(0, 1.9, 0),
+      new AutonomousMove(0, 1.9, 0,true),
       new GetOnChargeStationFromBack()
 
     );

@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -77,7 +78,8 @@ private double tempLowerLimit = 0;
     tempPeakFWD = Constants.GantryOutputMax;
     tempPeakREV = Constants.GantryOutputMin;
     m_Gantry.setNeutralMode(NeutralMode.Brake);
-
+   // m_Gantry.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, Constants.GantryMaxCurrentAmps, Constants.GantryPeakCurrentAmps, Constants.GantryMaxCurrentTime));
+    
     tempLowerLimit = Constants.GantryLowerLimit;
     SmartDashboard.putNumber("P value", tempP);
     SmartDashboard.putNumber("I value", tempI);
@@ -165,7 +167,7 @@ SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Consta
     
 
     //updatePID();
- 
+    SmartDashboard.putNumber("Gantry Stator Current", m_Gantry.getStatorCurrent());
     SmartDashboard.putBoolean("GantryUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("GantryLowerLimit", lowerLimit.get());
     SmartDashboard.putNumber("Gantry Position", m_Gantry.getSelectedSensorPosition()/Constants.GantryConversion);

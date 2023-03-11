@@ -27,9 +27,9 @@ public class BlueAutoPlaceA8 extends SequentialCommandGroup {
       new PlaceConeUpperLevel(),
       new releaseLiftBreak().withTimeout(.5),
       new DropAndRetract(),
-      new AutonomousMove(1, -.25, 0),
-      new AutonomousMove(3.6, 0, 0), 
-      new AutonomousMove(0, 0, 180)
+      new AutonomousMove(1, -.25, 0,true),
+      new AutonomousMove(3.6, 0, 0,true), 
+      new AutonomousMove(0, 0, 180,true)
     
     
     );

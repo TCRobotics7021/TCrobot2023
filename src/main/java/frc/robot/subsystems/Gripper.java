@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -65,7 +66,8 @@ private double tempPeakREV = 0;
     //enables those limits
     m_Gripper.configForwardSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Gripper.configReverseSoftLimitEnable(true, Constants.driveSettingTimeout);
-   
+   // m_Gripper.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, Constants.GripperMaxCurrentAmps, Constants.GripperPeakCurrentAmps, Constants.GripperMaxCurrentTime));
+    
     tempP = Constants.gripperMotor_P;
     tempI = Constants.gripperMotor_I;
     tempD = Constants.gripperMotor_D;
@@ -139,7 +141,7 @@ SmartDashboard.putNumber("Distance", m_Gripper.getSelectedSensorPosition()/Const
      m_Gripper.setSelectedSensorPosition(Constants.gripperUpperLimitSwitchPos * Constants.gripperConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
-    
+    SmartDashboard.putNumber("Gripper Stator Current", m_Gripper.getStatorCurrent());
     //updatePID();
  
     SmartDashboard.putBoolean("gripperUpperLimit", upperLimit.get());

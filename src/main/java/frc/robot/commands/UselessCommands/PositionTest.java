@@ -4,7 +4,19 @@
 
 package frc.robot.commands.UselessCommands;
 
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
+import frc.robot.commands.Autonomous.CalibrateGripperAtStartOfMatch;
+import frc.robot.commands.Autonomous.CalibrateLiftAtStartOfMatch;
+import frc.robot.commands.Autonomous.StartingConePlace;
+import frc.robot.commands.Drive.AdvAutoMove;
+import frc.robot.commands.Drive.AutonomousMove;
+import frc.robot.commands.Drive.ResetFieldOrientation;
+import frc.robot.commands.PickPlace.DropAndRetract;
+import frc.robot.commands.PickPlace.PrepareForPickUp;
+import frc.robot.commands.PickPlace.RetrieveCube;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -14,6 +26,16 @@ public class PositionTest extends SequentialCommandGroup {
   public PositionTest() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+      new ResetFieldOrientation(),
+      // new StartingConePlace(),
+      // new DropAndRetract(),
+      new AdvAutoMove(.25, -.25, 0, .5, 1, .1, 5, true),
+      new AdvAutoMove(3, -.25, 0, .5, 1, .1, 5, false),
+      new AutonomousMove(5, -.25, 180, false)
+      // new PrepareForPickUp(),
+      // new RetrieveCube(),
+      // new AutonomousMove(3, -.25, 0, false)
+    );
   }
 }

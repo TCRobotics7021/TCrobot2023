@@ -6,25 +6,24 @@ package frc.robot.commands.Lift;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class HomeLift extends CommandBase {
-  /** Creates a new HomeLift. */
+public class HomeLiftSpecial extends CommandBase {
+  /** Creates a new HomeLiftSpecial. */
   boolean finished; 
   boolean Trigger1;
-  public HomeLift() {
+  public HomeLiftSpecial() {
     finished = false;
     Trigger1 = false;
     addRequirements(RobotContainer.s_Lift);
     // Use addRequirements() here to declare subsystem dependencies.
-  } 
+  }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     RobotContainer.s_Lift.setSpeed(Constants.setSpeedForLiftHome);
-    RobotContainer.s_Lift.calibrateEncoder(Constants.liftLowerLimit-200);  
+    RobotContainer.s_Lift.calibrateEncoder(400);  
     finished = false;
   }
 
@@ -40,7 +39,7 @@ public class HomeLift extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-     RobotContainer.s_Lift.setSpeed(0);
+    RobotContainer.s_Lift.setSpeed(0);
   }
 
   // Returns true when the command should end.

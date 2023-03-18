@@ -62,7 +62,7 @@ private double tempLowerLimit = 0;
     m_Lift.configForwardSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Lift.configReverseSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Lift.setNeutralMode(NeutralMode.Brake);
-   // m_Lift.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, Constants.LiftMaxCurrentAmps, Constants.LiftPeakCurrentAmps, Constants.LiftMaxCurrentTime));
+    m_Lift.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, Constants.LiftMaxCurrentAmps, Constants.LiftPeakCurrentAmps, Constants.LiftMaxCurrentTime));
     calibrateEncoder(Constants.liftStartingPOS);
 
     tempP = Constants.liftMotor_P;
@@ -152,7 +152,7 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
     }
     
     
-    updatePID();
+    //updatePID();
     
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());

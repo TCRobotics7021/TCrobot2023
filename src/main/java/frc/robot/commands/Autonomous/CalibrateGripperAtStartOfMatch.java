@@ -10,14 +10,16 @@ import frc.robot.RobotContainer;
 
 public class CalibrateGripperAtStartOfMatch extends CommandBase {
   /** Creates a new CalibrateGripperAtStartOfMatch. */
-  public CalibrateGripperAtStartOfMatch() {
+  double startingPOS;
+  public CalibrateGripperAtStartOfMatch(double startingPOS) {
     addRequirements(RobotContainer.s_Gripper);
+    this.startingPOS = startingPOS;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Gripper.calibrateEncoder(Constants.GripperStartingPOS);
+    RobotContainer.s_Gripper.calibrateEncoder(startingPOS);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

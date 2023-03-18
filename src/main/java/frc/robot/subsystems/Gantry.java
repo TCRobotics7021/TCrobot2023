@@ -61,7 +61,7 @@ private double tempLowerLimit = 0;
     m_Gantry.configPeakOutputReverse(Constants.GantryOutputMin, Constants.driveSettingTimeout);
     m_Gantry.configAllowableClosedloopError(Constants.PIDindex, Constants.GantryPosTolerance, Constants.driveSettingTimeout);
     //in case the robot is doing the opposite of what we need (up or down)
-    m_Gantry.setInverted(false); //set to true to flip positive direction
+    m_Gantry.setInverted(true); //set to true to flip positive direction
     //encoder reads positive
     m_Gantry.setSensorPhase(true);
     //adds physical limits
@@ -166,7 +166,7 @@ SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Consta
     }
     
 
-    //updatePID();
+  // updatePID();
     SmartDashboard.putNumber("Gantry Stator Current", m_Gantry.getStatorCurrent());
     SmartDashboard.putBoolean("GantryUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("GantryLowerLimit", lowerLimit.get());

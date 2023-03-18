@@ -21,8 +21,9 @@ public class AutoPlaceCubeUpper extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
+      
       new CalibrateLiftAtStartOfMatch(),
-      new CalibrateGripperAtStartOfMatch(),
+      new CalibrateGripperAtStartOfMatch(Constants.GripperStartingcubePOS),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
       new PlaceConeUpperLevel(),
       new releaseLiftBreak().withTimeout(.5),

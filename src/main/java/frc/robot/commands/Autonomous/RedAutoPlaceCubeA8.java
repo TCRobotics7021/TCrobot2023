@@ -27,7 +27,7 @@ public class RedAutoPlaceCubeA8 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new CalibrateLiftAtStartOfMatch(),
-      new CalibrateGripperAtStartOfMatch(),
+      new CalibrateGripperAtStartOfMatch(Constants.GripperStartingcubePOS),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
       new PlaceConeUpperLevel(),
       new releaseLiftBreak().withTimeout(.5),

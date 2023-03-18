@@ -42,11 +42,11 @@ public class DriveOverChargeStation extends CommandBase {
     }
 
 
-    if (state == 0 && Constants.climbStartedAngle < currentAngle) {
+    if (state == 0 && -Constants.climbStartedAngle > currentAngle) {
       state = 1;
        }
   
-       if (state==1 && currentAngle < 0){
+       if (state==1 && currentAngle > 0){
        state = 2;
       }
 

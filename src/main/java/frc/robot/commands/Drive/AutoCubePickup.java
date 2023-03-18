@@ -5,20 +5,19 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.limeLight_subsystem;
 
-public class CameraAlignForCubePlace extends CommandBase {
-
-  /** Creates a new MoveToPosReletiveToTarget. */
+public class AutoCubePickup extends CommandBase {
+  /** Creates a new AutoCubePickup. */
   double targetX;
-  double targetY; 
+  double targetY;
   double targetR;
+  boolean resetodometry;
 
   double calcStrafe;
   double calcTranslation;
@@ -40,55 +39,44 @@ public class CameraAlignForCubePlace extends CommandBase {
 
   double ratio;
 
+  public AutoCubePickup(double targetX, double targetR, boolean resetodometry) {
+
+    this.targetX = targetX;
+    this.targetR = targetR;
+    this.resetodometry = resetodometry;
+    finished = false;
+    addRequirements(RobotContainer.s_Swerve, RobotContainer.s_Limelight);
+    
 
 
-
-
-  public CameraAlignForCubePlace(){
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Swerve);
-    addRequirements(RobotContainer.s_Limelight);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //currentR = -RobotContainer.s_Limelight.tagRelativeRPos();
-    RobotContainer.s_Limelight.setPipeline(0);
-    currentR = RobotContainer.s_Swerve.getYaw().getDegrees();
-    //currentX = RobotContainer.s_Limelight.targetX();
-    //currentY = RobotContainer.s_Limelight.targetA();
-    targetR=0;
-    targetX= Constants.limeLightCubeAlignX;
-    targetY=Constants.limeLightCubeALignY;
-    errorR = 10;
-    finished = false;
-    
+    RobotContainer.s_Limelight.setPipeline(1);
+    if(resetodometry == true){
+      RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
+    }
+     finished = false;
+     
+     targetY =-13;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (Math.abs(errorR) <= Constants.autoRotateTolerance) {
-    currentX = RobotContainer.s_Limelight.targetX();
-    currentY = RobotContainer.s_Limelight.targetA();
-    }else {
-      currentX = 0;
-      currentY = 0;
-    }
-    // currentR = RobotContainer.s_Swerve.getPose().getRotation().getDegrees();
+
+    currentX = RobotContainer.s_Swerve.gettempPose().getX();
+    currentY = RobotContainer.s_Limelight.targetX();
     currentR = RobotContainer.s_Swerve.gettempPose().getRotation().getDegrees();
-
-
-    SmartDashboard.putNumber("Current X", currentX); 
-    SmartDashboard.putNumber("Current Y", currentY); 
-    SmartDashboard.putNumber("Current R", currentR); 
 
     errorX = Math.abs(targetX - currentX);
     errorY = Math.abs(targetY - currentY);
     errorR = -(targetR - currentR);
 
-    //Finds shortest path for rotation
+    //finds shortest path for rotation
     if (errorR > 180){
       errorR = errorR -360;
     } 
@@ -96,41 +84,32 @@ public class CameraAlignForCubePlace extends CommandBase {
       errorR = errorR + 360;
     }
 
-    
-    calcTranslation = Constants.limeLightCubeAlignP_Area * -(targetY - currentY);
-    calcStrafe = Constants.limeLightCubeAlignP * -(targetX - currentX);
+    calcTranslation = Constants.autonomousMove_P * (targetX - currentX);
+    calcStrafe = Constants.limeLightCubeAlignP * (targetY - currentY);
     calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
     calcRotation = Constants.autoRotate_P * errorR;
 
-  
-
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
       calcTranslation = Math.min(Constants.limeLightMaxSpeed,calcTranslation);
-      //calcTranslation = Math.min(.5, calcTranslation);
     }
   
     if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
-      //calcTranslation = Math.min(-.2,calcTranslation);
       calcTranslation = Math.max(-Constants.limeLightMaxSpeed, calcTranslation);
     }
-
-    if (errorY < Constants.limeLightYTolerance){
+    if (errorX < Constants.errorTolerance){
       calcTranslation = 0;
     }
-
-
+    
+    
 
     if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
       calcStrafe = Math.min(Constants.limeLightMaxSpeed,calcStrafe);
-      //calcStrafe = Math.min(.5, calcStrafe);
     }
 
     if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
-      //calcStrafe = Math.min(-.2,calcStrafe);
       calcStrafe = Math.max(-Constants.limeLightMaxSpeed, calcStrafe);
     }
-  
-    if (errorX < Constants.limeLightXTolerance){
+    if (errorY < Constants.limeLightXTolerance){
       calcStrafe = 0;
     }
 
@@ -142,7 +121,6 @@ public class CameraAlignForCubePlace extends CommandBase {
       calcRotation = Math.max(-Constants.maxAutoRot, calcRotation);
     }
 
-
     if (Math.abs(errorR) > Constants.autoRotateTolerance){
       if (calcRotation > 0){
         calcRotation = Math.max(Constants.minAutoRot, calcRotation);
@@ -152,6 +130,8 @@ public class CameraAlignForCubePlace extends CommandBase {
         calcRotation = Math.min(-Constants.minAutoRot, calcRotation);
       }
     }
+    
+
 
 
     if (calcMagnitude <= Constants.limeLightMinSpeed && calcStrafe != 0) {
@@ -163,53 +143,49 @@ public class CameraAlignForCubePlace extends CommandBase {
     if(calcStrafe == 0 && calcTranslation != 0){
       calcTranslation = Math.max(Constants.limeLightMinSpeed,Math.abs(calcTranslation)) * Math.signum(calcTranslation);
     }
+
     if (Math.abs(errorR) <= Constants.autoRotateTolerance){
         RobotContainer.s_Swerve.drive(
           new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
           calcRotation * Constants.Swerve.maxAngularVelocity, 
-          false, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+          true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
           true
       );
     }else{
       RobotContainer.s_Swerve.drive(
           new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
           calcRotation * Constants.Swerve.maxAngularVelocity, 
-          false, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+          true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
           true
       );
     }
-    
-  //&& Math.abs(errorR) <= Constants.autoRotateTolerance
-   if (errorX <= Constants.limeLightXTolerance && errorY <= Constants.limeLightYTolerance && Math.abs(errorR) <= Constants.autoRotateTolerance){
+
+    if (errorX <= Constants.errorTolerance && Math.abs(errorR) <= Constants.autoRotateTolerance){
       finished = true;
     }
-    SmartDashboard.putNumber("Error R", errorR);
-    SmartDashboard.putNumber("Error X", errorX);
-    SmartDashboard.putNumber("Error Y", errorX);
-    SmartDashboard.putNumber("Calc Translation",calcTranslation);
-    SmartDashboard.putNumber("Calc Strafe",calcStrafe);
-    SmartDashboard.putNumber("Calc Rotate", calcRotation);
-    
+      SmartDashboard.putNumber("Target X", targetX);
+      SmartDashboard.putNumber("Current X", currentX);
+      SmartDashboard.putNumber("Calc Translation",calcTranslation);
+      SmartDashboard.putNumber("Calc Strafe",calcStrafe);
+      SmartDashboard.putNumber("Current Y", currentY);
+    // SmartDashboard.putNumber("Calc Rotate", calcRotation);
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     RobotContainer.s_Swerve.drive(
-      new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
-      0 * Constants.Swerve.maxAngularVelocity, 
-      false, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
-      true
-    );
-
-
+          new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
+          0 * Constants.Swerve.maxAngularVelocity, 
+          true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+          true
+      );
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-
     return finished;
   }
 }

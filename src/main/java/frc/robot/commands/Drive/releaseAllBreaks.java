@@ -7,30 +7,45 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class ResetFieldOrientation extends CommandBase {
-  /** Creates a new ResetFieldOrientation. */
-  public ResetFieldOrientation() {
+public class releaseAllBreaks extends CommandBase {
+  /** Creates a new releaseAllBreaks. */
+  public releaseAllBreaks() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Swerve);
+    addRequirements(RobotContainer.s_Arm);
+    addRequirements(RobotContainer.s_Gantry);
+    addRequirements(RobotContainer.s_Lift);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Swerve.Resetfieldorientation();
+    RobotContainer.s_Arm.setSpeed(0);
+    RobotContainer.s_Arm.setCoastMode();
+    RobotContainer.s_Gantry.setSpeed(0);
+    RobotContainer.s_Gantry.setCoastMode();
+    RobotContainer.s_Lift.setSpeed(0);
+    RobotContainer.s_Lift.setCoastMode();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+    RobotContainer.s_Arm.setBrakeMode();
+    RobotContainer.s_Gantry.setBrakeMode();
+    RobotContainer.s_Lift.setBrakeMode();
+
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

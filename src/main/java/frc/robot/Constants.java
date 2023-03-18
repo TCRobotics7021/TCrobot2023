@@ -30,14 +30,14 @@ public final class Constants {
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
-    public static double liftUpperLimit = 1189;
+    public static double liftUpperLimit = 1244;
 
     //lift conversion
-    public static double liftConversion = 274.536;
+    public static double liftConversion = 302.844;
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 1190;
+      public static double liftUpperLimitSwitchPos = 1245;
 
       public static final double liftPosTolerance = 5;
 
@@ -48,26 +48,26 @@ public final class Constants {
 
 
     //Gripper subsystem
-    public static double gripperMotor_P = .1;
+    public static double gripperMotor_P = .05;
     public static double gripperMotor_I = 0;
     public static double gripperMotor_D = 0;
 
     //max and min lift output
     public static double gripperOutputMax = .3;
-    public static double gripperOutputMin = -.5;
+    public static double gripperOutputMin = -.4;
 
     //upper & lower limits
-    public static double gripperLowerLimit = 34;
-    public static double gripperUpperLimit = 329;
+    public static double gripperLowerLimit = 1;
+    public static double gripperUpperLimit = 369;
 
     //lift conversion
     public static double gripperConversion = 112.7455;
 
     //upper and lower limit switch position / homing/calibrating values
-    public static double gripperLowerLimitSwitchPos = 33;
-    public static double gripperUpperLimitSwitchPos = 330;
+    public static double gripperLowerLimitSwitchPos = 0;
+    public static double gripperUpperLimitSwitchPos = 370;
 
-    public static final double gripperPosTolerance = 2;
+    public static final double gripperPosTolerance = 5;
 
       //max and min arm output
       public static double ArmOutputMax = 1;
@@ -110,11 +110,12 @@ public final class Constants {
         public static double GantryMotor_D = 0;
         
     //GripperPOS
-        public static double gripperCubeGrabPOS = 150;
-        public static double gripperConeGrabPOS = 75;
-        public static double openGripperPOS = 329;
+        public static double gripperCubeGrabPOS = 126;
+        public static double gripperConeGrabPOS = 41;
+        public static double openGripperPOS = 369;
         public static double gripperTimeout = .5;
-        public static double GripperStartingConeGripPos = 180;
+        public static double gripperTimeoutCube = .1;
+        public static double GripperStartingConeGripPos = 146;
         //gripper cali positions
         public static double GripperstartingConePos = 205;
         public static double GripperStartingcubePOS = 205;
@@ -122,7 +123,7 @@ public final class Constants {
     //ArmPOS
         public static double armRetractedPOS = 5;
         public static double armMidLevelPOS = 105;
-        public static double armExtendedPOS = 515;
+        public static double armExtendedPOS = 500;
         public static double armPickPOS = 350;
         public static double armSideStation = 5;
 
@@ -139,16 +140,17 @@ public final class Constants {
         public static double liftStartingPOS = 131;
         public static double liftBottomPOS = 0;
         public static double liftConeFlippy = 140;
-        public static double liftRetrievePOS = 275;
+        public static double liftRetrievePOS = 300;
         public static double liftLowerLevelPOS = 300;
         public static double liftMidLevelCubePOS = 700;
         public static double liftMidLevelConePOS = 900; 
-        public static double liftMaxLevelCubePOS = 1189;
+        public static double liftMaxLevelCubePOS = 1075;
         public static double liftMaxLevelConePOS = 1189;
         public static double liftSubstationPOS = 950;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
         public static double liftSideStation = 700;
+        public static double liftMaxLevelConeDip = 1050;
         
         // Test Postions
     public static double gripperTestPOS = 100;
@@ -158,8 +160,8 @@ public final class Constants {
     
     //current limiting
 
-    public static double LiftMaxCurrentAmps = 20;
-    public static double LiftPeakCurrentAmps = 25;
+    public static double LiftMaxCurrentAmps = 50;
+    public static double LiftPeakCurrentAmps = 50;
     public static double LiftMaxCurrentTime = .5;
 
     public static double GantryMaxCurrentAmps = 20;
@@ -187,36 +189,38 @@ public final class Constants {
         public static double setSpeedForArmHome = -.25;
 
 
-        public static double gantryLimitLift = 250;
-        public static double liftLimitGantry = 150;
+        public static double gantryLimitLift = 350;
+        public static double liftLimitGantry = 250;
    
     //DRIVE SECTION
 
 
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .2;
-    public static double maxSpeedPos = 1;
+    public static double maxSpeedPos = .5;
 
-    public static double minAutoRot = .15;
-    public static double maxAutoRot = .7;
+    public static double minAutoRot = .2;
+    public static double maxAutoRot = .6;
 
     public static double errorTolerance = .02;
 
 
     //P vaules
     public static final double autonomousMove_P = 1;
-    public static final double autoRotate_P = .02;
+    public static final double autoRotate_P = .015;
 
     public static final double autoRotateTolerance = 2;
 
     //LimeLight
-    public static double limeLightCubeAlignX = 0;
-    public static double limeLightCubeALignY=0;
-    public static double limeLightCubeAlignP=0.06;
+    public static double limeLightCubeAlignX = -10;
+    public static double limeLightCubeALignY= 1.5;
+    public static double limeLightCubeAlignP= 0.06;
+    public static double limeLightCubeAlignP_Area= 1;
     public static double limeLightMinSpeed = .1;
-    public static double limeLightMaxSpeed = .2;
-    public static double limeLightXTolerance = 2;   
-    public static double limeLightYTolerance = 2;   
+    public static double limeLightMaxSpeed = .15;
+    public static double limeLightXTolerance = 1;   
+    public static double limeLightYTolerance = .1;   
+    public static double limeLightATolerance = .1;
 
 
 //charge station
@@ -226,7 +230,7 @@ public final class Constants {
 
   public static double balanceTime = 3;
   public static double startClimbDelay = .5;
-  public static double driveOverDelay = 1;
+  public static double driveOverDelay = .4;
 
   public static double climbState0_StartingSpeed = .5;
   public static double climbState1_ClimbingSpeed = .15;
@@ -234,8 +238,8 @@ public final class Constants {
   public static double climbState3_REVspeed = -.1;
   public static double climbState4_FWDspeed = .1;
 
-  public static double driveOverState0_StartingSpeed = .5;
-  public static double driveOverState1_ClimbingSpeed = .7;
+  public static double driveOverState0_StartingSpeed = .4;
+  public static double driveOverState1_ClimbingSpeed = .3;
   public static double driveOverState2_DescendingSpeed = .3;
 
 
@@ -244,7 +248,7 @@ public final class Constants {
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 
         public static final COTSFalconSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot
-            COTSFalconSwerveConstants.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L1);
+            COTSFalconSwerveConstants.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L3);
 
         /* Drivetrain Constants */
         public static final double trackWidth = .56; //TODO: This must be tuned to specific robot
@@ -306,11 +310,15 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 4.5; //TODO: This must be tuned to specific robot
-        public static final double fineSpeed = 2.25; 
+        public static final double maxSpeed = 5.5; //TODO: This must be tuned to specific robot (DONT TOUCH THE SPEED!!!!)
+        public static final double driveSpeed = 4.5;
+        public static final double fineSpeed = 2; 
+        public static final double turboSpeed = 5.5;
         /** Radians per Second */
-        public static final double maxAngularVelocity = 5.0; //TODO: This must be tuned to specific robot
-        public static final double fineAngularVelocity = 2.5;
+        public static final double maxAngularVelocity = 5.0; //5.0 //TODO: This must be tuned to specific robot (DONT TOUCH THE SPEED!!!!)
+        public static final double driveAngularVelocity = 5.0;
+        public static final double fineAngularVelocity = 3;
+        public static final double turboAngularVelocity = 5.0;
         /* Neutral Modes */
         public static final NeutralMode angleNeutralMode = NeutralMode.Coast;
         public static final NeutralMode driveNeutralMode = NeutralMode.Brake;
@@ -321,7 +329,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 1;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(346.64);//13.53
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(347.344);//13.53
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -331,7 +339,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 2;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(273.51);//85.86
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(274.394);//85.86
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -341,7 +349,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 3;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(40.95);//306.91
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(40.869);//306.91
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -351,7 +359,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 4;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(69.25);//286.78
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(68.994);//286.78
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

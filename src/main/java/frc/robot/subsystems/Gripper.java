@@ -57,7 +57,7 @@ private double tempPeakREV = 0;
     m_Gripper.configPeakOutputReverse(Constants.gripperOutputMin, Constants.driveSettingTimeout);
     m_Gripper.configAllowableClosedloopError(Constants.PIDindex, Constants.gripperPosTolerance, Constants.driveSettingTimeout);
     //in case the robot is doing the opposite of what we need (up or down)
-    m_Gripper.setInverted(true); //set to true to flip positive direction
+    m_Gripper.setInverted(false); //set to true to flip positive direction
     //encoder reads positive
     m_Gripper.setSensorPhase(true);
     //adds physical limits
@@ -142,7 +142,7 @@ SmartDashboard.putNumber("Distance", m_Gripper.getSelectedSensorPosition()/Const
     }
 
     SmartDashboard.putNumber("Gripper Stator Current", m_Gripper.getStatorCurrent());
-    //updatePID();
+    updatePID();
  
     SmartDashboard.putBoolean("gripperUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("gripperLowerLimit", lowerLimit.get());

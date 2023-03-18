@@ -4,8 +4,12 @@
 
 package frc.robot.commands.Autonomous;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.Arm.setArmPosition;
+import frc.robot.commands.Gantry.setGantryPosition;
+import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.setLiftPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -16,10 +20,12 @@ public class StartingConePlace extends SequentialCommandGroup {
   public StartingConePlace() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
     new CalibrateGripperAtStartOfMatch(Constants.GripperStartingConeGripPos),
     new CalibrateLiftAtStartOfMatch(),
     new setLiftPosition(Constants.liftMaxLevelConePOS),
-    new 
+    Commands.parallel(new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
+    new setGripperPosition(Constants.openGripperPOS)
+    );
   }
 }

@@ -4,7 +4,13 @@
 
 package frc.robot.commands.PickPlace;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
+import frc.robot.commands.Arm.setArmPosition;
+import frc.robot.commands.Gantry.setGantryPosition;
+import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Lift.setLiftPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -14,6 +20,13 @@ public class PrepareForSideStation extends SequentialCommandGroup {
   public PrepareForSideStation() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(
+      new ResetEndPlaceCommand(),
+      //add limelight
+      Commands.parallel(new setLiftPosition(Constants.liftSideStation), new setGripperPosition(Constants.openGripperPOS)),
+      new setGantryPosition(Constants.gantrySideStation),
+      new setArmPosition(Constants.armSideStation),
+      new ResetEndPlaceCommand()
+    );
   }
 }

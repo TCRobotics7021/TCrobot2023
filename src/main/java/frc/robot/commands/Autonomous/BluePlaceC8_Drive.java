@@ -7,8 +7,13 @@ package frc.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Drive.AutonomousMove;
+import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Lift.HomeLift;
+import frc.robot.commands.Lift.setLiftPosition;
+import frc.robot.commands.PickPlace.HomeAll;
 import frc.robot.commands.PickPlace.PlaceCommandEnd;
 import frc.robot.commands.PickPlace.PlaceConeUpperLevel;
 
@@ -21,15 +26,17 @@ public class BluePlaceC8_Drive extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new CalibrateLiftAtStartOfMatch(),
-      new CalibrateGripperAtStartOfMatch(),
-      new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
+      new CalibrateGripperAtStartOfMatch(Constants.GripperStartingcubePOS),
+      Commands.parallel(Commands.sequence(new HomeLift(), new setLiftPosition(Constants.liftMaxLevelConePOS)),
+         new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
+      new setLiftPosition(Constants.liftMaxLevelConeDip),
+      new setGripperPosition(Constants.openGripperPOS),
       new PlaceConeUpperLevel(),
      // new releaseLiftBreak().withTimeout(.5),
       new setGripperPosition(Constants.openGripperPOS),
-      Commands.parallel(new AutonomousMove(4.6, .5, 0), new RetractArmGantryThenPrepareForClimb().withTimeout(4)),
+      Commands.parallel(new AutonomousMove(4.6, .5, 0,true), new RetractArmGantryThenPrepareForClimb().withTimeout(4)),
       new PlaceCommandEnd(),
-      new AutonomousMove(0, 0, 180)
+      new AutonomousMove(0, 0, 180,true)
     );
   }
 }

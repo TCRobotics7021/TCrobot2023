@@ -20,11 +20,12 @@ public class TeleopSwerve extends CommandBase {
     private DoubleSupplier strafeSup;
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
+    private BooleanSupplier turbobutton;
     
     private double tempMaxSpeed = 0;
     private double tempMaxRotate = 0;
 
-    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup) {
+    public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, BooleanSupplier turbobutton) {
         this.s_Swerve = s_Swerve;
         addRequirements(s_Swerve);
 
@@ -32,6 +33,7 @@ public class TeleopSwerve extends CommandBase {
         this.strafeSup = strafeSup;
         this.rotationSup = rotationSup;
         this.robotCentricSup = robotCentricSup;
+        this.turbobutton = turbobutton;
     }
 
     @Override
@@ -42,14 +44,29 @@ public class TeleopSwerve extends CommandBase {
         double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
         SmartDashboard.putNumber("GYRO YAW", s_Swerve.getYaw().getDegrees());
 
-    if (RobotContainer.s_Lift.currentPosition() > 400 || RobotContainer.s_Lift.currentPosition() < 200) {
 
-        tempMaxSpeed = Constants.Swerve.fineSpeed; 
-        tempMaxRotate = Constants.Swerve.fineAngularVelocity;     
-    } else {
-        tempMaxSpeed = Constants.Swerve.maxSpeed;
-        tempMaxRotate = Constants.Swerve.maxAngularVelocity;
+    if (turbobutton.getAsBoolean()){
+        if (RobotContainer.s_Arm.currentPosition() > 50) {
+
+            tempMaxSpeed = Constants.Swerve.driveSpeed; 
+            tempMaxRotate = Constants.Swerve.driveSpeed; 
+    
+        } else {
+            tempMaxSpeed = Constants.Swerve.turboSpeed;
+            tempMaxRotate = Constants.Swerve.turboSpeed;
+        }
+    }else{
+        if (RobotContainer.s_Arm.currentPosition() > 50) {
+
+            tempMaxSpeed = Constants.Swerve.fineSpeed; 
+            tempMaxRotate = Constants.Swerve.fineAngularVelocity; 
+    
+        } else {
+            tempMaxSpeed = Constants.Swerve.driveSpeed;
+            tempMaxRotate = Constants.Swerve.driveSpeed;
+        }
     }
+
 
 
 
@@ -57,7 +74,7 @@ public class TeleopSwerve extends CommandBase {
         /* Drive */
         s_Swerve.drive(
             new Translation2d(translationVal, strafeVal).times(tempMaxSpeed), 
-            rotationVal * tempMaxRotate, 
+            rotationVal * tempMaxRotate,
             !robotCentricSup.getAsBoolean(), 
             true
         );

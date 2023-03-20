@@ -27,14 +27,14 @@ public class RedAutoPlaceCubeA8 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new CalibrateLiftAtStartOfMatch(),
-      new CalibrateGripperAtStartOfMatch(),
+      new CalibrateGripperAtStartOfMatch(Constants.GripperStartingcubePOS),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
       new PlaceConeUpperLevel(),
       new releaseLiftBreak().withTimeout(.5),
       new DropAndRetract(),
-      new AutonomousMove(1, .25, 0),
-      new AutonomousMove(3.6, 0, 0),
-      new AutonomousMove(0, 0, 180)
+      new AutonomousMove(1, .25, 0,true),
+      new AutonomousMove(3.6, 0, 0,true),
+      new AutonomousMove(0, 0, 180,true)
     );
   }
 }

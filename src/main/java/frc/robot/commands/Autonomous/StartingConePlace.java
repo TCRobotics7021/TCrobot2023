@@ -7,28 +7,25 @@ package frc.robot.commands.Autonomous;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Drive.AutonomousMove;
+import frc.robot.commands.Arm.setArmPosition;
+import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
-import frc.robot.commands.PickPlace.DropAndRetract;
-import frc.robot.commands.PickPlace.PlaceConeMidLevel;
+import frc.robot.commands.Lift.setLiftPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PlaceConePosition1AndDriveOverLine extends SequentialCommandGroup {
-  /** Creates a new PlaceConePosition1AndDriveOverLine. */
-  public PlaceConePosition1AndDriveOverLine() {
+public class StartingConePlace extends SequentialCommandGroup {
+  /** Creates a new StartingConePlace. */
+  public StartingConePlace() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(Constants.gripperTimeout),
-      new CalibrateLiftAtStartOfMatch(),
-      new PlaceConeMidLevel(),
-      new DropAndRetract(),
-      new AutonomousMove(5, 0, 0)
-
-
-
+    new CalibrateGripperAtStartOfMatch(Constants.GripperStartingConeGripPos),
+    new CalibrateLiftAtStartOfMatch(),
+    new setLiftPosition(Constants.liftMaxLevelConePOS),
+    Commands.parallel(new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
+    new setGripperPosition(Constants.openGripperPOS)
     );
   }
 }

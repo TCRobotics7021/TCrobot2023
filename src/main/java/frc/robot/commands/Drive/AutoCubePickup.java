@@ -5,15 +5,15 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.limeLight_subsystem;
 
-public class AutonomousMove extends CommandBase {
-  /** Creates a new AutonomousMove. */
+public class AutoCubePickup extends CommandBase {
+  /** Creates a new AutoCubePickup. */
   double targetX;
   double targetY;
   double targetR;
@@ -39,34 +39,37 @@ public class AutonomousMove extends CommandBase {
 
   double ratio;
 
-  public AutonomousMove(double targetX, double targetY, double targetR, boolean resetodometry) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public AutoCubePickup(double targetX, double targetR, boolean resetodometry) {
+
     this.targetX = targetX;
-    this.targetY = targetY;
     this.targetR = targetR;
     this.resetodometry = resetodometry;
     finished = false;
-    addRequirements(RobotContainer.s_Swerve);
+    addRequirements(RobotContainer.s_Swerve, RobotContainer.s_Limelight);
+    
 
 
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-   if(resetodometry == true){
-     RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
-   }
-    finished = false;
+    RobotContainer.s_Limelight.setPipeline(1);
+    if(resetodometry == true){
+      RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
+    }
+     finished = false;
+     
+     targetY =-13;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-
     currentX = RobotContainer.s_Swerve.gettempPose().getX();
-    currentY = RobotContainer.s_Swerve.gettempPose().getY();
+    currentY = RobotContainer.s_Limelight.targetX();
     currentR = RobotContainer.s_Swerve.gettempPose().getRotation().getDegrees();
 
     errorX = Math.abs(targetX - currentX);
@@ -82,16 +85,16 @@ public class AutonomousMove extends CommandBase {
     }
 
     calcTranslation = Constants.autonomousMove_P * (targetX - currentX);
-    calcStrafe = Constants.autonomousMove_P * (targetY - currentY);
+    calcStrafe = Constants.limeLightCubeAlignP * (targetY - currentY);
     calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
     calcRotation = Constants.autoRotate_P * errorR;
 
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
-      calcTranslation = Math.min(Constants.maxSpeedPos,calcTranslation);
+      calcTranslation = Math.min(Constants.limeLightMaxSpeed,calcTranslation);
     }
   
     if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
-      calcTranslation = Math.max(-Constants.maxSpeedPos, calcTranslation);
+      calcTranslation = Math.max(-Constants.limeLightMaxSpeed, calcTranslation);
     }
     if (errorX < Constants.errorTolerance){
       calcTranslation = 0;
@@ -100,13 +103,13 @@ public class AutonomousMove extends CommandBase {
     
 
     if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
-      calcStrafe = Math.min(Constants.maxSpeedPos,calcStrafe);
+      calcStrafe = Math.min(Constants.limeLightMaxSpeed,calcStrafe);
     }
 
     if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
-      calcStrafe = Math.max(-Constants.maxSpeedPos, calcStrafe);
+      calcStrafe = Math.max(-Constants.limeLightMaxSpeed, calcStrafe);
     }
-    if (errorY < Constants.errorTolerance){
+    if (errorY < Constants.limeLightXTolerance){
       calcStrafe = 0;
     }
 
@@ -131,47 +134,58 @@ public class AutonomousMove extends CommandBase {
 
 
 
-    if (calcMagnitude <= Constants.minSpeedPos && calcStrafe != 0) {
+    if (calcMagnitude <= Constants.limeLightMinSpeed && calcStrafe != 0) {
       ratio = calcTranslation / calcStrafe;
-      calcStrafe = Math.sqrt(Math.pow(Constants.minSpeedPos, 2) / (Math.pow(ratio, 2) + 1)) * Math.signum(calcStrafe);
+      calcStrafe = Math.sqrt(Math.pow(Constants.limeLightMinSpeed, 2) / (Math.pow(ratio, 2) + 1)) * Math.signum(calcStrafe);
       calcTranslation = Math.abs(calcStrafe * ratio) * Math.signum(calcTranslation);
   
     }
     if(calcStrafe == 0 && calcTranslation != 0){
-      calcTranslation = Math.max(Constants.minSpeedPos,Math.abs(calcTranslation)) * Math.signum(calcTranslation);
+      calcTranslation = Math.max(Constants.limeLightMinSpeed,Math.abs(calcTranslation)) * Math.signum(calcTranslation);
     }
 
-    RobotContainer.s_Swerve.drive(
-      new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
-      calcRotation * Constants.Swerve.maxAngularVelocity, 
-      true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
-      true
-  );
-    if (errorX <= Constants.errorTolerance && errorY <= Constants.errorTolerance && Math.abs(errorR) <= Constants.autoRotateTolerance){
+    if (Math.abs(errorR) <= Constants.autoRotateTolerance){
+        RobotContainer.s_Swerve.drive(
+          new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
+          calcRotation * Constants.Swerve.maxAngularVelocity, 
+          true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+          true
+      );
+    }else{
+      RobotContainer.s_Swerve.drive(
+          new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
+          calcRotation * Constants.Swerve.maxAngularVelocity, 
+          true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+          true
+      );
+    }
+
+    if (errorX <= Constants.errorTolerance && Math.abs(errorR) <= Constants.autoRotateTolerance){
       finished = true;
     }
-    // SmartDashboard.putNumber("Error R", errorR);
-    // SmartDashboard.putNumber("Calc Translation",calcTranslation);
-    // SmartDashboard.putNumber("Calc Strafe",calcStrafe);
+      SmartDashboard.putNumber("Target X", targetX);
+      SmartDashboard.putNumber("Current X", currentX);
+      SmartDashboard.putNumber("Calc Translation",calcTranslation);
+      SmartDashboard.putNumber("Calc Strafe",calcStrafe);
+      SmartDashboard.putNumber("Current Y", currentY);
     // SmartDashboard.putNumber("Calc Rotate", calcRotation);
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     RobotContainer.s_Swerve.drive(
-      new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
-      0 * Constants.Swerve.maxAngularVelocity, 
-      false, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
-      true
-    );
+          new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
+          0 * Constants.Swerve.maxAngularVelocity, 
+          true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+          true
+      );
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-
-
     return finished;
   }
 }

@@ -28,14 +28,14 @@ public class AutoPlaceCubeB8_Climb extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new CalibrateLiftAtStartOfMatch(),
-      new CalibrateGripperAtStartOfMatch(),
+      new CalibrateGripperAtStartOfMatch(Constants.GripperStartingcubePOS),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
       new PlaceConeUpperLevel(),
       new releaseLiftBreak().withTimeout(.5),
       new setGripperPosition(Constants.openGripperPOS),
-      Commands.parallel(new AutonomousMove(.25, 0, 0), new setGantryPosition(Constants.gantryClimbPOS), new setArmPosition(Constants.armRetractedPOS)),
+      Commands.parallel(new AutonomousMove(.25, 0, 0,true), new setGantryPosition(Constants.gantryClimbPOS), new setArmPosition(Constants.armRetractedPOS)),
       new PlaceCommandEnd(),
-      Commands.parallel(new AutonomousMove(0, 0, 180), new setLiftPosition(Constants.liftClimbPOS)),
+      Commands.parallel(new AutonomousMove(0, 0, 180,true), new setLiftPosition(Constants.liftClimbPOS)),
       new GetOnChargeStation()
 
 

@@ -13,13 +13,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class limeLight_subsystem extends SubsystemBase {
 //define variable and objects
 
-  NetworkTable limeLight = NetworkTableInstance.getDefault().getTable("limelight-mitch"); //change, maybe blinky
+  NetworkTable limeLighttable; //change, maybe blinky
 int delay = 0;
 
   /** Creates a new limeLight_subsystem. */
   public limeLight_subsystem() {
 
-  
+    limeLighttable = NetworkTableInstance.getDefault().getTable("limelight-mitch");
 
   }
 
@@ -39,21 +39,21 @@ public double tagRelativeRPos(){
 
 //Reflective target position
 public double targetX(){
- return limeLight.getEntry("tx").getDouble(0);
+ return limeLighttable.getEntry("tx").getDouble(0);
  //return 0;
 }
 public double targetY(){
-return limeLight.getEntry("ty").getDouble(0);
+return limeLighttable.getEntry("ty").getDouble(0);
 //return 0;
 }
 public double targetA(){
- return limeLight.getEntry("ta").getDouble(0);
+ return limeLighttable.getEntry("ta").getDouble(0);
  //return 0;
 }
 
 
 public void setPipeline(int pipelineNumber){
- limeLight.getEntry("pipeline").setNumber(pipelineNumber); //Lets us change the vision pipeline
+ limeLighttable.getEntry("pipeline").setNumber(pipelineNumber); //Lets us change the vision pipeline
 }
 
 public void setLEDMode(int LEDNumber){
@@ -64,9 +64,9 @@ public void setLEDMode(int LEDNumber){
   public void periodic() {
     // This method will be called once per scheduler run
 //if(delay > 50){
-SmartDashboard.putNumber("TargetX", targetX());
-SmartDashboard.putNumber("TargetA", targetA());
-SmartDashboard.putNumber("TagRelativeR", tagRelativeRPos());
+//SmartDashboard.putNumber("TargetX", targetX());
+//SmartDashboard.putNumber("TargetA", targetA());
+//SmartDashboard.putNumber("TagRelativeR", tagRelativeRPos());
 
 //delay = 0;
   //}

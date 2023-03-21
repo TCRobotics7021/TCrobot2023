@@ -30,14 +30,14 @@ public final class Constants {
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
-    public static double liftUpperLimit = 1244;
+    public static double liftUpperLimit = 1189;
 
     //lift conversion
     public static double liftConversion = 302.844;
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 1245;
+      public static double liftUpperLimitSwitchPos = 1193;
 
       public static final double liftPosTolerance = 5;
 
@@ -48,7 +48,7 @@ public final class Constants {
 
 
     //Gripper subsystem
-    public static double gripperMotor_P = .05;
+    public static double gripperMotor_P = .1;
     public static double gripperMotor_I = 0;
     public static double gripperMotor_D = 0;
 
@@ -150,7 +150,7 @@ public final class Constants {
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
         public static double liftSideStation = 700;
-        public static double liftMaxLevelConeDip = 1050;
+        public static double liftMaxLevelConeDip = 950;
         
         // Test Postions
     public static double gripperTestPOS = 100;

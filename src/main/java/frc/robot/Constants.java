@@ -137,7 +137,7 @@ public final class Constants {
         public static double gantrySubPOS = 250;
         public static double gantrySideStation = 100;
     //LiftPOS
-        public static double liftStartingPOS = 131;
+        public static double liftStartingPOS = 400;
         public static double liftBottomPOS = 0;
         public static double liftConeFlippy = 140;
         public static double liftRetrievePOS = 300;
@@ -207,7 +207,7 @@ public final class Constants {
 
     //P vaules
     public static final double autonomousMove_P = 1;
-    public static final double autoRotate_P = .015;
+    public static final double autoRotate_P = .02;
 
     public static final double autoRotateTolerance = 2;
 

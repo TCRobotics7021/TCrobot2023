@@ -29,6 +29,7 @@ public class Auto_Blue1Cone_GrabCone_Climb extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetFieldOrientation(),
+      new CalibrateLiftAtStartOfMatch(),
       Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelConePOS)),
          new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
      new setLiftPosition(Constants.liftMaxLevelConeDip),

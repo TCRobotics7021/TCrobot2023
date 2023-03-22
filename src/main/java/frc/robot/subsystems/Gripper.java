@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -55,7 +56,7 @@ private double tempPeakREV = 0;
     m_Gripper.config_kD(Constants.PIDindex, Constants.gripperMotor_D, Constants.driveSettingTimeout);
     m_Gripper.configPeakOutputForward(Constants.gripperOutputMax, Constants.driveSettingTimeout);
     m_Gripper.configPeakOutputReverse(Constants.gripperOutputMin, Constants.driveSettingTimeout);
-    m_Gripper.configAllowableClosedloopError(Constants.PIDindex, Constants.gripperPosTolerance, Constants.driveSettingTimeout);
+    m_Gripper.configAllowableClosedloopError(Constants.PIDindex, 3, Constants.driveSettingTimeout);
     //in case the robot is doing the opposite of what we need (up or down)
     m_Gripper.setInverted(false); //set to true to flip positive direction
     //encoder reads positive
@@ -67,7 +68,8 @@ private double tempPeakREV = 0;
     m_Gripper.configForwardSoftLimitEnable(true, Constants.driveSettingTimeout);
     m_Gripper.configReverseSoftLimitEnable(true, Constants.driveSettingTimeout);
    // m_Gripper.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, Constants.GripperMaxCurrentAmps, Constants.GripperPeakCurrentAmps, Constants.GripperMaxCurrentTime));
-    
+    m_Gripper.setNeutralMode(NeutralMode.Brake);
+
     tempP = Constants.gripperMotor_P;
     tempI = Constants.gripperMotor_I;
     tempD = Constants.gripperMotor_D;
@@ -93,6 +95,15 @@ public void setPosition(double position){
   m_Gripper.set(ControlMode.Position, position*Constants.gripperConversion);
 
 }
+
+public void setCoastMode() {
+  m_Gripper.setNeutralMode(NeutralMode.Coast);
+}
+
+public void setBrakeMode() {
+  m_Gripper.setNeutralMode(NeutralMode.Brake);
+}
+
 public boolean atTopLimit () {
 return (!upperLimit.get());
 }
@@ -141,8 +152,8 @@ SmartDashboard.putNumber("Distance", m_Gripper.getSelectedSensorPosition()/Const
      m_Gripper.setSelectedSensorPosition(Constants.gripperUpperLimitSwitchPos * Constants.gripperConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
-    SmartDashboard.putNumber("Gripper Stator Current", m_Gripper.getStatorCurrent());
-    updatePID();
+    //SmartDashboard.putNumber("Gripper Stator Current", m_Gripper.getStatorCurrent());
+    //updatePID();
  
     SmartDashboard.putBoolean("gripperUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("gripperLowerLimit", lowerLimit.get());

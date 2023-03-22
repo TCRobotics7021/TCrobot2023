@@ -30,14 +30,14 @@ public final class Constants {
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
-    public static double liftUpperLimit = 1244;
+    public static double liftUpperLimit = 1167;
 
     //lift conversion
     public static double liftConversion = 302.844;
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 1245;
+      public static double liftUpperLimitSwitchPos = 1170;
 
       public static final double liftPosTolerance = 5;
 
@@ -48,7 +48,7 @@ public final class Constants {
 
 
     //Gripper subsystem
-    public static double gripperMotor_P = .05;
+    public static double gripperMotor_P = .1;
     public static double gripperMotor_I = 0;
     public static double gripperMotor_D = 0;
 
@@ -134,23 +134,23 @@ public final class Constants {
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
         public static double gantryClimbPOS = 350;
-        public static double gantrySubPOS = 250;
-        public static double gantrySideStation = 100;
+        public static double gantrySubPOS = 300;
+        public static double gantrySideStation = 200;
     //LiftPOS
-        public static double liftStartingPOS = 131;
+        public static double liftStartingPOS = 400;
         public static double liftBottomPOS = 0;
-        public static double liftConeFlippy = 140;
+        public static double liftConeFlippy = 115;
         public static double liftRetrievePOS = 300;
         public static double liftLowerLevelPOS = 300;
         public static double liftMidLevelCubePOS = 700;
         public static double liftMidLevelConePOS = 900; 
         public static double liftMaxLevelCubePOS = 1075;
-        public static double liftMaxLevelConePOS = 1189;
-        public static double liftSubstationPOS = 950;
+        public static double liftMaxLevelConePOS = 1167;
+        public static double liftSubstationPOS = 940;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
         public static double liftSideStation = 700;
-        public static double liftMaxLevelConeDip = 1050;
+        public static double liftMaxLevelConeDip = 950;
         
         // Test Postions
     public static double gripperTestPOS = 100;
@@ -207,7 +207,7 @@ public final class Constants {
 
     //P vaules
     public static final double autonomousMove_P = 1;
-    public static final double autoRotate_P = .015;
+    public static final double autoRotate_P = .02;
 
     public static final double autoRotateTolerance = 2;
 
@@ -232,7 +232,7 @@ public final class Constants {
   public static double startClimbDelay = .5;
   public static double driveOverDelay = .4;
 
-  public static double climbState0_StartingSpeed = .5;
+  public static double climbState0_StartingSpeed = .4;
   public static double climbState1_ClimbingSpeed = .15;
   public static double climbState2_Stopped = 0;
   public static double climbState3_REVspeed = -.1;

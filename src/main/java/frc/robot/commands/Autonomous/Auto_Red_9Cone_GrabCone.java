@@ -36,7 +36,7 @@ public class Auto_Red_9Cone_GrabCone extends SequentialCommandGroup {
      Commands.parallel(
       Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), 
             new setLiftPosition(Constants.liftBottomPOS)),
-      Commands.sequence( new AdvAutoMove(3, 0, 5, .3, .5, .1, 2, true), new AdvAutoMove(4, .45, 180, .1, .5, .1, 2, false),  new AdvAutoMove(4.7, .45, 180, .1, .2, .05, 2, false))),
+      Commands.sequence( new AdvAutoMove(3, 0, 5, .3, .5, .1, 2, true), new AdvAutoMove(4, .4, 180, .1, .5, .1, 2, false),  new AdvAutoMove(4.7, .4, 180, .1, .2, .05, 2, false))),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
       Commands.parallel(
         Commands.sequence(new RetrieveCone(),new PlaceConeUpperLevel()),

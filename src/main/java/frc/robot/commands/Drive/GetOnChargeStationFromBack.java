@@ -21,6 +21,7 @@ public class GetOnChargeStationFromBack extends CommandBase {
   double currentAngle = 0;
   double calcTranslation = 0;
   Timer initialTimer = new Timer();
+  double calcRotation = 0;
   public GetOnChargeStationFromBack() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.s_Swerve);
@@ -94,23 +95,30 @@ public class GetOnChargeStationFromBack extends CommandBase {
       calcTranslation = 0;
     }
     if (state ==3) {
-      if (Math.abs(currentAngle) < Constants.balanceAngle) {
+      if (Math.abs(currentAngle) < Constants.startedTiltDownAngle) {
         calcTranslation = 0;
       } else {
         calcTranslation = Constants.climbState3_REVspeed;
       }
     }
     if (state ==4) {
-      if (Math.abs(currentAngle) < Constants.balanceAngle) {
+      if (Math.abs(currentAngle) < Constants.startedTiltDownAngle) {
         calcTranslation = 0;
       } else {
         calcTranslation = Constants.climbState4_FWDspeed;
       }
     }
 
+    if (calcTranslation == 0){
+      calcRotation = .01;
+    }
+    else {
+      calcRotation = 0;
+    }
+
     RobotContainer.s_Swerve.drive(
       new Translation2d(-calcTranslation, 0).times(Constants.Swerve.maxSpeed), 
-      0 * Constants.Swerve.maxAngularVelocity, 
+      calcRotation * Constants.Swerve.maxAngularVelocity,  
       true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );

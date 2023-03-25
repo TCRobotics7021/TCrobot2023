@@ -28,6 +28,7 @@ import frc.robot.commands.Autonomous.Auto_Red_9Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Red_1Cone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red_5_Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Cube_Limelight_Test;
+import frc.robot.commands.Autonomous.Place_Cone_Drive_Over;
 import frc.robot.commands.Autonomous.Auto_Blue1Cone2Cube;
 import frc.robot.commands.Autonomous.Auto_Blue1Cone_GrabCone_Climb;
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
@@ -103,7 +104,8 @@ public class RobotContainer {
         );
 
       
-         m_Chooser.addOption("Blue_1Cone_2Cube", new Auto_Blue1Cone2Cube());
+        m_Chooser.setDefaultOption("Place_Cone_Drive_Over_Line", new Place_Cone_Drive_Over());
+        m_Chooser.addOption("Blue_1Cone_2Cube", new Auto_Blue1Cone2Cube());
          m_Chooser.addOption("Blue_9Cone_8Cube", new Auto_Blue9Cone8Cube());
         m_Chooser.addOption("Blue_5Cube_Overline_Climb", new Auto_Blue_5Cube_Overline_Climb());
         m_Chooser.addOption("Blue_1Cone_GrabCone_Climb", new Auto_Blue1Cone_GrabCone_Climb());
@@ -136,13 +138,13 @@ public class RobotContainer {
         
         
         
-        new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
-        new JoystickButton(RightStick, 11).onTrue(new InstantCommand(() -> s_Candle.setMode(1)));
-        new JoystickButton(RightStick, 12).onTrue(new InstantCommand(() -> s_Candle.setMode(2)));
-        new JoystickButton(RightStick, 13).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
-        new JoystickButton(RightStick, 14).onTrue(new InstantCommand(() -> s_Candle.setMode(4)));
-        new JoystickButton(RightStick, 15).onTrue(new InstantCommand(() -> s_Candle.setMode(5)));
-        new JoystickButton(RightStick, 16).onTrue(new InstantCommand(() -> s_Candle.setMode(6)));
+       // new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
+        //new JoystickButton(RightStick, 11).onTrue(new InstantCommand(() -> s_Candle.setMode(1)));
+       // new JoystickButton(RightStick, 12).onTrue(new InstantCommand(() -> s_Candle.setMode(2)));
+      //  new JoystickButton(OpPanel, 7).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
+       // new JoystickButton(RightStick, 14).onTrue(new InstantCommand(() -> s_Candle.setMode(4)));
+        //new JoystickButton(RightStick, 15).onTrue(new InstantCommand(() -> s_Candle.setMode(5)));
+       // new JoystickButton(OpPanel,8).onTrue(new InstantCommand(() -> s_Candle.setMode(6)));
 
         new POVButton(RightStick, 0).whileTrue(new JogAndSetPOS(Constants.liftJogUp));
         new POVButton(RightStick, 45).whileTrue(new JogAndSetPOS(Constants.liftJogUp));
@@ -163,17 +165,17 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
         new JoystickButton(OpPanel, 6).onTrue(new PrepareForSideStation());
 
-        new JoystickButton(OpPanel, 8).onTrue(new Auto_Blue9Cone8Cube());
+       // new JoystickButton(OpPanel, 8).onTrue(new Auto_Blue9Cone8Cube());
 
-       // new JoystickButton(OpPanel, 9).onTrue(new GetOnChargeStationFromBack());
-        new JoystickButton(OpPanel, 9).onTrue(new Cube_Limelight_Test());
+        new JoystickButton(OpPanel, 9).onTrue(new GetOnChargeStationFromBack());
+        //new JoystickButton(OpPanel, 9).onTrue(new Cube_Limelight_Test());
 
         new JoystickButton(OpPanel, 12).whileTrue(new releaseAllBreaks());
 
         new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectLowerLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 15).onTrue(new PlaceConeMidLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 16).onTrue(new PlaceConeUpperLevel().unless(() -> PlaceCommandStarted));
-        
+        new JoystickButton(OpPanel, 8 ).onTrue(new Auto_Blue_5Cube_Overline_Climb());
         
         
 

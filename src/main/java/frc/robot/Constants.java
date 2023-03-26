@@ -24,7 +24,7 @@ public final class Constants {
     public static double liftOutputMax = 1;
     public static double liftOutputMin = -.8;
     public static double liftJogUp = .25;
-    public static double liftJogDown = -.2;
+    public static double liftJogDown = -.25;
     //max and min motor output
     
 
@@ -57,15 +57,15 @@ public final class Constants {
     public static double gripperOutputMin = -.4;
 
     //upper & lower limits
-    public static double gripperLowerLimit = 1;
-    public static double gripperUpperLimit = 369;
+    public static double gripperLowerLimit = 41;
+    public static double gripperUpperLimit = 329;
 
     //lift conversion
     public static double gripperConversion = 112.7455;
 
     //upper and lower limit switch position / homing/calibrating values
-    public static double gripperLowerLimitSwitchPos = 0;
-    public static double gripperUpperLimitSwitchPos = 370;
+    public static double gripperLowerLimitSwitchPos = 40;
+    public static double gripperUpperLimitSwitchPos = 330;
 
     public static final double gripperPosTolerance = 5;
 
@@ -112,7 +112,7 @@ public final class Constants {
     //GripperPOS
         public static double gripperCubeGrabPOS = 126;
         public static double gripperConeGrabPOS = 41;
-        public static double openGripperPOS = 369;
+        public static double openGripperPOS = 329;
         public static double gripperTimeout = .5;
         public static double gripperTimeoutCube = .1;
         public static double GripperStartingConeGripPos = 146;
@@ -133,7 +133,7 @@ public final class Constants {
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
-        public static double gantryClimbPOS = 350;
+        public static double gantryClimbPOS = 1;
         public static double gantrySubPOS = 300;
         public static double gantrySideStation = 200;
     //LiftPOS
@@ -226,17 +226,17 @@ public final class Constants {
 //charge station
   public static double climbStartedAngle = 7.5;
   public static double startedTiltDownAngle = 6.5;
-  public static double balanceAngle = 3;
+  public static double balanceAngle = 4;
 
   public static double balanceTime = 3;
   public static double startClimbDelay = .5;
   public static double driveOverDelay = .4;
 
-  public static double climbState0_StartingSpeed = .4;
+  public static double climbState0_StartingSpeed = .35;
   public static double climbState1_ClimbingSpeed = .15;
   public static double climbState2_Stopped = 0;
-  public static double climbState3_REVspeed = -.1;
-  public static double climbState4_FWDspeed = .1;
+  public static double climbState3_REVspeed = -.11;
+  public static double climbState4_FWDspeed = .11;
 
   public static double driveOverState0_StartingSpeed = .4;
   public static double driveOverState1_ClimbingSpeed = .3;

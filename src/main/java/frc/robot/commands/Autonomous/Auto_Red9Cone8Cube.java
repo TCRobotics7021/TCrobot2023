@@ -38,8 +38,9 @@ public class Auto_Red9Cone8Cube extends SequentialCommandGroup {
       Commands.sequence( new AdvAutoMove(3, .15, 5, .3, .7, .1, 2, true), new AdvAutoMove(4, .15, 180, .1, .6, .1, 2, false))),
      
      
-    new AutoCubePickup(4.7, 180, false),
-    new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeoutCube),
+    new AutoCubePickup(4.75, 180, false),
+    Commands.parallel(new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeoutCube),
+    new DriveForward().withTimeout(.5)),
     Commands.parallel( new setLiftPosition(Constants.liftMaxLevelCubePOS), 
       Commands.sequence(new AdvAutoMove(3, .15, -5, .3, .7, .1, 5, false), new AdvAutoMove(.7, .2, 0, .1, .6, .05, 4, false), new AdvAutoMove(.25, .6, 0, .1, .5, .05, 2, false))),
     Commands.parallel(new setArmPosition(Constants.armExtendedPOS), new setGantryPosition(Constants.gantryUpperLevelPOS)),

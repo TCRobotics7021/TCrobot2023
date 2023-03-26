@@ -24,7 +24,7 @@ public final class Constants {
     public static double liftOutputMax = 1;
     public static double liftOutputMin = -.8;
     public static double liftJogUp = .25;
-    public static double liftJogDown = -.2;
+    public static double liftJogDown = -.25;
     //max and min motor output
     
 

@@ -18,12 +18,14 @@ import frc.robot.commands.Arm.HomeArm;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Arm.setArmSpeed;
 import frc.robot.commands.Autonomous.Auto_Blue9Cone8Cube;
+import frc.robot.commands.Autonomous.Auto_Blue9Cone_PrepareForPickUP;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_9Cone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red9Cone8Cube;
 import frc.robot.commands.Autonomous.Auto_Red9Cone_GrabCone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red1Cone2Cube;
+import frc.robot.commands.Autonomous.Auto_Red1Cone_PrepareForPickUp;
 import frc.robot.commands.Autonomous.Auto_Red_9Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Red_1Cone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red_5_Cube_Overline_Climb;
@@ -111,12 +113,14 @@ public class RobotContainer {
         m_Chooser.addOption("Blue_1Cone_GrabCone_Climb", new Auto_Blue1Cone_GrabCone_Climb());
         m_Chooser.addOption("Blue_1Cone_GrabCone_Back", new Auto_Blue_1Cone_GrabCone());
          m_Chooser.addOption("Blue_9Cone_Climb", new Auto_Blue_9Cone_Climb());
+         m_Chooser.addOption("Blue_9Cone_PrepareForPickUp", new Auto_Blue9Cone_PrepareForPickUP());
          m_Chooser.addOption("Red_9Cone_8Cube", new Auto_Red9Cone8Cube());
          m_Chooser.addOption("Red_1Cone_2Cube", new Auto_Red1Cone2Cube());
         m_Chooser.addOption("Red_5Cube_Overline_Climb", new Auto_Red_5_Cube_Overline_Climb());
         m_Chooser.addOption("Red_9Cone_GrabCone_Climb", new Auto_Red9Cone_GrabCone_Climb());
         m_Chooser.addOption("Red_9Cone_GrabCone_Back", new Auto_Red_9Cone_GrabCone());
          m_Chooser.addOption("Red_1Cone_Climb", new Auto_Red_1Cone_Climb());
+         m_Chooser.addOption("Red_1Cone_PrepareForPickUp", new Auto_Red1Cone_PrepareForPickUp());
         SmartDashboard.putData("Auto Chooser", m_Chooser);
 
         
@@ -167,15 +171,15 @@ public class RobotContainer {
 
        // new JoystickButton(OpPanel, 8).onTrue(new Auto_Blue9Cone8Cube());
 
-        new JoystickButton(OpPanel, 9).onTrue(new GetOnChargeStationFromBack());
-        //new JoystickButton(OpPanel, 9).onTrue(new Cube_Limelight_Test());
+       // new JoystickButton(OpPanel, 9).onTrue(new GetOnChargeStationFromBack());
+        new JoystickButton(OpPanel, 9).onTrue(new Cube_Limelight_Test());
 
         new JoystickButton(OpPanel, 12).whileTrue(new releaseAllBreaks());
 
         new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectLowerLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 15).onTrue(new PlaceConeMidLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 16).onTrue(new PlaceConeUpperLevel().unless(() -> PlaceCommandStarted));
-        new JoystickButton(OpPanel, 8 ).onTrue(new Auto_Blue_5Cube_Overline_Climb());
+      //  new JoystickButton(OpPanel, 8 ).onTrue(new Auto_Blue_5Cube_Overline_Climb());
         
         
 

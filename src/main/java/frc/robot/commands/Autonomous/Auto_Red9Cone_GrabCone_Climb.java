@@ -37,9 +37,9 @@ public class Auto_Red9Cone_GrabCone_Climb extends SequentialCommandGroup {
      Commands.parallel(
       Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), 
             new setLiftPosition(Constants.liftBottomPOS)),
-      Commands.sequence( new AdvAutoMove(3, .15, 5, .4, .5, .1, 2, true), new AdvAutoMove(4, .4, 180, .1, .5, .1, 2, false),  new AdvAutoMove(4.7, .4, 180, .1, .2, .05, 2, false))),
+      Commands.sequence( new AdvAutoMove(3, .15, 5, .4, .5, .1, 2, true), new AdvAutoMove(4, .45, 180, .1, .5, .1, 2, false),  new AdvAutoMove(4.8, .45, 180, .1, .2, .05, 2, false))),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
-      Commands.parallel(new RetrieveCone(), Commands.sequence(new AdvAutoMove(4.5, .15, 180, .3, .5, .05, 2, false), new AdvAutoMove(4.4, 2.3, 0, .1, .2, .1, 2, false))),
+      Commands.parallel(new RetrieveCone(), Commands.sequence(new AdvAutoMove(4.5, .15, 180, .3, .5, .05, 2, false), new AdvAutoMove(4.4, 2.3, 0, .2, .5, .1, 2, false))),
      new GetOnChargeStationFromBack()
     );
   }

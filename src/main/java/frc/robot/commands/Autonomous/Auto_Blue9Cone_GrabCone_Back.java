@@ -4,12 +4,15 @@
 
 package frc.robot.commands.Autonomous;
 
+import org.opencv.features2d.FlannBasedMatcher;
+
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Drive.AdvAutoMove;
+import frc.robot.commands.Drive.AutoCubePickup;
 import frc.robot.commands.Drive.ResetFieldOrientation;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
@@ -21,9 +24,9 @@ import frc.robot.commands.PickPlace.RetrieveCone;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Auto_Blue_1Cone_GrabCone extends SequentialCommandGroup {
-  /** Creates a new Auto_Blue_1Cone_GrabCone. */
-  public Auto_Blue_1Cone_GrabCone() {
+public class Auto_Blue9Cone_GrabCone_Back extends SequentialCommandGroup {
+  /** Creates a new Auto_Blue9Cone_PrepareForPickUP. */
+  public Auto_Blue9Cone_GrabCone_Back() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
@@ -36,11 +39,11 @@ public class Auto_Blue_1Cone_GrabCone extends SequentialCommandGroup {
      Commands.parallel(
       Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), 
             new setLiftPosition(Constants.liftBottomPOS)),
-      Commands.sequence( new AdvAutoMove(3, 0, -5, .3, .5, .1, 2, true), new AdvAutoMove(4, -.55, 180, .1, .5, .1, 2, false),  new AdvAutoMove(4.8, -.55, 180, .1, .2, .05, 2, false))),
+      Commands.sequence( new AdvAutoMove(3, 0, 5, .3, .5, .1, 2, true), new AdvAutoMove(4, .45, 180, .1, .3, .1, 2, false),  new AdvAutoMove(5.05, .45, 180, .1, .2, .05, 2, false))),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
       Commands.parallel(
         Commands.sequence(new RetrieveCone(),new PlaceConeUpperLevel()),
-         Commands.sequence(new AdvAutoMove(4.5, -.1, 0, .1, .2, .05, 2, false), new AdvAutoMove(.5, -.1, 0, .1, .5, .05, 2, false),new AdvAutoMove(.5, -1, 0, .1, .3, .05, 2, false)))
+         Commands.sequence(new AdvAutoMove(4.5, .25, 0, .1, .2, .05, 2, false), new AdvAutoMove(.5, .25, 0, .1, .3, .05, 2, false),new AdvAutoMove(.5, 1, 0, .1, .3, .05, 2, false)))
     );
   }
 }

@@ -18,13 +18,17 @@ import frc.robot.commands.Arm.HomeArm;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Arm.setArmSpeed;
 import frc.robot.commands.Autonomous.Auto_Blue9Cone8Cube;
-import frc.robot.commands.Autonomous.Auto_Blue9Cone_PrepareForPickUP;
+import frc.robot.commands.Autonomous.Auto_Blue9Cone_GrabCone_Back;
+import frc.robot.commands.Autonomous.Auto_Blue9Cone_GrabCone_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue9Cone_GrabCube_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_9Cone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red9Cone8Cube;
 import frc.robot.commands.Autonomous.Auto_Red9Cone_GrabCone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red1Cone2Cube;
+import frc.robot.commands.Autonomous.Auto_Red1Cone_GrabCone_Back;
+import frc.robot.commands.Autonomous.Auto_Red1Cone_GrabCone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red1Cone_PrepareForPickUp;
 import frc.robot.commands.Autonomous.Auto_Red_9Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Red_1Cone_Climb;
@@ -111,16 +115,23 @@ public class RobotContainer {
          m_Chooser.addOption("Blue_9Cone_8Cube", new Auto_Blue9Cone8Cube());
         m_Chooser.addOption("Blue_5Cube_Overline_Climb", new Auto_Blue_5Cube_Overline_Climb());
         m_Chooser.addOption("Blue_1Cone_GrabCone_Climb", new Auto_Blue1Cone_GrabCone_Climb());
-        m_Chooser.addOption("Blue_1Cone_GrabCone_Back", new Auto_Blue_1Cone_GrabCone());
+        m_Chooser.addOption("Blue_1Cone_GrabCone_Back", new Auto_Blue_1Cone_GrabCone()); //1
          m_Chooser.addOption("Blue_9Cone_Climb", new Auto_Blue_9Cone_Climb());
-         m_Chooser.addOption("Blue_9Cone_PrepareForPickUp", new Auto_Blue9Cone_PrepareForPickUP());
+         m_Chooser.addOption("Blue_9Cone_GrabCone_Back", new Auto_Blue9Cone_GrabCone_Back()); //2
          m_Chooser.addOption("Red_9Cone_8Cube", new Auto_Red9Cone8Cube());
          m_Chooser.addOption("Red_1Cone_2Cube", new Auto_Red1Cone2Cube());
         m_Chooser.addOption("Red_5Cube_Overline_Climb", new Auto_Red_5_Cube_Overline_Climb());
         m_Chooser.addOption("Red_9Cone_GrabCone_Climb", new Auto_Red9Cone_GrabCone_Climb());
-        m_Chooser.addOption("Red_9Cone_GrabCone_Back", new Auto_Red_9Cone_GrabCone());
+        m_Chooser.addOption("Red_9Cone_GrabCone_Back", new Auto_Red_9Cone_GrabCone());//1
          m_Chooser.addOption("Red_1Cone_Climb", new Auto_Red_1Cone_Climb());
          m_Chooser.addOption("Red_1Cone_PrepareForPickUp", new Auto_Red1Cone_PrepareForPickUp());
+        m_Chooser.addOption("Auto_Red1Cone_GrabCone_Back",new Auto_Red1Cone_GrabCone_Back());
+
+         //Untested
+         m_Chooser.addOption("Blue_9Cone_GrabCone_Climb", new Auto_Blue9Cone_GrabCone_Climb());
+         m_Chooser.addOption("Blue_9Cone_GrabCube_Climb", new Auto_Blue9Cone_GrabCube_Climb());
+         m_Chooser.addOption("Red_1Cone_GrabCone_Climb", new Auto_Red1Cone_GrabCone_Climb());
+
         SmartDashboard.putData("Auto Chooser", m_Chooser);
 
         

@@ -10,39 +10,43 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Drive.AdvAutoMove;
-import frc.robot.commands.Drive.GetOnChargeStation;
+import frc.robot.commands.Drive.AutoCubePickup;
+import frc.robot.commands.Drive.AutonomousMove;
+import frc.robot.commands.Drive.DriveOverChargeStation;
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
+import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.ResetFieldOrientation;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.HomeLiftSpecial;
 import frc.robot.commands.Lift.setLiftPosition;
-import frc.robot.commands.PickPlace.PlaceObjectLowerLevel;
-import frc.robot.commands.PickPlace.RetrieveCone;
+import frc.robot.commands.PickPlace.DropAndRetract;
+import frc.robot.commands.PickPlace.RetrieveCube;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Auto_Blue1Cone_GrabCone_Climb extends SequentialCommandGroup {
-  /** Creates a new Auto_Blue1Cone_GrabCone_Climb. */
-  public Auto_Blue1Cone_GrabCone_Climb() {
+public class Auto_Blue_5Cube_GrabCube_Climb extends SequentialCommandGroup {
+  /** Creates a new Auto_Blue_5Cube_GrabCube_Climb. */
+  public Auto_Blue_5Cube_GrabCube_Climb() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetFieldOrientation(),
       new CalibrateLiftAtStartOfMatch(),
-      Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelConePOS)),
+      Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelCubePOS)),
          new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
-     new setLiftPosition(Constants.liftMaxLevelConeDip),
-     new setGripperPosition(Constants.openGripperPOS),
-     Commands.parallel(
-      Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), 
-            new setLiftPosition(Constants.liftBottomPOS)),
-      Commands.sequence( new AdvAutoMove(3, 0, -5, .3, .5, .1, 2, true), new AdvAutoMove(4, -.45, 180, .1, .5, .1, 2, false),  new AdvAutoMove(4.8, -.45, 180, .1, .2, .05, 2, false))),
-      new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
-      Commands.parallel(new RetrieveCone(), Commands.sequence(new AdvAutoMove(4.5, -.45, 180, .3, .5, .05, 2, false), new AdvAutoMove(4.4, -2.3, 0, .2, .5, .1, 2, false))),
-       new GetOnChargeStationFromBack()
-
+      new setGripperPosition(Constants.openGripperPOS),
+      new AdvAutoMove(0, 0, 0, .3, .5, .1, 2, true),
+      Commands.parallel(new DropAndRetract(), new DriveOverChargeStation()),
+      new AdvAutoMove(4.7, .4, 180, .1, .3, .1, 2, false),
+      new AutoCubePickup(4.9, 180, false),
+    Commands.parallel(new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeoutCube),
+    new DriveForward().withTimeout(.5)), //Test if necessary 
+    Commands.parallel(new RetrieveCube(), new AdvAutoMove(4.5, .4, 180, .3, .5, .05, 2, false)),
+      new PrepareForClimb(),
+      new AutonomousMove(0, 0, 0, true),
+      new GetOnChargeStationFromBack()
     );
   }
 }

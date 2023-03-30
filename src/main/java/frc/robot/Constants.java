@@ -54,17 +54,17 @@ public final class Constants {
 
     //max and min lift output
     public static double gripperOutputMax = .3;
-    public static double gripperOutputMin = -.4;
+    public static double gripperOutputMin = -.5;
 
     //upper & lower limits
-    public static double gripperLowerLimit = 34;
+    public static double gripperLowerLimit = 0;
     public static double gripperUpperLimit = 429;
 
     //lift conversion
     public static double gripperConversion = 112.7455;
 
     //upper and lower limit switch position / homing/calibrating values
-    public static double gripperLowerLimitSwitchPos = 40;
+    public static double gripperLowerLimitSwitchPos = 0;
     public static double gripperUpperLimitSwitchPos = 430;
 
     public static final double gripperPosTolerance = 5;
@@ -111,7 +111,7 @@ public final class Constants {
         
     //GripperPOS
         public static double gripperCubeGrabPOS = 126;
-        public static double gripperConeGrabPOS = 34;
+        public static double gripperConeGrabPOS = 24;
         public static double openGripperPOS = 429;
         public static double gripperTimeout = .5;
         public static double gripperTimeoutCube = .1;

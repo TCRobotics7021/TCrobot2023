@@ -39,7 +39,7 @@ public class Auto_Red1Cone_GrabCone_Back extends SequentialCommandGroup {
      Commands.parallel(
       Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), 
             new setLiftPosition(Constants.liftBottomPOS)),
-      Commands.sequence( new AdvAutoMove(3, 0, 5, .3, .5, .1, 2, true), new AdvAutoMove(4, -.55, 180, .1, .3, .1, 2, false),  new AdvAutoMove(5.05, -.55, 180, .1, .2, .05, 2, false))),
+      Commands.sequence( new AdvAutoMove(3, 0, 5, .3, .5, .1, 2, true), new AdvAutoMove(4, -.45, 180, .1, .3, .1, 2, false),  new AdvAutoMove(5.05, -.45, 180, .1, .2, .05, 2, false))),
       new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout),
       Commands.parallel(
         Commands.sequence(new RetrieveCone(),new PlaceConeUpperLevel()),

@@ -21,6 +21,7 @@ import frc.robot.commands.Autonomous.Auto_Blue9Cone8Cube;
 import frc.robot.commands.Autonomous.Auto_Blue9Cone_GrabCone_Back;
 import frc.robot.commands.Autonomous.Auto_Blue9Cone_GrabCone_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue9Cone_GrabCube_Climb;
+import frc.robot.commands.Autonomous.Auto_BlueTest;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_GrabCone_GrabCube;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_GrabCube_Climb;
@@ -135,7 +136,7 @@ public class RobotContainer {
 
 
     
-    
+        m_Chooser.addOption("BlueTest", new Auto_BlueTest());
          
 
         SmartDashboard.putData("Auto Chooser", m_Chooser);

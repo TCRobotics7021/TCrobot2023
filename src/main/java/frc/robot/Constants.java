@@ -114,6 +114,7 @@ public final class Constants {
         public static double gripperConeGrabPOS = 24;
         public static double openGripperPOS = 429;
         public static double gripperTimeout = .5;
+        public static double gripperTestTimeout = .8;
         public static double gripperTimeoutCube = .1;
         public static double GripperStartingConeGripPos = 146;
         //gripper cali positions

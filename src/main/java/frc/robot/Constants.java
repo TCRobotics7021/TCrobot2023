@@ -22,7 +22,7 @@ public final class Constants {
 
     //max and min lift output
     public static double liftOutputMax = 1;
-    public static double liftOutputMin = -.8;
+    public static double liftOutputMin = -.9;
     public static double liftJogUp = .4;
     public static double liftJogDown = -.5;
     //max and min motor output
@@ -61,7 +61,7 @@ public final class Constants {
     public static double gripperUpperLimit = 429;
 
     //lift conversion
-    public static double gripperConversion = 112.7455;
+    public static double gripperConversion = 77.6282;
 
     //upper and lower limit switch position / homing/calibrating values
     public static double gripperLowerLimitSwitchPos = 0;
@@ -113,7 +113,7 @@ public final class Constants {
         public static double gripperCubeGrabPOS = 126;
         public static double gripperConeGrabPOS = 24;
         public static double openGripperPOS = 429;
-        public static double gripperTimeout = .5;
+        public static double gripperTimeout = .25;
         public static double gripperTestTimeout = .8;
         public static double gripperTimeoutCube = .1;
         public static double GripperStartingConeGripPos = 146;
@@ -125,6 +125,8 @@ public final class Constants {
         public static double armRetractedPOS = 5;
         public static double armMidLevelPOS = 105;
         public static double armExtendedPOS = 500;
+        public static double armAutoExtendedPOS = 400; //cube for autos
+        public static double armAutoLowerLevelPOS = 150; //cube for autos
         public static double armPickPOS = 350;
         public static double armSideStation = 5;
 
@@ -134,6 +136,7 @@ public final class Constants {
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
+        public static double gantryAutoUpperLevelPOS = 550;
         public static double gantryClimbPOS = 1;
         public static double gantrySubPOS = 300;
         public static double gantrySideStation = 200;
@@ -146,6 +149,7 @@ public final class Constants {
         public static double liftMidLevelCubePOS = 700;
         public static double liftMidLevelConePOS = 900; 
         public static double liftMaxLevelCubePOS = 1075;
+        public static double liftAutoCube = 900;
         public static double liftMaxLevelConePOS = 1167;
         public static double liftSubstationPOS = 940;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
@@ -201,14 +205,14 @@ public final class Constants {
     public static double maxSpeedPos = .5;
 
     public static double minAutoRot = .2;
-    public static double maxAutoRot = .6;
+    public static double maxAutoRot = 1;
 
     public static double errorTolerance = .02;
 
 
     //P vaules
     public static final double autonomousMove_P = 1;
-    public static final double autoRotate_P = .02;
+    public static final double autoRotate_P = .015;
 
     public static final double autoRotateTolerance = 2;
 

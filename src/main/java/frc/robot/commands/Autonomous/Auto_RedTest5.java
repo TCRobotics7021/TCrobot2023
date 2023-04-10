@@ -13,7 +13,7 @@ import frc.robot.commands.Drive.AdvAutoMove;
 import frc.robot.commands.Drive.AutonomousMove;
 import frc.robot.commands.Drive.DriveOverChargeStation;
 import frc.robot.commands.Drive.GetOnChargeStation;
-import frc.robot.commands.Drive.GetOnChargeStationBackwards;
+
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
 import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.ResetFieldOrientation;
@@ -34,7 +34,7 @@ public class Auto_RedTest5 extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetFieldOrientation(),
-      new CalibrateLiftAtStartOfMatch(),
+      new CalibrateLiftAtStartOfMatch(Constants.liftStartingPOS),
       new AdvAutoMove(0, 0, 0, .5, .7, .1, 1, true),
       Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelConePOS)),
       new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),

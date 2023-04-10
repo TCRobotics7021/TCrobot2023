@@ -24,6 +24,7 @@ import frc.robot.commands.Autonomous.Auto_Blue9Cone_GrabCube_Climb;
 import frc.robot.commands.Autonomous.Auto_BlueTest;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_GrabCone_GrabCube;
+import frc.robot.commands.Autonomous.Auto_Blue_2Cube_GrabCone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_GrabCube_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_9Cone_Climb;
@@ -42,6 +43,9 @@ import frc.robot.commands.Autonomous.DriveForward;
 import frc.robot.commands.Autonomous.Place_Cone_Drive_Over;
 import frc.robot.commands.Autonomous.Auto_Blue1Cone2Cube;
 import frc.robot.commands.Autonomous.Auto_Blue1Cone_GrabCone_Climb;
+import frc.robot.commands.Drive.AdvAutoMove;
+import frc.robot.commands.Drive.AdvAutoMove2;
+import frc.robot.commands.Drive.AdvAutoMove3;
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
 import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.TeleopSwerve;
@@ -117,27 +121,28 @@ public class RobotContainer {
       
         m_Chooser.setDefaultOption("Place_Cone_Drive_Over_Line", new Place_Cone_Drive_Over());
       //  m_Chooser.addOption("Blue_1Cone_2Cube", new Auto_Blue1Cone2Cube());
-      //   m_Chooser.addOption("Blue_9Cone_8Cube", new Auto_Blue9Cone8Cube());
+    //   //   m_Chooser.addOption("Blue_9Cone_8Cube", new Auto_Blue9Cone8Cube());
        
-        m_Chooser.addOption("Blue_1Cone_GrabCone_Climb", new Auto_Blue1Cone_GrabCone_Climb()); //3
-        m_Chooser.addOption("Blue_1Cone_GrabCone_Back", new Auto_Blue_1Cone_GrabCone()); //4
-        m_Chooser.addOption("Blue_5Cube_Overline_Climb", new Auto_Blue_5Cube_Overline_Climb());
-       //  m_Chooser.addOption("Blue_9Cone_Climb", new Auto_Blue_9Cone_Climb());
-         m_Chooser.addOption("Blue_9Cone_GrabCone_Back", new Auto_Blue9Cone_GrabCone_Back()); //
-         m_Chooser.addOption("Blue_9Cone_GrabCone_Climb", new Auto_Blue9Cone_GrabCone_Climb());
-       //  m_Chooser.addOption("Red_9Cone_8Cube", new Auto_Red9Cone8Cube()); //
-       //  m_Chooser.addOption("Red_1Cone_2Cube", new Auto_Red1Cone2Cube()); //
-        m_Chooser.addOption("Red_9Cone_GrabCone_Climb", new Auto_Red9Cone_GrabCone_Climb()); //
-        m_Chooser.addOption("Red_9Cone_GrabCone_Back", new Auto_Red_9Cone_GrabCone());//
-        m_Chooser.addOption("Red_5Cube_Overline_Climb", new Auto_Red_5_Cube_Overline_Climb()); //
-     //3w43w3w    m_Chooser.addOption("Red_1Cone_Climb", new Auto_Red_1Cone_Climb());
-         m_Chooser.addOption("Red_1Cone_GrabCone_Back",new Auto_Red1Cone_GrabCone_Back()); //2
-         m_Chooser.addOption("Red_1Cone_GrabCone_Climb", new Auto_Red1Cone_GrabCone_Climb()); //1
-        //  m_Chooser.addOption("Red_1Cone_PrepareForPickUp", new Auto_Red1Cone_PrepareForPickUp());
+    //     m_Chooser.addOption("Blue_1Cone_GrabCone_Climb", new Auto_Blue1Cone_GrabCone_Climb()); //3
+    //     m_Chooser.addOption("Blue_1Cone_GrabCone_Back", new Auto_Blue_1Cone_GrabCone()); //4
+    //     m_Chooser.addOption("Blue_5Cube_Overline_Climb", new Auto_Blue_5Cube_Overline_Climb());
+    //    //  m_Chooser.addOption("Blue_9Cone_Climb", new Auto_Blue_9Cone_Climb());
+    //      m_Chooser.addOption("Blue_9Cone_GrabCone_Back", new Auto_Blue9Cone_GrabCone_Back()); //
+    //      m_Chooser.addOption("Blue_9Cone_GrabCone_Climb", new Auto_Blue9Cone_GrabCone_Climb());
+    //    //  m_Chooser.addOption("Red_9Cone_8Cube", new Auto_Red9Cone8Cube()); //
+    //    //  m_Chooser.addOption("Red_1Cone_2Cube", new Auto_Red1Cone2Cube()); //
+    //     m_Chooser.addOption("Red_9Cone_GrabCone_Climb", new Auto_Red9Cone_GrabCone_Climb()); //
+    //     m_Chooser.addOption("Red_9Cone_GrabCone_Back", new Auto_Red_9Cone_GrabCone());//
+    //     m_Chooser.addOption("Red_5Cube_Overline_Climb", new Auto_Red_5_Cube_Overline_Climb()); //
+    //  //3w43w3w    m_Chooser.addOption("Red_1Cone_Climb", new Auto_Red_1Cone_Climb());
+    //      m_Chooser.addOption("Red_1Cone_GrabCone_Back",new Auto_Red1Cone_GrabCone_Back()); //2
+    //      m_Chooser.addOption("Red_1Cone_GrabCone_Climb", new Auto_Red1Cone_GrabCone_Climb()); //1
+    //     //  m_Chooser.addOption("Red_1Cone_PrepareForPickUp", new Auto_Red1Cone_PrepareForPickUp());
 
-
+        m_Chooser.addOption("Blue_2Cube_Cone_Cone", new Auto_Blue_2Cube_GrabCone_GrabCone());
         m_Chooser.addOption("RedTest", new Auto_RedTest5());
         m_Chooser.addOption("BlueTest", new Auto_BlueTest());
+
          
 
         SmartDashboard.putData("Auto Chooser", m_Chooser);
@@ -189,7 +194,10 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 6).onTrue(new PrepareForSideStation());
 
         
-        new JoystickButton(OpPanel, 9).onTrue(new DriveForward());
+       // new JoystickButton(OpPanel, 9).onTrue(new DriveForward());
+
+        new JoystickButton(OpPanel, 8).onTrue(new AdvAutoMove(2, 0, 180, .1, .5, .1, 5, true).withTimeout(5));
+        
 
        // new JoystickButton(OpPanel, 8).onTrue(new Auto_Blue9Cone8Cube());
 

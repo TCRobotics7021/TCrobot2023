@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class AdvAutoMove extends CommandBase {
+public class AdvAutoMove3 extends CommandBase {
   /** Creates a new AdvAutoMove. */
   double targetX;
   double targetY;
@@ -21,6 +21,9 @@ public class AdvAutoMove extends CommandBase {
   double minspeed;
   double maxspeed;
   boolean resetodometry;
+  double minRotateSpeed;
+  double maxRotateSpeed;
+  double rotateP;
 
   double calcStrafe;
   double calcTranslation;
@@ -33,7 +36,6 @@ public class AdvAutoMove extends CommandBase {
   double errorX;
   double errorY;
   double errorR;
-  double errorM;
 
   double calcMagnitude; 
 
@@ -43,7 +45,9 @@ public class AdvAutoMove extends CommandBase {
 
   double ratio;
 
-  public AdvAutoMove(double targetX, double targetY, double targetR, double minspeed, double maxspeed, double XYtolerance, double Rtolerance, boolean resetodometry) {
+  public AdvAutoMove3(double targetX, double targetY, double targetR, double minspeed, double maxspeed, 
+      double XYtolerance, double minRotateSpeed, double maxRotateSpeed, double rotateP, double Rtolerance, 
+      boolean resetodometry) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.targetX = targetX;
     this.targetY = targetY;
@@ -53,6 +57,9 @@ public class AdvAutoMove extends CommandBase {
     this.XYtolerance = XYtolerance;
     this.Rtolerance = Rtolerance;
     this.resetodometry = resetodometry;
+    this.minRotateSpeed = minRotateSpeed;
+    this.maxRotateSpeed = maxRotateSpeed;
+    this.rotateP = rotateP;
     finished = false;
     addRequirements(RobotContainer.s_Swerve);
 
@@ -78,7 +85,6 @@ public class AdvAutoMove extends CommandBase {
 
     errorX = Math.abs(targetX - currentX);
     errorY = Math.abs(targetY - currentY);
-    errorM = Math.sqrt(Math.pow(errorX, 2) + Math.pow(errorY, 2));
     errorR = -(targetR - currentR);
 
     //finds shortest path for rotation
@@ -91,8 +97,8 @@ public class AdvAutoMove extends CommandBase {
 
     calcTranslation = Constants.autonomousMove_P * (targetX - currentX);
     calcStrafe = Constants.autonomousMove_P * (targetY - currentY);
-   
-    calcRotation = Constants.autoRotate_P * errorR;
+    calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
+    calcRotation = rotateP * errorR;
 
     if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
       calcTranslation = Math.min(maxspeed,calcTranslation);
@@ -101,6 +107,11 @@ public class AdvAutoMove extends CommandBase {
     if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
       calcTranslation = Math.max(-maxspeed, calcTranslation);
     }
+    if (errorX < XYtolerance){
+      calcTranslation = 0;
+    }
+    
+    
 
     if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
       calcStrafe = Math.min(maxspeed,calcStrafe);
@@ -109,29 +120,31 @@ public class AdvAutoMove extends CommandBase {
     if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
       calcStrafe = Math.max(-maxspeed, calcStrafe);
     }
-
-    calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
+    if (errorY < XYtolerance){
+      calcStrafe = 0;
+    }
 
     if (calcRotation > 0){
-      calcRotation = Math.min(Constants.maxAutoRot, calcRotation);
+      calcRotation = Math.min(maxRotateSpeed, calcRotation);
     }
     
     if (calcRotation < 0){
-      calcRotation = Math.max(-Constants.maxAutoRot, calcRotation);
+      calcRotation = Math.max(-maxRotateSpeed, calcRotation);
     }
 
     if (Math.abs(errorR) > Rtolerance){
       if (calcRotation > 0){
-        calcRotation = Math.max(Constants.minAutoRot, calcRotation);
+        calcRotation = Math.max(minRotateSpeed, calcRotation);
       }
       
       if (calcRotation < 0){
-        calcRotation = Math.min(-Constants.minAutoRot, calcRotation);
+        calcRotation = Math.min(-minRotateSpeed, calcRotation);
       }
     }
     
 
-  if (errorM > XYtolerance){
+
+
     if (calcMagnitude <= minspeed && calcStrafe != 0) {
       ratio = calcTranslation / calcStrafe;
       calcStrafe = Math.sqrt(Math.pow(minspeed, 2) / (Math.pow(ratio, 2) + 1)) * Math.signum(calcStrafe);
@@ -141,14 +154,14 @@ public class AdvAutoMove extends CommandBase {
     if(calcStrafe == 0 && calcTranslation != 0){
       calcTranslation = Math.max(minspeed,Math.abs(calcTranslation)) * Math.signum(calcTranslation);
     }
-  }
+
     RobotContainer.s_Swerve.drive(
       new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
       calcRotation * Constants.Swerve.maxAngularVelocity, 
       true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
       true
   );
-    if (errorM <= XYtolerance && Math.abs(errorR) <= Rtolerance){
+    if (errorX <= XYtolerance && errorY <= XYtolerance && Math.abs(errorR) <= Rtolerance){
       finished = true;
     }
     // SmartDashboard.putNumber("Error R", errorR);

@@ -31,7 +31,7 @@ public class Auto_Blue9Cone_GrabCone_Back extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetFieldOrientation(),
-      new CalibrateLiftAtStartOfMatch(),
+      new CalibrateLiftAtStartOfMatch(Constants.liftStartingPOS),
       Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelConePOS)),
          new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
      new setLiftPosition(Constants.liftMaxLevelConeDip),

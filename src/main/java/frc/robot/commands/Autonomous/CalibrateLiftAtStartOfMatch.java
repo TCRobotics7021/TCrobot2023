@@ -12,14 +12,17 @@ import frc.robot.RobotContainer;
 
 public class CalibrateLiftAtStartOfMatch extends CommandBase {
   /** Creates a new CalibrateLiftAtStartOfMatch. */
-  public CalibrateLiftAtStartOfMatch() {
+  double liftStartingHeight;
+
+  public CalibrateLiftAtStartOfMatch(double liftStartingHeight) {
     addRequirements(RobotContainer.s_Lift);
+    this.liftStartingHeight = liftStartingHeight;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Lift.calibrateEncoder(Constants.liftStartingPOS);
+    RobotContainer.s_Lift.calibrateEncoder(liftStartingHeight);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

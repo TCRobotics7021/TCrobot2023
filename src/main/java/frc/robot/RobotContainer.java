@@ -37,6 +37,7 @@ import frc.robot.commands.Autonomous.Auto_Red1Cone_GrabCone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red1Cone_PrepareForPickUp;
 import frc.robot.commands.Autonomous.Auto_Red_9Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Red_1Cone_Climb;
+import frc.robot.commands.Autonomous.Auto_Red_2Cube_GrabCone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Red_5_Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Cube_Limelight_Test;
 import frc.robot.commands.Autonomous.DriveForward;
@@ -140,6 +141,7 @@ public class RobotContainer {
     //     //  m_Chooser.addOption("Red_1Cone_PrepareForPickUp", new Auto_Red1Cone_PrepareForPickUp());
 
         m_Chooser.addOption("Blue_2Cube_Cone_Cone", new Auto_Blue_2Cube_GrabCone_GrabCone());
+        m_Chooser.addOption("Red_2Cube_Cone_Cone", new Auto_Red_2Cube_GrabCone_GrabCone());
         m_Chooser.addOption("RedTest", new Auto_RedTest5());
         m_Chooser.addOption("BlueTest", new Auto_BlueTest());
 

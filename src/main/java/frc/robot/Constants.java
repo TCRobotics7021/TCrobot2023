@@ -204,8 +204,8 @@ public final class Constants {
     public static double minSpeedPos = .2;
     public static double maxSpeedPos = .5;
 
-    public static double minAutoRot = .2;
-    public static double maxAutoRot = 1;
+    public static double minAutoRot = .15;
+    public static double maxAutoRot = .9;
 
     public static double errorTolerance = .02;
 

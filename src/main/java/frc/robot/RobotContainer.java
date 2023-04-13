@@ -27,10 +27,11 @@ import frc.robot.commands.Autonomous.Auto_Blue_1Cone_GrabCone_GrabCube;
 import frc.robot.commands.Autonomous.Auto_Blue_2Cube_GrabCone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_GrabCube_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_Overline_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue_8Cube_GrabCone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Blue_9Cone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red9Cone8Cube;
 import frc.robot.commands.Autonomous.Auto_Red9Cone_GrabCone_Climb;
-import frc.robot.commands.Autonomous.Auto_RedTest5;
+import frc.robot.commands.Autonomous.Auto_Red4Cone_GrabCone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red1Cone2Cube;
 import frc.robot.commands.Autonomous.Auto_Red1Cone_GrabCone_Back;
 import frc.robot.commands.Autonomous.Auto_Red1Cone_GrabCone_Climb;
@@ -39,11 +40,13 @@ import frc.robot.commands.Autonomous.Auto_Red_9Cone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Red_1Cone_Climb;
 import frc.robot.commands.Autonomous.Auto_Red_2Cube_GrabCone_GrabCone;
 import frc.robot.commands.Autonomous.Auto_Red_5_Cube_Overline_Climb;
+import frc.robot.commands.Autonomous.Auto_Red_8Cube_GrabCone_GrabCone;
 import frc.robot.commands.Autonomous.Cube_Limelight_Test;
 import frc.robot.commands.Autonomous.DriveForward;
 import frc.robot.commands.Autonomous.Place_Cone_Drive_Over;
 import frc.robot.commands.Autonomous.Auto_Blue1Cone2Cube;
 import frc.robot.commands.Autonomous.Auto_Blue1Cone_GrabCone_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue6Cone_GrabCone_Climb;
 import frc.robot.commands.Drive.AdvAutoMove;
 import frc.robot.commands.Drive.AdvAutoMove2;
 import frc.robot.commands.Drive.AdvAutoMove3;
@@ -142,8 +145,12 @@ public class RobotContainer {
 
         m_Chooser.addOption("Blue_2Cube_Cone_Cone", new Auto_Blue_2Cube_GrabCone_GrabCone());
         m_Chooser.addOption("Red_2Cube_Cone_Cone", new Auto_Red_2Cube_GrabCone_GrabCone());
-        m_Chooser.addOption("RedTest", new Auto_RedTest5());
-        m_Chooser.addOption("BlueTest", new Auto_BlueTest());
+        m_Chooser.addOption("Red_8Cube_Cone_Cone", new Auto_Red_8Cube_GrabCone_GrabCone());
+        m_Chooser.addOption("Blue_8Cube_Cone_Cone", new Auto_Blue_8Cube_GrabCone_GrabCone());
+
+         m_Chooser.addOption("Red 4Cone Cone Climb", new Auto_Red4Cone_GrabCone_Climb());
+         m_Chooser.addOption("Blue 6Cone Cone Climb", new Auto_Blue6Cone_GrabCone_Climb());
+       // m_Chooser.addOption("BlueTest", new Auto_BlueTest());
 
          
 

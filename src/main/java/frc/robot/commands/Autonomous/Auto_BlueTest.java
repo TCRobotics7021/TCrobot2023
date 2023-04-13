@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.commands.Arm.setArmPosition;
+import frc.robot.commands.Autonomous.CalibrateLiftAtStartOfMatch;
 import frc.robot.commands.Drive.AdvAutoMove;
 import frc.robot.commands.Drive.ResetFieldOrientation;
 import frc.robot.commands.Gantry.setGantryPosition;

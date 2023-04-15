@@ -22,15 +22,15 @@ import frc.robot.commands.PickPlace.RetrieveCube;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class Auto_Blue_2Cube_GrabCone_GrabCone extends SequentialCommandGroup {
+public class Auto_Blue_2Cube_LowCone_LowCone extends SequentialCommandGroup {
   /** Creates a new Auto_Blue_2Cube_GrabCube_GrabCube. */
-  public Auto_Blue_2Cube_GrabCone_GrabCone() {
+  public Auto_Blue_2Cube_LowCone_LowCone() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetFieldOrientation(),
      // new CalibrateLiftAtStartOfMatch(850), //change
-      Commands.parallel(new setLiftPosition(Constants.liftAutoCube), //leave for now
+      Commands.parallel(new setLiftPosition(Constants.liftAutoCubePOS), //leave for now
          new setGantryPosition(Constants.gantryAutoUpperLevelPOS), new setArmPosition(Constants.armAutoExtendedPOS)),
       new setGripperPosition(Constants.openGripperPOS),
       Commands.parallel(

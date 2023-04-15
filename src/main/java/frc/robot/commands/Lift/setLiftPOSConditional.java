@@ -43,7 +43,7 @@ public class setLiftPOSConditional extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   if(RobotContainer.s_Arm.currentPosition() + RobotContainer.s_Gantry.currentPosition() < 650){
+   if(RobotContainer.s_Swerve.gettempPose().getX() > .5){
     RobotContainer.s_Lift.setPosition(setPosition);
    }
     if (Math.abs(RobotContainer.s_Lift.currentPosition() - setPosition) <= Constants.liftPosTolerance) {

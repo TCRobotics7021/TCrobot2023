@@ -17,22 +17,26 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Arm.HomeArm;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Arm.setArmSpeed;
-import frc.robot.commands.Autonomous.Auto_Blue9Cone8Cube;
-import frc.robot.commands.Autonomous.Auto_Blue9Cone_PrepareForPickUP;
-import frc.robot.commands.Autonomous.Auto_Blue_1Cone_GrabCone;
+import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_LowCone;
+import frc.robot.commands.Autonomous.Auto_Blue_2Cube_LowCone_LowCone;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_Overline_Climb;
-import frc.robot.commands.Autonomous.Auto_Blue_9Cone_Climb;
-import frc.robot.commands.Autonomous.Auto_Red9Cone8Cube;
-import frc.robot.commands.Autonomous.Auto_Red9Cone_GrabCone_Climb;
-import frc.robot.commands.Autonomous.Auto_Red1Cone2Cube;
-import frc.robot.commands.Autonomous.Auto_Red1Cone_PrepareForPickUp;
-import frc.robot.commands.Autonomous.Auto_Red_9Cone_GrabCone;
-import frc.robot.commands.Autonomous.Auto_Red_1Cone_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue_8Cube_LowCone_LowCone;
+import frc.robot.commands.Autonomous.Auto_Blue_9Cone_HighCube_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue_9Cone_HighCube_LowCube;
+import frc.robot.commands.Autonomous.Auto_Red4Cone_HoldCone_Climb;
+import frc.robot.commands.Autonomous.Auto_Red_1Cone_HighCube_LowCone;
+import frc.robot.commands.Autonomous.Auto_Red_2Cube_LowCone_LowCone;
 import frc.robot.commands.Autonomous.Auto_Red_5_Cube_Overline_Climb;
-import frc.robot.commands.Autonomous.Cube_Limelight_Test;
+import frc.robot.commands.Autonomous.Auto_Red_8Cube_LowCone_LowCone;
+import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_Climb;
+import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_LowCone;
+import frc.robot.commands.Autonomous.DriveForward;
 import frc.robot.commands.Autonomous.Place_Cone_Drive_Over;
-import frc.robot.commands.Autonomous.Auto_Blue1Cone2Cube;
-import frc.robot.commands.Autonomous.Auto_Blue1Cone_GrabCone_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue6Cone_HoldCone_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_Climb;
+import frc.robot.commands.Drive.AdvAutoMove;
+import frc.robot.commands.Drive.AdvAutoMove2;
+import frc.robot.commands.Drive.AdvAutoMove3;
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
 import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.TeleopSwerve;
@@ -107,20 +111,31 @@ public class RobotContainer {
 
       
         m_Chooser.setDefaultOption("Place_Cone_Drive_Over_Line", new Place_Cone_Drive_Over());
-        m_Chooser.addOption("Blue_1Cone_2Cube", new Auto_Blue1Cone2Cube());
-         m_Chooser.addOption("Blue_9Cone_8Cube", new Auto_Blue9Cone8Cube());
-        m_Chooser.addOption("Blue_5Cube_Overline_Climb", new Auto_Blue_5Cube_Overline_Climb());
-        m_Chooser.addOption("Blue_1Cone_GrabCone_Climb", new Auto_Blue1Cone_GrabCone_Climb());
-        m_Chooser.addOption("Blue_1Cone_GrabCone_Back", new Auto_Blue_1Cone_GrabCone());
-         m_Chooser.addOption("Blue_9Cone_Climb", new Auto_Blue_9Cone_Climb());
-         m_Chooser.addOption("Blue_9Cone_PrepareForPickUp", new Auto_Blue9Cone_PrepareForPickUP());
-         m_Chooser.addOption("Red_9Cone_8Cube", new Auto_Red9Cone8Cube());
-         m_Chooser.addOption("Red_1Cone_2Cube", new Auto_Red1Cone2Cube());
-        m_Chooser.addOption("Red_5Cube_Overline_Climb", new Auto_Red_5_Cube_Overline_Climb());
-        m_Chooser.addOption("Red_9Cone_GrabCone_Climb", new Auto_Red9Cone_GrabCone_Climb());
-        m_Chooser.addOption("Red_9Cone_GrabCone_Back", new Auto_Red_9Cone_GrabCone());
-         m_Chooser.addOption("Red_1Cone_Climb", new Auto_Red_1Cone_Climb());
-         m_Chooser.addOption("Red_1Cone_PrepareForPickUp", new Auto_Red1Cone_PrepareForPickUp());
+
+      
+        m_Chooser.addOption("Red_1Cone_HighCube_LowCone", new Auto_Red_1Cone_HighCube_LowCone());
+        m_Chooser.addOption("Red_2Cube_LowCone_LowCone", new Auto_Red_2Cube_LowCone_LowCone());
+        m_Chooser.addOption("Red 4Cone HoldCone Climb", new Auto_Red4Cone_HoldCone_Climb());
+        m_Chooser.addOption("Red 5Cube Overline Climb", new Auto_Red_5_Cube_Overline_Climb());
+        m_Chooser.addOption("Red_8Cube_LowCone_LowCone", new Auto_Red_8Cube_LowCone_LowCone());
+        m_Chooser.addOption("Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone());
+        m_Chooser.addOption("Red_9Cone_HighCube_Climb", new Auto_Red_9Cone_HighCube_Climb());
+
+    
+        m_Chooser.addOption("Blue_1Cone_HighCube_LowCone", new Auto_Blue_1Cone_HighCube_LowCone());
+        m_Chooser.addOption("Blue_1Cone_HighCube_Climb", new Auto_Blue_1Cone_HighCube_Climb());
+        m_Chooser.addOption("Blue_2Cube_LowCone_LowCone", new Auto_Blue_2Cube_LowCone_LowCone());
+        m_Chooser.addOption("Blue 5Cube Overline Climb", new Auto_Blue_5Cube_Overline_Climb());
+        m_Chooser.addOption("Blue 6Cone HoldCone Climb", new Auto_Blue6Cone_HoldCone_Climb());
+        m_Chooser.addOption("Blue_8Cube_LowCone_LowCone", new Auto_Blue_8Cube_LowCone_LowCone());
+        m_Chooser.addOption("Blue_9Cone_HighCube_LowCone", new Auto_Blue_9Cone_HighCube_LowCube());
+      
+
+   
+       
+
+         
+
         SmartDashboard.putData("Auto Chooser", m_Chooser);
 
         
@@ -142,9 +157,9 @@ public class RobotContainer {
         
         
         
-       // new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
-        //new JoystickButton(RightStick, 11).onTrue(new InstantCommand(() -> s_Candle.setMode(1)));
-       // new JoystickButton(RightStick, 12).onTrue(new InstantCommand(() -> s_Candle.setMode(2)));
+     //  new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
+        new JoystickButton(RightStick, 11).onTrue(new InstantCommand(() -> s_Candle.setMode(6)));
+       new JoystickButton(RightStick, 12).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
       //  new JoystickButton(OpPanel, 7).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
        // new JoystickButton(RightStick, 14).onTrue(new InstantCommand(() -> s_Candle.setMode(4)));
         //new JoystickButton(RightStick, 15).onTrue(new InstantCommand(() -> s_Candle.setMode(5)));
@@ -169,10 +184,16 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
         new JoystickButton(OpPanel, 6).onTrue(new PrepareForSideStation());
 
+        
+       // new JoystickButton(OpPanel, 9).onTrue(new DriveForward());
+
+        new JoystickButton(OpPanel, 8).onTrue(new AdvAutoMove(2, 0, 180, .1, .5, .1, 5, true).withTimeout(5));
+        
+
        // new JoystickButton(OpPanel, 8).onTrue(new Auto_Blue9Cone8Cube());
 
        // new JoystickButton(OpPanel, 9).onTrue(new GetOnChargeStationFromBack());
-        new JoystickButton(OpPanel, 9).onTrue(new Cube_Limelight_Test());
+      //  new JoystickButton(OpPanel, 9).onTrue(new Cube_Limelight_Test());
 
         new JoystickButton(OpPanel, 12).whileTrue(new releaseAllBreaks());
 

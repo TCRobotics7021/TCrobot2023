@@ -22,9 +22,9 @@ public final class Constants {
 
     //max and min lift output
     public static double liftOutputMax = 1;
-    public static double liftOutputMin = -.8;
-    public static double liftJogUp = .25;
-    public static double liftJogDown = -.25;
+    public static double liftOutputMin = -.9;
+    public static double liftJogUp = .4;
+    public static double liftJogDown = -.5;
     //max and min motor output
     
 
@@ -54,18 +54,18 @@ public final class Constants {
 
     //max and min lift output
     public static double gripperOutputMax = .3;
-    public static double gripperOutputMin = -.4;
+    public static double gripperOutputMin = -.5;
 
     //upper & lower limits
-    public static double gripperLowerLimit = 41;
-    public static double gripperUpperLimit = 329;
+    public static double gripperLowerLimit = 0;
+    public static double gripperUpperLimit = 429;
 
     //lift conversion
-    public static double gripperConversion = 112.7455;
+    public static double gripperConversion = 77.6282;
 
     //upper and lower limit switch position / homing/calibrating values
-    public static double gripperLowerLimitSwitchPos = 40;
-    public static double gripperUpperLimitSwitchPos = 330;
+    public static double gripperLowerLimitSwitchPos = 0;
+    public static double gripperUpperLimitSwitchPos = 430;
 
     public static final double gripperPosTolerance = 5;
 
@@ -111,9 +111,10 @@ public final class Constants {
         
     //GripperPOS
         public static double gripperCubeGrabPOS = 126;
-        public static double gripperConeGrabPOS = 41;
-        public static double openGripperPOS = 329;
-        public static double gripperTimeout = .5;
+        public static double gripperConeGrabPOS = 24;
+        public static double openGripperPOS = 429;
+        public static double gripperTimeout = .25;
+        public static double gripperTestTimeout = .8;
         public static double gripperTimeoutCube = .1;
         public static double GripperStartingConeGripPos = 146;
         //gripper cali positions
@@ -124,6 +125,8 @@ public final class Constants {
         public static double armRetractedPOS = 5;
         public static double armMidLevelPOS = 105;
         public static double armExtendedPOS = 500;
+        public static double armAutoExtendedPOS = 400; //cube for autos
+        public static double armAutoLowerLevelPOS = 150; //cube for autos
         public static double armPickPOS = 350;
         public static double armSideStation = 5;
 
@@ -133,6 +136,7 @@ public final class Constants {
         public static double gantryPickPOS = 50;
         public static double gantryMidLevelPOS = 500;
         public static double gantryUpperLevelPOS = 650;
+        public static double gantryAutoUpperLevelPOS = 550;
         public static double gantryClimbPOS = 1;
         public static double gantrySubPOS = 300;
         public static double gantrySideStation = 200;
@@ -145,6 +149,7 @@ public final class Constants {
         public static double liftMidLevelCubePOS = 700;
         public static double liftMidLevelConePOS = 900; 
         public static double liftMaxLevelCubePOS = 1075;
+        public static double liftAutoCubePOS = 960;
         public static double liftMaxLevelConePOS = 1167;
         public static double liftSubstationPOS = 940;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
@@ -199,15 +204,15 @@ public final class Constants {
     public static double minSpeedPos = .2;
     public static double maxSpeedPos = .5;
 
-    public static double minAutoRot = .2;
-    public static double maxAutoRot = .6;
+    public static double minAutoRot = .15;
+    public static double maxAutoRot = .9;
 
     public static double errorTolerance = .02;
 
 
     //P vaules
     public static final double autonomousMove_P = 1;
-    public static final double autoRotate_P = .02;
+    public static final double autoRotate_P = .015;
 
     public static final double autoRotateTolerance = 2;
 
@@ -329,7 +334,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 1;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(347.344);//13.53
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(347.16);//13.53
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -339,7 +344,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 2;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(274.394);//85.86
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(274.13);//85.86
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -349,7 +354,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 3;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(40.869);//306.91
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(39.99);//306.91
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -359,7 +364,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 4;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(68.994);//286.78
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(69.25);//286.78
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

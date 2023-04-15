@@ -31,7 +31,7 @@ public class Auto_Red_5_Cube_Overline_Climb extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetFieldOrientation(),
-      new CalibrateLiftAtStartOfMatch(),
+      new CalibrateLiftAtStartOfMatch(Constants.liftStartingPOS),
       Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelCubePOS)),
          new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
       new setGripperPosition(Constants.openGripperPOS),

@@ -26,10 +26,10 @@ public class Candle extends SubsystemBase {
   private Animation mode0 = null;
   private Animation mode1 = new FireAnimation(.5, .7, LedCount, .7, .5);
   private Animation mode2 = new LarsonAnimation(0, 255, 46, 0, 1, LedCount, BounceMode.Front, 3);
-  private Animation mode3 = new StrobeAnimation(240, 10, 180, 0, 98.0/256.0,LedCount);
+  private Animation mode3 = new StrobeAnimation(240, 10, 180, 0, 98.0/256.0,LedCount);//PURPLE
   private Animation mode4 = new RgbFadeAnimation(.7,98.0/256.0, LedCount);
   private Animation mode5 = new RainbowAnimation(.5, 1, LedCount);
-  private Animation mode6 = new StrobeAnimation(255, 255, 0, 0, 98.0/256.0, LedCount);
+  private Animation mode6 = new StrobeAnimation(255, 255, 0, 0, 98.0/256.0, LedCount);//YELLOW
 
 
   public Candle() {

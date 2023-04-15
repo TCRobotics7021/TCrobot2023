@@ -2,28 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Autonomous;
-
-import java.io.Console;
+package frc.robot.commands.UselessCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
-public class CalibrateLiftAtStartOfMatch extends CommandBase {
-  /** Creates a new CalibrateLiftAtStartOfMatch. */
-  double liftStartingHeight;
-
-  public CalibrateLiftAtStartOfMatch(double liftStartingHeight) {
-    addRequirements(RobotContainer.s_Lift);
-    this.liftStartingHeight = liftStartingHeight;
+public class Blank_Command extends CommandBase {
+  /** Creates a new Blank_Command. */
+  public Blank_Command() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    RobotContainer.s_Lift.calibrateEncoder(liftStartingHeight);
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -36,6 +27,6 @@ public class CalibrateLiftAtStartOfMatch extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

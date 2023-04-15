@@ -149,7 +149,7 @@ public final class Constants {
         public static double liftMidLevelCubePOS = 700;
         public static double liftMidLevelConePOS = 900; 
         public static double liftMaxLevelCubePOS = 1075;
-        public static double liftAutoCubePOS = 900;
+        public static double liftAutoCubePOS = 960;
         public static double liftMaxLevelConePOS = 1167;
         public static double liftSubstationPOS = 940;
         public static double liftSubstationBumpingUpwardsPosition = 1000;

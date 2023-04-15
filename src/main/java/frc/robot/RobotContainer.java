@@ -21,14 +21,19 @@ import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_LowCone;
 import frc.robot.commands.Autonomous.Auto_Blue_2Cube_LowCone_LowCone;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_8Cube_LowCone_LowCone;
+import frc.robot.commands.Autonomous.Auto_Blue_9Cone_HighCube_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue_9Cone_HighCube_LowCube;
 import frc.robot.commands.Autonomous.Auto_Red4Cone_HoldCone_Climb;
+import frc.robot.commands.Autonomous.Auto_Red_1Cone_HighCube_LowCone;
 import frc.robot.commands.Autonomous.Auto_Red_2Cube_LowCone_LowCone;
 import frc.robot.commands.Autonomous.Auto_Red_5_Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Auto_Red_8Cube_LowCone_LowCone;
+import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_Climb;
 import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_LowCone;
 import frc.robot.commands.Autonomous.DriveForward;
 import frc.robot.commands.Autonomous.Place_Cone_Drive_Over;
 import frc.robot.commands.Autonomous.Auto_Blue6Cone_HoldCone_Climb;
+import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_Climb;
 import frc.robot.commands.Drive.AdvAutoMove;
 import frc.robot.commands.Drive.AdvAutoMove2;
 import frc.robot.commands.Drive.AdvAutoMove3;
@@ -107,18 +112,24 @@ public class RobotContainer {
       
         m_Chooser.setDefaultOption("Place_Cone_Drive_Over_Line", new Place_Cone_Drive_Over());
 
-        m_Chooser.addOption("Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone());
+      
+        m_Chooser.addOption("Red_1Cone_HighCube_LowCone", new Auto_Red_1Cone_HighCube_LowCone());
         m_Chooser.addOption("Red_2Cube_LowCone_LowCone", new Auto_Red_2Cube_LowCone_LowCone());
         m_Chooser.addOption("Red 4Cone HoldCone Climb", new Auto_Red4Cone_HoldCone_Climb());
         m_Chooser.addOption("Red 5Cube Overline Climb", new Auto_Red_5_Cube_Overline_Climb());
         m_Chooser.addOption("Red_8Cube_LowCone_LowCone", new Auto_Red_8Cube_LowCone_LowCone());
+        m_Chooser.addOption("Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone());
+        m_Chooser.addOption("Red_9Cone_HighCube_Climb", new Auto_Red_9Cone_HighCube_Climb());
 
     
         m_Chooser.addOption("Blue_1Cone_HighCube_LowCone", new Auto_Blue_1Cone_HighCube_LowCone());
+        m_Chooser.addOption("Blue_1Cone_HighCube_Climb", new Auto_Blue_1Cone_HighCube_Climb());
         m_Chooser.addOption("Blue_2Cube_LowCone_LowCone", new Auto_Blue_2Cube_LowCone_LowCone());
         m_Chooser.addOption("Blue 5Cube Overline Climb", new Auto_Blue_5Cube_Overline_Climb());
         m_Chooser.addOption("Blue 6Cone HoldCone Climb", new Auto_Blue6Cone_HoldCone_Climb());
         m_Chooser.addOption("Blue_8Cube_LowCone_LowCone", new Auto_Blue_8Cube_LowCone_LowCone());
+        m_Chooser.addOption("Blue_9Cone_HighCube_LowCone", new Auto_Blue_9Cone_HighCube_LowCube());
+      
 
    
        

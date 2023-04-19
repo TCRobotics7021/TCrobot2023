@@ -44,7 +44,7 @@ public class Auto_Red4Cone_HoldCone_Climb extends SequentialCommandGroup {
     Commands.parallel(new AdvAutoMove(4.4, 0, 180, .4, .6, .1, 2, false),
       Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), 
             new setLiftPosition(Constants.liftBottomPOS))),
-      new AdvAutoMove(4.9, 0, 180, .1, .3, .1, 2, false),
+      new AdvAutoMove(5.5, 0, 180, .1, .3, .1, 2, false),
       new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(Constants.gripperTimeoutCube),
       //new PrepareForClimb(),
       Commands.parallel(new RetrieveCone(),

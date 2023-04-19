@@ -25,7 +25,7 @@ public class Auto_Blue_8Cube_LowCone_LowCone extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new ResetFieldOrientation(),
-      // new CalibrateLiftAtStartOfMatch(850), //change
+      new CalibrateLiftAtStartOfMatch(850), //change
        Commands.parallel(new setLiftPosition(Constants.liftAutoCubePOS), //leave for now
           new setGantryPosition(Constants.gantryAutoUpperLevelPOS), new setArmPosition(Constants.armAutoExtendedPOS)),
        new setGripperPosition(Constants.openGripperPOS),

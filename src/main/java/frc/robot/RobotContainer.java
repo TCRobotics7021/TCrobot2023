@@ -89,7 +89,6 @@ public class RobotContainer {
     public final static Gripper s_Gripper = new Gripper();
     public final static Gantry s_Gantry = new Gantry();
     public final static Arm s_Arm = new Arm();
-    public final static Candle s_Candle = new Candle();
    // public final static CANdleSystem m_candleSubsystem = new CANdleSystem();
     public static boolean EndPlaceCommand = false;
     public static boolean PlaceCommandStarted = false;
@@ -158,8 +157,6 @@ public class RobotContainer {
         
         
      //  new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
-        new JoystickButton(RightStick, 11).onTrue(new InstantCommand(() -> s_Candle.setMode(6)));
-       new JoystickButton(RightStick, 12).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
       //  new JoystickButton(OpPanel, 7).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
        // new JoystickButton(RightStick, 14).onTrue(new InstantCommand(() -> s_Candle.setMode(4)));
         //new JoystickButton(RightStick, 15).onTrue(new InstantCommand(() -> s_Candle.setMode(5)));

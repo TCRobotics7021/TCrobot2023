@@ -41,7 +41,7 @@ public class Auto_Red4Cone_HoldCone_Climb extends SequentialCommandGroup {
   new setLiftPosition(Constants.liftMaxLevelConeDip),
   new setGripperPosition(Constants.openGripperPOS),
       Commands.parallel(Commands.sequence(new DropAndRetract(), new setGantryPosition(Constants.gantryPickPOS)), new DriveOverChargeStation()),
-    Commands.parallel(new AdvAutoMove(4.4, 0, 180, .4, .6, .1, 2, false),
+    Commands.parallel(new AdvAutoMove(4.8, 0, 180, .4, .6, .1, 2, false),
       Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), 
             new setLiftPosition(Constants.liftBottomPOS))),
       new AdvAutoMove(5.5, 0, 180, .1, .3, .1, 2, false),

@@ -245,7 +245,7 @@ public final class Constants {
 
   public static double driveOverState0_StartingSpeed = .5;
   public static double driveOverState1_ClimbingSpeed = .4;
-  public static double driveOverState2_DescendingSpeed = .4;
+  public static double driveOverState2_DescendingSpeed = .3;
 
 
     public static final class Swerve {

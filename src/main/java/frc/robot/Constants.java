@@ -120,6 +120,9 @@ public final class Constants {
         //gripper cali positions
         public static double GripperstartingConePos = 205;
         public static double GripperStartingcubePOS = 205;
+
+        //gripper auto timeout delay
+        public static double GripperCubeDelay = .45;
         
     //ArmPOS
         public static double armRetractedPOS = 5;
@@ -143,6 +146,7 @@ public final class Constants {
     //LiftPOS
         public static double liftStartingPOS = 400;
         public static double liftBottomPOS = 0;
+        public static double liftCubeBottomPos = 25;
         public static double liftConeFlippy = 115;
         public static double liftRetrievePOS = 300;
         public static double liftLowerLevelPOS = 300;
@@ -151,7 +155,7 @@ public final class Constants {
         public static double liftMaxLevelCubePOS = 1075;
         public static double liftAutoCubePOS = 960;
         public static double liftMaxLevelConePOS = 1167;
-        public static double liftSubstationPOS = 940;
+        public static double liftSubstationPOS = 920;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
         public static double liftSideStation = 700;
@@ -194,7 +198,7 @@ public final class Constants {
         public static double setSpeedForArmHome = -.25;
 
 
-        public static double gantryLimitLift = 350;
+        public static double gantryLimitLift = 300;
         public static double liftLimitGantry = 250;
    
     //DRIVE SECTION
@@ -243,8 +247,8 @@ public final class Constants {
   public static double climbState3_REVspeed = -.11;
   public static double climbState4_FWDspeed = .11;
 
-  public static double driveOverState0_StartingSpeed = .4;
-  public static double driveOverState1_ClimbingSpeed = .3;
+  public static double driveOverState0_StartingSpeed = .5;
+  public static double driveOverState1_ClimbingSpeed = .4;
   public static double driveOverState2_DescendingSpeed = .3;
 
 

@@ -18,6 +18,7 @@ import frc.robot.commands.Arm.HomeArm;
 import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Arm.setArmSpeed;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_LowCone;
+import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_LowCone_TEST;
 import frc.robot.commands.Autonomous.Auto_Blue_2Cube_LowCone_LowCone;
 import frc.robot.commands.Autonomous.Auto_Blue_5Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_8Cube_LowCone_LowCone;
@@ -30,6 +31,7 @@ import frc.robot.commands.Autonomous.Auto_Red_5_Cube_Overline_Climb;
 import frc.robot.commands.Autonomous.Auto_Red_8Cube_LowCone_LowCone;
 import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_Climb;
 import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_LowCone;
+import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_LowCone_TEST;
 import frc.robot.commands.Autonomous.DriveForward;
 import frc.robot.commands.Autonomous.Place_Cone_Drive_Over;
 import frc.robot.commands.Autonomous.Auto_Blue6Cone_HoldCone_Climb;
@@ -89,7 +91,6 @@ public class RobotContainer {
     public final static Gripper s_Gripper = new Gripper();
     public final static Gantry s_Gantry = new Gantry();
     public final static Arm s_Arm = new Arm();
-    public final static Candle s_Candle = new Candle();
    // public final static CANdleSystem m_candleSubsystem = new CANdleSystem();
     public static boolean EndPlaceCommand = false;
     public static boolean PlaceCommandStarted = false;
@@ -118,18 +119,21 @@ public class RobotContainer {
         m_Chooser.addOption("Red 4Cone HoldCone Climb", new Auto_Red4Cone_HoldCone_Climb());
         m_Chooser.addOption("Red 5Cube Overline Climb", new Auto_Red_5_Cube_Overline_Climb());
         m_Chooser.addOption("Red_8Cube_LowCone_LowCone", new Auto_Red_8Cube_LowCone_LowCone());
-        m_Chooser.addOption("Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone());
+      //  m_Chooser.addOption("Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone());
+        m_Chooser.addOption("TEST_Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone_TEST());
         m_Chooser.addOption("Red_9Cone_HighCube_Climb", new Auto_Red_9Cone_HighCube_Climb());
-
+        
     
-        m_Chooser.addOption("Blue_1Cone_HighCube_LowCone", new Auto_Blue_1Cone_HighCube_LowCone());
+        //m_Chooser.addOption("Blue_1Cone_HighCube_LowCone", new Auto_Blue_1Cone_HighCube_LowCone());
+        m_Chooser.addOption("TEST_Blue_1Cone_HighCube_LowCone", new Auto_Blue_1Cone_HighCube_LowCone_TEST());
         m_Chooser.addOption("Blue_1Cone_HighCube_Climb", new Auto_Blue_1Cone_HighCube_Climb());
         m_Chooser.addOption("Blue_2Cube_LowCone_LowCone", new Auto_Blue_2Cube_LowCone_LowCone());
         m_Chooser.addOption("Blue 5Cube Overline Climb", new Auto_Blue_5Cube_Overline_Climb());
         m_Chooser.addOption("Blue 6Cone HoldCone Climb", new Auto_Blue6Cone_HoldCone_Climb());
         m_Chooser.addOption("Blue_8Cube_LowCone_LowCone", new Auto_Blue_8Cube_LowCone_LowCone());
         m_Chooser.addOption("Blue_9Cone_HighCube_LowCone", new Auto_Blue_9Cone_HighCube_LowCube());
-      
+        
+        
 
    
        
@@ -158,8 +162,6 @@ public class RobotContainer {
         
         
      //  new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
-        new JoystickButton(RightStick, 11).onTrue(new InstantCommand(() -> s_Candle.setMode(6)));
-       new JoystickButton(RightStick, 12).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
       //  new JoystickButton(OpPanel, 7).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
        // new JoystickButton(RightStick, 14).onTrue(new InstantCommand(() -> s_Candle.setMode(4)));
         //new JoystickButton(RightStick, 15).onTrue(new InstantCommand(() -> s_Candle.setMode(5)));

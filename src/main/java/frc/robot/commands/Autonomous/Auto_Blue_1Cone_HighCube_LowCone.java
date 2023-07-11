@@ -43,7 +43,7 @@ public class Auto_Blue_1Cone_HighCube_LowCone extends SequentialCommandGroup {
         Commands.sequence( new AdvAutoMove(2.8, -.15, -5, .5, .5, .2, 5, true),
           new AdvAutoMove(4.3, -.4, -175, .1, .3, .1, 5, false))),
         Commands.parallel(new AdvAutoMove(4.9, -.4, 180, .3, .3, .1, 5, false),
-          Commands.sequence(new Blank_Command().withTimeout(.35), new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout))),
+          Commands.sequence(new Blank_Command().withTimeout(Constants.GripperCubeDelay), new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout))),
         Commands.parallel(Commands.sequence(new setLiftPosition(Constants.liftAutoCubePOS), 
           Commands.parallel(new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS))),
                Commands.sequence( new AdvAutoMove(3, -.2, -5, .2, .4, .2, 5, false), 
@@ -53,13 +53,13 @@ public class Auto_Blue_1Cone_HighCube_LowCone extends SequentialCommandGroup {
        new setLiftPOSConditional(Constants.liftBottomPOS)), 
               Commands.sequence(new AdvAutoMove(3.5, -.15, 0, .5, .5, .2, 5, false), 
               new AdvAutoMove(4, 0, 130, .1, .3, .1, 5, false))),
-    new AdvAutoMove(5, -1.15, 135, .2, .4, .1, 5, false),
-    new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(Constants.gripperTimeout),
-    Commands.parallel(Commands.sequence(new setLiftPosition(Constants.liftLowerLevelPOS), new setArmPosition(Constants.armAutoLowerLevelPOS)),
-    Commands.sequence( new AdvAutoMove(3.5, -.6, 0, .2, .4, .2, 5, false), 
-           new AdvAutoMove(0.4, -.4, 0, .5, .8, .2, 5, false))),
-    new setGripperPosition(Constants.openGripperPOS),
-    new AdvAutoMove(3, -.45, 0, .2, .4, .2, .5, false)
+    new AdvAutoMove(5, -1.15, 135, .2, .4, .1, 5, false)
+    // new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(Constants.gripperTimeout),
+    // Commands.parallel(Commands.sequence(new setLiftPosition(Constants.liftLowerLevelPOS), new setArmPosition(Constants.armAutoLowerLevelPOS)),
+    // Commands.sequence( new AdvAutoMove(3.5, -.6, 0, .2, .4, .2, 5, false), 
+    //        new AdvAutoMove(0.4, -.4, 0, .5, .8, .2, 5, false))),
+    // new setGripperPosition(Constants.openGripperPOS),
+    // new AdvAutoMove(3, -.45, 0, .2, .4, .2, .5, false)
        
       );
   }

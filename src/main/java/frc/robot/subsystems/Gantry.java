@@ -167,10 +167,10 @@ SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Consta
     
 
   // updatePID();
-    SmartDashboard.putNumber("Gantry Stator Current", m_Gantry.getStatorCurrent());
+    //SmartDashboard.putNumber("Gantry Stator Current", m_Gantry.getStatorCurrent());
     SmartDashboard.putBoolean("GantryUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("GantryLowerLimit", lowerLimit.get());
-    SmartDashboard.putNumber("Gantry Position", m_Gantry.getSelectedSensorPosition()/Constants.GantryConversion);
+   // SmartDashboard.putNumber("Gantry Position", m_Gantry.getSelectedSensorPosition()/Constants.GantryConversion);
     
   }
 }

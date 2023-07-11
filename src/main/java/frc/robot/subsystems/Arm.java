@@ -154,10 +154,10 @@ SmartDashboard.putNumber("Distance", m_Arm.getSelectedSensorPosition()/Constants
     }
  
     //updatePID();
-    SmartDashboard.putNumber("Arm Stator Current", m_Arm.getStatorCurrent());
+   // SmartDashboard.putNumber("Arm Stator Current", m_Arm.getStatorCurrent());
     SmartDashboard.putBoolean("ArmUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("ArmLowerLimit", lowerLimit.get());
-    SmartDashboard.putNumber("Arm Position", m_Arm.getSelectedSensorPosition()/Constants.ArmConversion);
+    //SmartDashboard.putNumber("Arm Position", m_Arm.getSelectedSensorPosition()/Constants.ArmConversion);
  
  
   }

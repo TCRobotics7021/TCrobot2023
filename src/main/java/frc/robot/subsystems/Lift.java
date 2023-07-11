@@ -157,9 +157,9 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());
    // SmartDashboard.putNumber("Output", m_Lift.getMotorOutputPercent());
-   SmartDashboard.putNumber("Lift Stator Current", m_Lift.getStatorCurrent());
+  // SmartDashboard.putNumber("Lift Stator Current", m_Lift.getStatorCurrent());
  
-   SmartDashboard.putNumber("Lift Position", m_Lift.getSelectedSensorPosition()/Constants.liftConversion);
+  // SmartDashboard.putNumber("Lift Position", m_Lift.getSelectedSensorPosition()/Constants.liftConversion);
  
   }
 }

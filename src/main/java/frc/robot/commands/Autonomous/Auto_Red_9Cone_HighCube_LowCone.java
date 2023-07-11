@@ -43,7 +43,7 @@ public class Auto_Red_9Cone_HighCube_LowCone extends SequentialCommandGroup {
         Commands.sequence( new AdvAutoMove(2.8, .15, 5, .5, .5, .2, 5, true),
           new AdvAutoMove(4.3, .4, 175, .1, .3, .1, 5, false))),
         Commands.parallel(new AdvAutoMove(4.9, .4, -180, .3, .3, .1, 5, false),
-          Commands.sequence(new Blank_Command().withTimeout(.35), new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout))),
+          Commands.sequence(new Blank_Command().withTimeout(Constants.GripperCubeDelay), new setGripperPosition(Constants.gripperCubeGrabPOS).withTimeout(Constants.gripperTimeout))),
         Commands.parallel(Commands.sequence(new setLiftPosition(Constants.liftAutoCubePOS), 
           Commands.parallel(new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS))),
                Commands.sequence( new AdvAutoMove(3, .15, 5, .2, .4, .2, 5, false), 

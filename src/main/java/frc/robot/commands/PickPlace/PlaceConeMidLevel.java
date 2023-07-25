@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Drive.AutonomousMove;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Lift.setLiftPosition;
@@ -30,7 +29,7 @@ public class PlaceConeMidLevel extends SequentialCommandGroup {
     // new MoveToPosReletiveToTarget(0.56,-0.75 , 0),
     new PlaceCommandStart(),
     new setLiftPosition(Constants.liftMidLevelConePOS),
-    Commands.parallel(new setArmPosition(Constants.armMidLevelPOS), new setGantryPosition(Constants.gantryUpperLevelPOS)),
+    Commands.parallel(new setGantryPosition(Constants.gantryMidLevelPOS)),
      new ResetEndPlaceCommand()
 
 

@@ -11,7 +11,7 @@ public class releaseAllBreaks extends CommandBase {
   /** Creates a new releaseAllBreaks. */
   public releaseAllBreaks() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Arm);
+
     addRequirements(RobotContainer.s_Gantry);
     addRequirements(RobotContainer.s_Lift);
   }
@@ -19,8 +19,7 @@ public class releaseAllBreaks extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Arm.setSpeed(0);
-    RobotContainer.s_Arm.setCoastMode();
+ 
     RobotContainer.s_Gantry.setSpeed(0);
     RobotContainer.s_Gantry.setCoastMode();
     RobotContainer.s_Lift.setSpeed(0);
@@ -37,7 +36,7 @@ public class releaseAllBreaks extends CommandBase {
   @Override
   public void end(boolean interrupted) {
 
-    RobotContainer.s_Arm.setBrakeMode();
+
     RobotContainer.s_Gantry.setBrakeMode();
     RobotContainer.s_Lift.setBrakeMode();
 

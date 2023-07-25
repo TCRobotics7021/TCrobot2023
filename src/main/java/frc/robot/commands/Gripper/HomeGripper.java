@@ -24,7 +24,8 @@ public class HomeGripper extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.s_Gripper.setSpeed(Constants.setSpeedForGripperHome);
-    RobotContainer.s_Gripper.calibrateEncoder(Constants.gripperLowerLimit);  
+    RobotContainer.s_Gripper.calibrateEncoder(Constants.gripperUpperLimit); 
+
     finished = false;
   }
 
@@ -32,7 +33,7 @@ public class HomeGripper extends CommandBase {
   @Override
   public void execute() {
     
-     if (RobotContainer.s_Gripper.atTopLimit()) {
+     if (RobotContainer.s_Gripper.atBottomLimit()) {
       finished = true; 
      }
   }

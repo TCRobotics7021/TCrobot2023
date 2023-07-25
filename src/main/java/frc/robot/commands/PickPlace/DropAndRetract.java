@@ -7,9 +7,10 @@ package frc.robot.commands.PickPlace;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Arm.setArmPosition;
+
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Gripper.setIntakeSpeed;
 import frc.robot.commands.Lift.setLiftPosition;
 import frc.robot.subsystems.Gripper;
 
@@ -21,9 +22,9 @@ public class DropAndRetract extends SequentialCommandGroup {
   public DropAndRetract() {
     addCommands(
       new ResetEndPlaceCommand(),
-       new setGripperPosition(Constants.openGripperPOS),
-       Commands.parallel(new setArmPosition(Constants.armRetractedPOS), new setGantryPosition(Constants.gantryRetractedPOS)),
-       new setLiftPosition(Constants.liftRetrievePOS),
+       new setGripperPosition(Constants.openGripperPOS), new setIntakeSpeed(.5),
+       Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS)), new setIntakeSpeed(0),
+       new setLiftPosition(Constants.liftRetrievePOS), 
        new PlaceCommandEnd()
 
     );

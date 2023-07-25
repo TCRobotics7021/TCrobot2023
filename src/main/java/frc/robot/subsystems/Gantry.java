@@ -130,11 +130,11 @@ if (SmartDashboard.getNumber("P value", tempP) != tempP) {
   m_Gantry.config_kP(Constants.PIDindex, tempP, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("I value", tempI) != tempI) {
-  tempP = SmartDashboard.getNumber("I value", tempI); 
+  tempI = SmartDashboard.getNumber("I value", tempI); 
   m_Gantry.config_kI(Constants.PIDindex, tempI, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("D value", tempD) != tempD) {
-  tempP = SmartDashboard.getNumber("D value", tempD); 
+  tempD = SmartDashboard.getNumber("D value", tempD); 
   m_Gantry.config_kD(Constants.PIDindex, tempD, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("FWD Peak OutPut", tempPeakFWD) != tempPeakFWD); {
@@ -145,8 +145,8 @@ if (SmartDashboard.getNumber("FWD Peak OutPut", tempPeakFWD) != tempPeakFWD); {
     tempPeakREV = SmartDashboard.getNumber("REV Peak OutPut", tempPeakREV);
     m_Gantry.configPeakOutputReverse(tempPeakREV, Constants.driveSettingTimeout);  
 }
-SmartDashboard.putNumber("Ticks", m_Gantry.getSelectedSensorPosition());
-SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Constants.GantryConversion);
+//SmartDashboard.putNumber("Ticks", m_Gantry.getSelectedSensorPosition());
+//SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Constants.GantryConversion);
 
 }
   @Override
@@ -166,11 +166,11 @@ SmartDashboard.putNumber("Distance", m_Gantry.getSelectedSensorPosition()/Consta
     }
     
 
-  // updatePID();
+   //updatePID();
     //SmartDashboard.putNumber("Gantry Stator Current", m_Gantry.getStatorCurrent());
     SmartDashboard.putBoolean("GantryUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("GantryLowerLimit", lowerLimit.get());
-   // SmartDashboard.putNumber("Gantry Position", m_Gantry.getSelectedSensorPosition()/Constants.GantryConversion);
+   SmartDashboard.putNumber("Gantry Position", m_Gantry.getSelectedSensorPosition()/Constants.GantryConversion);
     
   }
 }

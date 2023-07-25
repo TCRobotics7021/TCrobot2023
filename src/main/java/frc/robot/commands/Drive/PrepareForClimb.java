@@ -7,7 +7,7 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Arm.setArmPosition;
+
 import frc.robot.commands.Autonomous.CalibrateLiftAtStartOfMatch;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
@@ -23,7 +23,7 @@ public class PrepareForClimb extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
     new setLiftPosition(Constants.liftRetrievePOS),
-    Commands.parallel(new setArmPosition(Constants.armRetractedPOS), new setGantryPosition(Constants.gantryClimbPOS), new setGripperPosition(Constants.openGripperPOS)
+    Commands.parallel(new setGantryPosition(Constants.gantryClimbPOS), new setGripperPosition(Constants.openGripperPOS)
     ),
     new setLiftPosition(Constants.liftClimbPOS)
    

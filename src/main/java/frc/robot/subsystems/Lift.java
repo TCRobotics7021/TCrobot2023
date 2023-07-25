@@ -116,11 +116,11 @@ if (SmartDashboard.getNumber("P value", tempP) != tempP) {
   m_Lift.config_kP(Constants.PIDindex, tempP, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("I value", tempI) != tempI) {
-  tempP = SmartDashboard.getNumber("I value", tempI); 
+  tempI = SmartDashboard.getNumber("I value", tempI); 
   m_Lift.config_kI(Constants.PIDindex, tempI, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("D value", tempD) != tempD) {
-  tempP = SmartDashboard.getNumber("D value", tempD); 
+  tempD = SmartDashboard.getNumber("D value", tempD); 
   m_Lift.config_kD(Constants.PIDindex, tempD, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("FWD Peak OutPut", tempPeakFWD) != tempPeakFWD); {
@@ -147,7 +147,7 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
       m_Lift.setSelectedSensorPosition(Constants.liftUpperLimitSwitchPos * Constants.liftConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
-    if(RobotContainer.s_Gantry.currentPosition() + RobotContainer.s_Arm.currentPosition() <= Constants.gantryLimitLift && currentPosition() < Constants.liftLimitGantry && m_Lift.getMotorOutputPercent() < 0){
+    if(RobotContainer.s_Gantry.currentPosition()<= Constants.gantryLimitLift && currentPosition() < Constants.liftLimitGantry && m_Lift.getMotorOutputPercent() < 0){
       setPosition(Constants.liftLimitGantry + 5);
     }
     
@@ -157,9 +157,9 @@ SmartDashboard.putNumber("Distance", m_Lift.getSelectedSensorPosition()/Constant
     SmartDashboard.putBoolean("liftUpperLimit", upperLimit.get());
     SmartDashboard.putBoolean("liftLowerLimit", lowerLimit.get());
    // SmartDashboard.putNumber("Output", m_Lift.getMotorOutputPercent());
-  // SmartDashboard.putNumber("Lift Stator Current", m_Lift.getStatorCurrent());
+   SmartDashboard.putNumber("Lift Stator Current", m_Lift.getStatorCurrent());
  
-  // SmartDashboard.putNumber("Lift Position", m_Lift.getSelectedSensorPosition()/Constants.liftConversion);
+   SmartDashboard.putNumber("Lift Position", m_Lift.getSelectedSensorPosition()/Constants.liftConversion);
  
   }
 }

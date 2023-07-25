@@ -45,28 +45,30 @@ public class TeleopSwerve extends CommandBase {
         SmartDashboard.putNumber("GYRO YAW", s_Swerve.getYaw().getDegrees());
 
 
-    if (turbobutton.getAsBoolean()){
-        if (RobotContainer.s_Arm.currentPosition() > 50) {
+    // if (turbobutton.getAsBoolean()){
+    //     if (RobotContainer.s_Arm.currentPosition() > 50) {
 
-            tempMaxSpeed = Constants.Swerve.driveSpeed; 
-            tempMaxRotate = Constants.Swerve.driveSpeed; 
+    //         tempMaxSpeed = Constants.Swerve.driveSpeed; 
+    //         tempMaxRotate = Constants.Swerve.driveSpeed; 
     
-        } else {
-            tempMaxSpeed = Constants.Swerve.turboSpeed;
-            tempMaxRotate = Constants.Swerve.turboSpeed;
-        }
-    }else{
-        if (RobotContainer.s_Arm.currentPosition() > 50) {
+    //     } else {
+    //         tempMaxSpeed = Constants.Swerve.turboSpeed;
+    //         tempMaxRotate = Constants.Swerve.turboSpeed;
+    //     }
+    // }else{
+    //     if (RobotContainer.s_Arm.currentPosition() > 50) {
 
-            tempMaxSpeed = Constants.Swerve.fineSpeed; 
-            tempMaxRotate = Constants.Swerve.fineAngularVelocity; 
+    //         tempMaxSpeed = Constants.Swerve.fineSpeed; 
+    //         tempMaxRotate = Constants.Swerve.fineAngularVelocity; 
     
-        } else {
-            tempMaxSpeed = Constants.Swerve.driveSpeed;
-            tempMaxRotate = Constants.Swerve.driveSpeed;
-        }
-    }
+    //     } else {
+    //         tempMaxSpeed = Constants.Swerve.driveSpeed;
+    //         tempMaxRotate = Constants.Swerve.driveSpeed;
+    //     }
 
+    // }
+    tempMaxSpeed = Constants.Swerve.driveSpeed;   
+    tempMaxRotate = Constants.Swerve.driveSpeed; 
 
 
 

@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
-import frc.robot.commands.Arm.HomeArm;
-import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.HomeGantry;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.HomeGripper;
@@ -25,9 +23,9 @@ public class HomeAll extends SequentialCommandGroup {
   /** Creates a new HomeAll. */
   public HomeAll() {
     addCommands(
-      Commands.parallel(new HomeGripper(), new HomeLift()),
-      new WaitCommand(.25),
-      Commands.parallel(new HomeGantry(), new HomeArm(), new setLiftPosition(Constants.liftLowerLevelPOS))
+       Commands.parallel(new HomeGripper(),  new HomeLift()),
+       new WaitCommand(.25),
+       Commands.parallel(new HomeGantry(), new setLiftPosition(Constants.liftRetrievePOS))
     );
   }
 }

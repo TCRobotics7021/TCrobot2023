@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
-import frc.robot.commands.Arm.setArmPosition;
+
 import frc.robot.commands.Drive.AdvAutoMove;
 import frc.robot.commands.Drive.AutonomousMove;
 import frc.robot.commands.Drive.DriveOverChargeStation;
@@ -34,12 +34,12 @@ public class Auto_Blue6Cone_HoldCone_Climb extends SequentialCommandGroup {
       new CalibrateLiftAtStartOfMatch(Constants.liftStartingPOS),
       new AdvAutoMove(0, 0, 0, .5, .7, .1, 1, true),
       Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelConePOS)),
-      new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
+      new setGantryPosition(Constants.gantryUpperLevelPOS)),
   new setLiftPosition(Constants.liftMaxLevelConeDip),
   new setGripperPosition(Constants.openGripperPOS),
       Commands.parallel(Commands.sequence(new DropAndRetract(), new setGantryPosition(Constants.gantryPickPOS)), new DriveOverChargeStation()),
     Commands.parallel(new AdvAutoMove(4.8, 0, 180, .4, .6, .1, 2, false),
-      Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), 
+      Commands.sequence(Commands.parallel(new setGantryPosition(Constants.gantryPickPOS)), 
             new setLiftPosition(Constants.liftBottomPOS))),
       new AdvAutoMove(5.5, -.1, 180, .1, .3, .1, 2, false),
       new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(Constants.gripperTimeoutCube),

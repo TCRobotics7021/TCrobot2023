@@ -14,9 +14,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.commands.Arm.HomeArm;
-import frc.robot.commands.Arm.setArmPosition;
-import frc.robot.commands.Arm.setArmSpeed;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_LowCone;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_LowCone_TEST;
 import frc.robot.commands.Autonomous.Auto_Blue_2Cube_LowCone_LowCone;
@@ -50,6 +47,7 @@ import frc.robot.commands.Gripper.HomeGripper;
 import frc.robot.commands.Gripper.releaseGripperBrake;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Gripper.setGripperSpeed;
+import frc.robot.commands.Gripper.setIntakeSpeed;
 import frc.robot.commands.Lift.HomeLift;
 import frc.robot.commands.Lift.JogAndSetPOS;
 import frc.robot.commands.Lift.releaseLiftBreak;
@@ -69,6 +67,7 @@ import frc.robot.commands.PickPlace.ResetEndPlaceCommand;
 import frc.robot.commands.PickPlace.RetrieveCone;
 import frc.robot.commands.PickPlace.RetrieveCube;
 import frc.robot.commands.PickPlace.RetrieveFromSub;
+import frc.robot.commands.PickPlace.prepareCubePickup;
 import frc.robot.subsystems.*;
 
 /**
@@ -90,7 +89,7 @@ public class RobotContainer {
     public final static Lift s_Lift = new Lift();
     public final static Gripper s_Gripper = new Gripper();
     public final static Gantry s_Gantry = new Gantry();
-    public final static Arm s_Arm = new Arm();
+
    // public final static CANdleSystem m_candleSubsystem = new CANdleSystem();
     public static boolean EndPlaceCommand = false;
     public static boolean PlaceCommandStarted = false;
@@ -109,6 +108,7 @@ public class RobotContainer {
                  () -> leftStick.getRawButton(2) //robot centric boolean
             )
         );
+
 
       
         m_Chooser.setDefaultOption("Place_Cone_Drive_Over_Line", new Place_Cone_Drive_Over());
@@ -151,14 +151,17 @@ public class RobotContainer {
   
         /* Driver Buttons */
         new JoystickButton(leftStick, 1).onTrue(new PrepareForPickUp().unless(() -> PlaceCommandStarted));
+        new JoystickButton(leftStick, 2).onTrue(new prepareCubePickup().unless(() -> PlaceCommandStarted));
         new JoystickButton(leftStick, 3).onTrue(new PrepareConeFlip().unless(() -> PlaceCommandStarted));
-        new JoystickButton(leftStick, 4 ).onTrue(new ConditionalCommand(new RetrieveFromSub(), new RetrieveCone(), s_Lift::liftGreaterThan200));
+        new JoystickButton(leftStick, 4).onTrue(new ConditionalCommand(new RetrieveFromSub(), new RetrieveCone(), s_Lift::liftGreaterThan200));
         new JoystickButton(leftStick, 10).whileTrue(new releaseGripperBrake());
+       
 
         new JoystickButton(RightStick, 1).onTrue(new DropAndRetract());
         new JoystickButton(RightStick, 2).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
         new JoystickButton(RightStick, 3).whileTrue(new releaseLiftBreak());
-        
+        new JoystickButton(RightStick, 4).whileTrue(new setIntakeSpeed(.5));
+        new JoystickButton(RightStick, 5).whileTrue(new setIntakeSpeed(-.5));
         
         
      //  new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
@@ -178,7 +181,9 @@ public class RobotContainer {
 
         
         //Operator Panel
-
+        //new JoystickButton(OpPanel, 9).onTrue(new HomeAll());
+      // new JoystickButton(OpPanel, 12).onTrue(new setLiftPosition(300));
+       //new JoystickButton(OpPanel, 9).onTrue(new setLiftPosition(1000));
         new JoystickButton(OpPanel, 1).onTrue(new HomeAll());
         new JoystickButton(OpPanel, 2).onTrue(new GetOnChargeStationFromBack());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
@@ -190,14 +195,14 @@ public class RobotContainer {
        // new JoystickButton(OpPanel, 9).onTrue(new DriveForward());
 
         new JoystickButton(OpPanel, 8).onTrue(new AdvAutoMove(2, 0, 180, .1, .5, .1, 5, true).withTimeout(5));
-        
-
+        new JoystickButton(OpPanel, 9).whileTrue(new setIntakeSpeed(.5));
+        new JoystickButton(OpPanel, 12).whileTrue(new setIntakeSpeed(0));
        // new JoystickButton(OpPanel, 8).onTrue(new Auto_Blue9Cone8Cube());
 
        // new JoystickButton(OpPanel, 9).onTrue(new GetOnChargeStationFromBack());
       //  new JoystickButton(OpPanel, 9).onTrue(new Cube_Limelight_Test());
 
-        new JoystickButton(OpPanel, 12).whileTrue(new releaseAllBreaks());
+        //new JoystickButton(OpPanel, 12).whileTrue(new releaseAllBreaks());
 
         new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectLowerLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 15).onTrue(new PlaceConeMidLevel().unless(() -> PlaceCommandStarted));

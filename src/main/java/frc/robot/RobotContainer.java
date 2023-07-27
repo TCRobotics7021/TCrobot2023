@@ -196,13 +196,13 @@ public class RobotContainer {
 
         new JoystickButton(OpPanel, 8).onTrue(new AdvAutoMove(2, 0, 180, .1, .5, .1, 5, true).withTimeout(5));
         new JoystickButton(OpPanel, 9).whileTrue(new setIntakeSpeed(.5));
-        new JoystickButton(OpPanel, 12).whileTrue(new setIntakeSpeed(0));
+       // new JoystickButton(OpPanel, 12).whileTrue(new setIntakeSpeed(0));
        // new JoystickButton(OpPanel, 8).onTrue(new Auto_Blue9Cone8Cube());
 
        // new JoystickButton(OpPanel, 9).onTrue(new GetOnChargeStationFromBack());
       //  new JoystickButton(OpPanel, 9).onTrue(new Cube_Limelight_Test());
 
-        //new JoystickButton(OpPanel, 12).whileTrue(new releaseAllBreaks());
+        new JoystickButton(OpPanel, 12).whileTrue(new releaseAllBreaks());
 
         new JoystickButton(OpPanel, 14).onTrue(new PlaceObjectLowerLevel().unless(() -> PlaceCommandStarted));
         new JoystickButton(OpPanel, 15).onTrue(new PlaceConeMidLevel().unless(() -> PlaceCommandStarted));

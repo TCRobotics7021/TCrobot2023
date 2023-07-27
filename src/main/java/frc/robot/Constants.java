@@ -30,14 +30,14 @@ public final class Constants {
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
-    public static double liftUpperLimit = 1250;
+    public static double liftUpperLimit = 1278;
 
     //lift conversion
     public static double liftConversion = 227.281;
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 1251;
+      public static double liftUpperLimitSwitchPos = 1279;
 
       public static final double liftPosTolerance = 5;
 
@@ -121,7 +121,7 @@ public final class Constants {
         public static double liftBottomPOS = 1;
         public static double liftCubeBottomPos = 25;
         public static double liftConeFlippy = 115;
-        public static double liftRetrievePOS = 200;
+        public static double liftRetrievePOS = 500;
         public static double liftLowerLevelPOS = 400;
         public static double liftMidLevelCubePOS = 700;
         public static double liftMidLevelConePOS = 800; 
@@ -168,8 +168,8 @@ public final class Constants {
 
     
 
-        public static double gantryLimitLift = 180;
-        public static double liftLimitGantry = 200;
+        public static double gantryLimitLift = 300;
+        public static double liftLimitGantry = 250;
    
     //DRIVE SECTION
 

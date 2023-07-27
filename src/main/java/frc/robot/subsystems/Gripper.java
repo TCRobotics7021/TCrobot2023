@@ -152,7 +152,7 @@ SmartDashboard.putNumber("Distance", m_Gripper.getSelectedSensorPosition()/Const
     }
 
     //SmartDashboard.putNumber("Gripper Stator Current", m_Gripper.getStatorCurrent());
-   updatePID();
+   //updatePID();
  
     SmartDashboard.putBoolean("gripperPieceSensor", pieceSensorBlocked.get());
     SmartDashboard.putBoolean("gripperLowerLimit", lowerLimit.get());

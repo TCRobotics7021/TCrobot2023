@@ -81,12 +81,12 @@ private double tempLowerLimit = 0;
    // m_Gantry.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, Constants.GantryMaxCurrentAmps, Constants.GantryPeakCurrentAmps, Constants.GantryMaxCurrentTime));
     
     tempLowerLimit = Constants.GantryLowerLimit;
-    SmartDashboard.putNumber("P value", tempP);
-    SmartDashboard.putNumber("I value", tempI);
-    SmartDashboard.putNumber("D value", tempD);
-    SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
-    SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
-    SmartDashboard.putBoolean("PID Tuning", false);
+    // //SmartDashboard.putNumber("P value", tempP);
+    // SmartDashboard.putNumber("I value", tempI);
+    // SmartDashboard.putNumber("D value", tempD);
+    // SmartDashboard.putNumber("FWD Peak OutPut", tempPeakFWD);
+    // SmartDashboard.putNumber("REV Peak OutPut", tempPeakREV); 
+    // SmartDashboard.putBoolean("PID Tuning", false);
   } 
 
 

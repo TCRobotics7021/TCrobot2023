@@ -36,6 +36,7 @@ import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_Climb;
 import frc.robot.commands.Drive.AdvAutoMove;
 import frc.robot.commands.Drive.AdvAutoMove2;
 import frc.robot.commands.Drive.AdvAutoMove3;
+import frc.robot.commands.Drive.AutoMove;
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
 import frc.robot.commands.Drive.PrepareForClimb;
 import frc.robot.commands.Drive.TeleopSwerve;
@@ -56,6 +57,8 @@ import frc.robot.commands.PickPlace.CancelAll;
 import frc.robot.commands.PickPlace.DropAndRetract;
 import frc.robot.commands.PickPlace.HomeAll;
 import frc.robot.commands.PickPlace.PlaceConeUpperLevel;
+import frc.robot.commands.PickPlace.PlaceCubeMidLevel;
+import frc.robot.commands.PickPlace.PlaceCubeUpperLevel;
 import frc.robot.commands.PickPlace.PlaceConeMidLevel;
 import frc.robot.commands.PickPlace.PlaceObjectLowerLevel;
 import frc.robot.commands.PickPlace.PlaceConeUpperLevel;
@@ -159,10 +162,13 @@ public class RobotContainer {
 
         new JoystickButton(RightStick, 1).onTrue(new DropAndRetract());
         new JoystickButton(RightStick, 2).onTrue(new InstantCommand(() -> s_Swerve.Resetfieldorientation()));
-        new JoystickButton(RightStick, 3).whileTrue(new releaseLiftBreak());
+        new JoystickButton(RightStick, 3).onTrue(new RetrieveFromSub());
+        //new JoystickButton(RightStick, 3).whileTrue(new releaseLiftBreak());
         new JoystickButton(RightStick, 4).whileTrue(new setIntakeSpeed(.5));
         new JoystickButton(RightStick, 5).whileTrue(new setIntakeSpeed(-.5));
-        
+        new JoystickButton(RightStick, 10).onTrue(new AutoMove(1, 1, 0, .1, 1, .2, 5, true));
+        new JoystickButton(RightStick, 11).onTrue(new AutoMove(-1, .5, 0, .1, 1, .2, 5, true));
+        new JoystickButton(RightStick, 12).onTrue(new AutoMove(0, -2, 0, .1, 1, .2, 5, true));
         
      //  new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
       //  new JoystickButton(OpPanel, 7).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));
@@ -188,14 +194,18 @@ public class RobotContainer {
         new JoystickButton(OpPanel, 2).onTrue(new GetOnChargeStationFromBack());
         new JoystickButton(OpPanel, 3).onTrue(new CancelAll());
 
-        new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
-        new JoystickButton(OpPanel, 6).onTrue(new PrepareForSideStation());
+        //new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
+        //new JoystickButton(OpPanel, 6).onTrue(new PrepareForSideStation());
 
         
        // new JoystickButton(OpPanel, 9).onTrue(new DriveForward());
 
-        new JoystickButton(OpPanel, 8).onTrue(new AdvAutoMove(2, 0, 180, .1, .5, .1, 5, true).withTimeout(5));
-        new JoystickButton(OpPanel, 9).whileTrue(new setIntakeSpeed(.5));
+        //new JoystickButton(OpPanel, 8).onTrue(new AdvAutoMove(2, 0, 180, .1, .5, .1, 5, true).withTimeout(5));
+        new JoystickButton(OpPanel, 5).onTrue(new PrepareForSubPickup());
+        new JoystickButton(OpPanel, 6).onTrue(new PlaceObjectLowerLevel().unless(() -> PlaceCommandStarted));
+        new JoystickButton(OpPanel, 7).onTrue(new PlaceCubeMidLevel().unless(() -> PlaceCommandStarted));
+        new JoystickButton(OpPanel, 8).onTrue(new PlaceCubeUpperLevel().unless(() -> PlaceCommandStarted));
+        //new JoystickButton(OpPanel, 9).whileTrue(new setIntakeSpeed(.5));
        // new JoystickButton(OpPanel, 12).whileTrue(new setIntakeSpeed(0));
        // new JoystickButton(OpPanel, 8).onTrue(new Auto_Blue9Cone8Cube());
 

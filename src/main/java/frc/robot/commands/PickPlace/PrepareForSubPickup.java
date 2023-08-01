@@ -8,8 +8,12 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.Gantry.setGantryPosition;
+import frc.robot.commands.Gripper.autoDoubleSubGrip;
+import frc.robot.commands.Gripper.autoGrip;
 import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Gripper.setIntakeSpeed;
 import frc.robot.commands.Lift.setLiftPosition;
+import frc.robot.commands.UselessCommands.Blank_Command;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -23,7 +27,11 @@ public class PrepareForSubPickup extends SequentialCommandGroup {
       new ResetEndPlaceCommand(),
       //add limelight
       Commands.parallel(new setLiftPosition(Constants.liftSubstationPOS), new setGripperPosition(Constants.openGripperPOS)),
-      new setGantryPosition(Constants.gantrySubPOS),
+      new setGantryPosition(Constants.gantrySubPOS), 
+      new setIntakeSpeed(Constants.intakeSpeed), new autoDoubleSubGrip(), 
+      new Blank_Command().withTimeout(.5), new setIntakeSpeed(Constants.intakeHoldingSpeed), 
+      new setLiftPosition(1100),
+      new PlaceCommandEnd(),
       new ResetEndPlaceCommand()
 
 

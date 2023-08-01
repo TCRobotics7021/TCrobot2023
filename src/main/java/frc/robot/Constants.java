@@ -18,7 +18,7 @@ public final class Constants {
 
     public static double liftMotor_P = .1;
     public static double liftMotor_I = 0;
-    public static double liftMotor_D = 2.25;
+    public static double liftMotor_D = 3.5;
 
     //max and min lift output
     public static double liftOutputMax = 1;
@@ -110,25 +110,25 @@ public final class Constants {
         public static double gantryLowerlevelPOS = 350;
         public static double gantryRetractedPOS = 1;
         public static double gantryPickPOS = 550;
-        public static double gantryMidLevelPOS = 350;
-        public static double gantryUpperLevelPOS = 650;
+        public static double gantryMidLevelPOS = 500;
+        public static double gantryUpperLevelPOS = 657;
         public static double gantryAutoUpperLevelPOS = 550;
         public static double gantryClimbPOS = 1;
-        public static double gantrySubPOS = 300;
+        public static double gantrySubPOS = 1;
         public static double gantrySideStation = 200;
     //LiftPOS
-        public static double liftStartingPOS = 400;
+        public static double liftStartingPOS = 200;
         public static double liftBottomPOS = 1;
         public static double liftCubeBottomPos = 25;
         public static double liftConeFlippy = 115;
-        public static double liftRetrievePOS = 500;
+        public static double liftRetrievePOS = 250;
         public static double liftLowerLevelPOS = 400;
         public static double liftMidLevelCubePOS = 700;
-        public static double liftMidLevelConePOS = 800; 
+        public static double liftMidLevelConePOS = 975;
         public static double liftMaxLevelCubePOS = 1075;
-        public static double liftAutoCubePOS = 960;
-        public static double liftMaxLevelConePOS = 1167;
-        public static double liftSubstationPOS = 920;
+        public static double liftAutoCubePOS = 1000;
+        public static double liftMaxLevelConePOS = 1277;
+        public static double liftSubstationPOS = 1065;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
         public static double liftSideStation = 700;
@@ -137,6 +137,7 @@ public final class Constants {
     //IntakePOS
         public static double intakeSpeed = -1;
         public static double intakeHoldingSpeed = -.1;
+        public static double intakeRevSpeed = 1;
         // Test Postions
     public static double gripperTestPOS = 100;
     public static double liftTestPOS = 200;
@@ -168,8 +169,8 @@ public final class Constants {
 
     
 
-        public static double gantryLimitLift = 300;
-        public static double liftLimitGantry = 250;
+        public static double gantryLimitLift = 250;
+        public static double liftLimitGantry = 225;
    
     //DRIVE SECTION
 

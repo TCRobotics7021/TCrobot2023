@@ -3,24 +3,25 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands.Drive;
+
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class AdvAutoMove extends CommandBase {
-  /** Creates a new AdvAutoMove. */
+public class AutoMove extends CommandBase {
   double targetX;
   double targetY;
   double targetR;
+  
   double XYtolerance;
   double Rtolerance;
   double minspeed;
   double maxspeed;
   boolean resetodometry;
+  
 
   double calcStrafe;
   double calcTranslation;
@@ -34,18 +35,17 @@ public class AdvAutoMove extends CommandBase {
   double errorY;
   double errorR;
   double errorM;
-
   double calcMagnitude; 
+  double errorA;
 
   boolean finished;
 
   double degrees;
 
   double ratio;
-
-  public AdvAutoMove(double targetX, double targetY, double targetR, double minspeed, double maxspeed, 
+  /** Creates a new AutoMove. */
+  public AutoMove(double targetX, double targetY, double targetR, double minspeed, double maxspeed, 
   double XYtolerance, double Rtolerance, boolean resetodometry) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.targetX = targetX;
     this.targetY = targetY;
     this.targetR = targetR;
@@ -54,33 +54,44 @@ public class AdvAutoMove extends CommandBase {
     this.XYtolerance = XYtolerance;
     this.Rtolerance = Rtolerance;
     this.resetodometry = resetodometry;
+    
     finished = false;
     addRequirements(RobotContainer.s_Swerve);
-
-
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     if(resetodometry == true){   
-      RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
-     }
-        finished = false;
-  }
+    RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
+   }
+      finished = false;
+    }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    
     currentX = RobotContainer.s_Swerve.gettempPose().getX();
     currentY = RobotContainer.s_Swerve.gettempPose().getY();
     currentR = RobotContainer.s_Swerve.gettempPose().getRotation().getDegrees();
 
-    errorX = Math.abs(targetX - currentX);
-    errorY = Math.abs(targetY - currentY);
-    errorM = Math.sqrt(Math.pow(errorX, 2) + Math.pow(errorY, 2));
+    errorX = (targetX - currentX);
+    errorY = (targetY - currentY);
+    errorM = Math.sqrt(Math.pow(errorX, 2)+ Math.pow(errorY, 2))*1;
+    if (errorM>maxspeed){
+      errorM = maxspeed;
+    }
+    if (errorM<minspeed){
+      errorM = minspeed;
+    }
+    errorA = Math.atan(errorX/errorY);
+    calcStrafe = errorM * Math.cos(errorA);
+    calcTranslation = errorM * Math.sin(errorA);
+
+
     errorR = -(targetR - currentR);
+
 
     //finds shortest path for rotation
     if (errorR > 180){
@@ -89,30 +100,7 @@ public class AdvAutoMove extends CommandBase {
     if (errorR < -180){
       errorR = errorR + 360;
     }
-
-    calcTranslation = Constants.autonomousMove_P * (targetX - currentX);
-    calcStrafe = Constants.autonomousMove_P * (targetY - currentY);
-   
     calcRotation = Constants.autoRotate_P * errorR;
-
-    if (calcTranslation > 0){ // Set the max and min speed on X coords in positive direction
-      calcTranslation = Math.min(maxspeed,calcTranslation);
-    }
-  
-    if (calcTranslation < 0){ // Set the max and min speed on X coords in negative direction
-      calcTranslation = Math.max(-maxspeed, calcTranslation);
-    }
-
-    if (calcStrafe > 0){ // Set the max and min speed on Y coords in positive direction
-      calcStrafe = Math.min(maxspeed,calcStrafe);
-    }
-
-    if (calcStrafe < 0){ // Set the max and min speed on Y coords in negative direction
-      calcStrafe = Math.max(-maxspeed, calcStrafe);
-    }
-
-    calcMagnitude = Math.sqrt(Math.pow(calcTranslation, 2) + Math.pow(calcStrafe, 2));
-
     if (calcRotation > 0){
       calcRotation = Math.min(Constants.maxAutoRot, calcRotation);
     }
@@ -130,33 +118,21 @@ public class AdvAutoMove extends CommandBase {
         calcRotation = Math.min(-Constants.minAutoRot, calcRotation);
       }
     }
-    
-
-  if (errorM > XYtolerance){
-    if (calcMagnitude <= minspeed && calcStrafe != 0) {
-      ratio = calcTranslation / calcStrafe;
-      calcStrafe = Math.sqrt(Math.pow(minspeed, 2) / (Math.pow(ratio, 2) + 1)) * Math.signum(calcStrafe);
-      calcTranslation = Math.abs(calcStrafe * ratio) * Math.signum(calcTranslation);
-  
-    }
-    if(calcStrafe == 0 && calcTranslation != 0){
-      calcTranslation = Math.max(minspeed,Math.abs(calcTranslation)) * Math.signum(calcTranslation);
-    }
+    SmartDashboard.putNumber("calcStrafe", calcStrafe);
+    SmartDashboard.putNumber("calcTranslation", calcTranslation);
+    SmartDashboard.putNumber("errorX", errorX);
+    SmartDashboard.putNumber("errorY", errorY);
+    SmartDashboard.putNumber("errorM", errorM);
+    SmartDashboard.putNumber("errorA", errorA);
+  //   RobotContainer.s_Swerve.drive(
+  //     new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
+  //     calcRotation * Constants.Swerve.maxAngularVelocity, 
+  //     true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+  //     true
+  // );
+  if (errorM <= XYtolerance && Math.abs(errorR) <= Rtolerance){
+    finished = true;
   }
-    RobotContainer.s_Swerve.drive(
-      new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
-      calcRotation * Constants.Swerve.maxAngularVelocity, 
-      true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
-      true
-  );
-    if (errorM <= XYtolerance && Math.abs(errorR) <= Rtolerance){
-      finished = true;
-    }
-    // SmartDashboard.putNumber("Error R", errorR);
-    // SmartDashboard.putNumber("Calc Translation",calcTranslation);
-    // SmartDashboard.putNumber("Calc Strafe",calcStrafe);
-    // SmartDashboard.putNumber("Calc Rotate", calcRotation);
-
   }
 
   // Called once the command ends or is interrupted.
@@ -174,5 +150,6 @@ public class AdvAutoMove extends CommandBase {
   @Override
   public boolean isFinished() {
     return finished;
+    
   }
 }

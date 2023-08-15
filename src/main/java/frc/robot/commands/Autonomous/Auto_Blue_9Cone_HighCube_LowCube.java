@@ -36,9 +36,11 @@ public class Auto_Blue_9Cone_HighCube_LowCube extends SequentialCommandGroup {
       new setIntakeSpeed(Constants.intakeRevSpeed),  
       new Blank_Command().withTimeout(.5),
       new setIntakeSpeed(0),
+     
+      new setGantryPosition(Constants.gantryPickPOS), 
       new AdvAutoMove(4, .15, 0, .1, .4, .2, 5, true),
-      Commands.parallel(new setGantryPosition(Constants.gantryPickPOS), 
-              new setLiftPOSConditional(Constants.liftCubeBottomPos)),   
+      
+      new setLiftPosition(Constants.liftCubeBottomPos),   
       new AdvAutoMove(4.3, .5, -175, .1, .3, .1, 5, false)
     //   Commands.parallel(new AdvAutoMove(5.2, .5, 180, .3, .3, .05, 5, false),
     //       Commands.sequence( new setIntakeSpeed(Constants.intakeSpeed), new autoGrip(), 

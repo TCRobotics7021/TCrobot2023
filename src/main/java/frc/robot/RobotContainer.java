@@ -31,6 +31,7 @@ import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_LowCone;
 import frc.robot.commands.Autonomous.Auto_Red_9Cone_HighCube_LowCone_TEST;
 import frc.robot.commands.Autonomous.DriveForward;
 import frc.robot.commands.Autonomous.Place_Cone_Drive_Over;
+import frc.robot.commands.Autonomous.Test_Blue_9Cone_HighCone_MidCone;
 import frc.robot.commands.Autonomous.Auto_Blue6Cone_HoldCone_Climb;
 import frc.robot.commands.Autonomous.Auto_Blue_1Cone_HighCube_Climb;
 import frc.robot.commands.Drive.AdvAutoMove;
@@ -114,27 +115,28 @@ public class RobotContainer {
 
 
       
-        m_Chooser.setDefaultOption("Place_Cone_Drive_Over_Line", new Place_Cone_Drive_Over());
+       // m_Chooser.setDefaultOption("Place_Cone_Drive_Over_Line", new Place_Cone_Drive_Over());
 
       
-        m_Chooser.addOption("Red_1Cone_HighCube_LowCone", new Auto_Red_1Cone_HighCube_LowCone());
-        m_Chooser.addOption("Red_2Cube_LowCone_LowCone", new Auto_Red_2Cube_LowCone_LowCone());
-        m_Chooser.addOption("Red 4Cone HoldCone Climb", new Auto_Red4Cone_HoldCone_Climb());
-        m_Chooser.addOption("Red 5Cube Overline Climb", new Auto_Red_5_Cube_Overline_Climb());
-        m_Chooser.addOption("Red_8Cube_LowCone_LowCone", new Auto_Red_8Cube_LowCone_LowCone());
-      //  m_Chooser.addOption("Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone());
-        m_Chooser.addOption("TEST_Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone_TEST());
-        m_Chooser.addOption("Red_9Cone_HighCube_Climb", new Auto_Red_9Cone_HighCube_Climb());
+      //   m_Chooser.addOption("Red_1Cone_HighCube_LowCone", new Auto_Red_1Cone_HighCube_LowCone());
+      //   m_Chooser.addOption("Red_2Cube_LowCone_LowCone", new Auto_Red_2Cube_LowCone_LowCone());
+      //   m_Chooser.addOption("Red 4Cone HoldCone Climb", new Auto_Red4Cone_HoldCone_Climb());
+      //   m_Chooser.addOption("Red 5Cube Overline Climb", new Auto_Red_5_Cube_Overline_Climb());
+      //   m_Chooser.addOption("Red_8Cube_LowCone_LowCone", new Auto_Red_8Cube_LowCone_LowCone());
+      // //  m_Chooser.addOption("Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone());
+      //   m_Chooser.addOption("TEST_Red_9Cone_HighCube_LowCone", new Auto_Red_9Cone_HighCube_LowCone_TEST());
+      //   m_Chooser.addOption("Red_9Cone_HighCube_Climb", new Auto_Red_9Cone_HighCube_Climb());
         
     
         //m_Chooser.addOption("Blue_1Cone_HighCube_LowCone", new Auto_Blue_1Cone_HighCube_LowCone());
-        m_Chooser.addOption("TEST_Blue_1Cone_HighCube_LowCone", new Auto_Blue_1Cone_HighCube_LowCone_TEST());
-        m_Chooser.addOption("Blue_1Cone_HighCube_Climb", new Auto_Blue_1Cone_HighCube_Climb());
-        m_Chooser.addOption("Blue_2Cube_LowCone_LowCone", new Auto_Blue_2Cube_LowCone_LowCone());
-        m_Chooser.addOption("Blue 5Cube Overline Climb", new Auto_Blue_5Cube_Overline_Climb());
-        m_Chooser.addOption("Blue 6Cone HoldCone Climb", new Auto_Blue6Cone_HoldCone_Climb());
-        m_Chooser.addOption("Blue_8Cube_LowCone_LowCone", new Auto_Blue_8Cube_LowCone_LowCone());
-        m_Chooser.addOption("Blue_9Cone_HighCube_LowCone", new Auto_Blue_9Cone_HighCube_LowCube());
+      //  m_Chooser.addOption("TEST_Blue_1Cone_HighCube_LowCone", new Auto_Blue_1Cone_HighCube_LowCone_TEST());
+        // m_Chooser.addOption("Blue_1Cone_HighCube_Climb", new Auto_Blue_1Cone_HighCube_Climb());
+        // m_Chooser.addOption("Blue_2Cube_LowCone_LowCone", new Auto_Blue_2Cube_LowCone_LowCone());
+        // m_Chooser.addOption("Blue 5Cube Overline Climb", new Auto_Blue_5Cube_Overline_Climb());
+        // m_Chooser.addOption("Blue 6Cone HoldCone Climb", new Auto_Blue6Cone_HoldCone_Climb());
+        // m_Chooser.addOption("Blue_8Cube_LowCone_LowCone", new Auto_Blue_8Cube_LowCone_LowCone());
+        // m_Chooser.addOption("Blue_9Cone_HighCube_LowCone", new Auto_Blue_9Cone_HighCube_LowCube());
+        m_Chooser.addOption("Test_Blue_9Cone_HighCube_MidCone", new Test_Blue_9Cone_HighCone_MidCone());
         
         
 
@@ -166,9 +168,9 @@ public class RobotContainer {
         //new JoystickButton(RightStick, 3).whileTrue(new releaseLiftBreak());
         new JoystickButton(RightStick, 4).whileTrue(new setIntakeSpeed(.5));
         new JoystickButton(RightStick, 5).whileTrue(new setIntakeSpeed(-.5));
-        new JoystickButton(RightStick, 10).onTrue(new AutoMove(1, 1, 0, .1, 1, .2, 5, true));
-        new JoystickButton(RightStick, 11).onTrue(new AutoMove(-1, .5, 0, .1, 1, .2, 5, true));
-        new JoystickButton(RightStick, 12).onTrue(new AutoMove(0, -2, 0, .1, 1, .2, 5, true));
+        //new JoystickButton(RightStick, 10).onTrue(new AutoMove(1, 1, 0, .1, 1, .2, 5, true));
+        //new JoystickButton(RightStick, 11).onTrue(new AutoMove(-1, .5, 0, .1, 1, .2, 5, true));
+        //new JoystickButton(RightStick, 12).onTrue(new AutoMove(0, -2, 0, .1, 1, .2, 5, true));
         
      //  new JoystickButton(RightStick, 10).onTrue(new InstantCommand(() -> s_Candle.setMode(0)));
       //  new JoystickButton(OpPanel, 7).onTrue(new InstantCommand(() -> s_Candle.setMode(3)));

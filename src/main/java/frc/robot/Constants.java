@@ -111,7 +111,7 @@ public final class Constants {
         public static double gantryRetractedPOS = 1;
         public static double gantryPickPOS = 550;
         public static double gantryMidLevelPOS = 500;
-        public static double gantryUpperLevelPOS = 657;
+        public static double gantryUpperLevelPOS = 557;
         public static double gantryAutoUpperLevelPOS = 550;
         public static double gantryClimbPOS = 1;
         public static double gantrySubPOS = 1;
@@ -135,9 +135,9 @@ public final class Constants {
         public static double liftMaxLevelConeDip = 950;
         
     //IntakePOS
-        public static double intakeSpeed = -1;
+        public static double intakeSpeed = -.35;
         public static double intakeHoldingSpeed = -.1;
-        public static double intakeRevSpeed = 1;
+        public static double intakeRevSpeed = .5;
         // Test Postions
     public static double gripperTestPOS = 100;
     public static double liftTestPOS = 200;

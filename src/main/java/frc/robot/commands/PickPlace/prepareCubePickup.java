@@ -28,7 +28,7 @@ public class prepareCubePickup extends SequentialCommandGroup {
       Commands.parallel(new setGantryPosition(Constants.gantryPickPOS), new setGripperPosition(Constants.openGripperPOS)),
       Commands.sequence(new setLiftPosition(Constants.liftBottomPOS), 
       new setIntakeSpeed(Constants.intakeSpeed), new autoGripCube(), 
-      new Blank_Command().withTimeout(.1), new setIntakeSpeed(Constants.intakeHoldingSpeed),  
+      new Blank_Command().withTimeout(.01), new setIntakeSpeed(Constants.intakeHoldingSpeed),  
       new setLiftPosition(Constants.liftRetrievePOS),
       Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS)),
       new PlaceCommandEnd()),

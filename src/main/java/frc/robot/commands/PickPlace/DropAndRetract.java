@@ -22,7 +22,7 @@ public class DropAndRetract extends SequentialCommandGroup {
   public DropAndRetract() {
     addCommands(
       new ResetEndPlaceCommand(),
-       new setGripperPosition(Constants.openGripperPOS), new setIntakeSpeed(.5),
+       new setGripperPosition(Constants.openGripperPOS), new setIntakeSpeed(1),
        Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS)), new setIntakeSpeed(0),
        new setLiftPosition(Constants.liftRetrievePOS), 
        new PlaceCommandEnd()

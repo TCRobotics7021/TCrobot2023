@@ -49,10 +49,9 @@ public class Test_Blue_9Cone_HighCone_MidCone extends SequentialCommandGroup {
     new setIntakeSpeed(Constants.intakeRevSpeed),  
       new Blank_Command().withTimeout(.05),
    new setIntakeSpeed(0),
-    Commands.parallel(new AdvAutoMove(1, 0, 0, .05, .3, .3, 1, false), new HomeGripper(), 
-    Commands.sequence(new setLiftPosition(Constants.liftRetrievePOS), 
+    Commands.parallel(new AdvAutoMove(1, 0, 0, .05, .3, .3, 1, false), new HomeGripper()),
+    Commands.parallel(new AdvAutoMove(4, 0, 150, .1, .4, .3, 5, false), Commands.sequence(new setLiftPosition(Constants.liftRetrievePOS), 
     new setGantryPosition(Constants.gantryPickPOS))),
-    new AdvAutoMove(4, 0, 150, .1, .4, .3, 5, false),
     Commands.parallel(new AdvAutoMove(5.4, -1.1, 150, .05, .4, .1, 3, false), Commands.sequence(new setIntakeSpeed(Constants.intakeSpeed), new autoGrip()), new setLiftPosition(Constants.liftBottomPOS)),  
     new Blank_Command().withTimeout(.05), new setIntakeSpeed(Constants.intakeHoldingSpeed)
    

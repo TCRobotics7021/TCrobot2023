@@ -125,7 +125,7 @@ public final class Constants {
         public static double liftLowerLevelPOS = 400;
         public static double liftMidLevelCubePOS = 700;
         public static double liftMidLevelConePOS = 975;
-        public static double liftMaxLevelCubePOS = 1075;
+        public static double liftMaxLevelCubePOS = 1225;
         public static double liftAutoCubePOS = 1000;
         public static double liftMaxLevelConePOS = 1277;
         public static double liftSubstationPOS = 1065;
@@ -180,7 +180,7 @@ public final class Constants {
     public static double maxSpeedPos = .5;
 
     public static double minAutoRot = .15;
-    public static double maxAutoRot = .9;
+    public static double maxAutoRot = .7;
 
     public static double errorTolerance = .02;
 

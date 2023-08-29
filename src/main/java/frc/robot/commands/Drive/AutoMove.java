@@ -78,16 +78,17 @@ public class AutoMove extends CommandBase {
 
     errorX = (targetX - currentX);
     errorY = (targetY - currentY);
-    errorM = Math.sqrt(Math.pow(errorX, 2)+ Math.pow(errorY, 2))*1;
+    errorM = Math.sqrt(Math.pow(errorX, 2)+ Math.pow(errorY, 2))*Constants.autonomousMove_P;
     if (errorM>maxspeed){
       errorM = maxspeed;
     }
-    if (errorM<minspeed){
+    if (errorM<minspeed && errorM > XYtolerance){
+
       errorM = minspeed;
     }
     errorA = Math.atan(errorX/errorY);
-    calcStrafe = errorM * Math.cos(errorA);
-    calcTranslation = errorM * Math.sin(errorA);
+    calcStrafe = errorM * Math.abs(Math.cos(errorA)) * Math.signum(errorY);
+    calcTranslation = errorM * Math.abs(Math.sin(errorA)) * Math.signum(errorX);
 
 
     errorR = -(targetR - currentR);
@@ -118,18 +119,20 @@ public class AutoMove extends CommandBase {
         calcRotation = Math.min(-Constants.minAutoRot, calcRotation);
       }
     }
-    SmartDashboard.putNumber("calcStrafe", calcStrafe);
-    SmartDashboard.putNumber("calcTranslation", calcTranslation);
-    SmartDashboard.putNumber("errorX", errorX);
-    SmartDashboard.putNumber("errorY", errorY);
-    SmartDashboard.putNumber("errorM", errorM);
-    SmartDashboard.putNumber("errorA", errorA);
-  //   RobotContainer.s_Swerve.drive(
-  //     new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
-  //     calcRotation * Constants.Swerve.maxAngularVelocity, 
-  //     true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
-  //     true
-  // );
+    // SmartDashboard.putNumber("calcStrafe", calcStrafe);
+    // SmartDashboard.putNumber("calcTranslation", calcTranslation);
+    // SmartDashboard.putNumber("errorX", errorX);
+    // SmartDashboard.putNumber("errorY", errorY);
+    // SmartDashboard.putNumber("errorM", errorM);
+    // SmartDashboard.putNumber("errorA", errorA);
+
+  RobotContainer.s_Swerve.drive(
+      new Translation2d(calcTranslation, calcStrafe).times(Constants.Swerve.maxSpeed), 
+      calcRotation * Constants.Swerve.maxAngularVelocity, 
+      true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
+      true
+  );
+
   if (errorM <= XYtolerance && Math.abs(errorR) <= Rtolerance){
     finished = true;
   }

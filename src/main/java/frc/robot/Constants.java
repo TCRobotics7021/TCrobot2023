@@ -177,7 +177,7 @@ public final class Constants {
 
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .2;
-    public static double maxSpeedPos = .5;
+    public static double maxSpeedPos = .7;
 
     public static double minAutoRot = .15;
     public static double maxAutoRot = .7;

@@ -180,14 +180,14 @@ public final class Constants {
     public static double maxSpeedPos = .7;
 
     public static double minAutoRot = .15;
-    public static double maxAutoRot = .9;
+    public static double maxAutoRot = .5;
 
     public static double errorTolerance = .02;
 
 
     //P vaules
     public static final double autonomousMove_P = 1;
-    public static final double autoRotate_P = .02;
+    public static final double autoRotate_P = .020;
 
     public static final double autoRotateTolerance = 2;
 

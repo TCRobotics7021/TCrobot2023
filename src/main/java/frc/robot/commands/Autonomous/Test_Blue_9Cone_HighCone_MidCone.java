@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.commands.Drive.AdvAutoMove;
+import frc.robot.commands.Drive.AutoMove;
 import frc.robot.commands.Drive.ResetFieldOrientation;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.HomeGripper;
@@ -35,33 +36,35 @@ public class Test_Blue_9Cone_HighCone_MidCone extends SequentialCommandGroup {
       new setIntakeSpeed(Constants.intakeRevSpeed),  
       new Blank_Command().withTimeout(.05),
       new setIntakeSpeed(0),
-  Commands.sequence(new AdvAutoMove(.5, 0, 0, .2, .4, .2, 10, true), 
-  new AdvAutoMove(1.5, 0, 30, .2, .4, .6, 5, false)),
-    Commands.parallel(new setLiftPosition(Constants.liftRetrievePOS), 
-     new setGantryPosition(Constants.gantryPickPOS),
-      new AdvAutoMove(4, 0, 175, .2, .4, .3, 5, false)),
-     Commands.parallel(new AdvAutoMove(5.4, -.3, 180, .2, .4, .1, 2, false), Commands.sequence(new setIntakeSpeed(Constants.intakeSpeed), new autoGrip()), new setLiftPosition(Constants.liftBottomPOS)),  
+ Commands.parallel(
+  //new setGantryPosition(Constants.gantryLowerlevelPOS), 
+          new setLiftPosition(Constants.liftRetrievePOS), 
+            Commands.sequence(new AdvAutoMove(.5, 0, 0, .1, .4, .2, 10, true), 
+                            new AutoMove(1.5, 0, 30, .1, .4, .6, 5, false), 
+                            new AutoMove(4, -.35, 175, .1, .4, .3, 4, false))),
+   new setGantryPosition(Constants.gantryPickPOS),
+     Commands.parallel(new AutoMove(5.4, -.35, 180, .2, .4, .1, 2, false), Commands.sequence(new setIntakeSpeed(Constants.intakeSpeed), new autoGrip()), new setLiftPosition(Constants.liftBottomPOS)),  
      new Blank_Command().withTimeout(.05), new setIntakeSpeed(Constants.intakeHoldingSpeed), 
      Commands.parallel(
     Commands.sequence(new setLiftPosition(Constants.liftMidLevelCubePOS), new setGantryPosition(Constants.gantryMidLevelPOS)),
-    new AdvAutoMove(1.5, -.4, -1, .2, .4, .3, 6, false)),
-    Commands.parallel(new AdvAutoMove(.6, -.8, 1, .2, .4, .05, 1, false), 
+    new AutoMove(1.5, -.4, -1, .2, .4, .3, 6, false)),
+    Commands.parallel(new AutoMove(.6, -.8, 1, .2, .4, .05, 1, false), 
     new setLiftPosition(Constants.liftMaxLevelCubePOS)),
     new setIntakeSpeed(Constants.intakeRevSpeed),  
       new Blank_Command().withTimeout(.05),
    new setIntakeSpeed(0),
-    new AdvAutoMove(1, -.1, 0, .2, .4, .6, 10, false),
-    Commands.parallel(new AdvAutoMove(5, -.2, 90, .5, .5, .6, 10, false), new HomeGripper(),
+    new AutoMove(1, .6, 0, .2, .4, .6, 10, false),
+    Commands.parallel(new AutoMove(5.6, .2, 135, .5, .5, .6, 10, false), new HomeGripper(),
              Commands.sequence(new setLiftPosition(Constants.liftRetrievePOS), 
             new setGantryPosition(Constants.gantryPickPOS))),
-            new AdvAutoMove(6, -.1, 90, .2, .4, .3, 5, false),
-    Commands.parallel(new AdvAutoMove(6, -1, 90, .2, .4, .1, 5, false), Commands.sequence(new setIntakeSpeed(Constants.intakeSpeed), new autoGrip()), new setLiftPosition(Constants.liftBottomPOS)),  
-    new Blank_Command().withTimeout(.05), new setIntakeSpeed(Constants.intakeHoldingSpeed),
-    Commands.parallel(
-      Commands.sequence(new setLiftPosition(Constants.liftMidLevelCubePOS), new setGantryPosition(Constants.gantryMidLevelPOS)),
-      new AdvAutoMove(4, 0, -1, .2, .4, .3, 5, false)),
-      new AdvAutoMove(1.2, -.2, 1, .2, .4, .05, 1, false)
-    //   Commands.parallel(new AdvAutoMove(.6, -.7, 0, .1, .4, .05, 2, false), new setLiftPosition(Constants.liftMaxLevelCubePOS))
+    
+    Commands.parallel(new AutoMove(5.6, -.8, 135, .2, .4, .1, 5, false), Commands.sequence(new setIntakeSpeed(Constants.intakeSpeed), new autoGrip()), new setLiftPosition(Constants.liftBottomPOS)),  
+    new Blank_Command().withTimeout(.05), new setIntakeSpeed(Constants.intakeHoldingSpeed)
+    // Commands.parallel(
+    //   Commands.sequence(new setLiftPosition(Constants.liftMidLevelCubePOS), new setGantryPosition(Constants.gantryMidLevelPOS)),
+    //   new AutoMove(4, 0, -1, .2, .4, .3, 5, false)),
+    //   new AutoMove(1.2, -.2, 1, .2, .4, .05, 1, false),
+    //   Commands.parallel(new AutoMove(.6, -.7, 0, .1, .4, .05, 2, false), new setLiftPosition(Constants.liftMaxLevelCubePOS))
     );
   }
 }

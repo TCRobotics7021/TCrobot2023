@@ -146,8 +146,10 @@ public class RobotContainer {
          
 
         SmartDashboard.putData("Auto Chooser", m_Chooser);
-
-        
+        SmartDashboard.putNumber("autoRotate_P", Constants.autoRotate_P);
+        SmartDashboard.putNumber("autoRotate_D", Constants.autoRotate_D);
+        SmartDashboard.putNumber("minAutoRot", Constants.minAutoRot);
+        SmartDashboard.putNumber("maxAutoRot", Constants.maxAutoRot);
         // Configure the button bindings
         configureButtonBindings();
     }
@@ -168,11 +170,11 @@ public class RobotContainer {
         //new JoystickButton(RightStick, 3).whileTrue(new releaseLiftBreak());
         new JoystickButton(RightStick, 4).whileTrue(new setIntakeSpeed(.5));
         new JoystickButton(RightStick, 5).whileTrue(new setIntakeSpeed(-.5));
-         new JoystickButton(RightStick,11).onTrue(new AutoMove(0, 0, 0, .1, .3, .05, 2, false));
-        new JoystickButton(RightStick, 12).onTrue(new AutoMove(0, 0, 45, .1, .3, .05, 2, false));
-        new JoystickButton(RightStick,13).onTrue(new AutoMove(0, 0, 90, .1, .3, .05, 2, false));
-        new JoystickButton(RightStick, 14).onTrue(new AutoMove(0, 0, 120, .1, .3, .05, 2, false));
-        new JoystickButton(RightStick, 15).onTrue(new AutoMove(0, 0, 180, .1, .3, .05, 2, false));
+         new JoystickButton(RightStick,11).onTrue(new AutoMove(0, 0, 0, .1, .3, .05, 1, false, .5));
+        new JoystickButton(RightStick, 12).onTrue(new AutoMove(0, 0, 45, .1, .3, .05, 1, false, .5));
+        new JoystickButton(RightStick,13).onTrue(new AutoMove(0, 0, 90, .1, .3, .05, 1, false, .5));
+        new JoystickButton(RightStick, 14).onTrue(new AutoMove(0, 0, 120, .1, .3, .05, 1, false, .5));
+        new JoystickButton(RightStick, 15).onTrue(new AutoMove(0, 0, 180, .1, .3, .05, 1, false, .5));
         //new JoystickButton(RightStick, 10).onTrue(new AutoMove(1, 1, 0, .1, 1, .2, 5, true));
         //new JoystickButton(RightStick, 11).onTrue(new AutoMove(-1, .5, 0, .1, 1, .2, 5, true));
         //new JoystickButton(RightStick, 12).onTrue(new AutoMove(0, -2, 0, .1, 1, .2, 5, true));

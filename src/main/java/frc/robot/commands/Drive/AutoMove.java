@@ -6,6 +6,7 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -15,6 +16,7 @@ public class AutoMove extends CommandBase {
   double targetX;
   double targetY;
   double targetR;
+  
   
   double XYtolerance;
   double Rtolerance;
@@ -30,6 +32,7 @@ public class AutoMove extends CommandBase {
   double currentX;
   double currentY;
   double currentR;
+  double previousR;
 
   double errorX;
   double errorY;
@@ -43,9 +46,16 @@ public class AutoMove extends CommandBase {
   double degrees;
 
   double ratio;
+
+  Timer clock = new Timer();
+  double dt = 0;
+  double angularVelocity;
+  Timer tonDelay = new Timer();
+  double tonTime = 0;
+
   /** Creates a new AutoMove. */
   public AutoMove(double targetX, double targetY, double targetR, double minspeed, double maxspeed, 
-  double XYtolerance, double Rtolerance, boolean resetodometry) {
+  double XYtolerance, double Rtolerance, boolean resetodometry, double tonTime) {
     this.targetX = targetX;
     this.targetY = targetY;
     this.targetR = targetR;
@@ -54,7 +64,8 @@ public class AutoMove extends CommandBase {
     this.XYtolerance = XYtolerance;
     this.Rtolerance = Rtolerance;
     this.resetodometry = resetodometry;
-    
+    this.tonTime = tonTime;
+
     finished = false;
     addRequirements(RobotContainer.s_Swerve);
     // Use addRequirements() here to declare subsystem dependencies.
@@ -66,15 +77,28 @@ public class AutoMove extends CommandBase {
     if(resetodometry == true){   
     RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
    }
+      clock.reset();
+      clock.start();
+      tonDelay.reset();
+      tonDelay.stop();
       finished = false;
     }
+
+
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     currentX = RobotContainer.s_Swerve.gettempPose().getX();
     currentY = RobotContainer.s_Swerve.gettempPose().getY();
+    previousR = currentR;
     currentR = RobotContainer.s_Swerve.gettempPose().getRotation().getDegrees();
+
+    dt = clock.get();
+    clock.reset();
+
+    angularVelocity = (currentR - previousR)/dt;
 
     errorX = (targetX - currentX);
     errorY = (targetY - currentY);
@@ -101,25 +125,31 @@ public class AutoMove extends CommandBase {
     if (errorR < -180){
       errorR = errorR + 360;
     }
-    calcRotation = Constants.autoRotate_P * errorR;
+    // calcRotation = Constants.autoRotate_P * errorR + Constants.autoRotate_D * angularVelocity;
+    calcRotation = SmartDashboard.getNumber("autoRotate_P", 0) * errorR + SmartDashboard.getNumber("autoRotate_D", 0) * angularVelocity;
+    SmartDashboard.putNumber("angularVelocity", angularVelocity);
+    
+
     if (calcRotation > 0){
-      calcRotation = Math.min(Constants.maxAutoRot, calcRotation);
+      calcRotation = Math.min(SmartDashboard.getNumber("maxAutoRot", Constants.maxAutoRot), calcRotation);
     }
     
     if (calcRotation < 0){
-      calcRotation = Math.max(-Constants.maxAutoRot, calcRotation);
+      calcRotation = Math.max(-SmartDashboard.getNumber("maxAutoRot", Constants.maxAutoRot), calcRotation);
     }
+  
 
     if (Math.abs(errorR) > Rtolerance){
       if (calcRotation > 0){
-        calcRotation = Math.max(Constants.minAutoRot, calcRotation);
+        calcRotation = Math.max(SmartDashboard.getNumber("minAutoRot", Constants.minAutoRot), calcRotation);
       }
       
       if (calcRotation < 0){
-        calcRotation = Math.min(-Constants.minAutoRot, calcRotation);
+        calcRotation = Math.min(-SmartDashboard.getNumber("minAutoRot", Constants.minAutoRot), calcRotation);
       }
     }
-    // SmartDashboard.putNumber("calcStrafe", calcStrafe);
+    
+  //SmartDashboard.putNumber("calcStrafe", calcStrafe);
     // SmartDashboard.putNumber("calcTranslation", calcTranslation);
     // SmartDashboard.putNumber("errorX", errorX);
     // SmartDashboard.putNumber("errorY", errorY);
@@ -133,9 +163,25 @@ public class AutoMove extends CommandBase {
       true
   );
 
-  if (errorM <= XYtolerance && Math.abs(errorR) <= Rtolerance){
+
+  if (Math.abs(errorR) <= Rtolerance && errorM <= XYtolerance) {
+    tonDelay.start();
+
+  }
+  else {
+    tonDelay.reset();
+    tonDelay.stop();
+  }
+
+
+  if (tonDelay.get() > tonTime && tonTime > 0){
     finished = true;
   }
+
+  if (Math.abs(errorR) <= Rtolerance && errorM <= XYtolerance && tonTime == 0) {
+    finished = true;
+  }
+
   }
 
   // Called once the command ends or is interrupted.

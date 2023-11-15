@@ -16,9 +16,9 @@ public final class Constants {
     public static int driveSettingTimeout = 100;
     public static int PIDindex = 0;
 
-    public static double liftMotor_P = .1;
+    public static double liftMotor_P = .11;
     public static double liftMotor_I = 0;
-    public static double liftMotor_D = 3.5;
+    public static double liftMotor_D = 6;
 
     //max and min lift output
     public static double liftOutputMax = 1;
@@ -30,14 +30,14 @@ public final class Constants {
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
-    public static double liftUpperLimit = 1278;
-
-    //lift conversion
-    public static double liftConversion = 227.281;
+    public static double liftUpperLimit = 1328;
+    //old = 1278
+    //lift conversion 227.281 (old)
+    public static double liftConversion = 181.782;//227.281
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 1279;
+      public static double liftUpperLimitSwitchPos = 1389;
 
       public static final double liftPosTolerance = 5;
 
@@ -53,8 +53,8 @@ public final class Constants {
     public static double gripperMotor_D = 0;
 
     //max and min gripper output
-    public static double gripperOutputMax = .1;
-    public static double gripperOutputMin = -.1;
+    public static double gripperOutputMax = .2;
+    public static double gripperOutputMin = -.2;
 
     //upper & lower limits
     public static double gripperLowerLimit = 1;
@@ -65,7 +65,7 @@ public final class Constants {
 
     //upper and lower limit switch position / homing/calibrating values
     public static double gripperLowerLimitSwitchPos = 0;
-    public static double gripperUpperLimitSwitchPos = 66;
+    public static double gripperUpperLimitSwitchPos = 98;
 
     public static final double gripperPosTolerance = 5;
 
@@ -91,14 +91,14 @@ public final class Constants {
         
     //GripperPOS
         public static double gripperCubeGrabPOS = 1;
-        public static double gripperConeGrabPOS = 65;
+        public static double gripperConeGrabPOS = 95;
         public static double openGripperPOS = 1;
         public static double gripperTimeout = .25;
         public static double gripperTestTimeout = .8;
         public static double gripperTimeoutCube = .1;
-        public static double GripperStartingConeGripPos = 65;
+        public static double GripperStartingConeGripPos = 95;
         //gripper cali positions
-        public static double GripperstartingConePos = 65;
+        public static double GripperstartingConePos = 95;
         public static double GripperStartingcubePOS = 1;
 
         //gripper auto timeout delay
@@ -111,7 +111,7 @@ public final class Constants {
         public static double gantryRetractedPOS = 1;
         public static double gantryPickPOS = 550;
         public static double gantryMidLevelPOS = 500;
-        public static double gantryUpperLevelPOS = 557;
+        public static double gantryUpperLevelPOS = 625; //old = 550
         public static double gantryAutoUpperLevelPOS = 550;
         public static double gantryClimbPOS = 1;
         public static double gantrySubPOS = 1;
@@ -121,23 +121,23 @@ public final class Constants {
         public static double liftBottomPOS = 1;
         public static double liftCubeBottomPos = 25;
         public static double liftConeFlippy = 115;
-        public static double liftRetrievePOS = 250;
+        public static double liftRetrievePOS = 300;
         public static double liftLowerLevelPOS = 400;
-        public static double liftMidLevelCubePOS = 700;
+        public static double liftMidLevelCubePOS = 750;
         public static double liftMidLevelConePOS = 975;
         public static double liftMaxLevelCubePOS = 1225;
         public static double liftAutoCubePOS = 1000;
         public static double liftMaxLevelConePOS = 1277;
-        public static double liftSubstationPOS = 1065;
+        public static double liftSubstationPOS = 1140;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
         public static double liftSideStation = 700;
         public static double liftMaxLevelConeDip = 950;
         
     //IntakePOS
-        public static double intakeSpeed = -.35;
-        public static double intakeHoldingSpeed = -.1;
-        public static double intakeRevSpeed = .5;
+        public static double intakeSpeed = -.4;
+        public static double intakeHoldingSpeed = -.2;
+        public static double intakeRevSpeed = .2;
         // Test Postions
     public static double gripperTestPOS = 100;
     public static double liftTestPOS = 200;
@@ -169,8 +169,8 @@ public final class Constants {
 
     
 
-        public static double gantryLimitLift = 250;
-        public static double liftLimitGantry = 225;
+        public static double gantryLimitLift = 300;
+        public static double liftLimitGantry = 275;
    
     //DRIVE SECTION
 
@@ -189,8 +189,10 @@ public final class Constants {
     public static final double autonomousMove_P = 1;
     public static final double autoRotate_P = .018;
     public static final double autoRotate_D = 0.0;
+    public static final double autoCubePickup_P = 0.022;
 
     public static final double autoRotateTolerance = 2;
+
 
     //LimeLight
     public static double limeLightCubeAlignX = -10;

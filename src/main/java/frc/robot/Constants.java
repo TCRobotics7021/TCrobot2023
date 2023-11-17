@@ -92,6 +92,7 @@ public final class Constants {
     //GripperPOS
         public static double gripperCubeGrabPOS = 1;
         public static double gripperConeGrabPOS = 95;
+        public static double gripperSubstationPickupPOS = 60;
         public static double openGripperPOS = 1;
         public static double gripperTimeout = .25;
         public static double gripperTestTimeout = .8;
@@ -179,7 +180,7 @@ public final class Constants {
     public static double minSpeedPos = .2;
     public static double maxSpeedPos = .7;
 
-    public static double minAutoRot = .15;
+    public static double minAutoRot = .16;
     public static double maxAutoRot = 1;
 
     public static double errorTolerance = .02;
@@ -187,9 +188,9 @@ public final class Constants {
 
     //P vaules
     public static final double autonomousMove_P = 1;
-    public static final double autoRotate_P = .018;
+    public static final double autoRotate_P = .02;
     public static final double autoRotate_D = 0.0;
-    public static final double autoCubePickup_P = 0.022;
+    public static final double autoCubePickup_P = 0.024;
 
     public static final double autoRotateTolerance = 2;
 

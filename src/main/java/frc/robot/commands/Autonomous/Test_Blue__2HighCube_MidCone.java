@@ -33,7 +33,7 @@ public class Test_Blue__2HighCube_MidCone extends SequentialCommandGroup {
       new ResetFieldOrientation(),
 
     //Eject starting cube
-      Commands.parallel(new setIntakeSpeed(Constants.intakeRevSpeed),
+      Commands.parallel(new setIntakeSpeed(Constants.intakeHoldingSpeed),
                         new CalibrateLiftAtStartOfMatch(Constants.liftStartingPOS)),
       new WaitCommand(.25), 
 
@@ -42,12 +42,13 @@ public class Test_Blue__2HighCube_MidCone extends SequentialCommandGroup {
       new setGantryPosition(450),
       new Blank_Command().withTimeout(.05),
       new setGripperPosition(Constants.openGripperPOS),
-      
+      new setIntakeSpeed(Constants.intakeRevSpeed),
+      new Blank_Command().withTimeout(.5),
 
     //Move back a little then turn 90 degrees
       Commands.parallel(
           new setGantryPosition(400), 
-          new setLiftPosition(400),
+          new setLiftPosition(600),
           Commands.sequence(new AutoMove(.5, .6, 0, .1, .2, .2, 10, true, 0),
                             new setIntakeSpeed(0), 
                             new AutoMove(2.5, .7, 90, .1, .4, .4, 20, false, 0))),
@@ -69,27 +70,36 @@ public class Test_Blue__2HighCube_MidCone extends SequentialCommandGroup {
     Commands.parallel(
                         Commands.sequence(new setLiftPosition(Constants.liftMidLevelCubePOS), 
                                           new setGantryPosition(Constants.gantryMidLevelPOS)),
-                                          new AutoMove(1.5, .3, -20, .2, .4, .3, 6, false, 0)),
+                                          new AutoMove(1.5, .3, -10, .2, .4, .3, 6, false, 0)),
    
     // Placing the second game piece in the middle POS
     new AutoMove(.35, 0, 0, .2, .4, .05, 1, false, 0), 
     new setGripperPosition(Constants.openGripperPOS),
     new setIntakeSpeed(Constants.intakeRevSpeed),  
-    new Blank_Command().withTimeout(.5), 
+    new Blank_Command().withTimeout(.3), 
+
+// Move to the side to avoid charge station
 
     // Drive back for the 3rd game piece
-    Commands.parallel(new AutoMove(1.5, .7, 0, .1, .2, .2, 10, false, 0), 
+    Commands.parallel(new AutoMove(1.25, .8, 0, .1, .2, .2, 10, false, 0), 
                       new setGantryPosition(300), 
-                      new setLiftPosition(750)),
+                      new setLiftPosition(600),
+                      new setIntakeSpeed(Constants.intakeSpeed)),
     
-    // Driving back while preparing to pick up next peice                  
-    Commands.parallel(new AutoMove(3.7, .55, 135, .3, .5, .1, 3, false, 0), 
+    // Driving back while preparing to pick up next peice  here                
+    Commands.parallel(new AutoMove(3.7, .65, 135, .3, .5, .1, 3, false, 0), 
                       new HomeGripper(),
-                      new setLiftPosition(Constants.liftRetrievePOS), 
                       new setGantryPosition(Constants.gantryPickPOS)),
-        
-    // Drive back with 3rd game piece
-    new AutoMove(4.5, 0, 135, .2, .4, .1, 3, false, 0) 
-    );
+    new setLiftPosition(Constants.liftBottomPOS),
+      
+
+// Preparing to pick up the third game piece
+new setIntakeSpeed(Constants.intakeSpeed), 
+new autoGrip()  
+
+
+
+    
+     );
   }
 }

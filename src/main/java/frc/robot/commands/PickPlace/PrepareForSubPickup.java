@@ -26,11 +26,11 @@ public class PrepareForSubPickup extends SequentialCommandGroup {
     addCommands(
       new ResetEndPlaceCommand(),
       //add limelight
-      Commands.parallel(new setLiftPosition(Constants.liftSubstationPOS), new setGripperPosition(Constants.openGripperPOS)),
+      Commands.parallel(new setLiftPosition(Constants.liftSubstationPOS), new setGripperPosition(Constants.gripperSubstationPickupPOS)),
       new setGantryPosition(Constants.gantrySubPOS), 
       new setIntakeSpeed(Constants.intakeSpeed), new autoDoubleSubGrip(), 
       new Blank_Command().withTimeout(.5), new setIntakeSpeed(Constants.intakeHoldingSpeed), 
-      new setLiftPosition(1100),
+      new setLiftPosition(1275),
       new PlaceCommandEnd(),
       new ResetEndPlaceCommand()
 

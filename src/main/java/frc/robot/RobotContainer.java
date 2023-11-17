@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.Autonomous.AutoPlaceHighCubeClimb;
 import frc.robot.commands.Autonomous.Place_Cone_Drive_Over;
 import frc.robot.commands.Autonomous.Test_Blue__2HighCube_MidCone;
 import frc.robot.commands.Autonomous.Test_Red_2HighCube_MidCone;
@@ -142,7 +143,7 @@ public class RobotContainer {
         m_Chooser.addOption("Test_Blue_9Cone_HighCube_MidCone", new Test_Blue__2HighCube_MidCone());
         m_Chooser.addOption("Test_Red_9Cone_HighCube_MidCone", new Test_Red_2HighCube_MidCone());
         m_Chooser.addOption("Auto_Red_BumpSide", new Auto_Red_BumpSide_OFF());
-
+        m_Chooser.addOption("AutoPlaceHighCubeClimb", new AutoPlaceHighCubeClimb());
    
        
 

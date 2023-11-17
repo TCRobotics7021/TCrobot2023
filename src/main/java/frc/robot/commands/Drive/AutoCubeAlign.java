@@ -35,12 +35,12 @@ boolean finished;
 
     if (calcRotation > 0){
       calcRotation = Math.min(Constants.maxAutoRot, calcRotation);
-      calcRotation = Math.max(.15,calcRotation);
+      calcRotation = Math.max(.16,calcRotation);
     }
 
     if (calcRotation < 0){
       calcRotation = Math.max(-Constants.maxAutoRot, calcRotation);
-      calcRotation = Math.min(-.15,calcRotation);
+      calcRotation = Math.min(-.16,calcRotation);
     }
     
 

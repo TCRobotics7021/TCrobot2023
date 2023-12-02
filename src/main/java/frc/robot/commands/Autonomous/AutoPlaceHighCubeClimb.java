@@ -13,6 +13,7 @@ import frc.robot.commands.Drive.DriveOverChargeStation;
 import frc.robot.commands.Drive.GetOnChargeStation;
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
 import frc.robot.commands.Gantry.setGantryPosition;
+import frc.robot.commands.Gripper.HomeGripper;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Gripper.setIntakeSpeed;
 import frc.robot.commands.Lift.setLiftPosition;
@@ -38,11 +39,13 @@ public class AutoPlaceHighCubeClimb extends SequentialCommandGroup {
       new setGantryPosition(450),
       new Blank_Command().withTimeout(.05),
       new setGripperPosition(Constants.openGripperPOS),
+      new HomeGripper(),
       new setIntakeSpeed(Constants.intakeRevSpeed),
       new Blank_Command().withTimeout(.5),
       new setGantryPosition(0),
       new setLiftPosition(Constants.liftLowerLevelPOS),
       new DriveOverChargeStation(),
+      new Blank_Command().withTimeout(.5),
       new GetOnChargeStationFromBack()
     );
   }

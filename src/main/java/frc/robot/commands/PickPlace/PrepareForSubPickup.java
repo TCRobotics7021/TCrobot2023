@@ -30,7 +30,7 @@ public class PrepareForSubPickup extends SequentialCommandGroup {
       new setGantryPosition(Constants.gantrySubPOS), 
       new setIntakeSpeed(Constants.intakeSpeed), new autoDoubleSubGrip(), 
       new Blank_Command().withTimeout(.5), new setIntakeSpeed(Constants.intakeHoldingSpeed), 
-      new setLiftPosition(1275),
+      new setLiftPosition(1250),
       new PlaceCommandEnd(),
       new ResetEndPlaceCommand()
 

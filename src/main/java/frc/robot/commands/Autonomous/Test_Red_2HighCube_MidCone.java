@@ -33,7 +33,7 @@ public class Test_Red_2HighCube_MidCone extends SequentialCommandGroup {
       new ResetFieldOrientation(),
 
     //Eject starting cube
-      Commands.parallel(new setIntakeSpeed(Constants.intakeRevSpeed),
+      Commands.parallel(new setIntakeSpeed(Constants.intakeHoldingSpeed),
                         new CalibrateLiftAtStartOfMatch(Constants.liftStartingPOS)),
       new WaitCommand(.25), 
 
@@ -42,6 +42,7 @@ public class Test_Red_2HighCube_MidCone extends SequentialCommandGroup {
       new setGantryPosition(450), 
       new Blank_Command().withTimeout(.05),
       new setGripperPosition(Constants.openGripperPOS),
+      new HomeGripper(),
       new setIntakeSpeed(Constants.intakeRevSpeed),
       new Blank_Command().withTimeout(.5),
 
@@ -75,6 +76,7 @@ public class Test_Red_2HighCube_MidCone extends SequentialCommandGroup {
     //Placing the second game piece in the middle POS
     new AutoMove(.35, 0, 0, .2, .4, .05, 1, false, 0), 
     new setGripperPosition(Constants.openGripperPOS),
+    new HomeGripper(),
     new setIntakeSpeed(Constants.intakeRevSpeed),  
     new Blank_Command().withTimeout(.3),
   

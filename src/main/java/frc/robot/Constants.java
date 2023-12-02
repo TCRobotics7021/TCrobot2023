@@ -30,7 +30,7 @@ public final class Constants {
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
-    public static double liftUpperLimit = 1328;
+    public static double liftUpperLimit = 1388;
     //old = 1278
     //lift conversion 227.281 (old)
     public static double liftConversion = 181.782;//227.281
@@ -91,7 +91,7 @@ public final class Constants {
         
     //GripperPOS
         public static double gripperCubeGrabPOS = 1;
-        public static double gripperConeGrabPOS = 95;
+        public static double gripperConeGrabPOS = 80;
         public static double gripperSubstationPickupPOS = 60;
         public static double openGripperPOS = 1;
         public static double gripperTimeout = .25;
@@ -112,7 +112,7 @@ public final class Constants {
         public static double gantryRetractedPOS = 1;
         public static double gantryPickPOS = 550;
         public static double gantryMidLevelPOS = 500;
-        public static double gantryUpperLevelPOS = 625; //old = 550
+        public static double gantryUpperLevelPOS = 615; //old = 550
         public static double gantryAutoUpperLevelPOS = 550;
         public static double gantryClimbPOS = 1;
         public static double gantrySubPOS = 1;
@@ -128,8 +128,8 @@ public final class Constants {
         public static double liftMidLevelConePOS = 975;
         public static double liftMaxLevelCubePOS = 1225;
         public static double liftAutoCubePOS = 1000;
-        public static double liftMaxLevelConePOS = 1277;
-        public static double liftSubstationPOS = 1140;
+        public static double liftMaxLevelConePOS = 1370;
+        public static double liftSubstationPOS = 1225;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
         public static double liftSideStation = 700;

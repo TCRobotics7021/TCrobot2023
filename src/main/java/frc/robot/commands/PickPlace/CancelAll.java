@@ -14,7 +14,7 @@ public class CancelAll extends CommandBase {
     addRequirements(RobotContainer.s_Lift);
     addRequirements(RobotContainer.s_Gripper);
     addRequirements(RobotContainer.s_Gantry);
-    addRequirements(RobotContainer.s_Arm);
+
     addRequirements(RobotContainer.s_Swerve);
   }
 
@@ -30,7 +30,7 @@ public class CancelAll extends CommandBase {
     RobotContainer.s_Lift.setSpeed(0);
     RobotContainer.s_Gripper.setSpeed(0);
     RobotContainer.s_Gantry.setSpeed(0);
-    RobotContainer.s_Arm.setSpeed(0);
+
     
   }
 

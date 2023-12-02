@@ -2,25 +2,25 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Arm;
+package frc.robot.commands.Gripper;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class setArmSpeed extends CommandBase {
+public class setIntakeSpeed extends CommandBase {
   /** Creates a new setLiftSpeed. */
   double goSpeed;
-  public setArmSpeed(double goSpeed ) {
+  public setIntakeSpeed(double goSpeed ) {
     this.goSpeed = goSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.s_Arm);
+    addRequirements(RobotContainer.s_Gripper);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Arm.setSpeed(goSpeed);
+    RobotContainer.s_Gripper.setIntakeSpeed(goSpeed);
 
 
 
@@ -33,7 +33,7 @@ public class setArmSpeed extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.s_Arm.setSpeed(0);
+    
 
 
   }
@@ -41,6 +41,6 @@ public class setArmSpeed extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

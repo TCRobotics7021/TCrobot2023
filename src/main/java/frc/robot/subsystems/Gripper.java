@@ -19,10 +19,10 @@ import frc.robot.Constants;
 public class Gripper extends SubsystemBase {
   /** Creates a new Gripper. */
   TalonFX m_Gripper = new TalonFX(12, "canivore1");
+  TalonFX m_Intake = new TalonFX(14, "canivore1");
 
-
-  private DigitalInput upperLimit = new DigitalInput(6);
-  private DigitalInput lowerLimit = new DigitalInput(7);
+  private DigitalInput pieceSensorBlocked = new DigitalInput(6);
+  private DigitalInput lowerLimit = new DigitalInput(1);
   // private DigitalInput digitalLimit2 = new DigitalInput(2);
   // private DigitalInput digitalLimit3 = new DigitalInput(3);
   // private DigitalInput digitalLimit4 = new DigitalInput(4);
@@ -95,6 +95,9 @@ public void setPosition(double position){
   m_Gripper.set(ControlMode.Position, position*Constants.gripperConversion);
 
 }
+  public void setIntakeSpeed(double goSpeed) {
+    m_Intake.set(ControlMode.PercentOutput, goSpeed);
+  }
 
 public void setCoastMode() {
   m_Gripper.setNeutralMode(NeutralMode.Coast);
@@ -104,11 +107,11 @@ public void setBrakeMode() {
   m_Gripper.setNeutralMode(NeutralMode.Brake);
 }
 
-public boolean atTopLimit () {
-return (!upperLimit.get());
+public boolean pieceSensorBlocked () {
+return (pieceSensorBlocked.get());
 }
   public boolean atBottomLimit () {
-    return (!lowerLimit.get());
+    return (lowerLimit.get());
   }
 public void calibrateEncoder (double calibratePosition) {
   m_Gripper.setSelectedSensorPosition(calibratePosition * Constants.gripperConversion, Constants.PIDindex, Constants.driveSettingTimeout);
@@ -121,11 +124,11 @@ if (SmartDashboard.getNumber("P value", tempP) != tempP) {
   m_Gripper.config_kP(Constants.PIDindex, tempP, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("I value", tempI) != tempI) {
-  tempP = SmartDashboard.getNumber("I value", tempI); 
+  tempI = SmartDashboard.getNumber("I value", tempI); 
   m_Gripper.config_kI(Constants.PIDindex, tempI, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("D value", tempD) != tempD) {
-  tempP = SmartDashboard.getNumber("D value", tempD); 
+  tempD = SmartDashboard.getNumber("D value", tempD); 
   m_Gripper.config_kD(Constants.PIDindex, tempD, Constants.driveSettingTimeout);
 }
 if (SmartDashboard.getNumber("FWD Peak OutPut", tempPeakFWD) != tempPeakFWD); {
@@ -144,20 +147,16 @@ SmartDashboard.putNumber("Distance", m_Gripper.getSelectedSensorPosition()/Const
   public void periodic() {
     // This method will be called once per scheduler run
 
-    if(!lowerLimit.get()){
+    if(lowerLimit.get()){
      m_Gripper.setSelectedSensorPosition(Constants.gripperLowerLimitSwitchPos * Constants.gripperConversion, Constants.PIDindex, Constants.driveSettingTimeout);
     }
 
-    if(!upperLimit.get()){
-     m_Gripper.setSelectedSensorPosition(Constants.gripperUpperLimitSwitchPos * Constants.gripperConversion, Constants.PIDindex, Constants.driveSettingTimeout);
-    }
-
     //SmartDashboard.putNumber("Gripper Stator Current", m_Gripper.getStatorCurrent());
-   // updatePID();
+   //updatePID();
  
-    SmartDashboard.putBoolean("gripperUpperLimit", upperLimit.get());
+    SmartDashboard.putBoolean("gripperPieceSensor", pieceSensorBlocked.get());
     SmartDashboard.putBoolean("gripperLowerLimit", lowerLimit.get());
-  //  SmartDashboard.putNumber("GripperPos", currentPosition());
+    SmartDashboard.putNumber("GripperPos", currentPosition());
     
   }
 }

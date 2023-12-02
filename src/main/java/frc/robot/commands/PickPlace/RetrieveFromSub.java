@@ -7,9 +7,9 @@ package frc.robot.commands.PickPlace;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Gripper.setIntakeSpeed;
 import frc.robot.commands.Lift.setLiftPosition;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -18,17 +18,15 @@ import frc.robot.commands.Lift.setLiftPosition;
 public class RetrieveFromSub extends SequentialCommandGroup {
   /** Creates a new RetrieveFromSub. */
   public RetrieveFromSub() {
-  addCommands(
-new ResetEndPlaceCommand(),
-new setGripperPosition(Constants.gripperConeGrabPOS).withTimeout(Constants.gripperTimeout),
-new setLiftPosition(Constants.liftSubstationBumpingUpwardsPosition),
-Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS),new setArmPosition(Constants.armRetractedPOS)),
-new setLiftPosition(Constants.liftRetrievePOS),
-new PlaceCommandEnd(),
-new ResetEndPlaceCommand()
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(
+      new ResetEndPlaceCommand(),
+      new setLiftPosition(Constants.liftRetrievePOS), 
+      new PlaceCommandEnd(),
+      new ResetEndPlaceCommand()
 
 
-
-  );
+    );
   }
 }

@@ -8,26 +8,32 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
-import frc.robot.commands.Gantry.HomeGantry;
+import frc.robot.RobotContainer;
+import frc.robot.commands.Drive.AutonomousMove;
 import frc.robot.commands.Gantry.setGantryPosition;
-import frc.robot.commands.Gripper.HomeGripper;
-import frc.robot.commands.Gripper.setGripperPosition;
-import frc.robot.commands.Gripper.setIntakeSpeed;
-import frc.robot.commands.Lift.HomeLift;
 import frc.robot.commands.Lift.setLiftPosition;
-import frc.robot.subsystems.Gripper;
+import frc.robot.commands.UselessCommands.MoveToPosReletiveToTarget;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class HomeAll extends SequentialCommandGroup {
-  /** Creates a new HomeAll. */
-  public HomeAll() {
+public class PlaceCubeMidLevel extends SequentialCommandGroup {
+  /** Creates a new PlaceCubePOS2. */
+  public PlaceCubeMidLevel() {
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new setIntakeSpeed(0),
-       Commands.parallel(new HomeGripper(),  new HomeLift()),
-       new WaitCommand(.25),
-       Commands.parallel(new HomeGantry(), new setLiftPosition(Constants.liftRetrievePOS))
+    new ResetEndPlaceCommand(),
+    // new MoveToPosReletiveToTarget(1.25, 0, 0),
+    // new WaitCommand(0.5),
+    // new MoveToPosReletiveToTarget(0.56,-0.75 , 0),
+    new PlaceCommandStart(),
+    new setLiftPosition(Constants.liftMidLevelCubePOS),
+    Commands.parallel(new setGantryPosition(Constants.gantryMidLevelPOS)),
+     new ResetEndPlaceCommand()
+
+
+
     );
   }
 }

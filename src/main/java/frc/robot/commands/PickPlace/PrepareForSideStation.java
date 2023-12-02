@@ -7,7 +7,7 @@ package frc.robot.commands.PickPlace;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.Arm.setArmPosition;
+
 import frc.robot.commands.Gantry.setGantryPosition;
 import frc.robot.commands.Gripper.setGripperPosition;
 import frc.robot.commands.Lift.setLiftPosition;
@@ -25,7 +25,7 @@ public class PrepareForSideStation extends SequentialCommandGroup {
       //add limelight
       Commands.parallel(new setLiftPosition(Constants.liftSideStation), new setGripperPosition(Constants.openGripperPOS)),
       new setGantryPosition(Constants.gantrySideStation),
-      new setArmPosition(Constants.armSideStation),
+  
       new ResetEndPlaceCommand()
     );
   }

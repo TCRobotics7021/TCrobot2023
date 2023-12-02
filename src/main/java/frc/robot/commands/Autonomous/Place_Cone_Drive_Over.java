@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
-import frc.robot.commands.Arm.setArmPosition;
 import frc.robot.commands.Drive.AdvAutoMove;
 import frc.robot.commands.Drive.ResetFieldOrientation;
 import frc.robot.commands.Gantry.setGantryPosition;
@@ -28,11 +27,11 @@ public class Place_Cone_Drive_Over extends SequentialCommandGroup {
       new ResetFieldOrientation(),
       new CalibrateLiftAtStartOfMatch(Constants.liftStartingPOS),
       Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelConePOS)),
-         new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
+         new setGantryPosition(Constants.gantryUpperLevelPOS)),
      new setLiftPosition(Constants.liftMaxLevelConeDip),
      new setGripperPosition(Constants.openGripperPOS),
      Commands.parallel(
-      Commands.sequence(Commands.parallel(new setArmPosition(Constants.armPickPOS), new setGantryPosition(Constants.gantryPickPOS)), new setLiftPosition(Constants.liftBottomPOS)),
+      Commands.sequence(Commands.parallel( new setGantryPosition(Constants.gantryPickPOS)), new setLiftPosition(Constants.liftBottomPOS)),
             new AdvAutoMove(3, 0, 0, .2, .4, .1, 2, true))
     );
   }

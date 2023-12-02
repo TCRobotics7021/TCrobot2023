@@ -2,49 +2,57 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Autonomous;
+package frc.robot.commands.Gripper;
 
-import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class DriveForward extends CommandBase {
-  /** Creates a new DriveForward. */
-  public DriveForward() {
-    addRequirements(RobotContainer.s_Swerve);
+public class autoGripCube extends CommandBase {
+  /** Creates a new setDefaultGripperCommand. */
+
+
+boolean finished = false;
+
+  public autoGripCube() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(RobotContainer.s_Gripper);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Swerve.drive(
-          new Translation2d(.1, 0).times(Constants.Swerve.maxSpeed), 
-          0 * Constants.Swerve.maxAngularVelocity, 
-          true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
-          true
-      );
+    finished = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    if (RobotContainer.s_Gripper.pieceSensorBlocked() && RobotContainer.s_Lift.currentPosition()<200) {
+
+     
+     
+
+      finished = true; 
+
+    }
+
+    //SmartDashboard.putBoolean("debug2", RobotContainer.s_Gripper.pieceSensorBlocked());
+
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.s_Swerve.drive(
-      new Translation2d(0, 0).times(Constants.Swerve.maxSpeed), 
-      0 * Constants.Swerve.maxAngularVelocity, 
-      true, //Fieldcentric - !robotCentricSup.getAsBoolean(), 
-      true
-  );
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+
+    return finished;
   }
 }

@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Autonomous;
+package frc.robot.commands.Autonomous.Old;
 
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.commands.Arm.setArmPosition;
+import frc.robot.commands.Autonomous.CalibrateLiftAtStartOfMatch;
 import frc.robot.commands.Drive.AutonomousMove;
 import frc.robot.commands.Drive.DriveOverChargeStation;
 import frc.robot.commands.Drive.GetOnChargeStationFromBack;
@@ -36,7 +36,7 @@ public class Auto_Blue_5Cube_Overline_Climb extends SequentialCommandGroup {
       new ResetFieldOrientation(),
       new CalibrateLiftAtStartOfMatch(Constants.liftStartingPOS),
       Commands.parallel(Commands.sequence(new HomeLiftSpecial(), new WaitCommand(.25), new setLiftPosition(Constants.liftMaxLevelCubePOS)),
-         new setGantryPosition(Constants.gantryUpperLevelPOS), new setArmPosition(Constants.armExtendedPOS)),
+         new setGantryPosition(Constants.gantryUpperLevelPOS)),
       new setGripperPosition(Constants.openGripperPOS),
       Commands.parallel(new DropAndRetract(), new DriveOverChargeStation()),
       new PrepareForClimb(),

@@ -16,13 +16,13 @@ public final class Constants {
     public static int driveSettingTimeout = 100;
     public static int PIDindex = 0;
 
-    public static double liftMotor_P = .1;
+    public static double liftMotor_P = .11;
     public static double liftMotor_I = 0;
-    public static double liftMotor_D = 0;
+    public static double liftMotor_D = 6;
 
     //max and min lift output
     public static double liftOutputMax = 1;
-    public static double liftOutputMin = -.9;
+    public static double liftOutputMin = -1;
     public static double liftJogUp = .4;
     public static double liftJogDown = -.5;
     //max and min motor output
@@ -30,14 +30,14 @@ public final class Constants {
 
     //upper & lower limits
     public static double liftLowerLimit = 1;
-    public static double liftUpperLimit = 1167;
-
-    //lift conversion
-    public static double liftConversion = 302.844;
+    public static double liftUpperLimit = 1388;
+    //old = 1278
+    //lift conversion 227.281 (old)
+    public static double liftConversion = 181.782;//227.281
 
       //upper and lower limit switch position / homing/calibrating values
       public static double liftLowerLimitSwitchPos = 0;
-      public static double liftUpperLimitSwitchPos = 1170;
+      public static double liftUpperLimitSwitchPos = 1389;
 
       public static final double liftPosTolerance = 5;
 
@@ -52,44 +52,24 @@ public final class Constants {
     public static double gripperMotor_I = 0;
     public static double gripperMotor_D = 0;
 
-    //max and min lift output
-    public static double gripperOutputMax = .3;
-    public static double gripperOutputMin = -.5;
+    //max and min gripper output
+    public static double gripperOutputMax = .2;
+    public static double gripperOutputMin = -.2;
 
     //upper & lower limits
-    public static double gripperLowerLimit = 0;
-    public static double gripperUpperLimit = 429;
+    public static double gripperLowerLimit = 1;
+    public static double gripperUpperLimit = 65;
 
-    //lift conversion
-    public static double gripperConversion = 77.6282;
+    //gripper conversion
+    public static double gripperConversion = 151.2154;
 
     //upper and lower limit switch position / homing/calibrating values
     public static double gripperLowerLimitSwitchPos = 0;
-    public static double gripperUpperLimitSwitchPos = 430;
+    public static double gripperUpperLimitSwitchPos = 98;
 
     public static final double gripperPosTolerance = 5;
 
-      //max and min arm output
-      public static double ArmOutputMax = 1;
-      public static double ArmOutputMin = -1;
-  
-      //upper & lower limits
-      public static double ArmLowerLimit = 1;
-      public static double ArmUpperLimit = 522;
-
-      //arm conversion
-      public static double ArmConversion = 307.122;
-  
-        //upper and lower limit switch position / homing/calibrating values
-        public static double ArmLowerLimitSwitchPos = 0;
-        public static double ArmUpperLimitSwitchPos = 523;
-  
-        public static final double ArmPosTolerance = 5;
-        public static double ArmMotor_P = .1;
-        public static double ArmMotor_I = 0;
-        public static double ArmMotor_D = 0;
-        
-            //max and min arm output
+            //max and min Gantry output
       public static double GantryOutputMax = 1;
       public static double GantryOutputMin = -1;
   
@@ -110,62 +90,60 @@ public final class Constants {
         public static double GantryMotor_D = 0;
         
     //GripperPOS
-        public static double gripperCubeGrabPOS = 126;
-        public static double gripperConeGrabPOS = 24;
-        public static double openGripperPOS = 429;
+        public static double gripperCubeGrabPOS = 1;
+        public static double gripperConeGrabPOS = 80;
+        public static double gripperSubstationPickupPOS = 60;
+        public static double openGripperPOS = 1;
         public static double gripperTimeout = .25;
         public static double gripperTestTimeout = .8;
         public static double gripperTimeoutCube = .1;
-        public static double GripperStartingConeGripPos = 146;
+        public static double GripperStartingConeGripPos = 95;
         //gripper cali positions
-        public static double GripperstartingConePos = 205;
-        public static double GripperStartingcubePOS = 205;
+        public static double GripperstartingConePos = 95;
+        public static double GripperStartingcubePOS = 1;
 
         //gripper auto timeout delay
         public static double GripperCubeDelay = .45;
         
-    //ArmPOS
-        public static double armRetractedPOS = 5;
-        public static double armMidLevelPOS = 105;
-        public static double armExtendedPOS = 500;
-        public static double armAutoExtendedPOS = 400; //cube for autos
-        public static double armAutoLowerLevelPOS = 150; //cube for autos
-        public static double armPickPOS = 350;
-        public static double armSideStation = 5;
+ 
 
     //GantryPOS
         public static double gantryLowerlevelPOS = 350;
         public static double gantryRetractedPOS = 1;
-        public static double gantryPickPOS = 50;
+        public static double gantryPickPOS = 550;
         public static double gantryMidLevelPOS = 500;
-        public static double gantryUpperLevelPOS = 650;
+        public static double gantryUpperLevelPOS = 615; //old = 550
         public static double gantryAutoUpperLevelPOS = 550;
         public static double gantryClimbPOS = 1;
-        public static double gantrySubPOS = 300;
+        public static double gantrySubPOS = 1;
         public static double gantrySideStation = 200;
     //LiftPOS
-        public static double liftStartingPOS = 400;
-        public static double liftBottomPOS = 0;
+        public static double liftStartingPOS = 200;
+        public static double liftBottomPOS = 1;
         public static double liftCubeBottomPos = 25;
         public static double liftConeFlippy = 115;
         public static double liftRetrievePOS = 300;
-        public static double liftLowerLevelPOS = 300;
-        public static double liftMidLevelCubePOS = 700;
-        public static double liftMidLevelConePOS = 900; 
-        public static double liftMaxLevelCubePOS = 1075;
-        public static double liftAutoCubePOS = 960;
-        public static double liftMaxLevelConePOS = 1167;
-        public static double liftSubstationPOS = 920;
+        public static double liftLowerLevelPOS = 400;
+        public static double liftMidLevelCubePOS = 750;
+        public static double liftMidLevelConePOS = 975;
+        public static double liftMaxLevelCubePOS = 1225;
+        public static double liftAutoCubePOS = 1000;
+        public static double liftMaxLevelConePOS = 1370;
+        public static double liftSubstationPOS = 1225;
         public static double liftSubstationBumpingUpwardsPosition = 1000;
         public static double liftClimbPOS = 300;
         public static double liftSideStation = 700;
         public static double liftMaxLevelConeDip = 950;
         
+    //IntakePOS
+        public static double intakeSpeed = -.4;
+        public static double intakeHoldingSpeed = -.2;
+        public static double intakeRevSpeed = .2;
         // Test Postions
     public static double gripperTestPOS = 100;
     public static double liftTestPOS = 200;
     public static double gantryTestPOS = 5;
-    public static double armTestPOS = 5;
+
     
     //current limiting
 
@@ -181,44 +159,41 @@ public final class Constants {
     public static double GripperPeakCurrentAmps = 25;
     public static double GripperMaxCurrentTime = .5;
 
-    public static double ArmMaxCurrentAmps = 20;
-    public static double ArmPeakCurrentAmps = 25;
-    public static double ArmMaxCurrentTime = .5;
-
-
 
 
     //Set speed for HomingLift
         public static double setSpeedForLiftHome = .5;
 
-        public static double setSpeedForGripperHome = .25;
+        public static double setSpeedForGripperHome = -.1;
 
         public static double setSpeedforGantryHome = -.25;
 
-        public static double setSpeedForArmHome = -.25;
-
+    
 
         public static double gantryLimitLift = 300;
-        public static double liftLimitGantry = 250;
+        public static double liftLimitGantry = 275;
    
     //DRIVE SECTION
 
 
     //minimum and max speed for setting auto motor speed
     public static double minSpeedPos = .2;
-    public static double maxSpeedPos = .5;
+    public static double maxSpeedPos = .7;
 
-    public static double minAutoRot = .15;
-    public static double maxAutoRot = .9;
+    public static double minAutoRot = .16;
+    public static double maxAutoRot = 1;
 
     public static double errorTolerance = .02;
 
 
     //P vaules
     public static final double autonomousMove_P = 1;
-    public static final double autoRotate_P = .015;
+    public static final double autoRotate_P = .02;
+    public static final double autoRotate_D = 0.0;
+    public static final double autoCubePickup_P = 0.024;
 
     public static final double autoRotateTolerance = 2;
+
 
     //LimeLight
     public static double limeLightCubeAlignX = -10;
@@ -338,7 +313,7 @@ public final class Constants {
             public static final int driveMotorID = 1;
             public static final int angleMotorID = 2;
             public static final int canCoderID = 1;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(347.16);//13.53
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(344.4);//13.53
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -348,7 +323,7 @@ public final class Constants {
             public static final int driveMotorID = 3;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 2;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(274.13);//85.86
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(275.18);//85.86
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -358,7 +333,7 @@ public final class Constants {
             public static final int driveMotorID = 5;
             public static final int angleMotorID = 6;
             public static final int canCoderID = 3;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(39.99);//306.91
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(39.5);//306.91
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -368,7 +343,7 @@ public final class Constants {
             public static final int driveMotorID = 7;
             public static final int angleMotorID = 8;
             public static final int canCoderID = 4;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(69.25);//286.78
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(69.69);//286.78
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

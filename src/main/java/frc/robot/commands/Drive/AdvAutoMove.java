@@ -43,7 +43,8 @@ public class AdvAutoMove extends CommandBase {
 
   double ratio;
 
-  public AdvAutoMove(double targetX, double targetY, double targetR, double minspeed, double maxspeed, double XYtolerance, double Rtolerance, boolean resetodometry) {
+  public AdvAutoMove(double targetX, double targetY, double targetR, double minspeed, double maxspeed, 
+  double XYtolerance, double Rtolerance, boolean resetodometry) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.targetX = targetX;
     this.targetY = targetY;

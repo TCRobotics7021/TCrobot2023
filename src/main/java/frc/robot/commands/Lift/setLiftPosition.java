@@ -4,6 +4,7 @@
 
 package frc.robot.commands.Lift;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -47,7 +48,7 @@ public class setLiftPosition extends CommandBase {
       finished = true;
     }
     
-  
+    SmartDashboard.putNumber("debug",Math.abs(RobotContainer.s_Lift.currentPosition() - setPosition));
   }
    
   

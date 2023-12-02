@@ -55,7 +55,7 @@ public class AutoCubePickup extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.s_Limelight.setPipeline(0);
+    RobotContainer.s_Limelight.setPipeline(1);
     if(resetodometry == true){
       RobotContainer.s_Swerve.resettempOdometry(new Pose2d(0, 0, RobotContainer.s_Swerve.getYaw()));
     }

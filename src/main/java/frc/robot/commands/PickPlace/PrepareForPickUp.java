@@ -9,12 +9,14 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
-import frc.robot.commands.Arm.setArmPosition;
+
 import frc.robot.commands.Drive.AutonomousMove;
 import frc.robot.commands.Gantry.setGantryPosition;
+import frc.robot.commands.Gripper.autoGrip;
 import frc.robot.commands.Gripper.setGripperPosition;
+import frc.robot.commands.Gripper.setIntakeSpeed;
 import frc.robot.commands.Lift.setLiftPosition;
-import frc.robot.subsystems.Arm;
+import frc.robot.commands.UselessCommands.Blank_Command;
 import frc.robot.subsystems.Gantry;
 import frc.robot.subsystems.Gripper;
 
@@ -29,8 +31,13 @@ public class PrepareForPickUp extends SequentialCommandGroup {
   
    addCommands( 
     new ResetEndPlaceCommand(),
-    Commands.parallel(new setGantryPosition(Constants.gantryPickPOS), new setArmPosition(Constants.armPickPOS), new setGripperPosition(Constants.openGripperPOS)),
-    Commands.sequence(new setLiftPosition(Constants.liftBottomPOS)),
+    Commands.parallel(new setGantryPosition(Constants.gantryPickPOS), new setGripperPosition(Constants.openGripperPOS)),
+    Commands.sequence(new setLiftPosition(Constants.liftBottomPOS), 
+    new setIntakeSpeed(Constants.intakeSpeed), new autoGrip(), 
+    new Blank_Command().withTimeout(.5), new setIntakeSpeed(Constants.intakeHoldingSpeed), 
+    new setLiftPosition(Constants.liftRetrievePOS),
+    Commands.parallel(new setGantryPosition(Constants.gantryRetractedPOS)),
+    new PlaceCommandEnd()),
     new ResetEndPlaceCommand()
    );
 
